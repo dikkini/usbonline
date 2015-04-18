@@ -4,15 +4,16 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('winusbonline:server');
-var http = require('http');
+var app = require('../app')
+    , debug = require('debug')('winusbonline:server')
+    , http = require('http')
+    , config = require('../libs/config');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '8081');
+var port = config.get('port');
 app.set('port', port);
 
 /**
@@ -35,49 +36,6 @@ require('../public/sockets/base')(io);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-
-/**
- * PostgreSQL
- */
-
-var pg = require('pg');
-var conString = "postgres://dikkini:dikkini@localhost/dikkini";
-pg.connect(conString, function(err, client, done) {
-
-  if (err) {
-    return console.error('error fetching client from pool', err);
-  } else {
-    console.log("PGSQL connection OK!")
-  }
-  client.query('SELECT $1::int AS number', ['1'], function(err, result) {
-    done();
-    if (err) {
-      return console.error('error running query', err);
-    }
-    console.log("PGSQL OK! : " + result.rows[0].number);
-  });
-
-});
-
-/**
- * Normalize a port into a number, string, or false.
- */
-
-function normalizePort(val) {
-  var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
-}
 
 /**
  * Event listener for HTTP server "error" event.

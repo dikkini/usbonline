@@ -1,13 +1,15 @@
 var express = require("express")
     , app = express()
+    , config = require('./libs/config')
     , bodyParser = require("body-parser")
     , path = require('path')
     , _ = require("underscore")
     , favicon = require('serve-favicon')
     , logger = require('morgan')
     , cookieParser = require('cookie-parser')
+    , log = require('./libs/log')(module)
     , routes = require('./routes/index')
-    , usb = require('./routes/usb');
+    , api = require('./routes/api');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,17 +21,31 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.methodOverride()); // put and delete methods
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/usb', usb);
+app.use('/usb', api);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+app.use(function(req, res, next){
+    res.status(404);
+    log.debug('Not found URL: %s',req.url);
+    res.send({ error: 'Not found' });
 });
+
+app.use(function(err, req, res, next){
+    res.status(err.status || 500);
+    log.error('Internal error(%d): %s',res.statusCode,err.message);
+    res.send({ error: err.message });
+});
+
+
+//// catch 404 and forward to error handler
+//app.use(function(req, res, next) {
+//    var err = new Error('Not Found');
+//    err.status = 404;
+//    next(err);
+//});
 
 // error handlers
 

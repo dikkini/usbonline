@@ -1,0 +1,9 @@
+{
+  "port" : 1337,
+  "mongoose": {
+    "uri": "mongodb://localhost/winusbonline"
+  },
+  "postgres": {
+    "uri": "postgres://dikkini:dikkini@localhost/dikkini"
+  }
+}
