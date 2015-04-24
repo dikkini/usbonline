@@ -7,9 +7,10 @@ var express = require("express")
     , favicon = require('serve-favicon')
     , logger = require('morgan')
     , cookieParser = require('cookie-parser')
+    , methodOverride = require('method-override')
     , log = require('./libs/log')(module)
-    , routes = require('./routes/index')
-    , api = require('./routes/api');
+    , routes = require('./routes/index');
+    //, api = require('./routes/api');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,23 +22,23 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.methodOverride()); // put and delete methods
+app.use(methodOverride('X-HTTP-Method-Override')); // put and delete methods
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/usb', api);
+app.use('/api', api);
 
-app.use(function(req, res, next){
-    res.status(404);
-    log.debug('Not found URL: %s',req.url);
-    res.send({ error: 'Not found' });
-});
-
-app.use(function(err, req, res, next){
-    res.status(err.status || 500);
-    log.error('Internal error(%d): %s',res.statusCode,err.message);
-    res.send({ error: err.message });
-});
+//app.use(function(req, res, next){
+//    res.status(404);
+//    log.debug('Not found URL: %s',req.url);
+//    res.send({ error: 'Not found' });
+//});
+//
+//app.use(function(err, req, res, next){
+//    res.status(err.status || 500);
+//    log.error('Internal error(%d): %s',res.statusCode,err.message);
+//    res.send({ error: err.message });
+//});
 
 
 //// catch 404 and forward to error handler
@@ -59,16 +60,14 @@ if (app.get('env') === 'development') {
             error: err
         });
     });
-}
 
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: {}
+        });
     });
-});
+}
 
 module.exports = app;

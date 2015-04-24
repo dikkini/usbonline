@@ -18,6 +18,9 @@
     "pg": "~4.3.0",
     "winston": "~1.0.0",
     "nconf": "~0.7.1",
-    "mongoose": "~4.0.1"
+    "mongoose": "~4.0.1",
+    "redis": "~0.12.1",
+    "method-override": "~2.3.2",
+    "crypto": "~0.0.3"
   }
 }

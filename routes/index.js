@@ -10,4 +10,8 @@ router.get('/usb', function(req, res, next) {
   res.render('usb', { title: 'Online USB Make', ip: "http://10.211.55.3:8080/" });
 });
 
+router.post('/log', function(req, res, next) {
+    // TODO
+});
+
 module.exports = router;
