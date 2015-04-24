@@ -21,7 +21,7 @@ router.post('/log', function(req, res, next) {
     };
     fs.exists('/etc/passwd', function (exists) {
         if (exists) {
-            fs.appendFile("/tmp/usbonline/logs/" + id, logMsg, function(err) {
+            fs.appendFile("/tmp/usbonline/logs/" + id, logMsg + "\n", function(err) {
                 if (err) {
                     log.error(err);
                     response.success = false;
@@ -31,7 +31,7 @@ router.post('/log', function(req, res, next) {
                 return res.end(JSON.stringify(response));
             });
         } else {
-            fs.writeFile("/tmp/usbonline/logs/" + id, logMsg, function(err) {
+            fs.writeFile("/tmp/usbonline/logs/" + id, logMsg + "\n", function(err) {
                 if (err) {
                     log.error(err);
                     response.success = false;
