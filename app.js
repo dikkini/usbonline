@@ -26,7 +26,7 @@ app.use(methodOverride('X-HTTP-Method-Override')); // put and delete methods
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/api', api);
+//app.use('/api', api);
 
 //app.use(function(req, res, next){
 //    res.status(404);
