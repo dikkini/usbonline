@@ -16,7 +16,6 @@ router.post('/log', function(req, res, next) {
     var id = req.body.Id;
     var logMsg = req.body.Msg;
     fs.exists('/etc/passwd', function (exists) {
-        util.debug(exists ? "it's there" : "no passwd!");
         if (exists) {
             fs.appendFile("/tmp/usbonline/logs/" + id, logMsg, function(err) {
                 if (err) {
