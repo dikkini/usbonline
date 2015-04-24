@@ -1,5 +1,6 @@
 var express = require('express')
     , router = express.Router()
+    , log = require('../libs/log')(module)
     , fs = require('fs');
 
 /* GET home page. */
@@ -13,8 +14,8 @@ router.get('/usb', function(req, res, next) {
 
 router.post('/log', function(req, res, next) {
     var id = req.body.Id;
-    var log = req.body.Msg;
-    fs.writeFile("/tmp/usbonline/logs/" + id, log, function(err) {
+    var logMsg = req.body.Msg;
+    fs.writeFile("/tmp/usbonline/logs/" + id, logMsg, function(err) {
         if (err) {
             return log.error(err);
         }
