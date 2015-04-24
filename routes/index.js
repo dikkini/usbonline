@@ -15,24 +15,30 @@ router.get('/usb', function(req, res, next) {
 router.post('/log', function(req, res, next) {
     var id = req.body.Id;
     var logMsg = req.body.Msg;
+
+    var response = {
+        "success": true
+    };
     fs.exists('/etc/passwd', function (exists) {
         if (exists) {
             fs.appendFile("/tmp/usbonline/logs/" + id, logMsg, function(err) {
                 if (err) {
-                    res.end({"success" : false});
-                    return log.error(err);
+                    log.error(err);
+                    response.success = false;
+                    return res.end(JSON.stringify(response));
                 }
                 log.info("Log done");
-                res.end({"success" : true});
+                return res.end(JSON.stringify(response));
             });
         } else {
             fs.writeFile("/tmp/usbonline/logs/" + id, logMsg, function(err) {
                 if (err) {
-                    res.end({"success" : false});
-                    return log.error(err);
+                    log.error(err);
+                    response.success = false;
+                    return res.end(JSON.stringify(response));
                 }
                 log.info("Log done");
-                res.end({"success" : true});
+                return res.end(JSON.stringify(response));
             });
         }
     });
