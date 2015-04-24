@@ -1,5 +1,6 @@
 var express = require('express')
     , router = express.Router()
+    , log = require('../libs/log')(module)
     , fs = require('fs');
 
 /* GET home page. */
