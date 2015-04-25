@@ -46,11 +46,23 @@ router.post('/log', function(req, res, next) {
 
 router.get('/log/:id', function(req, res, next) {
     var id = req.params.id;
-    fs.readFile('/tmp/usbonline/logs/' + id, function (err, data) {
-        if (err) {
-            return log.error(err);
+    var response = {
+        "success": false,
+        "logFile": "file not found"
+    };
+    fs.exists('/tmp/usbonline/logs/' + id, function (exists) {
+        if (exists) {
+            fs.readFile('/tmp/usbonline/logs/' + id, function (err, data) {
+                if (err) {
+                    return log.error(err);
+                }
+                response.success = true;
+                response.logFIle = data;
+                return res.end(JSON.stringify(response));
+            });
+        } else {
+            return res.end(JSON.stringify(response));
         }
-        res.end(data);
     });
 });
 
