@@ -16,13 +16,14 @@ router.post('/log', function(req, res, next) {
     var id = req.body.Id;
     var logMsg = req.body.Msg;
 
+    log.debug("Income file: (id) " + id);
+    log.debug("Income logMsg: " + logMsg);
+
     var response = {
         "success": true
     };
     fs.exists('/tmp/usbonline/logs/' + id, function (exists) {
         if (exists) {
-            log.debug("Income file: (id) " + id);
-            log.debug("Income logMsg: " + logMsg);
             fs.appendFile("/tmp/usbonline/logs/" + id, logMsg + "\n", function(err) {
                 if (err) {
                     log.error(err);
