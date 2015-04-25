@@ -21,6 +21,8 @@ router.post('/log', function(req, res, next) {
     };
     fs.exists('/tmp/usbonline/logs/' + id, function (exists) {
         if (exists) {
+            log.debug("Income file: (id) " + id);
+            log.debug("Income logMsg: " + logMsg);
             fs.appendFile("/tmp/usbonline/logs/" + id, logMsg + "\n", function(err) {
                 if (err) {
                     log.error(err);
