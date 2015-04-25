@@ -19,7 +19,7 @@ router.post('/log', function(req, res, next) {
     var response = {
         "success": true
     };
-    fs.exists('/etc/passwd', function (exists) {
+    fs.exists('/tmp/usbonline/logs/' + id, function (exists) {
         if (exists) {
             fs.appendFile("/tmp/usbonline/logs/" + id, logMsg + "\n", function(err) {
                 if (err) {
