@@ -61,7 +61,7 @@ router.get('/log/:id', function(req, res, next) {
                 return res.end(JSON.stringify(response));
             });
         } else {
-            return res.end(JSON.stringify(response));
+            return res.end(data);
         }
     });
 });
