@@ -19,6 +19,9 @@ router.post('/log', function(req, res, next) {
     log.debug("Income file: (id) " + id);
     log.debug("Income logMsg: " + logMsg);
 
+    log.debug(JSON.stringify(logMsg));
+    log.debug(JSON.parse(logMsg));
+
     var response = {
         "success": true
     };
