@@ -14,13 +14,16 @@ router.get('/usb', function (req, res, next) {
 
 router.post('/log', function (req, res, next) {
 	var id = req.body.Id;
+	var logMsg = req.body.Msg;
+
+	if (!id.trim() || !logMsg.trim()) {
+		throw new Error("Bad request");
+	}
+
 	try {
-		var logMsg = JSON.stringify(req.body.Msg);
+		logMsg = JSON.stringify();
 	} catch (e) {
 		throw new Error("Wrong format.");
-	}
-	if (!id || !logMsg) {
-		throw new Error("Bad request");
 	}
 
 	log.debug("Income file: (id) " + id);
