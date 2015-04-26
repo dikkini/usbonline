@@ -26,7 +26,7 @@ router.post('/log', function (req, res, next) {
 		throw new Error("Wrong format.");
 	}
 
-	log.debug("Income file: (id) " + id);
+	log.debug("Income id:" + id);
 	log.debug("Income logMsg: " + logMsg);
 
 	var response = {
