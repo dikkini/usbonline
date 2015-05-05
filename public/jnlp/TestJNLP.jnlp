@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="109.120.173.163:1337/jnlp/" href="TestJNLP.jnlp">
+    <information>
+        <title>TestJNLP</title>
+        <vendor>Arturik</vendor>
+    </information>
+    <resources>
+        <!-- Application Resources -->
+        <j2se version="1.7+"
+              href="http://java.sun.com/products/autodl/j2se"/>
+        <jar href="winusbonline_jws.jar"
+            main="true" />
+
+    </resources>
+    <application-desc
+         name="Testing JNLP technology"
+         main-class=
+           "Test"
+         width="300"
+         height="300">
+     </application-desc>
+     <update check="background"/>
+</jnlp>
