@@ -1,3 +1,76 @@
+/**
+* Make element in center of page wiht support some new browsers
+*/
+.centerFlex {
+    /* Internet Explorer 10 */
+    display:-ms-flexbox;
+    -ms-flex-pack:center;
+    -ms-flex-align:center;
+    /* Firefox */
+    display:-moz-box;
+    -moz-box-pack:center;
+    -moz-box-align:center;
+    /* Safari, Opera, and Chrome */
+    display:-webkit-box;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+    /* W3C */
+    display: box;
+    box-pack: center;
+    box-align: center;
+}
+
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+#loader-list {
+    position: relative;
+    padding-top: 110px;
+    left: 0;
+}
+
+/**
+ * Progress bars with centered text
+ */
+
+.progress {
+    position: relative;
+}
+
+.progress span {
+    position: absolute;
+    display: block;
+    width: 100%;
+    color: black;
+}
+
+/* progress in minimized view */
+.progress-minimized {
+    margin-bottom: 0px !important;
+    height: 4px !important;
+}
+
+/* flash drive size progress */
+.progress-flash-bar {
+    height: 30px !important;
+}
+
+.btn-group-sm>.btn {
+    line-height: 1.42857143 !important;
+}
+
+
+
 .box {
     border: solid gray 1px;
     width: 400px;
@@ -215,6 +288,8 @@ textarea {
 .clearfix {
     *zoom: 1;
 }
+
+
 
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
