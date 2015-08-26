@@ -53,7 +53,11 @@ $(document).ready(function() {
 
 	$('body').on('click', '.loader-action-chooseiso', function() {
 		var loaderId = $(this).data('loader-id');
+<<<<<<< HEAD
 		var loaderCode = $('select#' + loaderId).find(':selected').data('code');
+=======
+		var loaderCode = $(this).data('code');
+>>>>>>> 593706712695ca4a74aa787505f5cd9e1c8313e2
 		successCb = function(response) {
 			console.log(response);
 			if (response.Error) {
