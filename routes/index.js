@@ -7,7 +7,6 @@ var express = require('express')
 router.get('/', function (req, res, next) {
 	res.render('index', {title: 'Online USB Make'});
 });
-
 router.get('/usb', function (req, res, next) {
 	res.render('usb', {title: 'Online USB Make', ip: "http://localhost:8080/"});
 });

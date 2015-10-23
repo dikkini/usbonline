@@ -3,7 +3,7 @@
     <envs>
       <env name="DEBUG" value="winusbonline" />
     </envs>
-    <browser url="http://localhost:3000/" />
+    <browser url="http://localhost:1337/" />
     <RunnerSettings RunnerId="debuggableProgram" />
     <ConfigurationWrapper RunnerId="debuggableProgram" />
     <method />

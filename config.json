@@ -1,14 +1,6 @@
 {
   "port" : 1337,
-  "mongoose": {
-    "uri": "mongodb://10.211.55.5/usbonline"
-  },
   "postgres": {
-    "uri": "postgres://postgres:w0pG0pMay0p#@109.120.173.163/usbonline"
-  },
-  "redis": {
-    "host": "10.211.55.5",
-    "port": "6379",
-    "expire_session": "3600"
+    "uri": "postgres://postgres:w0pG0pMay0p#@77.221.146.148/usbonline"
   }
 }
