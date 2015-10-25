@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$.blockUI.defaults.fadeIn = 0;
 	$.blockUI.defaults.fadeOut = 0;
-	$.blockUI.defaults.message = '<h3><img height=50 src="http://109.120.173.163:1337/small_ui/img/loading.gif" /> Please wait...</h3>';
+	$.blockUI.defaults.message = '<h3><img height=50 src="http://77.221.146.148:1337/assets/small_ui/img/loading.gif" /> Please wait...</h3>';
 	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 
 	renderFlashDrives();
