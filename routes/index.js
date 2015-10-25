@@ -9,11 +9,9 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/setport', function(req, res, next) {
-	var port = req.body.ListeningPort;
-	var error = req.body.error;
+	var json = req.body.JSON;
 
-	console.log(port);
-	console.log(error);
+	console.log(json);
 
 	var response = {
 		"success": true

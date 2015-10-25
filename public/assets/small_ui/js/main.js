@@ -1,29 +1,207 @@
 $(document).ready(function() {
+
+	'use strict';
+
 	$.blockUI.defaults.fadeIn = 0;
 	$.blockUI.defaults.fadeOut = 0;
 	$.blockUI.defaults.message = '<h3><img height=50 src="http://77.221.146.148:1337/assets/small_ui/img/loading.gif" /> Please wait...</h3>';
-	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+
+	var dontBlock = false;
+
+	$(document).ajaxStart(function(){
+		if(!dontBlock)
+			$.blockUI();
+	}).ajaxStop($.unblockUI);
+	
+	var $burnTypeSelect = $("#burnTypeSelectBtn");
+	var $burnTypeSelectUL = $("#burnTypeSelectUL");
+	var $flashDriveSelectBtn = $("#flashDriveSelectBtn");
+	var $flashDriveSelectUL = $("#flashDriveSelectUl");
+	var $body = $("body");
+	var $burnBtn = $("#burnBtn");
+	var $refreshDrivesBtn = $("#refreshFlashDrives");
+
+	var MODE_NONE = "Type";
+	var MODE_CURRENT = MODE_NONE;
+	var MODE_NEW = "New";
+	var MODE_ADD = "Add";
+	var ISWORKING = false;
 
 	renderFlashDrives();
 
 	var selectedFlashDrive = -1;
 
-	$("#burnBtn").click(function() {
-		collectLoaders();
+	$burnBtn.click(function() {
+		var loaderList = collectLoaders();
+		
+		if (loaderList == "") {
+			return;
+		}
+		var mode = $burnTypeSelect.text().trim();
+		if (mode == MODE_NONE) {
+			$burnTypeSelect.css({'border-color': 'red'});
+			$.growlUI('Error', 'Choose type flash drive burn!');
+			return;
+		}
+
+		for (var i=0; i<loaderList.length; i++) {
+			var loader = loaderList[i];
+			disableLoaderInterface(loader.Name);
+		}
+
+		var successCb = function(response) {
+			console.log(response);
+			disableInterface();
+			launchBurningProgressProcess();
+		};
+
+		var errorCb = function(response) {
+			console.log(response);
+		};
+
+		burnFlashDrive(loaderList, mode, selectedFlashDrive.Letter, true, successCb, errorCb);
 	});
 
-	function collectLoaders() {
-		$("#loader-list").children().not("#add-loader").each(function() {
-			alert($(this).data("loader-id"));
-		});
+	var burningProgressMessages;
+	function launchBurningProgressProcess() {
+		var successCb = function(response) {
+			ISWORKING = true;
+			console.log(response);
+			var messages = response.NewMessages;
+			if (!messages) {
+				return;
+			}
+			for (var i = 0; i < messages.length; i++) {
+				var msg = messages[i];
+				var progressValue = msg.MsgTextFst; // Progress=Integer
+				var loaderId = msg.MsgTextFrth; // Name=LoaderId
+				var status = msg.MsgTextScnd; // Status=Running
+				var type = msg.MsgType; // "JobSync"
+
+				if (type == "JobSync" && status == "Initializing") {
+					$('.loader-action-remcancel[data-loader-id="' + loaderId + '"]').removeClass("disabled");
+				}
+
+				if (type == "BurnFinished") {
+					ISWORKING = false;
+					enableInterface();
+					clearInterval(burningProgressMessages);
+					return;
+				}
+
+				if (type == "JobFinished") {
+					$('.loader-action-remcancel[data-loader-id="' + loaderId + '"]').addClass("disabled");
+				}
+
+				if (progressValue == "Format") {
+					$.growlUI('Info', 'Formatting flash Drive');
+					continue;
+				}
+
+				var $loaderItem = $("#loader-list").find('.loader-item[data-loader-id="' + loaderId + '"]');
+				var $progressBar = $loaderItem.find('.progress-bar[data-loader-id="' + loaderId + '"]');
+				$progressBar.css("width", progressValue + "%").attr("aria-valuenow", progressValue);
+				$progressBar.find("span").text(progressValue + "%");
+				$loaderItem.find('.loader-status-value[data-loader-id="' + loaderId + '"]').text(" " + status);
+			}
+		};
+
+		var errorCb = function(response) {
+			console.log(response);
+		};
+
+		burningProgressMessages = setInterval(function(){
+			getLoaderBurningProgress(true, successCb, errorCb);
+		}, 1000);
 	}
 
-	$("body").on("click", "#refreshFlashDrives", function() {
+	function disableInterface() {
+		$burnTypeSelect.addClass("disabled");
+		$refreshDrivesBtn.addClass("disabled");
+		$flashDriveSelectBtn.addClass("disabled");
+		$burnBtn.addClass("disabled");
+	}
+
+	function enableInterface() {
+		$burnTypeSelect.removeClass("disabled");
+		$refreshDrivesBtn.removeClass("disabled");
+		$flashDriveSelectBtn.removeClass("disabled");
+		$burnBtn.removeClass("disabled");
+	}
+
+	function collectLoaders() {
+		var loaderList = [];
+		var error = false;
+		$("#loader-list").children().not("#add-loader").each(function() {
+			var loaderId = $(this).data("loader-id");
+			var loaderISO = $('.loader-iso[data-loader-id="' + loaderId + '"]');
+			var loaderISOPath = loaderISO.data("loader-iso-path");
+			var loaderISOSize = loaderISO.data("loader-iso-size");
+			if (!loaderISOPath || !loaderISOSize) {
+				$('.loader-action-chooseiso[data-loader-id="' + loaderId + '"]').css({'border-color': 'red'});
+				$.growlUI('Error', 'Choose ISO Path for loader!');
+				error = true;
+				return;
+			}
+			var loaderSelect = $('select[data-loader-id="' + loaderId + '"]');
+			var loaderSelectSelected = loaderSelect.find(':selected');
+			var loaderCode = loaderSelectSelected.data('code');
+			if (!loaderCode) {
+				$('.loader-type-select[data-loader-id="' + loaderId + '"]').css({'border-color': 'red'});
+				$.growlUI('Error', 'Choose loader type!');
+				error = true;
+				return;
+			}
+			var loader = {
+				Name: loaderId,
+				Path: loaderISOPath,
+				Code: loaderCode,
+				Size: loaderISOSize
+			};
+			loaderList.push(loader);
+		});
+		if (error) {
+			return "";
+		}
+		return loaderList;
+	}
+
+	$body.on("click", "button.loader-action-remcancel", function() {
+		var loaderId = $(this).data("loader-id");
+		$(this).addClass("disabled");
+		if (ISWORKING) {
+			var successCb = function(response) {
+				console.log("CANCELLING RESPONSE");
+				console.log(response);
+			};
+			var errorCb = function(response) {
+				console.log("CANCELLING RESPONSE ERROR");
+				console.log(response);
+			};
+			cancelLoader(true, successCb, errorCb);
+		} else {
+			$("#loader-list").find('.loader-item[data-loader-id="' + loaderId + '"]').remove();
+		}
+	});
+
+	function disableLoaderInterface(loaderId) {
+		var loaders = $("#loader-list").find('.loader-item[data-loader-id="' + loaderId + '"]');
+		loaders.find("input, button").not(".loader-action-minimize, .loader-action-linktoiso").addClass("disabled");
+		loaders.find("select").prop('disabled', 'disabled');
+	}
+
+	$body.on("click", "#refreshFlashDrives", function() {
+		$flashDriveSelectUL.children().each(function() {
+			$(this).remove();
+		});
+		$flashDriveSelectBtn.html("Choose flash drive <span class='caret'></span>");
+		$burnTypeSelect.html("Type <span class='caret'></span>");
+		$burnTypeSelect.addClass("disabled");
 		renderFlashDrives();
 	});
 
 	function renderFlashDrives() {
-		successCb = function(response) {
+		var successCb = function(response) {
 			var select = $("#flashDriveSelectUl");
 			var drives = response.Drives;
 			if (!drives) {
@@ -35,35 +213,47 @@ $(document).ready(function() {
 				var txt = drive.Name + " (" + drive.Letter.toUpperCase() + ":\\) " + drive.FS + " FreeSpace: " + Math.round(parseInt(drive.FreeSpace) / (1024*1024)) + "Mb. FullSize: " + Math.round(parseInt(drive.FullSize) / (1024*1024)) + "Mb";
 				select.append("<li><a href='#' value='" + JSON.stringify(drive) + "'>" + txt + "</a></li>");
 			}
-			$("#flashDriveSelect").removeClass("disabled");
+			$flashDriveSelectBtn.removeClass("disabled");
 		};
-		errorCb = function(response) {
+		var errorCb = function(response) {
 			console.log("ERROR BLAT");
 			console.log(response);
 		};
 		getFlashDrives(true, successCb, errorCb);
 	}
 
-	$('body').on('click', '#flashDriveSelectUl li a', function() {
+	$body.on('click', '#flashDriveSelectUl li a', function() {
 		var fd = $(this).attr("value");
 		selectedFlashDrive = $.parseJSON(fd);
 		var txt = " (" + selectedFlashDrive.Letter.toUpperCase() + ":\\) " + selectedFlashDrive.FS;
-		$("#flashDriveSelect").html(txt + " <span class='caret'></span>")
+		$flashDriveSelectBtn.html(txt + " <span class='caret'></span>");
 		console.log("User select flash drive: " + fd);
 		$("#add-loader").removeClass("disabled")
+		$burnTypeSelect.removeClass("disabled");
 	});
 
-	$('body').on('click', '.loader-action-chooseiso', function() {
+	$body.on('click', '#burnTypeSelectUL li a', function() {
+		var chosenType = $(this).text();
+		$burnTypeSelect.html(chosenType + " <span class='caret'></span>");
+		if (chosenType == MODE_ADD) {
+			// TODO
+		} else if (chosenType == MODE_NEW) {
+			// TODO
+		}
+	});
+
+	$body.on('click', '.loader-action-chooseiso', function() {
 		var loaderId = $(this).data('loader-id');
-		var loaderSelect = $('select[data-loader-id="' + loaderId+ '"]');
+		var loaderSelect = $('select[data-loader-id="' + loaderId + '"]');
 		var loaderSelectSelected = loaderSelect.find(':selected');
 		var loaderCode = loaderSelectSelected.data('code');
 		console.log(loaderCode);
-		successCb = function(response) {
+		var successCb = function(response) {
 			console.log(response);
 			if (response.Error) {
 				// TODO think about it because some error means that user just close FileBrowser and we have to handle it
 				alert("Internal server error. Please contact to a support. Error: " + response.Error);
+				return;
 			}
 
 			var prevIso = $('.loader-iso[data-loader-id="' + loaderId + '"]');
@@ -89,7 +279,7 @@ $(document).ready(function() {
 			$('.loader-information[data-loader-id="' + loaderId + '"]').append(label)
 		};
 
-		errorCb = function(response) {
+		var errorCb = function(response) {
 			console.log("ERROR BLAT");
 			console.log(response);
 		};
@@ -118,22 +308,24 @@ $(document).ready(function() {
 		loaderItem.slideDown(500);
 	});
 
-	$("body").on("click", ".loader-action-minimize", function() {
+	$body.on("click", ".loader-action-minimize", function() {
 		var id = $(this).data("loader-id");
 		// hide task
-		$('.loader-task[data-loader-id="' + id + '"]').fadeOut(500);
+		$('.loader-task[data-loader-id="' + id + '"]');
 		// hide status
-		$('.loader-status[data-loader-id="' + id + '"]').fadeOut(500);
+		$('.loader-status[data-loader-id="' + id + '"]');
 		// move progressbar
-		$('.loader-progressbar[data-loader-id="' + id + '"]').fadeOut().prependTo($('.loader-item[data-loader-id="' + id + '"]')).fadeIn(500);
+		var $loaderProgressBar = $('.loader-progressbar[data-loader-id="' + id + '"]');
+		var $loaderItem = $('.loader-item[data-loader-id="' + id + '"]');
+		$loaderProgressBar.prependTo($loaderItem);
 		// and make it small
-		$('.loader-progressbar[data-loader-id="' + id + '"]').find(".progress").addClass("progress-minimized");
+		$loaderProgressBar.find(".progress").addClass("progress-minimized");
 		// change button to maximize
 		$(this).addClass("loader-action-maximize").removeClass('loader-action-minimize');
 		$(this).find("span.glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
 	});
 
-	$("body").on("click", ".loader-action-maximize", function() {
+	$body.on("click", ".loader-action-maximize", function() {
 		var id = $(this).data("loader-id");
 		// show task
 		var task = $('.loader-task[data-loader-id="' + id + '"]');
@@ -142,12 +334,14 @@ $(document).ready(function() {
 		var status = $('.loader-status[data-loader-id="' + id + '"]');
 		status.remove();
 		// move progressbar
-		$('.loader-progressbar[data-loader-id="' + id + '"]').fadeOut().appendTo($('.loader-item[data-loader-id="' + id + '"]')).fadeIn(500);
+		var $loaderProgressBar = $('.loader-progressbar[data-loader-id="' + id + '"]');
+		var $loaderItem = $('.loader-item[data-loader-id="' + id + '"]');
+		$loaderProgressBar.appendTo($loaderItem);
 		// append task and status
-		status.appendTo($('.loader-item[data-loader-id="' + id + '"]')).fadeIn(500);
-		task.appendTo($('.loader-item[data-loader-id="' + id + '"]')).fadeIn(500);
+		status.appendTo($loaderItem);
+		task.appendTo($loaderItem);
 		// and make it small
-		$('.loader-progressbar[data-loader-id="' + id + '"]').find(".progress").removeClass("progress-minimized");
+		$loaderProgressBar.find(".progress").removeClass("progress-minimized");
 		// change button to maximize
 		$(this).removeClass("loader-action-maximize").addClass('loader-action-minimize');
 		$(this).find("span.glyphicon-plus").addClass("glyphicon-minus").removeClass("glyphicon-plus");
@@ -171,7 +365,58 @@ function getFlashDrives(async, successCb, errorCb) {
 	});
 }
 
-function burn(loadersJson, mode, flashDriveLetter, async, successCb, errorCb) {
+function cancelLoader(async, successCb, errorCb) {
+	dontBlock = true;
+	$.ajax({
+		url: "/",
+		type: "POST",
+		dataType: "JSON",
+		data: { "Operation": "CancelCurrent" },
+		async: async,
+		success: function (response) {
+			successCb(response);
+		},
+		error: function (response) {
+			errorCb(response);
+		}
+	})
+}
+
+function disableLoader(jobName, async, successCb, errorCb) {
+	dontBlock = true;
+	$.ajax({
+		url: "/",
+		type: "POST",
+		dataType: "JSON",
+		data: { "Operation": "Disable", "JobName":jobName },
+		async: async,
+		success: function (response) {
+			successCb(response);
+		},
+		error: function (response) {
+			errorCb(response);
+		}
+	})
+}
+
+function enableLoader(async, successCb, errorCb) {
+	dontBlock = true;
+	$.ajax({
+		url: "/",
+		type: "POST",
+		dataType: "JSON",
+		data: { "Operation": "Enable", "JobName":jobName },
+		async: async,
+		success: function (response) {
+			successCb(response);
+		},
+		error: function (response) {
+			errorCb(response);
+		}
+	})
+}
+
+function burnFlashDrive(loadersJson, mode, flashDriveLetter, async, successCb, errorCb) {
 	$.ajax({
 		url: "/",
 		type: "POST",
@@ -181,6 +426,7 @@ function burn(loadersJson, mode, flashDriveLetter, async, successCb, errorCb) {
 			"Operation": "BurnFlashDrive",
 			"FlashDrive": flashDriveLetter,
 			"Mode": mode,
+			"NewFS" : "NTFS",
 			"Loaders": loadersJson
 		},
 		async: async,
@@ -193,12 +439,13 @@ function burn(loadersJson, mode, flashDriveLetter, async, successCb, errorCb) {
 	});
 }
 
-function getLoaderBurningProgress(loaderId, async, successCb, errorCb) {
+function getLoaderBurningProgress(async, successCb, errorCb) {
+	dontBlock = true;
 	$.ajax({
 		url: "/",
 		type: "POST",
 		dataType: "JSON",
-		data: { "Operation": "BurningProgress", "JobNum": loaderId },
+		data: { "Operation": "CheckMessages" },
 		async: async,
 		success: function (response) {
 			successCb(response);
@@ -241,15 +488,6 @@ function log(message, async, successCb, errorCb) {
 	});
 }
 
-// commonjs
-$.disable = function(el) {
-	el.attr('disabled','disabled');
-};
-
-$.enable = function(el) {
-	el.removeAttr('disabled');
-};
-
 function genHash(data) {
 	data = data.split("").reverse().join("").substring(0, data.length - 1);
 	// TODO get key
@@ -275,7 +513,7 @@ function buildLoaderItem(loaderId) {
 	var $loaderItemMaximizedRow = $("<div>", {class:"row", style:"margin: 0px; padding-top: 4px; padding-bottom: 4px;"});
 	var $loaderItemMaximizedRowColXs9 = $("<div>", {class:"col-xs-9"});
 	var $loaderItemMaximizedRowColXs9InputGrp = $("<div>", {"data-loader-id":loaderId, class:"loader-information input-group btn-group-sm", role:"group"});
-	var $loaderItemMaximizedRowColXs9InputGrpSelectLoaderType = $("<select>", {"data-loader-id":loaderId, class:"loader-type-select form-control input-sm", style:"width: auto; height: auto; display: inline;"});
+	var $loaderItemMaximizedRowColXs9InputGrpSelectLoaderType = $("<select>", {"data-loader-id":loaderId, class:"loader-type-select form-control input-sm", style:"width: auto; height: 30px; display: inline;"});
 	var $loaderItemMaximizedRowColXs9InputGrpSelectLoaderTypeOption1 = $("<option>", {value:"windows7", "data-code":"3", "data-url":"http://yandex.com/", text:"Windows 7, 8, 10, 2008 Server and etc."});
 	var $loaderItemMaximizedRowColXs9InputGrpSelectLoaderTypeOption2 = $("<option>", {value:"windowsxp", "data-code":"4", "data-url":"http://yandex.com/", text:"Windows XP, 2003 Server and etc."});
 	var $loaderItemMaximizedRowColXs9InputGrpSelectLoaderTypeOption3 = $("<option>", {value:"kav", "data-code":"5", "data-url":"http://yandex.com/", text:"Kasperksy Rescue Disk"});
@@ -286,8 +524,10 @@ function buildLoaderItem(loaderId) {
 
 	var $loaderItemMaximizedRowColXs3 = $("<div>", {class:"col-xs-3"});
 	var $loaderItemMaximizedRowColXs3Buttons = $("<div>", {"data-loader-id":loaderId, class:"loader-actions btn-group btn-group-sm", style:"float: right;", role:"group", "aria-label":"..."});
-	var $loaderItemMaximizedRowColXs3EndisableBtn = $("<button>", {"data-loader-id":loaderId, type:"button", class:"loader-action-endisable btn btn-warning", "aria-label":"Left Align"});
+	var $loaderItemMaximizedRowColXs3EndisableBtn = $("<button>", {"data-loader-id":loaderId, type:"button", class:"loader-action-endisable btn btn-warning", "aria-label":"Left Align", "style":"display:none;"});
 	var $loaderItemMaximizedRowColXs3EndisableBtnGlyphIcon = $("<span>", {class:"glyphicon glyphicon-pause", "aria-hidden":"true"});
+	var $loaderItemMaximizedRowColXs3RemCancelBtn = $("<button>", {"data-loader-id":loaderId, type:"button", class:"loader-action-remcancel btn btn-danger", "aria-label":"Left Align"});
+	var $loaderItemMaximizedRowColXs3RemCancelBtnGlyphIcon = $("<span>", {class:"glyphicon glyphicon-pause", "aria-hidden":"true"});
 	var $loaderItemMaximizedRowColXs3MinimizeBtn = $("<button>", {"data-loader-id":loaderId, type:"button", class:"loader-action-minimize btn btn-default", "aria-label":"Left Align"});
 	var $loaderItemMaximizedRowColXs3MinimizeBtnGlyphIcon = $("<span>", {class:"glyphicon glyphicon-minus", "aria-hidden":"true"});
 	// loader progress bar
@@ -296,11 +536,6 @@ function buildLoaderItem(loaderId) {
 	var $loaderItemMinimizedRowProgressColXs12ProgressDiv = $("<div>", {"data-loader-id":loaderId, class:"progress", style:"margin-bottom: 0px;"});
 	var $loaderItemMinimizedRowProgressColXs12ProgressDivProgressBar = $("<div>", {"data-loader-id":loaderId, class:"progress-bar progress-bar-striped active", role:"progressbar", "aria-valuenow":"0", "aria-valuemin":"0", "aria-valuemax":"100", style:"width: 0%;"});
 	var $loaderItemMinimizedRowProgressColXs12ProgressDivProgressBarValueSpan = $("<span>", {"data-loader-id": loaderId, text:"0%"});
-	// loader task
-	var $loaderItemMaximizedRowTask = $("<div>", {"data-loader-id": loaderId, class:"row loader-task", style:"margin: 0px;"});
-	var $loaderItemMaximizedRowTaskColXs12 = $("<div>", {class:"loader-task col-xs-12"});
-	var $loaderItemMaximizedRowTaskColXs12Label = $("<label>", {text:"Current task:"});
-	var $loaderItemMaximizedRowTaskColXs12LabelSmall = $("<small>", {"data-loader-id":loaderId,class:"loader-task-value", text:""});
 	// loader status
 	var $loaderItemMaximizedRowStatus = $("<div>", {"data-loader-id": loaderId, class:"row loader-status", style:"margin: 0px;"});
 	var $loaderItemMaximizedRowStatusColXs12 = $("<div>", {class:"loader-status col-xs-12"});
@@ -322,9 +557,11 @@ function buildLoaderItem(loaderId) {
 
 	$loaderItemMaximizedRowColXs3EndisableBtn.append($loaderItemMaximizedRowColXs3EndisableBtnGlyphIcon);
 	$loaderItemMaximizedRowColXs3Buttons.append($loaderItemMaximizedRowColXs3EndisableBtn);
-	$loaderItemMaximizedRowColXs3MinimizeBtn.append($loaderItemMaximizedRowColXs3MinimizeBtnGlyphIcon)
+	$loaderItemMaximizedRowColXs3RemCancelBtn.append($loaderItemMaximizedRowColXs3RemCancelBtnGlyphIcon);
+	$loaderItemMaximizedRowColXs3Buttons.append($loaderItemMaximizedRowColXs3RemCancelBtn);
+	$loaderItemMaximizedRowColXs3MinimizeBtn.append($loaderItemMaximizedRowColXs3MinimizeBtnGlyphIcon);
 	$loaderItemMaximizedRowColXs3Buttons.append($loaderItemMaximizedRowColXs3MinimizeBtn);
-	$loaderItemMaximizedRowColXs3.append($loaderItemMaximizedRowColXs3Buttons)
+	$loaderItemMaximizedRowColXs3.append($loaderItemMaximizedRowColXs3Buttons);
 	$loaderItemMaximizedRow.append($loaderItemMaximizedRowColXs3);
 	$loaderItemMaximized.append($loaderItemMaximizedRow);
 
@@ -333,11 +570,6 @@ function buildLoaderItem(loaderId) {
 	$loaderItemMinimizedRowProgressColXs12.append($loaderItemMinimizedRowProgressColXs12ProgressDiv);
 	$loaderItemMinimizedRowProgress.append($loaderItemMinimizedRowProgressColXs12);
 	$loaderItemMaximized.append($loaderItemMinimizedRowProgress);
-
-	$loaderItemMaximizedRowTaskColXs12Label.append($loaderItemMaximizedRowTaskColXs12LabelSmall);
-	$loaderItemMaximizedRowTaskColXs12.append($loaderItemMaximizedRowTaskColXs12Label);
-	$loaderItemMaximizedRowTask.append($loaderItemMaximizedRowTaskColXs12);
-	$loaderItemMaximized.append($loaderItemMaximizedRowTask);
 
 	$loaderItemMaximizedRowStatusColXs12.append($loaderItemMaximizedRowStatusColXs12Label);
 	$loaderItemMaximizedRowStatusColXs12.append($loaderItemMaximizedRowStatusColXs12Small);
