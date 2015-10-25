@@ -8,6 +8,20 @@ router.get('/', function (req, res, next) {
 	res.render('index', {title: 'Online USB Make'});
 });
 
+router.post('/setport', function(req, res, next) {
+	var port = req.body.ListeningPort;
+	var error = req.body.error;
+
+	console.log(port);
+	console.log(error);
+
+	var response = {
+		"success": true
+	};
+
+	return res.end(JSON.stringify(response));
+});
+
 router.get('/usb', function (req, res, next) {
 	res.render('usb', {title: 'Online USB Make', ip: "http://localhost:8080/"});
 });

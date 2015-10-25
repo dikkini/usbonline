@@ -5,7 +5,6 @@ $(document).ready(function() {
 	$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 
 	renderFlashDrives();
-	$("#flashDriveSelect").html("<option value='-1'>Choose flash drive");
 
 	var selectedFlashDrive = -1;
 
@@ -25,7 +24,7 @@ $(document).ready(function() {
 
 	function renderFlashDrives() {
 		successCb = function(response) {
-			var select = $("#flashDriveSelect").html("<option value='-1'>Choose flash drive");
+			var select = $("#flashDriveSelectUl");
 			var drives = response.Drives;
 			if (!drives) {
 				$.unblockUI();
@@ -34,8 +33,9 @@ $(document).ready(function() {
 			for (var i = 0; i < drives.length; i++) {
 				var drive = drives[i];
 				var txt = drive.Name + " (" + drive.Letter.toUpperCase() + ":\\) " + drive.FS + " FreeSpace: " + Math.round(parseInt(drive.FreeSpace) / (1024*1024)) + "Mb. FullSize: " + Math.round(parseInt(drive.FullSize) / (1024*1024)) + "Mb";
-				select.append("<option value='" + JSON.stringify(drive) + "'>" + txt + "</option>");
+				select.append("<li><a href='#' value='" + JSON.stringify(drive) + "'>" + txt + "</a></li>");
 			}
+			$("#flashDriveSelect").removeClass("disabled");
 		};
 		errorCb = function(response) {
 			console.log("ERROR BLAT");
@@ -44,16 +44,21 @@ $(document).ready(function() {
 		getFlashDrives(true, successCb, errorCb);
 	}
 
-	$('body').on('change', '#flashDriveSelect', function() {
-		$("#flashDriveSelect option[value='-1']").remove();
-		selectedFlashDrive = $.parseJSON(this.value);
-		console.log("User select flash drive: " + selectedFlashDrive);
+	$('body').on('click', '#flashDriveSelectUl li a', function() {
+		var fd = $(this).attr("value");
+		selectedFlashDrive = $.parseJSON(fd);
+		var txt = " (" + selectedFlashDrive.Letter.toUpperCase() + ":\\) " + selectedFlashDrive.FS;
+		$("#flashDriveSelect").html(txt + " <span class='caret'></span>")
+		console.log("User select flash drive: " + fd);
 		$("#add-loader").removeClass("disabled")
 	});
 
 	$('body').on('click', '.loader-action-chooseiso', function() {
 		var loaderId = $(this).data('loader-id');
-		var loaderCode = $('select#' + loaderId).find(':selected').data('code');
+		var loaderSelect = $('select[data-loader-id="' + loaderId+ '"]');
+		var loaderSelectSelected = loaderSelect.find(':selected');
+		var loaderCode = loaderSelectSelected.data('code');
+		console.log(loaderCode);
 		successCb = function(response) {
 			console.log(response);
 			if (response.Error) {
