@@ -1,5 +1,5 @@
 {
-  "port" : 1337,
+  "port" : 80,
   "postgres": {
     "uri": "postgres://postgres:w0pG0pMay0p#@77.221.146.148/usbonline"
   }
