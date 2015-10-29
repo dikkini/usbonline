@@ -3,12 +3,12 @@ var express = require('express')
 	, log = require('../libs/log')(module)
 	, pg = require('pg')
 	, config = require('../libs/config')
-	, redis = require('redis')
-	, crypto = require('crypto')
-	, redisCli = redis.createClient(config.get("redis:port"), config.get("redis:host"));
+	//, redis = require('redis')
+	, crypto = require('crypto');
+	//, redisCli = redis.createClient(config.get("redis:port"), config.get("redis:host"));
 
 
-router.get('/session/:id', function (req, res) {
+router.get('/:id', function (req, res) {
 	var response = {
 		status: 200,
 		success: true
@@ -33,7 +33,7 @@ router.get('/session/:id', function (req, res) {
 	});
 });
 
-router.post('/session', function (req, res) {
+router.post('/', function (req, res) {
 	var userId = req.body.userId;
 	var userTime = req.body.userTime;
 	log.debug(userId + userTime);
@@ -113,11 +113,11 @@ router.post('/session', function (req, res) {
 	});
 });
 
-router.put('/session/:id', function (req, res) {
+router.put('/:id', function (req, res) {
 	// TODO i think this is will be update session after user bought premium account
 });
 
-router.delete('/session/:id', function (req, res) {
+router.delete('/:id', function (req, res) {
 	var userTime = req.body.userTime;
 	var userId = req.params.id;
 	log.debug(userTime);

@@ -9,8 +9,10 @@ var express = require("express")
     , cookieParser = require('cookie-parser')
     , methodOverride = require('method-override')
     , log = require('./libs/log')(module)
-    , routes = require('./routes/index');
-    //, api = require('./routes/api');
+    , index = require('./routes/index')
+    , logs = require('./routes/log')
+    , utils = require('./routes/utils')
+    , session = require('./routes/session');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,8 +32,10 @@ app.use(function(req, res, next) {
 app.use(methodOverride('X-HTTP-Method-Override')); // put and delete methods
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-//app.use('/api', api);
+app.use('/', index);
+app.use('/log', logs);
+app.use('/utils', utils);
+app.use('/session', session);
 
 //app.use(function(req, res, next){
 //    res.status(404);
