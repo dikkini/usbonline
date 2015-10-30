@@ -10,7 +10,7 @@ $(document).on('ready', function() {
 	function init() {
 		var $appUrl = $("#application-url");
 		var ieVer = msieversion();
-		if (ieVer == 0) {
+		if (ieVer == -1) {
 			$appUrl.attr("href", "/application/BootLine.exe");
 		}
 
