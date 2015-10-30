@@ -13,7 +13,8 @@ var express = require("express")
     , index = require('./routes/index')
     , logs = require('./routes/log')
     , utils = require('./routes/utils')
-    , session = require('./routes/session');
+    , session = require('./routes/session')
+    , download = require('./routes/download');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,6 +38,7 @@ app.use('/', index);
 app.use('/log', logs);
 app.use('/utils', utils);
 app.use('/session', session);
+app.use('/download', download);
 
 // error handlers
 
