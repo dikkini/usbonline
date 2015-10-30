@@ -7,15 +7,37 @@ $(document).on('ready', function() {
 		, socket = io.connect(serverBaseUrl)
 		, sessionId = '';
 
-	socket.on('connect', function () {
-		sessionId = socket.io.engine.id;
-		console.log("socket.io connected : " + sessionId);
-		socket.emit('testSrv');
-	});
+	function init() {
+		var $appUrl = $("#application-url");
+		var ieVer = msieversion();
+		if (ieVer == 0) {
+			$appUrl.attr("href", "/application/BootLine.exe");
+		}
 
-	socket.on('testClient', function (data) {
-		console.log(data.message);
-	});
+		socket.on('connect', function () {
+			sessionId = socket.io.engine.id;
+			console.log("socket.io connected : " + sessionId);
+			socket.emit('testSrv');
+		});
+
+		socket.on('testClient', function (data) {
+			console.log(data.message);
+		});
+	}
+
+	init();
 
 });
+
+function msieversion() {
+	var ua = window.navigator.userAgent;
+	var msie = ua.indexOf("MSIE ");
+
+	if (msie > 0)      // If Internet Explorer, return version number
+		alert(parseInt(ua.substring(msie + 5, ua.indexOf(".", msie))));
+	else                 // If another browser, return 0
+		alert('otherbrowser');
+
+	return msie;
+}
 

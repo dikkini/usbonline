@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+  <% include partials/head.ejs %>
+</head>
+
+<body>
+<% include partials/nav.ejs %>
+
+<div id="page-content" class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <p>Два простых шага чтобы начать пользоваться приложением:</p>
+      <p>
+        1. Запустить приложение <a id="application-url" href="/clickonce/BootLineCO.application">кликнув по ссылке</a>
+      </p>
+      <p>
+        2. Обновить страницу если она сама не обновилась чтобы появился интерфейс приложения
+      </p>
+      <hr>
+      <p>Если вы видите ошибку, </p><img src="/img/iframe_error.png" height="50px"/>
+
+      <p>а не интерфейс программы, то вам необходимо запустить сервер после чего обновить страницу</p>
+    </div>
+    <div class="col-lg-6">
+      <iframe width="800" height="600" scrolling="no" frameborder="no" src="<%- ip %>"></iframe>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

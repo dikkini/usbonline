@@ -15,4 +15,16 @@ router.post('/setport', function(req, res, next) {
 	return res.end(JSON.stringify(response));
 });
 
+router.post('/report', function(req, res, next) {
+	var json = req.body.JSON;
+
+	console.log(json);
+
+	var response = {
+		"success": true
+	};
+
+	return res.end(JSON.stringify(response));
+});
+
 module.exports = router;
