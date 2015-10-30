@@ -11,7 +11,7 @@ $(document).on('ready', function() {
 		var $appUrl = $("#application-url");
 		var ieVer = msieversion();
 		if (ieVer == -1) {
-			$appUrl.attr("href", "/application/BootLine.exe");
+			$appUrl.attr("href", "/download/application");
 		}
 
 		socket.on('connect', function () {
