@@ -8,7 +8,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/dev', function (req, res, next) {
-	res.render('index', {title: 'Online USB Make', ip: "http://10.211.55.3:8080/"});
+	res.render('index', {title: 'Online USB Make', ip: "http://10.211.55.3:" + config.get('iframe:port')});
 });
 
 module.exports = router;
