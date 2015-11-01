@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 	$.blockUI.defaults.fadeIn = 0;
 	$.blockUI.defaults.fadeOut = 0;
-	$.blockUI.defaults.message = '<h3><img height=50 src="http://77.221.146.148:1337/assets/small_ui/img/loading.gif" /> Please wait...</h3>';
+	$.blockUI.defaults.message = '<h3><img height=50 src="http://77.221.146.148/assets/small_ui/img/loading.gif" /> Please wait...</h3>';
 
 	var dontBlock = false;
 
@@ -12,7 +12,11 @@ $(document).ready(function() {
 		if(!dontBlock)
 			$.blockUI();
 	}).ajaxStop($.unblockUI);
-	
+
+	var SESSIONID = generateUUID()
+
+	saveUserInfo();
+
 	var $burnTypeSelect = $("#burnTypeSelectBtn");
 	var $burnTypeSelectUL = $("#burnTypeSelectUL");
 	var $flashDriveSelectBtn = $("#flashDriveSelectBtn");
@@ -332,9 +336,9 @@ $(document).ready(function() {
 		var $progressBar = $("#flashDriveSizeBarGreen");
 
 		if (widthInPerc > 80 && widthInPerc < 98) {
-			alert("Your flash drive has more than 80% capacity filled. Be carefull.");
+			$.growlUI('Error', 'Your flash drive has more than 80% capacity filled. Be carefully.');
 		} else if (widthInPerc > 98) {
-			alert("Your flash drive has more than 98% capacity filled. We can't burn this loader.");
+			$.growlUI('Error', 'Your flash drive has more than 98% capacity filled. We can\'t burn this loader.');
 			return false;
 		}
 		$progressBar.width(widthInPerc+"%");
@@ -468,6 +472,7 @@ $(document).ready(function() {
 	}
 
 	function burnFlashDrive(loadersJson, mode, flashDriveLetter, async, successCb, errorCb) {
+		dontBlock = true;
 		$.ajax({
 			url: "/",
 			type: "POST",
@@ -525,6 +530,8 @@ $(document).ready(function() {
 	}
 
 	function log(message, async, successCb, errorCb) {
+		dontBlock = true;
+
 		$.ajax({
 			url: "/",
 			type: "POST",
@@ -705,6 +712,76 @@ $(document).ready(function() {
 		$loaderItem.append($loaderItemMaximized);
 
 		return $loaderItem;
+	}
+
+	$("#send-feedback").click(function() {
+		var email = $("#feedback-email").val();
+		var feedback = $("#feedback-text").val();
+		$("#feedback-modal").modal("hide");
+		dontBlock = true;
+
+		$.ajax({
+			url: "http://localhost:1337/utils/feedback",
+			type: "POST",
+			dataType: "JSON",
+			data: {
+				"email": email,
+				"feedback": feedback,
+				"sessionId": SESSIONID
+			},
+			async: true,
+			success: function (response) {
+				if (response.success) {
+					$.growlUI('Success', 'Thank you!');
+				}
+			},
+			error: function (response) {
+			}
+		});
+	});
+
+	function saveUserInfo() {
+		//Application Code Name
+		var codeName = navigator.appCodeName;
+		//Application Name
+		var appName = navigator.appName;
+		//Application Version
+		var appVersion = navigator.appVersion;
+		//User Language and Language
+		var language = navigator.language;
+		//Platform
+		var platform = navigator.platform;
+		//User Agent
+		var userAgent = navigator.userAgent;
+		//Java Enabled
+		var javaEnabled = navigator.javaEnabled();
+		//To check cookies are enabled in the browser.
+		var cookiesEnabled = navigator.cookieEnabled;
+		//Browser Version
+		var version = parseInt(navigator.appVersion,10);
+
+		$.ajax({
+			url: "http://localhost:1337/utils/userinfo",
+			type: "POST",
+			dataType: "JSON",
+			data: {
+				"sessionId": SESSIONID,
+				"codeName": codeName,
+				"appName": appName,
+				"appVersion": appVersion,
+				"language": language,
+				"platform": platform,
+				"userAgent": userAgent,
+				"javaEnabled": javaEnabled,
+				"cookiesEnabled": cookiesEnabled,
+				"version": version
+			},
+			async: true,
+			success: function (response) {
+			},
+			error: function (response) {
+			}
+		});
 	}
 
 });

@@ -7,28 +7,22 @@ SET search_path = PUBLIC, pg_catalog;
 SET default_tablespace = '';
 SET default_with_oids = FALSE;
 
-DROP TABLE public.users CASCADE;
-DROP TABLE public.sessionLog CASCADE;
-DROP TABLE public.sessions CASCADE;
+DROP TABLE public.userinfo CASCADE;
 
-CREATE TABLE users
+CREATE TABLE userinfo
 (
-  userid VARCHAR(36) PRIMARY KEY NOT NULL,
-  premium BOOL DEFAULT FALSE NOT NULL,
-  restore_premium_request BOOL DEFAULT FALSE NOT NULL
-);
-CREATE UNIQUE INDEX unique_userid ON users (userid);
-
-CREATE TABLE sessionLog
-(
-  id INT PRIMARY KEY,
-  log TEXT
-);
-
-CREATE TABLE sessions
-(
-  id TEXT PRIMARY KEY NOT NULL,
-  userTimeStart TIMESTAMP,
-  userTimeEnd TIMESTAMP,
-  log_id INT REFERENCES public.sessionLog(id)
+  sessionId VARCHAR(255),
+  startdate VARCHAR(255),
+  enddate VARCHAR(255),
+  appcodename VARCHAR(255),
+  appname VARCHAR(255),
+  appversion VARCHAR(255),
+  language VARCHAR(255),
+  platform VARCHAR(255),
+  useragent VARCHAR(255),
+  javaenabled BOOLEAN,
+  cookiesenabled BOOLEAN,
+  browserversion VARCHAR(255),
+  feedback_email VARCHAR(255),
+  feedback TEXT
 );

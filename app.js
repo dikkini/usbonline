@@ -11,11 +11,11 @@ var express = require("express")
     , cookieParser = require('cookie-parser')
     , methodOverride = require('method-override')
     , log = require('./libs/log')(module)
-    , index = require('./routes/index')
-    , logs = require('./routes/log')
-    , utils = require('./routes/utils')
-    , session = require('./routes/session')
-    , download = require('./routes/download');
+    , index = require('./controllers/index')
+    , logs = require('./controllers/log')
+    , utils = require('./controllers/utils')
+    , session = require('./controllers/session')
+    , download = require('./controllers/download');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
