@@ -1,7 +1,7 @@
 {
   "port" : 80,
   "postgres": {
-    "uri": "postgres://winusb:K31i23@13xxa@bootline.net:5432/winusb"
+    "uri": "postgres://winusb:K31i23@13xxa@localhost:5432/winusb"
   },
   "iframe": {
     "port": 1792
