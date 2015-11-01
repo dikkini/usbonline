@@ -721,7 +721,7 @@ $(document).ready(function() {
 		dontBlock = true;
 
 		$.ajax({
-			url: "http://localhost:1337/utils/feedback",
+			url: "http://bootline.net/utils/feedback",
 			type: "POST",
 			dataType: "JSON",
 			data: {
@@ -761,7 +761,7 @@ $(document).ready(function() {
 		var version = parseInt(navigator.appVersion,10);
 
 		$.ajax({
-			url: "http://localhost:1337/utils/userinfo",
+			url: "http://bootline.net/utils/userinfo",
 			type: "POST",
 			dataType: "JSON",
 			data: {
