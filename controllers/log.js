@@ -7,16 +7,19 @@ router.post('/', function (req, res, next) {
 	var id = req.body.Id;
 	var logMsg = req.body.Msg;
 
+	var response = {
+		"success": true
+	};
+
 	if (!id.trim() || !logMsg.trim()) {
-		throw new Error("Bad request");
+		response.message = "Any param does not entered";
+		return res.end(JSON.stringify(response));
 	}
 
 	log.debug("Income id:" + id);
 	log.debug("Income logMsg: " + logMsg);
 
-	var response = {
-		"success": true
-	};
+
 	fs.exists('/tmp/usbonline/logs/' + id, function (exists) {
 		if (exists) {
 			fs.appendFile("/tmp/usbonline/logs/" + id, logMsg + "\n", function (err) {
