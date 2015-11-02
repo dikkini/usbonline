@@ -12,6 +12,7 @@ router.post('/', function (req, res, next) {
 	};
 
 	if (!id.trim() || !logMsg.trim()) {
+		response.success = false;
 		response.message = "Any param does not entered";
 		return res.end(JSON.stringify(response));
 	}
