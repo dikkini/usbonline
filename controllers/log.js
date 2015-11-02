@@ -4,16 +4,22 @@ var express = require('express')
 	, fs = require('fs');
 
 router.post('/', function (req, res, next) {
-	var id = req.body.Id;
-	var logMsg = req.body.Msg;
+	var id = req.body.id;
+	var logMsg = req.body.msg;
 
 	var response = {
 		"success": true
 	};
 
-	if (!id.trim() || !logMsg.trim()) {
+	if (!id.trim()) {
 		response.success = false;
-		response.message = "Any param does not entered";
+		response.message = "id param not found";
+		return res.end(JSON.stringify(response));
+	}
+
+	if (!logMsg.trim()) {
+		response.success = false;
+		response.message = "logMsg param not found";
 		return res.end(JSON.stringify(response));
 	}
 
