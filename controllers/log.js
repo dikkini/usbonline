@@ -11,12 +11,6 @@ router.post('/', function (req, res, next) {
 		throw new Error("Bad request");
 	}
 
-	try {
-		logMsg = JSON.stringify();
-	} catch (e) {
-		throw new Error("Wrong format.");
-	}
-
 	log.debug("Income id:" + id);
 	log.debug("Income logMsg: " + logMsg);
 
