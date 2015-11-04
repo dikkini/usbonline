@@ -1,6 +1,5 @@
 {
-  "port" : 1337,
-  "socketPort": 1338,
+  "port" : 80,
   "postgres": {
     "uri": "postgres://winusb:K31i23@13xxa@localhost:5432/winusb"
   },
