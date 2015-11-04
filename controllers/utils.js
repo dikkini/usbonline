@@ -6,10 +6,10 @@ var express = require('express')
 	, config = require('../libs/config')
 	, fs = require('fs');
 
-router.post('/setport', function(req, res, next) {
-	var json = req.body.JSON;
+router.post('/setPort', function(req, res, next) {
+	var body = req.body;
 
-	console.log(json);
+	console.log(body);
 
 	var response = {
 		"success": true
