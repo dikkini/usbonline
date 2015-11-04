@@ -26,8 +26,7 @@ var server = http.createServer(app);
  * socket.io
  */
 
-var io = require('socket.io').listen(server);
-require('../public/assets/sockets/base')(io);
+var io = require('../service/sockets').startServer(server);
 
 /**
  * Listen on provided port, on all network interfaces.

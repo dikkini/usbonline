@@ -2,18 +2,24 @@ var express = require('express')
 	, router = express.Router()
 	, log = require('../libs/log')(module)
 	, db = require('../service/db')
-	, pg = require('pg')
-	, config = require('../libs/config')
-	, fs = require('fs');
+	, sockets = require('../service/sockets')
+	, config = require('../libs/config');
 
 router.post('/setPort', function(req, res, next) {
-	var body = req.body;
+	var sessionId = req.body.sessionId;
+	var port = req.body.port;
 
 	console.log(body);
 
 	var response = {
 		"success": true
 	};
+
+	var data = {
+		port: port
+	};
+
+	sockets.emit(sessionId, data);
 
 	return res.end(JSON.stringify(response));
 });
