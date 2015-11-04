@@ -5,23 +5,11 @@ var express = require('express')
 
 router.post('/', function (req, res, next) {
 	var id = req.body.id;
-	var logMsg = req.body.msg;
+	var logMsg = req.body.msg.toString();
 
 	var response = {
 		"success": true
 	};
-
-	if (!id.trim()) {
-		response.success = false;
-		response.message = "id param not found";
-		return res.end(JSON.stringify(response));
-	}
-
-	if (!logMsg.trim()) {
-		response.success = false;
-		response.message = "logMsg param not found";
-		return res.end(JSON.stringify(response));
-	}
 
 	log.debug("Income id:" + id);
 	log.debug("Income logMsg: " + logMsg);
