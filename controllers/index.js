@@ -4,11 +4,11 @@ var express = require('express')
 	, log = require('../libs/log')(module);
 
 router.get('/', function (req, res, next) {
-	res.render('index', {title: 'Online USB Make', ip: "http://localhost:" + config.get('iframe:port') });
+	res.render('index', {ip: "http://localhost:" + config.get('iframe:port') });
 });
 
 router.get('/dev', function (req, res, next) {
-	res.render('index', {title: 'Online USB Make', ip: "http://10.211.55.3:" + config.get('iframe:port')});
+	res.render('index', {ip: "http://10.211.55.3:" + config.get('iframe:port')});
 });
 
 module.exports = router;

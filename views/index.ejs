@@ -1,8 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<html>
+<!DOCTYPE>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
 <head>
+  <title>BootLine</title>
+  <meta charset="UTF-8">
   <% include partials/head.ejs %>
+  <script src="/js/index.js"></script>
+  <script src="/assets/small_ui/js/main.js"></script>
+  <link rel="stylesheet" href="/assets/small_ui/css/normalize.css">
+  <link rel="stylesheet" href="/assets/small_ui/css/main.css">
 </head>
 
 <body>
@@ -10,7 +26,7 @@
 
 <div id="page-content" class="container">
   <div class="row">
-    <div class="col-lg-3">
+    <div id="left-content" class="col-lg-3">
       <p>Два простых шага чтобы начать пользоваться приложением:</p>
       <p>
         1. Запустить приложение <a id="application-url" href="/clickonce/BootLineCO.application">кликнув по ссылке</a>
@@ -23,8 +39,17 @@
 
       <p>а не интерфейс программы, то вам необходимо запустить сервер после чего обновить страницу</p>
     </div>
-    <div class="col-lg-6">
-      <iframe width="800" height="600" scrolling="no" frameborder="no" src="<%- ip %>"></iframe>
+    <div id="right-content" class="col-lg-9">
+      <div class="row" style="padding-bottom: 30px;">
+        <button id="launchApp" class="btn btn-primary col-lg-12">Continue</button>
+      </div>
+      <div id="loader-list" class="list-group" style="padding: 0 !important;">
+        <div id="addLoaderBtn" class="list-group-item">
+          <center>
+            <img width="50px" src="/assets/small_ui/img/btn_plus.png"/>
+          </center>
+        </div>
+      </div>
     </div>
   </div>
 </div>

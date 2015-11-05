@@ -1,21 +1,27 @@
 $(document).ready(function() {
-
 	'use strict';
 
-	$.blockUI.defaults.fadeIn = 0;
-	$.blockUI.defaults.fadeOut = 0;
-	$.blockUI.defaults.message = '<h3><img height=50 src="http://77.221.146.148/assets/small_ui/img/loading.gif" /> Please wait...</h3>';
+	var isAppRuning = $("#isAppRunning").val();
+	if (isAppRuning) {
+		getSessionId();
+	}
 
-	var dontBlock = false;
+	function init() {
+		$.blockUI.defaults.fadeIn = 0;
+		$.blockUI.defaults.fadeOut = 0;
+		$.blockUI.defaults.message = '<h3><img height=50 src="http://77.221.146.148/assets/small_ui/img/loading.gif" /> Please wait...</h3>';
 
-	$(document).ajaxStart(function(){
-		if(!dontBlock)
-			$.blockUI();
-	}).ajaxStop($.unblockUI);
+		$(document).ajaxStart(function () {
+			if (!dontBlock)
+				$.blockUI();
+		}).ajaxStop($.unblockUI);
 
-	var SESSIONID = generateUUID()
+		saveUserInfo();
 
-	saveUserInfo();
+		renderFlashDrives();
+	}
+
+	var SESSIONID;
 
 	var $burnTypeSelect = $("#burnTypeSelectBtn");
 	var $burnTypeSelectUL = $("#burnTypeSelectUL");
@@ -31,8 +37,7 @@ $(document).ready(function() {
 	var MODE_NEW = "New";
 	var MODE_ADD = "Add";
 	var ISWORKING = false;
-
-	renderFlashDrives();
+	var dontBlock = false;
 
 	var selectedFlashDrive = -1;
 
@@ -527,6 +532,54 @@ $(document).ready(function() {
 				errorCb(response);
 			}
 		})
+	}
+
+	function getSessionId() {
+		$.ajax({
+			url: "/",
+			type: "POST",
+			dataType: "JSON",
+			data: { "Operation": "GetSessionId" },
+			async: false,
+			success: function (response) {
+				SESSIONID = response.SESSIONID;
+				getLoadersJson();
+			},
+			error: function (response) {
+				console.log(response);
+			}
+		});
+	}
+
+	function getLoadersJson() {
+		$.ajax({
+			url: "/",
+			type: "POST",
+			dataType: "JSON",
+			data: { "Operation": "GetLoadersJSON" },
+			async: false,
+			success: function (response) {
+				var loadersJson = response.LoadersJSON;
+				renderLoadersJson(loadersJson);
+				init();
+			},
+			error: function (response) {
+				console.log(response);
+			}
+		});
+	}
+
+	function renderLoadersJson(loadersJson) {
+		for (var loader in loadersJson) {
+			var loaderId = loader.id;
+			var loaderCode = loader.code;
+			var $loaderItem = buildLoaderItem(loaderId);
+			$("#loader-list").prepend($loaderItem);
+			$loaderItem.slideDown(500);
+			var loaderSelect = $('select[data-loader-id="' + loaderId + '"]');
+			var loaderSelectOption = loaderSelect.find('option[data-code="' + loaderCode + '"]');
+			loaderSelectOption.prop('selected', true);
+		}
 	}
 
 	function log(message, async, successCb, errorCb) {
