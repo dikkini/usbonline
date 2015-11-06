@@ -46,14 +46,15 @@ $(document).ready(function() {
 	});
 
 	function loaderCodes() {
-		var loadersJson = [];
+		var loadersJson = "";
 		$("#loader-list").children().not("#addLoaderBtn").each(function() {
 			var loaderId = $(this).data("loader-id");
 			var loaderSelect = $('select[data-loader-id="' + loaderId + '"]');
 			var loaderSelectSelected = loaderSelect.find(':selected');
 			var loaderCode = -1;
 			loaderCode = loaderSelectSelected.data('code');
-			loadersJson.push(loaderCode);
+			loadersJson += loaderCode;
+			loadersJson += ",";
 		});
 
 		return loadersJson;
