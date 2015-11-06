@@ -582,6 +582,8 @@ $(document).ready(function() {
 		for (var loader in loadersJson) {
 			var loaderId = generateUUID();
 			var loaderCode = loader;
+			console.log(loaderId);
+			console.log(loaderCode);
 			var $loaderItem = buildLoaderItem(loaderId);
 			$("#loader-list").prepend($loaderItem);
 			$loaderItem.slideDown(500);
