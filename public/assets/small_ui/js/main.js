@@ -570,6 +570,7 @@ $(document).ready(function() {
 				}
 				loadersJson = loadersJson.split(",");
 				console.log(loadersJson);
+				console.log(loadersJson[0]);
 				renderLoadersJson(loadersJson);
 				init();
 			},
