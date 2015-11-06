@@ -45,6 +45,7 @@ $(document).ready(function() {
 			href = href + "&loadersJson=" + JSON.stringify(loadersJson);
 			canReload = true;
 			launchApp = true;
+			console.log(href);
 			window.location = href;
 		}
 	});

@@ -10,7 +10,7 @@ $(document).ready(function() {
 		console.log("unload small app");
 		if (!isAppRuning) {
 			shutdownServer();
-			window.location = "/";
+			window.location = '/';
 		}
 	});
 
@@ -427,7 +427,7 @@ $(document).ready(function() {
 			type: "POST",
 			dataType: "JSON",
 			data: { "Operation": "FinishWorks"},
-			async: async,
+			async: true,
 			success: function (response) {
 				console.log(JSON.stringify(response));
 			},
