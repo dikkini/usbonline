@@ -36,13 +36,13 @@ $(document).ready(function() {
 
 	$('body').on('click', "#launchApp", function() {
 		var loadersJson = loadersToJson();
-		//if (isClickOnce) {
+		if (isClickOnce) {
 			var $appUrl = $("#application-url");
 			var href = $appUrl.attr("href");
 			href = href + "&loadersJson=" + JSON.stringify(loadersJson);
-			//canReload = true;
+			canReload = true;
 			window.location = href;
-		//}
+		}
 	});
 
 	function loadersToJson() {
