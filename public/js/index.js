@@ -87,7 +87,7 @@ $(document).ready(function() {
 	}
 
 	function isClientBrowserIE() {
-		// DETECT IE11
+		// detect IE11
 		if (Object.hasOwnProperty.call(window, "ActiveXObject") && !window.ActiveXObject) {
 			return true;
 		}
@@ -102,6 +102,7 @@ $(document).ready(function() {
 		// detect older than IE11
 		var msie = ua.indexOf("MSIE ");
 
+		// other browsers would be -1
 		return msie > 0;
 
 		//if (msie > 0)      // If Internet Explorer, return version number
@@ -124,6 +125,12 @@ $(document).ready(function() {
 				e.stopPropagation();
 				e.preventDefault();
 			}
+
+			// for IE, do not show alert dialog twice
+			canReload = true;
+			setTimeout(function() {
+				canReload = false;
+			}, 100);
 		}
 	}
 	window.onbeforeunload=goodbye;
