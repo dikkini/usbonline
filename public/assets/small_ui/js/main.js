@@ -564,7 +564,11 @@ $(document).ready(function() {
 				console.log("GetExistLoaders");
 				console.log(JSON.stringify(response));
 				var loadersJson = response.ExistLoaders;
-				loadersJson = loadersJson.split(",")
+				if (loadersJson == "null") {
+					init();
+					return;
+				}
+				loadersJson = loadersJson.split(",");
 				renderLoadersJson(loadersJson);
 				init();
 			},
