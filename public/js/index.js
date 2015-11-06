@@ -8,6 +8,9 @@ $(document).ready(function() {
 	init();
 
 	function init() {
+		$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Please wait...</h3>';
+
+
 		var $appUrl = $("#application-url");
 		var isIE = isClientBrowserIE();
 		if (isIE) {
@@ -59,12 +62,15 @@ $(document).ready(function() {
 			loaderCodes += loaderCode;
 			loaderCodes += ",";
 		});
-		loaderCodes = loaderCodes.substring(0, loaderCodes.length-1);
+		if (loaderCodes != "null") {
+			loaderCodes = loaderCodes.substring(0, loaderCodes.length - 1);
+		}
 
 		return loaderCodes;
 	}
 
 	function startApp(port) {
+		$.blockUI();
 		var content = $("#right-content");
 		// clear
 		content.children().each(function() {
@@ -77,10 +83,10 @@ $(document).ready(function() {
 		content.append(iframe);
 
 		// TODO reload iframe unti server does not start
-		reloadIFrame();
 		setTimeout(function() {
 			reloadIFrame();
-		}, 5000);
+			$.unblockUI();
+		}, 1000);
 	}
 
 	function reloadIFrame() {
