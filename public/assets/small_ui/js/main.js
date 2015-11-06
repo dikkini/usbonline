@@ -16,6 +16,8 @@ $(document).ready(function() {
 				$.blockUI();
 		}).ajaxStop($.unblockUI);
 
+		$.blockUI();
+
 		saveUserInfo();
 
 		renderFlashDrives();
@@ -239,6 +241,7 @@ $(document).ready(function() {
 			$addLoaderBtn.addClass("disabled");
 			$burnTypeSelect.addClass("disabled");
 			$burnBtn.addClass("disabled");
+			$.unblockUI();
 		};
 		var errorCb = function(response) {
 			console.log("ERROR BLAT");

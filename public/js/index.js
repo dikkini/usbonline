@@ -8,8 +8,7 @@ $(document).ready(function() {
 	init();
 
 	function init() {
-		$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Please wait...</h3>';
-
+		$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Please wait...</h3>'
 
 		var $appUrl = $("#application-url");
 		var isIE = isClientBrowserIE();
@@ -80,11 +79,10 @@ $(document).ready(function() {
 		var iframe = '<iframe id="smallAppIFrame" width="800" height="600" scrolling="no" frameborder="no" ' +
 				'src="http://localhost:' + port + '"></iframe>';
 
-		content.append(iframe);
-
 		// TODO reload iframe unti server does not start
 		setTimeout(function() {
-			reloadIFrame();
+			//reloadIFrame();
+			content.append(iframe);
 			$.unblockUI();
 		}, 1000);
 	}
