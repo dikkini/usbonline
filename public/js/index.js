@@ -35,7 +35,7 @@ $(document).ready(function() {
 	}
 
 	$('body').on('click', "#launchApp", function() {
-		var loadersJson = loadersToJson();
+		var loadersJson = loaderCodes();
 		if (isClickOnce) {
 			var $appUrl = $("#application-url");
 			var href = $appUrl.attr("href");
@@ -45,7 +45,7 @@ $(document).ready(function() {
 		}
 	});
 
-	function loadersToJson() {
+	function loaderCodes() {
 		var loadersJson = [];
 		$("#loader-list").children().not("#addLoaderBtn").each(function() {
 			var loaderId = $(this).data("loader-id");
@@ -53,12 +53,7 @@ $(document).ready(function() {
 			var loaderSelectSelected = loaderSelect.find(':selected');
 			var loaderCode = -1;
 			loaderCode = loaderSelectSelected.data('code');
-
-			var loader = {
-				"id":loaderId,
-				"code":loaderCode
-			};
-			loadersJson.push(loader);
+			loadersJson.push(loaderCode);
 		});
 
 		return loadersJson;
