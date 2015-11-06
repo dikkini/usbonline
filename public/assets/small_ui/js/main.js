@@ -6,6 +6,14 @@ $(document).ready(function() {
 		getSessionId();
 	}
 
+	$(window).unload(function() {
+		console.log("unload small app");
+		if (!isAppRuning) {
+			shutdownServer();
+			window.location = "/";
+		}
+	});
+
 	function init() {
 		$.blockUI.defaults.fadeIn = 0;
 		$.blockUI.defaults.fadeOut = 0;
@@ -412,6 +420,23 @@ $(document).ready(function() {
 	});
 
 	// IT IS DLL.JS
+
+	function shutdownServer() {
+		$.ajax({
+			url: "/",
+			type: "POST",
+			dataType: "JSON",
+			data: { "Operation": "FinishWorks"},
+			async: async,
+			success: function (response) {
+				console.log(JSON.stringify(response));
+			},
+			error: function (response) {
+				console.log(JSON.stringify(response));
+			}
+		});
+	}
+
 	function getFlashDrives(async, successCb, errorCb) {
 		$.ajax({
 			url: "/",
