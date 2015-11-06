@@ -557,7 +557,7 @@ $(document).ready(function() {
 			url: "/",
 			type: "POST",
 			dataType: "JSON",
-			data: { "Operation": "GetLoadersJSON" },
+			data: { "Operation": "GetExistLoaders" },
 			async: false,
 			success: function (response) {
 				console.log(JSON.stringify(response));

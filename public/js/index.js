@@ -78,7 +78,9 @@ $(document).ready(function() {
 
 		// TODO reload iframe unti server does not start
 		reloadIFrame();
-		setTimeout('reloadIFrame();', 5000);
+		setTimeout(function() {
+			reloadIFrame();
+		}, 5000);
 	}
 
 	function reloadIFrame() {
