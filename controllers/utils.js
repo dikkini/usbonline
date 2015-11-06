@@ -8,7 +8,6 @@ var express = require('express')
 router.post('/setPort', function(req, res, next) {
 	var sessionId = req.body.sessionId;
 	var port = req.body.port;
-	var code = req.body.code;
 
 	var response = {
 		"success": true
@@ -16,8 +15,7 @@ router.post('/setPort', function(req, res, next) {
 
 	var data = {
 		op: "launchapp",
-		port: port,
-		code: code
+		port: port
 	};
 
 	sockets.emit(sessionId, data);
