@@ -53,7 +53,9 @@ $(document).ready(function() {
 			var loaderSelectSelected = loaderSelect.find(':selected');
 			var loaderCode = -1;
 			loaderCode = loaderSelectSelected.data('code');
-			loaderCodes = "";
+			if (loaderCodes == "null") {
+				loaderCodes = "";
+			}
 			loaderCodes += loaderCode;
 			loaderCodes += ",";
 		});
