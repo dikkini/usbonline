@@ -569,6 +569,7 @@ $(document).ready(function() {
 					return;
 				}
 				loadersJson = loadersJson.split(",");
+				console.log(loadersJson);
 				renderLoadersJson(loadersJson);
 				init();
 			},
