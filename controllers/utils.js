@@ -6,7 +6,7 @@ var express = require('express')
 	, config = require('../libs/config');
 
 router.post('/setPort', function(req, res, next) {
-	var sessionId = req.body.sessionId;
+	var sessionId = req.body.id;
 	var port = req.body.port;
 
 	var response = {
