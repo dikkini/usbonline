@@ -564,7 +564,7 @@ $(document).ready(function() {
 				console.log("GetExistLoaders");
 				console.log(JSON.stringify(response));
 				var loadersJson = response.ExistLoaders;
-				loadersJson = $.parseJSON(loadersJson);
+				loadersJson = loadersJson.split(",")
 				renderLoadersJson(loadersJson);
 				init();
 			},
@@ -576,8 +576,8 @@ $(document).ready(function() {
 
 	function renderLoadersJson(loadersJson) {
 		for (var loader in loadersJson) {
-			var loaderId = loader.id;
-			var loaderCode = loader.code;
+			var loaderId = generateUUID();
+			var loaderCode = loader;
 			var $loaderItem = buildLoaderItem(loaderId);
 			$("#loader-list").prepend($loaderItem);
 			$loaderItem.slideDown(500);
