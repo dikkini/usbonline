@@ -42,10 +42,10 @@ $(document).ready(function() {
 			var loadersJson = loaderCodes();
 			var $appUrl = $("#application-url");
 			var href = $appUrl.attr("href");
-			href = href + "&loadersJson=" + JSON.stringify(loadersJson);
+			href = href + "&loadersJson=" + loadersJson;
 			canReload = true;
 			launchApp = true;
-			console.log(href);
+			alert(href);
 			window.location = href;
 		}
 	});
