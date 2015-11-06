@@ -55,8 +55,8 @@ $(document).ready(function() {
 			loaderCode = loaderSelectSelected.data('code');
 
 			var loader = {
-				id:loaderId,
-				code:loaderCode
+				"id":loaderId,
+				"code":loaderCode
 			};
 			loadersJson.push(loader);
 		});
