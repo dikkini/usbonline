@@ -542,6 +542,7 @@ $(document).ready(function() {
 			data: { "Operation": "GetSessionId" },
 			async: false,
 			success: function (response) {
+				console.log("GetSessionId");
 				console.log(JSON.stringify(response));
 				SESSIONID = response.SessionUID;
 				getLoadersJson();
@@ -560,9 +561,10 @@ $(document).ready(function() {
 			data: { "Operation": "GetExistLoaders" },
 			async: false,
 			success: function (response) {
+				console.log("GetExistLoaders");
 				console.log(JSON.stringify(response));
 				var loadersJson = response.ExistLoaders;
-				loadersJson = JSON.parseJSON(loadersJson);
+				loadersJson = $.parseJSON(loadersJson);
 				renderLoadersJson(loadersJson);
 				init();
 			},
