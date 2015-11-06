@@ -569,8 +569,7 @@ $(document).ready(function() {
 					return;
 				}
 				loadersJson = loadersJson.split(",");
-				console.log(loadersJson);
-				console.log(loadersJson[0]);
+				console.log(loadersJson.length);
 				renderLoadersJson(loadersJson);
 				init();
 			},
@@ -581,9 +580,9 @@ $(document).ready(function() {
 	}
 
 	function renderLoadersJson(loadersJson) {
-		for (var loader in loadersJson) {
+		for (var i = 0; i<loadersJson.length; i++) {
 			var loaderId = generateUUID();
-			var loaderCode = loader;
+			var loaderCode = loadersJson[i];
 			console.log(loaderId);
 			console.log(loaderCode);
 			var $loaderItem = buildLoaderItem(loaderId);
