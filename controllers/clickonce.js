@@ -6,7 +6,9 @@ var express = require('express')
 
 router.get('/Application%20Files/:version/:file', function (req, res, next) {
 	var version = req.params.version;
+	log.debug(version);
 	var fileName = req.params.file;
+	log.debug(fileName);
 	var file = '/opt/bootline/clickonce/' + version + '/' + fileName;
 	res.download(file); // Set disposition and send it.
 });

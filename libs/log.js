@@ -8,10 +8,18 @@ function getLogger(module) {
 			new winston.transports.Console({
 				colorize:   true,
 				level:      'debug',
-				label:      path
+				label:      path,
+				timestamp:	true
+			}),
+			new winston.transports.File({
+				filename: 	'usbonline.log',
+				json: 		false,
+				maxsize: 	50000000,
+				level:      'debug',
+				timestamp:	true
 			})
 		]
 	});
 }
 
-module.exports = getLogger
+module.exports = getLogger;
