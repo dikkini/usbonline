@@ -9,7 +9,7 @@ var express = require("express")
     , favicon = require('serve-favicon')
     , cookieParser = require('cookie-parser')
     , methodOverride = require('method-override')
-    , log = require('./libs/log')(module)
+	, expressLog = require('./libs/expressLog')
     , index = require('./controllers/index')
     , logs = require('./controllers/log')
     , utils = require('./controllers/utils')
@@ -34,6 +34,8 @@ app.use(function(req, res, next) {
 app.use(methodOverride('X-HTTP-Method-Override')); // put and delete methods
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(expressLog());
 
 app.use('/', index);
 app.use('/log', logs);

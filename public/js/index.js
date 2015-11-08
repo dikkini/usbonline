@@ -39,14 +39,12 @@ $(document).ready(function() {
 
 	$('body').on('click', "#launchApp", function() {
 		if (isClickOnce) {
-			$.blockUI();
 			var loadersJson = loaderCodes();
 			var $appUrl = $("#application-url");
 			var href = $appUrl.attr("href");
 			href = href + "&loadersJson=" + loadersJson;
 			canReload = true;
 			launchApp = true;
-			alert(href);
 			window.location = href;
 		}
 	});
