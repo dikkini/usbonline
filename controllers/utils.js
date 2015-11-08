@@ -7,17 +7,22 @@ var express = require('express')
 
 router.post('/setPort', function(req, res, next) {
 	var sessionId = req.body.id;
+	log.debug("SessionId: " + sessionId);
 	var port = req.body.port;
+	log.debug("port: " + port);
 
 	var response = {
 		"success": true
 	};
 
+	log.debug("Build data for socket transpor");
 	var data = {
 		op: "launchapp",
 		port: port
 	};
+	log.debug("Built! Data: " + data.toString());
 
+	log.debug("Socket emit");
 	sockets.emit(sessionId, data);
 
 	return res.end(JSON.stringify(response));
@@ -25,16 +30,18 @@ router.post('/setPort', function(req, res, next) {
 
 router.post('/feedback', function(req, res, next) {
 	var feedback_email = req.body.email;
+	log.debug("Feedback email: " + feedback_email);
 	var feedback = req.body.feedback;
+	log.debug("Feedback text: " + feedback);
 	var sessionid = req.body.sessionId;
-
+	log.debug("Session Id: " + sessionid);
 
 	var response = {
 		"success": true
 	};
 
+	log.debug("Add user feedback to database");
 	db.query(config.get("sql:add_user_feedback"), [feedback_email, feedback, sessionid], function (err, result) {
-
 		log.debug(result);
 		log.error(err);
 		if (err) {
