@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+var express = require('express');
+
+process.exit(1);
