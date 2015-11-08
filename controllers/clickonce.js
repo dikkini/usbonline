@@ -9,7 +9,7 @@ router.get('/Application%20Files/:version/:file', function (req, res, next) {
 	log.debug(version);
 	var fileName = req.params.file;
 	log.debug(fileName);
-	var file = '/opt/bootline/clickonce/' + version + '/' + fileName;
+	var file = '/opt/bootline/clickonce/Application Files/' + version + '/' + fileName;
 	res.download(file); // Set disposition and send it.
 });
 
