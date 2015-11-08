@@ -1,0 +1,15 @@
+var express = require('express')
+	, router = express.Router()
+	, config = require('../libs/config')
+	, log = require('../libs/log')(module)
+	, path = require('path');
+
+router.get('/Application%20Files/:version/:file', function (req, res, next) {
+	var version = req.params.version;
+	var fileName = req.params.file;
+	var file = '/opt/bootline/clickonce/' + version + '/' + fileName;
+	res.download(file); // Set disposition and send it.
+});
+
+
+module.exports = router;

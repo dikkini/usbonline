@@ -15,7 +15,8 @@ var express = require("express")
     , logs = require('./controllers/log')
     , utils = require('./controllers/utils')
     , session = require('./controllers/session')
-    , download = require('./controllers/download');
+    , download = require('./controllers/download')
+    , clickonce = require('./controllers/clickonce');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,6 +41,7 @@ app.use('/log', logs);
 app.use('/utils', utils);
 app.use('/session', session);
 app.use('/download', download);
+app.use('/clickonce', clickonce);
 
 // error handlers
 
