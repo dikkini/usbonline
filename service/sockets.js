@@ -16,7 +16,7 @@ function handler(socket) {
 	var time = (new Date).toLocaleTimeString();
 	log.debug("Add to array of clients");
 	clients[sessionId] = socket;
-	log.debug("Socket clients size: " + Object.size(clients));
+	//log.debug("Socket clients size: " + Object.size(clients));
 	socket.json.send({'event': 'connected', 'name': sessionId, 'time': time});
 
 	socket.on("launchapp", function (data) {
