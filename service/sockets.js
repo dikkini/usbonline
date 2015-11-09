@@ -44,9 +44,13 @@ module.exports = {
 	},
 	emit: function(sessionId, data) {
 		log.debug("Socket emit with sessionId" + sessionId + ". Emit to client operation with data");
-		log.debug("Socket Clients size BEFORE delete operation: " + Object.size(clients));
+		log.debug("Get socket from clients");
 		var socket = clients[sessionId];
-		log.debug("Socket Clients size AFTER delete operation: " + Object.size(clients));
+		if (!socket) {
+			log.error("Socket is empty.");
+			return;
+		}
+		log.debug("Socket: " + socket.id);
 		socket.emit(data.op, data);
 	}
 };
