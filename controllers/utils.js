@@ -22,9 +22,13 @@ router.post('/setPort', function(req, res, next) {
 	};
 	log.debug("Built! Data: " + data.toString());
 
-	log.debug("Socket emit");
-	sockets.emit(sessionId, data);
+	log.debug("Socket emit in timeout");
+	setTimeout(function() {
+		log.debug("Socket emitting now.");
+		sockets.emit(sessionId, data);
+	}, 100);
 
+	log.debug("Return response: " + response.toString());
 	return res.end(JSON.stringify(response));
 });
 
