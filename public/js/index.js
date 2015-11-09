@@ -46,6 +46,10 @@ $(document).ready(function() {
 			canReload = true;
 			launchApp = true;
 			window.location = href;
+			
+			setTimeout(function() {
+				canReload = false;
+			}, 3000)
 		}
 	});
 
@@ -144,18 +148,14 @@ $(document).ready(function() {
 	window.onbeforeunload=onBeforeUnload;
 
 	$(window).unload(function() {
-		console.log("unload");
+		console.log("unload wat?");
 
-		setTimeout(function() {
-			var serverBaseUrl = document.href
-					, socket = io.connect(serverBaseUrl);
-			socket.emit("end");
-			socket.emit("end");
-			socket.emit("end");
-			if (!launchApp) {
-				window.location = '/';
-			}
-		}, 1000);
+		var serverBaseUrl = document.href
+				, socket = io.connect(serverBaseUrl);
+		socket.emit("end");
+		if (!launchApp) {
+			window.location = '/';
+		}
 
 	});
 });
