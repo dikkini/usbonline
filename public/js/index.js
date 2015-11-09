@@ -148,7 +148,6 @@ $(document).ready(function() {
 	window.onbeforeunload=onBeforeUnload;
 
 	$(window).unload(function() {
-		console.log("unload wat?");
 		//socket.disconnect();
 		if (!launchApp) {
 			window.location = '/';
