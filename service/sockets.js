@@ -2,13 +2,13 @@ var io = require('socket.io')
 	, log = require('../libs/log')(module)
 	, clients = new Object();
 
-Object.size = function(obj) {
-	var size = 0, key;
-	for (key in obj) {
-		if (obj.hasOwnProperty(key)) size++;
-	}
-	return size;
-};
+//Object.size = function(obj) {
+//	var size = 0, key;
+//	for (key in obj) {
+//		if (obj.hasOwnProperty(key)) size++;
+//	}
+//	return size;
+//};
 
 function handler(socket) {
 	var sessionId = (socket.id).toString().substr(0, 10);
@@ -45,20 +45,28 @@ module.exports = {
 	emit: function(sessionId, data) {
 		log.debug("Socket emit with sessionId: " + sessionId + " . Emit to client operation with data");
 		log.debug("Get socket from clients");
-		var socket = clients[sessionId];
-		for (var key in clients) {
-			log.debug("#### KEY: " + key);
-			if (clients.hasOwnProperty(key)) {
-				log.debug("Has own property");
-				var obj = clients[key];
-				log.debug(obj.id)
+		var socket;
+		if (clients.hasOwnProperty(sessionId)) {
+			socket = clients[sessionId];
+			log.debug("We got socket!")
+		} else {
+			log.error("There are no socket in clients.");
+			for (var key in clients) {
+				if (clients.hasOwnProperty(key)) {
+					log.debug("KEY: " + key);
+					log.debug("OBJ: " + clients[key]);
+				} else {
+					log.debug("No own prop for key: " + key);
+				}
 			}
+			return false;
 		}
 		if (!socket) {
 			log.error("Socket is empty.");
-			return;
+			return false;
 		}
 		log.debug("Socket: " + socket.id);
 		socket.emit(data.op, data);
+		return true;
 	}
 };

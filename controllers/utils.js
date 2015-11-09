@@ -23,10 +23,13 @@ router.post('/setPort', function(req, res, next) {
 	log.debug("Built! Data: " + JSON.stringify(data));
 
 	log.debug("Return response: " + JSON.stringify(response));
-	res.end(JSON.stringify(response));
 
 	log.debug("Socket emit");
-	sockets.emit(sessionId, data);
+	var success = sockets.emit(sessionId, data);
+	if (success) {
+		return res.end(JSON.stringify(response));
+	}
+
 });
 
 router.post('/feedback', function(req, res, next) {
