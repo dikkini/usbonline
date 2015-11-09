@@ -15,12 +15,12 @@ router.post('/setPort', function(req, res, next) {
 		"success": true
 	};
 
-	log.debug("Build data for socket transpor");
+	log.debug("Build data for socket transport");
 	var data = {
 		op: "launchapp",
 		port: port
 	};
-	log.debug("Built! Data: " + data.toString());
+	log.debug("Built! Data: " + JSON.stringify(data));
 
 	log.debug("Socket emit in timeout");
 	setTimeout(function() {
@@ -28,7 +28,7 @@ router.post('/setPort', function(req, res, next) {
 		sockets.emit(sessionId, data);
 	}, 100);
 
-	log.debug("Return response: " + response.toString());
+	log.debug("Return response: " + JSON.stringify(response));
 	return res.end(JSON.stringify(response));
 });
 
