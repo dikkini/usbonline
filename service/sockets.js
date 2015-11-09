@@ -4,7 +4,9 @@ var io = require('socket.io')
 
 function handler(socket) {
 	var sessionId = (socket.id).toString().substr(0, 10);
+	log.debug("New socket session: " + sessionId);
 	var time = (new Date).toLocaleTimeString();
+	log.debug("Add to array of clients");
 	clients[sessionId] = socket;
 	socket.json.send({'event': 'connected', 'name': sessionId, 'time': time});
 
@@ -16,13 +18,17 @@ function handler(socket) {
 
 	socket.on('end', function() {
 		var sessionId = (socket.id).toString().substr(0, 10);
+		log.debug("Socket end session: " + sessionId);
 		delete clients[sessionId];
+		log.debug("Delete client from array");
 		socket.disconnect();
+		log.debug("Disconnected");
 	});
 }
 
 module.exports = {
 	startServer: function(server) {
+		log.debug("Start socket server");
 		io.listen(server).on('connection', handler);
 	},
 	emit: function(sessionId, data) {

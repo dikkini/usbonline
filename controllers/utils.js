@@ -44,6 +44,7 @@ router.post('/feedback', function(req, res, next) {
 	db.query(config.get("sql:add_user_feedback"), [feedback_email, feedback, sessionid], function (err, result) {
 		log.debug(result);
 		log.error(err);
+		log.error("Add user error: ", err);
 		if (err) {
 			response.success = false;
 			response.errorMessage = err;
@@ -53,6 +54,7 @@ router.post('/feedback', function(req, res, next) {
 });
 
 router.post('/userinfo', function(req, res, next) {
+	log.debug("Collect user info");
 	var sessionid = req.body.sessionId;
 	var appcodename = req.body.codeName;
 	var appname = req.body.appName;
@@ -70,12 +72,14 @@ router.post('/userinfo', function(req, res, next) {
 		"success": true
 	};
 
+	log.debug("Save userinfo to database");
 	db.query(config.get("sql:save_user_info"), [sessionid, startdate, appcodename, appname, appversion, language,
 		platform, useragent, javaenabled, cookiesenabled, browserversion], function (err, result) {
 
 		log.debug(result);
 		log.error(err);
 		if (err) {
+			log.error("Save error user info", err);
 			response.success = false;
 			response.errorMessage = err;
 		}
