@@ -25,6 +25,17 @@ function handler(socket) {
 		});
 	});
 
+	socket.on('disconnect', function() {
+		var sessionId = (socket.id).toString().substr(0, 10);
+		log.debug("Socket end session: " + sessionId);
+		log.debug("Socket Clients size BEFORE delete operation: " + Object.size(clients));
+		delete clients[sessionId];
+		log.debug("Socket Clients size AFTER delete operation: " + Object.size(clients));
+		log.debug("Delete client from array");
+		socket.disconnect();
+		log.debug("Disconnected");
+	});
+
 	socket.on('end', function() {
 		var sessionId = (socket.id).toString().substr(0, 10);
 		log.debug("Socket end session: " + sessionId);

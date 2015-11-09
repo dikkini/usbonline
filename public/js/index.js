@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var serverBaseUrl = document.href
-		, socket = io.connect(serverBaseUrl)
+		, socket = io.connect(serverBaseUrl, {'sync disconnect on unload' : true})
 		, sessionId = ''
 		, canReload = false
 		, launchApp = false
@@ -149,9 +149,7 @@ $(document).ready(function() {
 
 	$(window).unload(function() {
 		console.log("unload wat?");
-		socket.emit("end");
-		socket.emit("end");
-		socket.emit("end");
+		//socket.disconnect();
 		if (!launchApp) {
 			window.location = '/';
 		}
