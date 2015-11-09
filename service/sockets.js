@@ -2,13 +2,13 @@ var io = require('socket.io')
 	, log = require('../libs/log')(module)
 	, clients = new Object();
 
-//Object.size = function(obj) {
-//	var size = 0, key;
-//	for (key in obj) {
-//		if (obj.hasOwnProperty(key)) size++;
-//	}
-//	return size;
-//};
+Object.size = function(obj) {
+	var size = 0, key;
+	for (key in obj) {
+		if (obj.hasOwnProperty(key)) size++;
+	}
+	return size;
+};
 
 function handler(socket) {
 	var sessionId = (socket.id).toString().substr(0, 10);
@@ -16,7 +16,7 @@ function handler(socket) {
 	var time = (new Date).toLocaleTimeString();
 	log.debug("Add to array of clients");
 	clients[sessionId] = socket;
-	//log.debug("Socket clients size: " + Object.size(clients));
+	log.debug("Socket clients size: " + Object.size(clients));
 	socket.json.send({'event': 'connected', 'name': sessionId, 'time': time});
 
 	socket.on("launchapp", function (data) {

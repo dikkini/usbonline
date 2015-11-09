@@ -151,8 +151,8 @@ $(document).ready(function() {
 
 	$(window).unload(function() {
 		console.log("unload");
-		var serverBaseUrl = document.href
-				, socket = io.connect(serverBaseUrl);
+		//var serverBaseUrl = document.href
+		//		, socket = io.connect(serverBaseUrl);
 		socket.emit("end");
 		if (!launchApp) {
 			window.location = '/';
