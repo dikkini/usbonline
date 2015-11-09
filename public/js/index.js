@@ -139,23 +139,23 @@ $(document).ready(function() {
 			setTimeout(function() {
 				canReload = false;
 			}, 500);
-		} else {
-			if (launchApp) {
-				var serverBaseUrl = document.href
-						, socket = io.connect(serverBaseUrl);
-				socket.emit("end");
-			}
 		}
 	}
 	window.onbeforeunload=onBeforeUnload;
 
 	$(window).unload(function() {
 		console.log("unload");
-		//var serverBaseUrl = document.href
-		//		, socket = io.connect(serverBaseUrl);
-		socket.emit("end");
-		if (!launchApp) {
-			window.location = '/';
-		}
+
+		setTimeout(function() {
+			var serverBaseUrl = document.href
+					, socket = io.connect(serverBaseUrl);
+			socket.emit("end");
+			socket.emit("end");
+			socket.emit("end");
+			if (!launchApp) {
+				window.location = '/';
+			}
+		}, 1000);
+
 	});
 });
