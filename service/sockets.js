@@ -2,13 +2,13 @@ var io = require('socket.io')
 	, log = require('../libs/log')(module)
 	, clients = new Object();
 
-//Object.size = function(obj) {
-//	var size = 0, key;
-//	for (key in obj) {
-//		if (obj.hasOwnProperty(key)) size++;
-//	}
-//	return size;
-//};
+Object.size = function(obj) {
+	var size = 0, key;
+	for (key in obj) {
+		if (obj.hasOwnProperty(key)) size++;
+	}
+	return size;
+};
 
 function handler(socket) {
 	var sessionId = (socket.id).toString().substr(0, 10);
@@ -16,7 +16,7 @@ function handler(socket) {
 	var time = (new Date).toLocaleTimeString();
 	log.debug("Add to array of clients");
 	clients[sessionId] = socket;
-	//log.debug("Socket clients size: " + Object.size(clients));
+	log.debug("Socket clients size: " + Object.size(clients));
 	socket.json.send({'event': 'connected', 'name': sessionId, 'time': time});
 
 	socket.on("launchapp", function (data) {
@@ -28,7 +28,9 @@ function handler(socket) {
 	socket.on('end', function() {
 		var sessionId = (socket.id).toString().substr(0, 10);
 		log.debug("Socket end session: " + sessionId);
+		log.debug("Socket Clients size BEFORE delete operation: " + Object.size(clients));
 		delete clients[sessionId];
+		log.debug("Socket Clients size AFTER delete operation: " + Object.size(clients));
 		log.debug("Delete client from array");
 		socket.disconnect();
 		log.debug("Disconnected");
@@ -41,9 +43,17 @@ module.exports = {
 		io.listen(server).on('connection', handler);
 	},
 	emit: function(sessionId, data) {
-		log.debug("Socket emit with sessionId: " + sessionId + ". Emit to client operation with data");
+		log.debug("Socket emit with sessionId: " + sessionId + " . Emit to client operation with data");
 		log.debug("Get socket from clients");
 		var socket = clients[sessionId];
+		for (var key in clients) {
+			log.debug("#### KEY: " + key);
+			if (clients.hasOwnProperty(key)) {
+				log.debug("Has own property");
+				var obj = clients[key];
+				log.debug(obj.id)
+			}
+		}
 		if (!socket) {
 			log.error("Socket is empty.");
 			return;
