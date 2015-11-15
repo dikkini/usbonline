@@ -32,6 +32,7 @@ $(document).ready(function() {
 		});
 
 		socket.on('launchapp', function (data) {
+			alert("launchapp");
 			console.log(data);
 			startApp(data.port);
 		});
@@ -75,6 +76,7 @@ $(document).ready(function() {
 	}
 
 	function startApp(port) {
+		alert("startApp");
 		$.blockUI();
 		var content = $("#right-content");
 		// clear
@@ -85,11 +87,8 @@ $(document).ready(function() {
 		var iframe = '<iframe id="smallAppIFrame" width="800" height="600" scrolling="no" frameborder="no" ' +
 				'src="http://localhost:' + port + '"></iframe>';
 
-		setTimeout(function() {
-			//reloadIFrame();
-			content.append(iframe);
-			$.unblockUI();
-		}, 500);
+		content.append(iframe);
+		$.unblockUI();
 	}
 
 	function reloadIFrame() {
