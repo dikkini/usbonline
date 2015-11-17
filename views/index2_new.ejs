@@ -17,12 +17,13 @@
 			common
 		*/
 		.trian {
-			width:      250px;
-			height:     150px;
+			width:      400px;
+			height:     200px;
+			background: lemonchiffon;
 			border:     1px solid white;
-			box-shadow: 5px 5px 15px #193C54;
-			-webkit-box-shadow: 5px 5px 15px #193C54;
-			-moz-box-shadow: 5px 5px 15px #193C54;
+			box-shadow: 3px 3px 10px #193C54;
+			-webkit-box-shadow: 3px 3px 10px #193C54;
+			-moz-box-shadow: 3px 3px 10px #193C54;
 		}
 
 		#addCross {
@@ -153,7 +154,7 @@
 			}
 
 			#wrapper.toggled {
-				padding-left: 0;
+				padding-left: 50px;
 			}
 
 			#sidebar-wrapper {
@@ -161,7 +162,7 @@
 			}
 
 			#wrapper.toggled #sidebar-wrapper {
-				width: 0;
+				width: 50px;
 			}
 
 			#page-content-wrapper {
@@ -174,6 +175,11 @@
 				margin-right: 0;
 			}
 		}
+		#sidebar-toggle {
+			z-index: 1001;
+			color: white;
+			cursor: pointer;
+		}
 	</style>
 
 	<title>USB Online</title>
@@ -182,35 +188,37 @@
 <div id="wrapper">
 	<div id="sidebar-wrapper">
 		<ul class="sidebar-nav">
+			<span id="sidebar-toggle" class="glyphicon btn-menu toggle">
+				MENU
+			</span>
+			<div id="test" style="padding-top: 20px;">
 			<li>
-				<h3 style="color: white;">Flash Drive Menu</h3>
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="input-group">
 							<div class="input-group-btn">
-										<span class="btn-group">
-											<button id="flashDriveSelectBtn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Choose <span class="caret"></span></button>
-											<ul id="flashDriveSelectUl" class="dropdown-menu" role="menu" aria-labelledby="#flashDriveSelectBtn"></ul>
-										</span>
+								<span class="btn-group">
+									<button id="flashDriveSelectBtn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Choose <span class="caret"></span></button>
+									<ul id="flashDriveSelectUl" class="dropdown-menu" role="menu" aria-labelledby="#flashDriveSelectBtn"></ul>
+								</span>
 								<input id="isAppRunning" type="hidden" value="true">
-										<span class="btn-group">
-											<button id="refreshFlashDrives" class="btn btn-default" data-toggle="tooltip" data-placement="right" data-original-title="Refresh flash drives" type="button">
-												<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-											</button>
-										</span>
-										<span class="btn-group">
-											<button id="burnTypeSelectBtn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Type <span class="caret"></span></button>
-											<ul id="burnTypeSelectUL" class="dropdown-menu" role="menu" aria-labelledby="#burnTypeSelectBtn">
-												<li><a id="1" href="#" class="burnType">New</a></li>
-												<li><a id="2" href="#" class="burnType">Add</a></li>
-											</ul>
-										</span>
+								<span class="btn-group">
+									<button id="refreshFlashDrives" class="btn btn-default" data-toggle="tooltip" data-placement="right" data-original-title="Refresh flash drives" type="button">
+										<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+									</button>
+								</span>
+								<span class="btn-group">
+									<button id="burnTypeSelectBtn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Type <span class="caret"></span></button>
+									<ul id="burnTypeSelectUL" class="dropdown-menu" role="menu" aria-labelledby="#burnTypeSelectBtn">
+										<li><a id="1" href="#" class="burnType">New</a></li>
+										<li><a id="2" href="#" class="burnType">Add</a></li>
+									</ul>
+								</span>
 							</div>
 						</div>
 					</div>
 				</div>
 			</li>
-			<li>
 			<li>
 				<div class="row" style="padding-left: 20px; ">
 					<h5 style="color: white;">Capacity</h5>
@@ -223,21 +231,17 @@
 					</div>
 				</div>
 			</li>
+			</div>
 		</ul>
 	</div>
-
-	<div id="page-content-wrapper">
+	<!--<div style="width: 30px;height: 100%;min-height: 100%;background: red;display: block;">-->
+		<!--<a id="menu-toggle" href="#" class="glyphicon glyphicon-align-justify btn-menu toggle">-->
+			<!--<i class="fa fa-bars"></i>-->
+		<!--</a>-->
+	<!--</div>-->
+	<div id="page-content-wrapper" style="padding-right: 200px; min-height: 100%; height: 100%;">
 		<div class="row">
-			<div class="col-lg-12">
-				<h3>
-					<a id="menu-toggle" href="#" class="glyphicon glyphicon-align-justify btn-menu toggle"><i class="fa fa-bars"></i></a>
-					BootLine.net
-				</h3>
-			</div>
-		</div>
-		</hr>
-		<div class="row loader-row">
-			<div class="col-lg-4">
+			<div class="col-lg-6">
 				<div class="loader trian box-shadow">
 					<div style="padding: 10px">
 						<h4> Loader #1 - Burning... </h4>
@@ -261,6 +265,7 @@
 								<option value="clonezilla" data-code="9" data-url="http://yandex.com/">CloneZilla Live</option>
 							</select>
 						</div>
+						<h5> Windows7.ISO 300Mb</h5>
 						<h5>Progress</h5>
 						<div class="progress" style="margin-right: 5px;">
 							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
@@ -270,7 +275,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-4">
+			<div class="col-lg-6">
 				<div class="loader trian box-shadow">
 					<div style="padding: 10px">
 						<h4> Loader #2 - Waiting... </h4>
@@ -303,42 +308,42 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-4">
-				<div class="loader trian box-shadow">
-					<div style="padding: 10px">
-						<h4> Loader #3 - Waiting... </h4>
-						<div data-loader-id="asd" class="loader-information input-group btn-group-sm" role="group">
-							<button data-loader-id="asd" type="button" class="loader-action-chooseiso btn btn-default">
-								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-							</button>
-							<button data-loader-id="asd" type="button" class="loader-action-linktoiso btn btn-default">
-								<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>
-							</button>
-							<select data-loader-id="asd" class="loader-type-select form-control input-sm" style="width: auto; height: 30px; display: inline;">
-								<option value="windows7" data-code="0" data-url="http://yandex.com/">Windows 7</option>
-								<option value="windows8" data-code="1" data-url="http://yandex.com/">Windows 8</option>
-								<option value="windows10" data-code="2" data-url="http://yandex.com/">Windows 10</option>
-								<option value="kav" data-code="3" data-url="http://yandex.com/">Kasperksy Rescue Disk</option>
-								<option value="avg" data-code="4" data-url="http://yandex.com/">AVG Rescue Disk</option>
-								<option value="ubuntu" data-code="5" data-url="http://yandex.com/">Ubuntu Linux</option>
-								<option value="hiren" data-code="6" data-url="http://yandex.com/">Hiren's Boot CD</option>
-								<option value="parted" data-code="7" data-url="http://yandex.com/">Parted Magic</option>
-								<option value="drweb" data-code="8" data-url="http://yandex.com/">Dr. Web Live Disk</option>
-								<option value="clonezilla" data-code="9" data-url="http://yandex.com/">CloneZilla Live</option>
-							</select>
-						</div>
-						<h5>Progress</h5>
-						<div class="progress" style="margin-right: 5px;">
-							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-								0%
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<!--<div class="col-lg-4">-->
+				<!--<div class="loader trian box-shadow">-->
+					<!--<div style="padding: 10px">-->
+						<!--<h4> Loader #3 - Waiting... </h4>-->
+						<!--<div data-loader-id="asd" class="loader-information input-group btn-group-sm" role="group">-->
+							<!--<button data-loader-id="asd" type="button" class="loader-action-chooseiso btn btn-default">-->
+								<!--<span class="glyphicon glyphicon-search" aria-hidden="true"></span>-->
+							<!--</button>-->
+							<!--<button data-loader-id="asd" type="button" class="loader-action-linktoiso btn btn-default">-->
+								<!--<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>-->
+							<!--</button>-->
+							<!--<select data-loader-id="asd" class="loader-type-select form-control input-sm" style="width: auto; height: 30px; display: inline;">-->
+								<!--<option value="windows7" data-code="0" data-url="http://yandex.com/">Windows 7</option>-->
+								<!--<option value="windows8" data-code="1" data-url="http://yandex.com/">Windows 8</option>-->
+								<!--<option value="windows10" data-code="2" data-url="http://yandex.com/">Windows 10</option>-->
+								<!--<option value="kav" data-code="3" data-url="http://yandex.com/">Kasperksy Rescue Disk</option>-->
+								<!--<option value="avg" data-code="4" data-url="http://yandex.com/">AVG Rescue Disk</option>-->
+								<!--<option value="ubuntu" data-code="5" data-url="http://yandex.com/">Ubuntu Linux</option>-->
+								<!--<option value="hiren" data-code="6" data-url="http://yandex.com/">Hiren's Boot CD</option>-->
+								<!--<option value="parted" data-code="7" data-url="http://yandex.com/">Parted Magic</option>-->
+								<!--<option value="drweb" data-code="8" data-url="http://yandex.com/">Dr. Web Live Disk</option>-->
+								<!--<option value="clonezilla" data-code="9" data-url="http://yandex.com/">CloneZilla Live</option>-->
+							<!--</select>-->
+						<!--</div>-->
+						<!--<h5>Progress</h5>-->
+						<!--<div class="progress" style="margin-right: 5px;">-->
+							<!--<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">-->
+								<!--0%-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
 		</div>
 		<div class="row loader-row">
-			<div class="col-lg-4">
+			<div class="col-lg-6">
 				<div class="loader trian box-shadow">
 					<div style="padding: 10px">
 						<h4> Loader #4 - Burning... </h4>
@@ -371,7 +376,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-4">
+			<div class="col-lg-6">
 				<div class="loader trian box-shadow">
 					<div style="padding: 10px">
 						<h4> Loader #5 - Waiting... </h4>
@@ -404,39 +409,39 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-4">
-				<div class="loader trian box-shadow">
-					<div style="padding: 10px">
-						<h4> Loader #6 - Waiting... </h4>
-						<div data-loader-id="asd" class="loader-information input-group btn-group-sm" role="group">
-							<button data-loader-id="asd" type="button" class="loader-action-chooseiso btn btn-default">
-								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-							</button>
-							<button data-loader-id="asd" type="button" class="loader-action-linktoiso btn btn-default">
-								<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>
-							</button>
-							<select data-loader-id="asd" class="loader-type-select form-control input-sm" style="width: auto; height: 30px; display: inline;">
-								<option value="windows7" data-code="0" data-url="http://yandex.com/">Windows 7</option>
-								<option value="windows8" data-code="1" data-url="http://yandex.com/">Windows 8</option>
-								<option value="windows10" data-code="2" data-url="http://yandex.com/">Windows 10</option>
-								<option value="kav" data-code="3" data-url="http://yandex.com/">Kasperksy Rescue Disk</option>
-								<option value="avg" data-code="4" data-url="http://yandex.com/">AVG Rescue Disk</option>
-								<option value="ubuntu" data-code="5" data-url="http://yandex.com/">Ubuntu Linux</option>
-								<option value="hiren" data-code="6" data-url="http://yandex.com/">Hiren's Boot CD</option>
-								<option value="parted" data-code="7" data-url="http://yandex.com/">Parted Magic</option>
-								<option value="drweb" data-code="8" data-url="http://yandex.com/">Dr. Web Live Disk</option>
-								<option value="clonezilla" data-code="9" data-url="http://yandex.com/">CloneZilla Live</option>
-							</select>
-						</div>
-						<h5>Progress</h5>
-						<div class="progress" style="margin-right: 5px;">
-							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-								0%
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<!--<div class="col-lg-4">-->
+				<!--<div class="loader trian box-shadow">-->
+					<!--<div style="padding: 10px">-->
+						<!--<h4> Loader #6 - Waiting... </h4>-->
+						<!--<div data-loader-id="asd" class="loader-information input-group btn-group-sm" role="group">-->
+							<!--<button data-loader-id="asd" type="button" class="loader-action-chooseiso btn btn-default">-->
+								<!--<span class="glyphicon glyphicon-search" aria-hidden="true"></span>-->
+							<!--</button>-->
+							<!--<button data-loader-id="asd" type="button" class="loader-action-linktoiso btn btn-default">-->
+								<!--<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>-->
+							<!--</button>-->
+							<!--<select data-loader-id="asd" class="loader-type-select form-control input-sm" style="width: auto; height: 30px; display: inline;">-->
+								<!--<option value="windows7" data-code="0" data-url="http://yandex.com/">Windows 7</option>-->
+								<!--<option value="windows8" data-code="1" data-url="http://yandex.com/">Windows 8</option>-->
+								<!--<option value="windows10" data-code="2" data-url="http://yandex.com/">Windows 10</option>-->
+								<!--<option value="kav" data-code="3" data-url="http://yandex.com/">Kasperksy Rescue Disk</option>-->
+								<!--<option value="avg" data-code="4" data-url="http://yandex.com/">AVG Rescue Disk</option>-->
+								<!--<option value="ubuntu" data-code="5" data-url="http://yandex.com/">Ubuntu Linux</option>-->
+								<!--<option value="hiren" data-code="6" data-url="http://yandex.com/">Hiren's Boot CD</option>-->
+								<!--<option value="parted" data-code="7" data-url="http://yandex.com/">Parted Magic</option>-->
+								<!--<option value="drweb" data-code="8" data-url="http://yandex.com/">Dr. Web Live Disk</option>-->
+								<!--<option value="clonezilla" data-code="9" data-url="http://yandex.com/">CloneZilla Live</option>-->
+							<!--</select>-->
+						<!--</div>-->
+						<!--<h5>Progress</h5>-->
+						<!--<div class="progress" style="margin-right: 5px;">-->
+							<!--<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">-->
+								<!--0%-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
 		</div>
 		<div class="row loader-row">
 			<div class="col-lg-12">
@@ -449,8 +454,9 @@
 </html>
 
 <script>
-	$("#menu-toggle").click(function(e) {
+	$("#sidebar-toggle").click(function(e) {
 		e.preventDefault();
 		$("#wrapper").toggleClass("toggled");
+		$("#test").toggle();
 	});
 </script>
