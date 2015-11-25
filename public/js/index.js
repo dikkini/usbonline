@@ -56,7 +56,7 @@ $(document).ready(function() {
 
 	function loaderCodes() {
 		var loaderCodes = "null";
-		$("#loader-list").children().not("#addLoaderBtn").each(function() {
+		$(".loader-item").each(function() {
 			var loaderId = $(this).data("loader-id");
 			var loaderSelect = $('select[data-loader-id="' + loaderId + '"]');
 			var loaderSelectSelected = loaderSelect.find(':selected');
