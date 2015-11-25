@@ -1,320 +1,62 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!DOCTYPE>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
 <head>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width">
+	<title>BootLine</title>
+	<meta charset="UTF-8">
+	<% include partials/head.ejs %>
+	<script src="/js/index.js"></script>
+	<script src="/assets/small_ui/js/main_new.js"></script>
+	<link rel="stylesheet" href="/assets/small_ui/css/normalize.css">
+	<link rel="stylesheet" href="/assets/small_ui/css/main_new.css">
+	<!--[if !IE]><!-->
+		<link rel="stylesheet" href="/assets/small_ui/css/main_new_not_ie.css">
+	<!--<![endif]-->
 
-	<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.css">
-
-	<script src="/assets/jquery-1.9.1.min.js"></script>
-	<script src="/assets/bootstrap/js/bootstrap.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-	<style type="text/css" media="screen">
-		/*
-			common
-		*/
-		.trian {
-			width:      350px;
-			height:     150px;
-			border:     1px solid white;
-			box-shadow: 5px 5px 15px #193C54;
-			-webkit-box-shadow: 5px 5px 15px #193C54;
-			-moz-box-shadow: 5px 5px 15px #193C54;
-		}
-
-		#addCross {
-			width: 65px;
-			height: 65px;
-			margin: auto;
-			margin-top: 15px;
-			background: linear-gradient(to bottom, transparent 35%, #193C54 35%, #193C54 65%,  transparent 65%),
-			linear-gradient(to right, transparent 35%, #193C54 35%, #193C54 65%, transparent 65%);
-		},
-
-		.color-black {
-			color: black !important;
-		},
-
-		.color-white {
-			color: white;
-		}
-
-		.row {
-			padding-top: 20px;
-		}
-
-		/*
-			side bar
-		*/
-		/*!
-		 * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
-		 * Code licensed under the Apache License v2.0.
-		 * For details, see http://www.apache.org/licenses/LICENSE-2.0.
-		 */
-
-		/* Toggle Styles */
-
-		#wrapper {
-			padding-left: 0;
-			-webkit-transition: all 0.5s ease;
-			-moz-transition: all 0.5s ease;
-			-o-transition: all 0.5s ease;
-			transition: all 0.5s ease;
-		}
-
-		#wrapper.toggled {
-			padding-left: 200px;
-		}
-
-		#sidebar-wrapper {
-			z-index: 1000;
-			position: fixed;
-			left: 250px;
-			width: 0;
-			height: 100%;
-			margin-left: -250px;
-			overflow-y: auto;
-			background: #193C54;
-			-webkit-transition: all 0.5s ease;
-			-moz-transition: all 0.5s ease;
-			-o-transition: all 0.5s ease;
-			transition: all 0.5s ease;
-		}
-
-		#wrapper.toggled #sidebar-wrapper {
-			width: 200px;
-		}
-
-		#page-content-wrapper {
-			width: 100%;
-			position: absolute;
-			padding: 15px;
-		}
-
-		#wrapper.toggled #page-content-wrapper {
-			position: absolute;
-			margin-right: -250px;
-		}
-
-		/* Sidebar Styles */
-
-		.sidebar-nav {
-			position: absolute;
-			top: 0;
-			width: 200px;
-			margin: 0;
-			padding: 0;
-			list-style: none;
-		}
-
-		.sidebar-nav li {
-			text-indent: 5px;
-			line-height: 5px;
-		}
-
-		.sidebar-nav li a {
-			display: block;
-			text-decoration: none;
-			color: #999999;
-		}
-
-		.sidebar-nav li a:hover {
-			text-decoration: none;
-			color: #fff;
-			background: rgba(255,255,255,0.2);
-		}
-
-		.sidebar-nav li a:active,
-		.sidebar-nav li a:focus {
-			text-decoration: none;
-		}
-
-		.sidebar-nav > .sidebar-brand {
-			height: 65px;
-			font-size: 18px;
-			line-height: 60px;
-		}
-
-		.sidebar-nav > .sidebar-brand a {
-			color: #999999;
-		}
-
-		.sidebar-nav > .sidebar-brand a:hover {
-			color: #fff;
-			background: none;
-		}
-
-		@media(min-width:768px) {
-			#wrapper {
-				padding-left: 200px;
-			}
-
-			#wrapper.toggled {
-				padding-left: 0;
-			}
-
-			#sidebar-wrapper {
-				width: 200px;
-			}
-
-			#wrapper.toggled #sidebar-wrapper {
-				width: 0;
-			}
-
-			#page-content-wrapper {
-				padding: 20px;
-				position: relative;
-			}
-
-			#wrapper.toggled #page-content-wrapper {
-				position: relative;
-				margin-right: 0;
-			}
-		}
-	</style>
-
-	<title>USB Online</title>
+	<!--[if lte IE 9]>
+		<link rel="stylesheet" href="/assets/small_ui/css/main_new_ie_lte_9.css">
+	<![endif]-->
 </head>
-<body>
-<div id="wrapper">
-	<div id="sidebar-wrapper">
-		<ul class="sidebar-nav">
-			<li>
-				<h4 style="color: white;">Flash Drive Menu</h4>
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="input-group">
-							<div class="input-group-btn">
-								<span class="btn-group">
-									<button id="flashDriveSelectBtn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Choose <span class="caret"></span></button>
-									<ul id="flashDriveSelectUl" class="dropdown-menu" role="menu" aria-labelledby="#flashDriveSelectBtn"></ul>
-								</span>
-								<input id="isAppRunning" type="hidden" value="true">
-								<span class="btn-group">
-									<button id="refreshFlashDrives" class="btn btn-default" data-toggle="tooltip" data-placement="right" data-original-title="Refresh flash drives" type="button">
-										<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-									</button>
-								</span>
-								<span class="btn-group">
-									<button id="burnTypeSelectBtn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Type <span class="caret"></span></button>
-									<ul id="burnTypeSelectUL" class="dropdown-menu" role="menu" aria-labelledby="#burnTypeSelectBtn">
-										<li><a id="1" href="#" class="burnType">New</a></li>
-										<li><a id="2" href="#" class="burnType">Add</a></li>
-									</ul>
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</li>
-			<li>
-			<li>
-				<div class="row" style="padding-left: 5px;">
-					<h5 style="color: white; padding-left: 10px;">Capacity</h5>
-					<div class="col-xs-12">
-						<div class="progress" style="margin-right: 5px;">
-							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 56%">
-								56%
-							</div>
-						</div>
-					</div>
-				</div>
-			</li>
-		</ul>
-	</div>
 
-	<div id="page-content-wrapper" style="padding-right: 350px;">
-		<div class="row">
-			<div class="col-lg-12">
-				<h3>
-					<a id="menu-toggle" href="#" class="glyphicon glyphicon-align-justify btn-menu toggle"><i class="fa fa-bars"></i></a>
-					BootLine.net
-				</h3>
-			</div>
+<body>
+<% include partials/nav.ejs %>
+
+<div id="page-content" class="container">
+	<div class="row">
+		<div id="left-content" class="col-lg-3">
+			<p>Два простых шага чтобы начать пользоваться приложением:</p>
+			<p>
+				1. Запустить приложение <a id="application-url" href="/clickonce/ClickLine.application">кликнув по ссылке</a>
+			</p>
+			<p>
+				2. Обновить страницу если она сама не обновилась чтобы появился интерфейс приложения
+			</p>
+			<hr>
+			<p>Если вы видите ошибку, </p><img src="/img/iframe_error.png" height="50px"/>
+
+			<p>а не интерфейс программы, то вам необходимо запустить сервер после чего обновить страницу</p>
 		</div>
-		</hr>
-		<div class="row">
-			<div class="col-lg-6">
-				<div class="loader trian box-shadow">
-					<div style="padding: 10px">
-						<h4> Burning... </h4>
-						<div data-loader-id="asd" class="loader-information input-group btn-group-sm" role="group">
-							<button data-loader-id="asd" type="button" class="loader-action-chooseiso btn btn-default">
-								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-							</button>
-							<button data-loader-id="asd" type="button" class="loader-action-linktoiso btn btn-default">
-								<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>
-							</button>
-							<select data-loader-id="asd" class="loader-type-select form-control input-sm" style="width: auto; height: 30px; display: inline;">
-								<option value="windows7" data-code="0" data-url="http://yandex.com/">Windows 7</option>
-								<option value="windows8" data-code="1" data-url="http://yandex.com/">Windows 8</option>
-								<option value="windows10" data-code="2" data-url="http://yandex.com/">Windows 10</option>
-								<option value="kav" data-code="3" data-url="http://yandex.com/">Kasperksy Rescue Disk</option>
-								<option value="avg" data-code="4" data-url="http://yandex.com/">AVG Rescue Disk</option>
-								<option value="ubuntu" data-code="5" data-url="http://yandex.com/">Ubuntu Linux</option>
-								<option value="hiren" data-code="6" data-url="http://yandex.com/">Hiren's Boot CD</option>
-								<option value="parted" data-code="7" data-url="http://yandex.com/">Parted Magic</option>
-								<option value="drweb" data-code="8" data-url="http://yandex.com/">Dr. Web Live Disk</option>
-								<option value="clonezilla" data-code="9" data-url="http://yandex.com/">CloneZilla Live</option>
-							</select>
-						</div>
-						<div class="progress" style="margin-top: 10px;">
-							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
-								30%
-							</div>
-						</div>
+		<div id="right-content" class="col-lg-9">
+			<div id="loader-list">
+				<div class="row loader-row">
+					<div class="col-lg-6">
+						<div id="addLoaderBtn" class="trian box-shadow"><div id="addCross"></div></div>
 					</div>
 				</div>
-			</div>
-			<div class="col-lg-6">
-				<div class="loader trian box-shadow">
-					<div style="padding: 10px">
-						<h4> Burning... </h4>
-						<div data-loader-id="asd" class="loader-information input-group btn-group-sm" role="group">
-							<button data-loader-id="asd" type="button" class="loader-action-chooseiso btn btn-default">
-								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-							</button>
-							<button data-loader-id="asd" type="button" class="loader-action-linktoiso btn btn-default">
-								<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>
-							</button>
-							<select data-loader-id="asd" class="loader-type-select form-control input-sm" style="width: auto; height: 30px; display: inline;">
-								<option value="windows7" data-code="0" data-url="http://yandex.com/">Windows 7</option>
-								<option value="windows8" data-code="1" data-url="http://yandex.com/">Windows 8</option>
-								<option value="windows10" data-code="2" data-url="http://yandex.com/">Windows 10</option>
-								<option value="kav" data-code="3" data-url="http://yandex.com/">Kasperksy Rescue Disk</option>
-								<option value="avg" data-code="4" data-url="http://yandex.com/">AVG Rescue Disk</option>
-								<option value="ubuntu" data-code="5" data-url="http://yandex.com/">Ubuntu Linux</option>
-								<option value="hiren" data-code="6" data-url="http://yandex.com/">Hiren's Boot CD</option>
-								<option value="parted" data-code="7" data-url="http://yandex.com/">Parted Magic</option>
-								<option value="drweb" data-code="8" data-url="http://yandex.com/">Dr. Web Live Disk</option>
-								<option value="clonezilla" data-code="9" data-url="http://yandex.com/">CloneZilla Live</option>
-							</select>
-						</div>
-						<div class="progress" style="margin-top: 10px;">
-							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
-								30%
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-				<div id="addLoader" class="trian box-shadow"><div id="addCross"></div></div>
 			</div>
 		</div>
 	</div>
 </div>
+
 </body>
 </html>
-
-<script>
-	$("#menu-toggle").click(function(e) {
-		e.preventDefault();
-		$("#wrapper").toggleClass("toggled");
-	});
-</script>
