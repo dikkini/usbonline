@@ -31,7 +31,7 @@ $(document).ready(function() {
 	$(window).unload(function() {
 		console.log("unload small app");
 		if (isAppRuning) {
-			//shutdownServer();
+			shutdownServer();
 			window.location = '/';
 		}
 	});
