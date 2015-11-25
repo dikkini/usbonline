@@ -57,6 +57,31 @@ router.post('/feedback', function(req, res, next) {
 	});
 });
 
+router.post('/feedback_win', function(req, res, next) {
+	var feedback_email = req.body.email;
+	log.debug("Feedback email: " + feedback_email);
+	var feedback = req.body.feedback;
+	log.debug("Feedback text: " + feedback);
+	var sessionid = req.body.id;
+	log.debug("Session Id: " + sessionid);
+
+	var response = {
+		"success": true
+	};
+
+	log.debug("Add user feedback to database");
+	db.query(config.get("sql:add_user_feedback"), [feedback_email, feedback, sessionid], function (err, result) {
+		log.debug(result);
+		log.error(err);
+		log.error("Add user error: ", err);
+		if (err) {
+			response.success = false;
+			response.errorMessage = err;
+		}
+		return res.end(JSON.stringify(response));
+	});
+});
+
 router.post('/userinfo', function(req, res, next) {
 	log.debug("Collect user info");
 	var sessionid = req.body.sessionId;
