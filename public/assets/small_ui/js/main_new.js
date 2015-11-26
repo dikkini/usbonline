@@ -430,9 +430,19 @@ $(document).ready(function() {
 		if ($(this).hasClass("disabled")) {
 			return false;
 		}
-		var id = generateUUID();
-		var loaderItem = buildLoaderItem(id);
+	});
 
+	$body.on("click", "button, input", function(){
+		var border = $(this).css('border-color');
+		if (border == "rgb(255, 0, 0)") {
+			$(this).css({'border-color': ''});
+		}
+		var id = generateUUID();
+		addLoaderToDOM(id);
+	});
+
+	function addLoaderToDOM(id) {
+		var loaderItem = buildLoaderItem(id);
 		var $loaderList = $("#loader-list");
 		var $col = $("<div>", {class:"col-lg-6"});
 
@@ -458,14 +468,7 @@ $(document).ready(function() {
 			$loaderList.append($row);
 		}
 		ALL_LOADERS_COUNT += 1;
-	});
-
-	$body.on("click", "button, input", function(){
-		var border = $(this).css('border-color');
-		if (border == "rgb(255, 0, 0)") {
-			$(this).css({'border-color': ''});
-		}
-	});
+	}
 
 	// IT IS DLL.JS
 
@@ -664,9 +667,7 @@ $(document).ready(function() {
 			var loaderCode = loadersJson[i];
 			console.log(loaderId);
 			console.log(loaderCode);
-			var $loaderItem = buildLoaderItem(loaderId);
-			$("#loader-list").prepend($loaderItem);
-			$loaderItem.slideDown(500);
+			addLoaderToDOM(loaderId);
 			var loaderSelect = $('select[data-loader-id="' + loaderId + '"]');
 			var loaderSelectOption = loaderSelect.find('option[data-code="' + loaderCode + '"]');
 			loaderSelectOption.prop('selected', true);
