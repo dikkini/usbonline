@@ -430,6 +430,8 @@ $(document).ready(function() {
 		if ($(this).hasClass("disabled")) {
 			return false;
 		}
+		var id = generateUUID();
+		addLoaderToDOM(id);
 	});
 
 	$body.on("click", "button, input", function(){
@@ -437,8 +439,6 @@ $(document).ready(function() {
 		if (border == "rgb(255, 0, 0)") {
 			$(this).css({'border-color': ''});
 		}
-		var id = generateUUID();
-		addLoaderToDOM(id);
 	});
 
 	function addLoaderToDOM(id) {
