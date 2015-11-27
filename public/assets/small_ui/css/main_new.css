@@ -15,6 +15,11 @@
     padding-top: 20px !important;
 }
 
+#loader-list {
+    overflow-y: scroll;
+    height:500px;
+}
+
 .color-black {
     color: black !important;
 }
