@@ -9,19 +9,23 @@ $(document).ready(function() {
 	init();
 
 	function init() {
+		alert("init method");
 		$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Please wait...</h3>'
 
 		var $appUrl = $("#application-url");
 		var isIE = isClientBrowserIE();
 		if (isIE) {
+			alert("isIE");
 			isClickOnce = true;
 		} else {
+			alert("notIE");
 			$appUrl.attr("href", "/download/application");
 		}
 
 		$("#isClickOnce").val(isClickOnce);
 
 		socket.on('connect', function () {
+			alert("socket connect");
 			sessionId = (socket.io.engine.id).toString().substr(0, 10);
 			if (isClickOnce) {
 				var href = $appUrl.attr("href");
@@ -39,6 +43,7 @@ $(document).ready(function() {
 	}
 
 	$('body').on('click', "#launchApp", function() {
+		alert("body click launchapp");
 		if (isClickOnce) {
 			var loadersJson = loaderCodes();
 			var $appUrl = $("#application-url");
@@ -46,15 +51,18 @@ $(document).ready(function() {
 			href = href + "&loadersJson=" + loadersJson;
 			canReload = true;
 			launchApp = true;
+			alert(href);
 			window.location = href;
 
 			setTimeout(function() {
+				alert("timeout canReload = false");
 				canReload = false;
 			}, 3000)
 		}
 	});
 
 	function loaderCodes() {
+		alert("loaderCodes method");
 		var loaderCodes = "null";
 		$(".loader-item").each(function() {
 			var loaderId = $(this).data("loader-id");
@@ -72,13 +80,14 @@ $(document).ready(function() {
 			loaderCodes = loaderCodes.substring(0, loaderCodes.length - 1);
 		}
 
+		alert(loaderCodes);
 		return loaderCodes;
 	}
 
 	function startApp(port) {
 		alert("startApp");
 		$.blockUI();
-		var content = $("#right-content");
+		var content = $("#page-content").find(".row");
 		// clear
 		content.children().each(function() {
 			$(this).remove();
@@ -123,7 +132,9 @@ $(document).ready(function() {
 	}
 
 	function onBeforeUnload(e) {
+		alert("onBeforeUnload");
 		if (!canReload) {
+			alert("canReload");
 			if (!e) e = window.event;
 			//e.cancelBubble is supported by IE - this will kill the bubbling process.
 			e.cancelBubble = true;
@@ -143,6 +154,7 @@ $(document).ready(function() {
 				canReload = false;
 			}, 500);
 		}
+		alert("can't reload");
 	}
 	window.onbeforeunload=onBeforeUnload;
 

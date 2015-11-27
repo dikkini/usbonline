@@ -39,7 +39,7 @@ $(document).ready(function() {
 	function init() {
 		$.blockUI.defaults.fadeIn = 0;
 		$.blockUI.defaults.fadeOut = 0;
-		$.blockUI.defaults.message = '<h3><img height=50 src="http://172.20.5.30:1337/assets/small_ui/img/loading.gif" /> Please wait...</h3>';
+		$.blockUI.defaults.message = '<h3><img height=50 src="http://bootline.net/assets/small_ui/img/loading.gif" /> Please wait...</h3>';
 
 		$(document).ajaxStart(function () {
 			if (!dontBlock)
