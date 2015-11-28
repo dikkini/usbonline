@@ -1,12 +1,30 @@
 $(document).ready(function() {
 	var serverBaseUrl = document.href
-		, socket = io.connect(serverBaseUrl, {'sync disconnect on unload' : true})
 		, sessionId = ''
 		, canReload = false
 		, launchApp = false
 		, isClickOnce = false;
 
+	var socket = io.connect(serverBaseUrl, {'sync disconnect on unload' : true})
+
 	init();
+
+	socket.on('connect', function () {
+		alert("socket connect");
+		sessionId = (socket.io.engine.id).toString().substr(0, 10);
+		if (isClickOnce) {
+			var href = $appUrl.attr("href");
+			href = href + "?sessionId=" + sessionId;
+			$appUrl.attr("href", href);
+		}
+		console.log("socket.io connected : " + sessionId);
+	});
+
+	socket.on('launchapp', function (data) {
+		alert("launchapp");
+		console.log(data);
+		startApp(data.port);
+	});
 
 	function init() {
 		alert("init method");
@@ -23,23 +41,6 @@ $(document).ready(function() {
 		}
 
 		$("#isClickOnce").val(isClickOnce);
-
-		socket.on('connect', function () {
-			alert("socket connect");
-			sessionId = (socket.io.engine.id).toString().substr(0, 10);
-			if (isClickOnce) {
-				var href = $appUrl.attr("href");
-				href = href + "?sessionId=" + sessionId;
-				$appUrl.attr("href", href);
-			}
-			console.log("socket.io connected : " + sessionId);
-		});
-
-		socket.on('launchapp', function (data) {
-			alert("launchapp");
-			console.log(data);
-			startApp(data.port);
-		});
 	}
 
 	$('body').on('click', "#launchApp", function() {
@@ -134,7 +135,7 @@ $(document).ready(function() {
 	function onBeforeUnload(e) {
 		alert("onBeforeUnload");
 		if (!canReload) {
-			alert("canReload");
+			alert("can't reload");
 			if (!e) e = window.event;
 			//e.cancelBubble is supported by IE - this will kill the bubbling process.
 			e.cancelBubble = true;
@@ -154,7 +155,7 @@ $(document).ready(function() {
 				canReload = false;
 			}, 500);
 		}
-		alert("can't reload");
+		alert("canReload");
 	}
 	window.onbeforeunload=onBeforeUnload;
 
