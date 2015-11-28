@@ -97,7 +97,11 @@ $(document).ready(function() {
 		var iframe = '<iframe id="smallAppIFrame" width="800" height="600" scrolling="no" frameborder="no" ' +
 				'src="http://localhost:' + port + '"></iframe>';
 
-		content.append(iframe);
+		var col = $('<div/>', {"class": 'col-lg-12'});
+
+		col.append(iframe);
+
+		content.append(col);
 		$.unblockUI();
 	}
 
