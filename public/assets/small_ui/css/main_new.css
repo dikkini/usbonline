@@ -31,7 +31,7 @@
 .loader-action-remcancel {
     width: 15px;
     height: 15px;
-    margin-top: -13px;
+    margin-top: -23px;
     margin-right: -12px;
     display: block;
     float: right;
@@ -187,4 +187,8 @@
 /* PROGRESS BAR */
 .progress-flash-bar {
     margin-right: -15px !important;
+}
+
+#menu-toggle {
+    cursor: pointer;
 }

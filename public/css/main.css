@@ -9,3 +9,7 @@ a {
 .white {
   color: #f8ffff;
 }
+
+.navbar-brand {
+  padding-left: 47px !important;
+}
