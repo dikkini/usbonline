@@ -7,7 +7,20 @@ $(document).ready(function() {
 
 	var socket = io.connect(serverBaseUrl, {'sync disconnect on unload' : true})
 
-	init();
+	alert("init method");
+	$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Please wait...</h3>'
+
+	var $appUrl = $("#application-url");
+	var isIE = isClientBrowserIE();
+	if (isIE) {
+		alert("isIE");
+		isClickOnce = true;
+	} else {
+		alert("notIE");
+		$appUrl.attr("href", "/download/application");
+	}
+
+	$("#isClickOnce").val(isClickOnce);
 
 	socket.on('connect', function () {
 		alert("socket connect");
@@ -25,23 +38,6 @@ $(document).ready(function() {
 		console.log(data);
 		startApp(data.port);
 	});
-
-	function init() {
-		alert("init method");
-		$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Please wait...</h3>'
-
-		var $appUrl = $("#application-url");
-		var isIE = isClientBrowserIE();
-		if (isIE) {
-			alert("isIE");
-			isClickOnce = true;
-		} else {
-			alert("notIE");
-			$appUrl.attr("href", "/download/application");
-		}
-
-		$("#isClickOnce").val(isClickOnce);
-	}
 
 	$('body').on('click', "#launchApp", function() {
 		alert("body click launchapp");
