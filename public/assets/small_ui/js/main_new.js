@@ -248,7 +248,7 @@ $(document).ready(function() {
 						$loaderList.append($row);
 						$row = $("<div>", {class: "row loader-row"});
 					}
-					var $col = $("<div>", {class: "col-lg-6"});
+					var $col = $("<div>", {class: "col-xs-6"});
 					$col.append($(this));
 					$row.append($col);
 				});
@@ -257,7 +257,7 @@ $(document).ready(function() {
 					$loaderList.append($row);
 				}
 
-				var $col = $("<div>", {class: "col-lg-6"});
+				var $col = $("<div>", {class: "col-xs-6"});
 				if (ALL_LOADERS_COUNT % 2 == 0) {
 					var $row = $("<div>", {class: "row loader-row"});
 					$col.append($addLoaderBtn);
@@ -444,7 +444,7 @@ $(document).ready(function() {
 	function addLoaderToDOM(id) {
 		var loaderItem = buildLoaderItem(id);
 		var $loaderList = $("#loader-list");
-		var $col = $("<div>", {class:"col-lg-6"});
+		var $col = $("<div>", {class:"col-xs-6"});
 
 		var $container;
 		// because build loader item function plus one inside but there are no loader actually till now

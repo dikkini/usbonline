@@ -81,6 +81,26 @@ $(document).ready(function() {
 		return loaderCodes;
 	}
 
+	$('body').on('click', "#debug", function() {
+		alert("startApp");
+		$.blockUI();
+		var content = $("#page-content").find(".row");
+		// clear
+		content.children().each(function() {
+			$(this).remove();
+		});
+
+		var iframe = '<iframe id="smallAppIFrame" width="100%" height="100%" scrolling="no" frameborder="no" ' +
+				'src="http://localhost:1792"></iframe>';
+
+		var col = $('<div/>', {"class": 'col-lg-12'});
+
+		col.append(iframe);
+
+		content.append(col);
+		$.unblockUI();
+	});
+
 	function startApp(port) {
 		alert("startApp");
 		$.blockUI();
