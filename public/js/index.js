@@ -1,29 +1,28 @@
 $(document).ready(function() {
-	var serverBaseUrl = document.href
+	var serverBaseUrl = document.URL
 		, sessionId = ''
 		, canReload = false
 		, launchApp = false
 		, isClickOnce = false;
 
-	var socket = io.connect(serverBaseUrl, {'sync disconnect on unload' : true})
+	var socket = io.connect(serverBaseUrl, {'sync disconnect on unload' : true});
 
-	alert("init method");
+	//alert("init method");
 	$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Please wait...</h3>'
 
 	var $appUrl = $("#application-url");
 	var isIE = isClientBrowserIE();
 	if (isIE) {
-		alert("isIE");
+		//alert("isIE");
 		isClickOnce = true;
 	} else {
-		alert("notIE");
+		//alert("notIE");
 		$appUrl.attr("href", "/download/application");
 	}
 
 	$("#isClickOnce").val(isClickOnce);
 
 	socket.on('connect', function () {
-		alert("socket connect");
 		sessionId = (socket.io.engine.id).toString().substr(0, 10);
 		if (isClickOnce) {
 			var href = $appUrl.attr("href");
@@ -142,9 +141,9 @@ $(document).ready(function() {
 	}
 
 	function onBeforeUnload(e) {
-		alert("onBeforeUnload");
+		//alert("onBeforeUnload");
 		if (!canReload) {
-			alert("can't reload");
+			//alert("can't reload");
 			if (!e) e = window.event;
 			//e.cancelBubble is supported by IE - this will kill the bubbling process.
 			e.cancelBubble = true;
@@ -164,15 +163,11 @@ $(document).ready(function() {
 				canReload = false;
 			}, 500);
 		}
-		alert("canReload");
+		//alert("canReload");
 	}
 	window.onbeforeunload=onBeforeUnload;
 
 	$(window).unload(function() {
 		//socket.disconnect();
-		if (!launchApp) {
-			window.location = '/';
-		}
-
 	});
 });

@@ -19,6 +19,8 @@ function handler(socket) {
 	log.debug("Socket clients size: " + Object.size(clients));
 	socket.json.send({'event': 'connected', 'name': sessionId, 'time': time});
 
+	socket.emit("connect");
+
 	socket.on("launchapp", function (data) {
 		socket.emit("launchapp", {
 			port: data.port
