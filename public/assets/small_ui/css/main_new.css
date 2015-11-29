@@ -17,7 +17,8 @@
 
 #loader-list {
     overflow-y: scroll;
-    height:500px;
+    overflow-x: hidden;
+    height:600px;
 }
 
 .color-black {
