@@ -595,6 +595,9 @@ $(document).ready(function() {
 				if (loadersJson == "null") {
 					init();
 					return;
+				} else if (!loadersJson) {
+					init();
+					return;
 				}
 				loadersJson = loadersJson.split(",");
 				console.log(loadersJson.length);
