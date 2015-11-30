@@ -360,8 +360,10 @@ $(document).ready(function() {
 		var successCb = function(response) {
 			//console.log(response);
 			if (response.Error) {
-				// TODO think about it because some error means that user just close FileBrowser and we have to handle it
-				alert("Internal server error. Please contact to a support. Error: " + response.Error);
+				if (response.Error != "Dialog cancelled") {
+					alert("Internal server error. Please contact to a support. Error: " + response.Error);
+				}
+				// TODO
 				return;
 			}
 
@@ -390,6 +392,7 @@ $(document).ready(function() {
 		};
 
 		var errorCb = function(response) {
+			alert(response);
 			//console.log("ERROR BLAT");
 			//console.log(response);
 		};
