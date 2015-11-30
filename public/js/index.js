@@ -7,16 +7,13 @@ $(document).ready(function() {
 
 	var socket = io.connect(serverBaseUrl, {'sync disconnect on unload' : true});
 
-	//alert("init method");
 	$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Please wait...</h3>'
 
 	var $appUrl = $("#application-url");
 	var isIE = isClientBrowserIE();
 	if (isIE) {
-		//alert("isIE");
 		isClickOnce = true;
 	} else {
-		//alert("notIE");
 		$appUrl.attr("href", "/download/application");
 	}
 
@@ -29,17 +26,14 @@ $(document).ready(function() {
 			href = href + "?sessionId=" + sessionId;
 			$appUrl.attr("href", href);
 		}
-		console.log("socket.io connected : " + sessionId);
 	});
 
 	socket.on('launchapp', function (data) {
 		alert("launchapp");
-		console.log(data);
 		startApp(data.port);
 	});
 
 	$('body').on('click', "#launchApp", function() {
-		alert("body click launchapp");
 		if (isClickOnce) {
 			var loadersJson = loaderCodes();
 			var $appUrl = $("#application-url");
@@ -47,8 +41,7 @@ $(document).ready(function() {
 			href = href + "&loadersJson=" + loadersJson;
 			canReload = true;
 			launchApp = true;
-			alert(href);
-			window.location = href;
+			window.location.href = href;
 
 			setTimeout(function() {
 				alert("timeout canReload = false");
@@ -58,7 +51,6 @@ $(document).ready(function() {
 	});
 
 	function loaderCodes() {
-		alert("loaderCodes method");
 		var loaderCodes = "null";
 		$(".loader-item").each(function() {
 			var loaderId = $(this).data("loader-id");
@@ -95,7 +87,6 @@ $(document).ready(function() {
 	});
 
 	function startApp(port) {
-		alert("startApp");
 		$.blockUI();
 		var content = $("#page-content");
 		content.empty();
@@ -141,9 +132,7 @@ $(document).ready(function() {
 	}
 
 	function onBeforeUnload(e) {
-		//alert("onBeforeUnload");
 		if (!canReload) {
-			//alert("can't reload");
 			if (!e) e = window.event;
 			//e.cancelBubble is supported by IE - this will kill the bubbling process.
 			e.cancelBubble = true;
@@ -163,7 +152,6 @@ $(document).ready(function() {
 				canReload = false;
 			}, 500);
 		}
-		//alert("canReload");
 	}
 	window.onbeforeunload=onBeforeUnload;
 

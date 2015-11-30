@@ -29,7 +29,7 @@ $(document).ready(function() {
 	}
 
 	$(window).unload(function() {
-		console.log("unload small app");
+		//console.log("unload small app");
 		if (isAppRuning) {
 			shutdownServer();
 			window.location = '/';
@@ -72,13 +72,13 @@ $(document).ready(function() {
 		}
 
 		var successCb = function(response) {
-			console.log(response);
+			//console.log(response);
 			disableInterface();
 			launchBurningProgressProcess();
 		};
 
 		var errorCb = function(response) {
-			console.log(response);
+			//console.log(response);
 		};
 
 		burnFlashDrive(loaderList, mode, selectedFlashDrive.Letter, true, successCb, errorCb);
@@ -92,7 +92,7 @@ $(document).ready(function() {
 			if (!messages) {
 				return;
 			}
-			console.log(response);
+			//console.log(response);
 			for (var i = 0; i < messages.length; i++) {
 				var msg = messages[i];
 				var progressValue = msg.MsgTextFst; // Progress=Integer
@@ -129,7 +129,7 @@ $(document).ready(function() {
 		};
 
 		var errorCb = function(response) {
-			console.log(response);
+			//console.log(response);
 		};
 
 		burningProgressMessages = setInterval(function(){
@@ -196,8 +196,8 @@ $(document).ready(function() {
 		$(this).addClass("disabled");
 		if (ISWORKING) {
 			var successCb = function(response) {
-				console.log("CANCELLING RESPONSE");
-				console.log(response);
+				//console.log("CANCELLING RESPONSE");
+				//console.log(response);
 
 				var $loaderIso = $('.loader-iso[data-loader-id="' + loaderId + '"]');
 				var loaderIsoSizePerc = $loaderIso.data("loader-iso-size-percent");
@@ -210,8 +210,8 @@ $(document).ready(function() {
 				disableInterface(loaderId);
 			};
 			var errorCb = function(response) {
-				console.log("CANCELLING RESPONSE ERROR");
-				console.log(response);
+				//console.log("CANCELLING RESPONSE ERROR");
+				//console.log(response);
 			};
 			cancelLoader(true, successCb, errorCb);
 		} else {
@@ -309,8 +309,8 @@ $(document).ready(function() {
 			$.unblockUI();
 		};
 		var errorCb = function(response) {
-			console.log("ERROR BLAT");
-			console.log(response);
+			//console.log("ERROR BLAT");
+			//console.log(response);
 			$refreshDrivesBtn.removeClass("disabled");
 		};
 		getFlashDrives(true, successCb, errorCb);
@@ -321,7 +321,7 @@ $(document).ready(function() {
 		selectedFlashDrive = $.parseJSON(fd);
 		var txt = " (" + selectedFlashDrive.Letter.toUpperCase() + ":\\) " + selectedFlashDrive.FS;
 		$flashDriveSelectBtn.html(txt + " <span class='caret'></span>");
-		console.log("User select flash drive: " + fd);
+		//console.log("User select flash drive: " + fd);
 
 		var value = getFlashDriveFilledSpace(selectedFlashDrive);
 		value = isoSizeToPerc(value);
@@ -356,9 +356,9 @@ $(document).ready(function() {
 		var loaderSelect = $('select[data-loader-id="' + loaderId + '"]');
 		var loaderSelectSelected = loaderSelect.find(':selected');
 		var loaderCode = loaderSelectSelected.data('code');
-		console.log(loaderCode);
+		//console.log(loaderCode);
 		var successCb = function(response) {
-			console.log(response);
+			//console.log(response);
 			if (response.Error) {
 				// TODO think about it because some error means that user just close FileBrowser and we have to handle it
 				alert("Internal server error. Please contact to a support. Error: " + response.Error);
@@ -376,22 +376,22 @@ $(document).ready(function() {
 			var size = parseInt(response.Size);
 			var sizeMb = Math.round(size / 1000000);
 			var sizePerc = isoSizeToPerc(size);
-			console.log("Selected ISO: " + path + " with size: " + size + " for loader: " + loaderId);
+			//console.log("Selected ISO: " + path + " with size: " + size + " for loader: " + loaderId);
 			currentWidth += sizePerc;
 			var isSet = calcFlashDriveSize(currentWidth, true);
 
 			if (isSet) {
 				var label = $('<label>', {class: "loader-iso", "data-loader-id": loaderId, "data-loader-iso-path": path, "data-loader-iso-size-percent": sizePerc, "data-loader-iso-size": size, text: path + " " + sizeMb + " MiB"});
-				console.log("Created label for chosen ISO");
-				console.log(label);
+				//console.log("Created label for chosen ISO");
+				//console.log(label);
 
 				$('.loader-information[data-loader-id="' + loaderId + '"]').append(label)
 			}
 		};
 
 		var errorCb = function(response) {
-			console.log("ERROR BLAT");
-			console.log(response);
+			//console.log("ERROR BLAT");
+			//console.log(response);
 		};
 		openBrowseDialog(false, "Window title", loaderCode, successCb, errorCb)
 	});
@@ -480,10 +480,10 @@ $(document).ready(function() {
 			data: { "Operation": "FinishWorks"},
 			async: true,
 			success: function (response) {
-				console.log(JSON.stringify(response));
+				//console.log(JSON.stringify(response));
 			},
 			error: function (response) {
-				console.log(JSON.stringify(response));
+				//console.log(JSON.stringify(response));
 			}
 		});
 	}
@@ -621,13 +621,13 @@ $(document).ready(function() {
 			data: { "Operation": "GetSessionId" },
 			async: false,
 			success: function (response) {
-				console.log("GetSessionId");
-				console.log(JSON.stringify(response));
+				//console.log("GetSessionId");
+				//console.log(JSON.stringify(response));
 				SESSIONID = response.SessionUID;
 				getLoadersJson();
 			},
 			error: function (response) {
-				console.log(response);
+				//console.log(response);
 			}
 		});
 	}
@@ -640,8 +640,8 @@ $(document).ready(function() {
 			data: { "Operation": "GetExistLoaders" },
 			async: false,
 			success: function (response) {
-				console.log("GetExistLoaders");
-				console.log(JSON.stringify(response));
+				//console.log("GetExistLoaders");
+				//console.log(JSON.stringify(response));
 				var loadersJson = response.ExistLoaders;
 				if (loadersJson == "null") {
 					init();
@@ -651,12 +651,12 @@ $(document).ready(function() {
 					return;
 				}
 				loadersJson = loadersJson.split(",");
-				console.log(loadersJson.length);
+				//console.log(loadersJson.length);
 				renderLoadersJson(loadersJson);
 				init();
 			},
 			error: function (response) {
-				console.log(response);
+				//console.log(response);
 			}
 		});
 	}
@@ -665,8 +665,8 @@ $(document).ready(function() {
 		for (var i = 0; i<loadersJson.length; i++) {
 			var loaderId = generateUUID();
 			var loaderCode = loadersJson[i];
-			console.log(loaderId);
-			console.log(loaderCode);
+			//console.log(loaderId);
+			//console.log(loaderCode);
 			addLoaderToDOM(loaderId);
 			var loaderSelect = $('select[data-loader-id="' + loaderId + '"]');
 			var loaderSelectOption = loaderSelect.find('option[data-code="' + loaderCode + '"]');
