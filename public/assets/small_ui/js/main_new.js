@@ -391,13 +391,23 @@ $(document).ready(function() {
 			}
 		};
 
-		var errorCb = function(response) {
-			alert(response);
-			//console.log("ERROR BLAT");
-			//console.log(response);
-		};
-		openBrowseDialog(false, "Window title", loaderCode, successCb, errorCb)
+		openBrowseDialog("Window title", loaderCode, successCb)
 	});
+
+	function openBrowseDialog(windowTitle, loaderCode, successCb) {
+		$.ajax({
+			url: "/",
+			type: "POST",
+			dataType: "JSON",
+			data: { "Operation":"FlOpnDlg", "Name": "Windows Title", "Id": loaderCode },
+			success: function (response) {
+				successCb(response);
+			},
+			error: function (response) {
+				alert(response);
+			}
+		})
+	}
 
 	function getFlashDriveFilledSpace() {
 		var flashDriveFullSize = parseInt(selectedFlashDrive.FullSize);
@@ -590,22 +600,6 @@ $(document).ready(function() {
 			dataType: "JSON",
 			global: false,
 			data: { "Operation": "CheckMessages" },
-			async: async,
-			success: function (response) {
-				successCb(response);
-			},
-			error: function (response) {
-				errorCb(response);
-			}
-		})
-	}
-
-	function openBrowseDialog(async, windowTitle, loaderCode, successCb, errorCb, rsa) {
-		$.ajax({
-			url: "/",
-			type: "POST",
-			dataType: "JSON",
-			data: { "Operation":"FlOpnDlg", "Name": windowTitle, "Id": loaderCode, "RSA": rsa },
 			async: async,
 			success: function (response) {
 				successCb(response);
