@@ -341,6 +341,7 @@ $(document).ready(function() {
 			var select = $("#flashDriveSelectUl");
 			var drives = response.Drives;
 			if (!drives) {
+				$refreshDrivesBtn.removeAttr("disabled");
 				$.unblockUI();
 				return;
 			}
@@ -611,11 +612,11 @@ $(document).ready(function() {
 		});
 	}
 
-	//$(window).unload(function() {
-	//	if (isAppRuning) {
-	//		shutdownServer();
-	//		window.location = '/';
-	//	}
-	//});
+	$(window).unload(function() {
+		if (isAppRuning) {
+			shutdownServer();
+			window.location = '/';
+		}
+	});
 
 });
