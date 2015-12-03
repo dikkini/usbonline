@@ -5,10 +5,7 @@ $(document).ready(function() {
 
 	var SESSIONID;
 
-	var $burnTypeSelect = $("#burnTypeSelectBtn");
-	var $burnTypeSelectUL = $("#burnTypeSelectUL");
-	var $flashDriveSelectBtn = $("#flashDriveSelectBtn");
-	var $flashDriveSelectUL = $("#flashDriveSelectUl");
+	var $flashDriveList = $("#flash-drives-list");
 	var $body = $("body");
 	var $burnBtn = $("#burnBtn");
 	var $refreshDrivesBtn = $("#refreshFlashDrives");
@@ -27,6 +24,8 @@ $(document).ready(function() {
 	var LOADER_STATUS_WORKING = 3;
 
 	var selectedFlashDrive = -1;
+
+	var ERROR_ALL_LOADERS_SIZE = false;
 
 	var isAppRuning = $("#isAppRunning").val();
 	if (isAppRuning) {
@@ -70,8 +69,62 @@ $(document).ready(function() {
 
 		saveUserInfo();
 
+		disableInterface();
 		renderFlashDrives();
 	}
+
+	$body.on("click", "#refreshFlashDrives", function() {
+		selectedFlashDrive = -1;
+		$flashDriveList.children().each(function() {
+			$(this).remove();
+		});
+		disableInterface();
+		renderFlashDrives();
+	});
+
+	$body.on('click', '.flash-drive-item', function() {
+		var fd = $(this).attr("value");
+		selectedFlashDrive = $.parseJSON(fd);
+
+		$flashDriveList.children().each(function() {
+			$(this).removeClass("active");
+		});
+		$(this).addClass("active");
+
+		var value = getFlashDriveFilledSpace(selectedFlashDrive);
+
+		$(".loader-item").each(function () {
+			var loaderId = $(this).data("loader-id");
+			var loaderISO = $('.loader-iso[data-loader-id="' + loaderId + '"]');
+			var loaderISOPath = loaderISO.data("loader-iso-path");
+			var loaderISOSize = loaderISO.data("loader-iso-size");
+
+			value += loaderISOSize;
+		});
+
+		value = isoSizeToPerc(selectedFlashDrive, value);
+		calcFlashDriveSize(value);
+	});
+
+	//$body.on('click', '#burnTypeSelectUL li a', function() {
+	//	var chosenType = $(this).text();
+	//	$burnTypeSelect.html(chosenType + " <span class='caret'></span>");
+	//
+	//	var allLoaderSize = 0;
+	//	$(".loader-item").each(function() {
+	//		var loaderId = $(this).data("loader-id");
+	//		var loaderISO = $('.loader-iso[data-loader-id="' + loaderId + '"]');
+	//		allLoaderSize += loaderISO.data("loader-iso-size");
+	//	});
+	//
+	//	var value = allLoaderSize;
+	//	var filledSpace = getFlashDriveFilledSpace(selectedFlashDrive);
+	//	if (chosenType == MODE_ADD) {
+	//		value += filledSpace;
+	//	}
+	//	value = isoSizeToPerc(selectedFlashDrive, value);
+	//	calcFlashDriveSize(value);
+	//});
 
 	$body.on("click", "button,input", function(){
 		var border = $(this).css('border-color');
@@ -85,17 +138,27 @@ $(document).ready(function() {
 	});
 
 	$burnBtn.click(function() {
+		if (selectedFlashDrive == -1) {
+			$.growlUI('Error', 'Choose flash drive from the list firstly!');
+			return;
+		}
+
+		if (ERROR_ALL_LOADERS_SIZE) {
+			$.growlUI('Error', 'We can\'t burn all loaders because their size more than capacity of your flash drive. ' +
+					'Choose other flash drive or remove some loaders');
+			return;
+		}
 		var loaderList = collectLoaders();
 
 		if (loaderList == "") {
 			return;
 		}
-		var mode = $burnTypeSelect.text().trim();
-		if (mode == MODE_NONE) {
-			$burnTypeSelect.css({'border-color': 'red'});
-			$.growlUI('Error', 'Choose type flash drive burn!');
-			return;
-		}
+		//var mode = $burnTypeSelect.text().trim();
+		//if (mode == MODE_NONE) {
+		//	$burnTypeSelect.css({'border-color': 'red'});
+		//	$.growlUI('Error', 'Choose type flash drive burn!');
+		//	return;
+		//}
 
 		for (var i = 0; i<loaderList.length; i++) {
 			var loader = loaderList[i];
@@ -207,52 +270,6 @@ $(document).ready(function() {
 		}
 	});
 
-	$body.on("click", "#refreshFlashDrives", function() {
-		selectedFlashDrive = -1;
-		$flashDriveSelectUL.children().each(function() {
-			$(this).remove();
-		});
-		$flashDriveSelectBtn.html("Choose <span class='caret'></span>");
-		$burnTypeSelect.html("Type <span class='caret'></span>");
-		disableInterface();
-		renderFlashDrives();
-	});
-
-	$body.on('click', '#flashDriveSelectUl li a', function() {
-		var fd = $(this).attr("value");
-		selectedFlashDrive = $.parseJSON(fd);
-		var txt = " (" + selectedFlashDrive.Letter.toUpperCase() + ":\\) " + selectedFlashDrive.FS;
-		$flashDriveSelectBtn.html(txt + " <span class='caret'></span>");
-		//console.log("User select flash drive: " + fd);
-
-		var value = getFlashDriveFilledSpace(selectedFlashDrive);
-		value = isoSizeToPerc(selectedFlashDrive, value);
-		calcFlashDriveSize(value);
-		$burnTypeSelect.removeAttr("disabled");
-		$addLoaderBtn.removeAttr("disabled");
-	});
-
-	$body.on('click', '#burnTypeSelectUL li a', function() {
-		var chosenType = $(this).text();
-		$burnTypeSelect.html(chosenType + " <span class='caret'></span>");
-
-		var allLoaderSize = 0;
-		$(".loader-item").each(function() {
-			var loaderId = $(this).data("loader-id");
-			var loaderISO = $('.loader-iso[data-loader-id="' + loaderId + '"]');
-			allLoaderSize += loaderISO.data("loader-iso-size");
-		});
-
-		var value = allLoaderSize;
-		var filledSpace = getFlashDriveFilledSpace(selectedFlashDrive);
-		if (chosenType == MODE_ADD) {
-			value += filledSpace;
-		}
-		value = isoSizeToPerc(selectedFlashDrive, value);
-		calcFlashDriveSize(value);
-		$burnBtn.removeAttr("disabled");
-	});
-
 	$body.on('click', '.loader-action-chooseiso', function() {
 		var loaderId = $(this).data('loader-id');
 		var loaderSelect = $('select[data-loader-id="' + loaderId + '"]');
@@ -310,6 +327,18 @@ $(document).ready(function() {
 		addLoaderToDOM(id);
 	});
 
+	$("#showFlashDrives").click(function() {
+		$flashDriveList.slideToggle(500);
+		var isShow = $(this).data("show");
+		if (isShow == true) {
+			$(this).data("show", false);
+			$(this).html("<strong>Show Flash Drives</strong>");
+		} else {
+			$(this).data("show", true);
+			$(this).html("<strong>Hide Flash Drives</strong>");
+		}
+	});
+
 	$("#send-feedback").click(function() {
 		var email = $("#feedback-email").val();
 		var feedback = $("#feedback-text").val();
@@ -338,7 +367,7 @@ $(document).ready(function() {
 
 	function renderFlashDrives() {
 		var successCb = function(response) {
-			var select = $("#flashDriveSelectUl");
+			var fdList = $("#flash-drives-list");
 			var drives = response.Drives;
 			if (!drives) {
 				$refreshDrivesBtn.removeAttr("disabled");
@@ -347,13 +376,16 @@ $(document).ready(function() {
 			}
 			for (var i = 0; i < drives.length; i++) {
 				var drive = drives[i];
-				var txt = drive.Name + " (" + drive.Letter.toUpperCase() + ":\\) " + drive.FS + " FreeSpace: " + Math.round(parseInt(drive.FreeSpace) / (1024*1024)) + "Mb. FullSize: " + Math.round(parseInt(drive.FullSize) / (1024*1024)) + "Mb";
-				select.append("<li><a href='#' value='" + JSON.stringify(drive) + "' style='color: black;'>" + "<p>" + txt + "</p>" + "</a></li>");
+				var html = "<a href='#' value='" + JSON.stringify(drive) + "' class='list-group-item flash-drive-item'>" +
+								"<h4 class='list-group-item-heading'>" + drive.Name + '</h4>' +
+								"<p class='list-group-item-text'>(" + drive.Letter.toUpperCase() + ":\\" + ") " + drive.FS + "</p>" +
+						    	"<p class='list-group-item-text'>FreeSpace:" + Math.round(parseInt(drive.FreeSpace) / (1024*1024)) + "Mb</p>" +
+								"<p class='list-group-item-text'>FullSize: " + Math.round(parseInt(drive.FullSize) / (1024*1024)) + "Mb</p>" +
+
+							'</a>';
+				fdList.append(html);
 			}
 			enableInterface();
-			$("#addLoaderBtn").attr("disabled", "disabled");
-			$("#burnTypeSelectBtn").attr("disabled", "disabled");
-			$("#burnBtn").attr("disabled", "disabled");
 			$.unblockUI();
 		};
 		var errorCb = function(response) {
@@ -423,19 +455,34 @@ $(document).ready(function() {
 		loaders.find("select").prop('disabled', 'disabled');
 	}
 	function disableInterface() {
-		$burnTypeSelect.attr("disabled", "disabled");
 		$refreshDrivesBtn.attr("disabled", "disabled");
-		$flashDriveSelectBtn.attr("disabled", "disabled");
-		$burnBtn.attr("disabled", "disabled");
+		$flashDriveList.attr("disabled", "disabled");
 		$addLoaderBtn.attr("disabled", "disabled");
+		$burnBtn.attr("disabled", "disabled");
 	}
 
 	function enableInterface() {
-		$burnTypeSelect.removeAttr("disabled");
 		$refreshDrivesBtn.removeAttr("disabled");
-		$flashDriveSelectBtn.removeAttr("disabled");
-		$burnBtn.removeAttr("disabled");
+		$flashDriveList.removeAttr("disabled");
 		$addLoaderBtn.removeAttr("disabled");
+		$burnBtn.removeAttr("disabled");
+	}
+
+	function calcFlashDriveSize(widthInPerc) {
+		var $progressBar = $("#flashDriveSizeBarGreen");
+
+		if (widthInPerc > 80 && widthInPerc < 98) {
+			$.growlUI('Error', 'Your flash drive has more than 80% capacity filled. Be carefully.');
+			ERROR_ALL_LOADERS_SIZE = false;
+		} else if (widthInPerc > 98) {
+			$.growlUI('Error', 'Your flash drive has more than 98% capacity filled. We can\'t burn this loader.');
+			ERROR_ALL_LOADERS_SIZE = true;
+		} else {
+			ERROR_ALL_LOADERS_SIZE = false;
+		}
+		$progressBar.width(widthInPerc+"%");
+		$progressBar.text(widthInPerc+"%");
+		return true;
 	}
 
 	function collectLoaders() {
@@ -612,11 +659,11 @@ $(document).ready(function() {
 		});
 	}
 
-	$(window).unload(function() {
-		if (isAppRuning) {
-			shutdownServer();
-			window.location = '/';
-		}
-	});
+	//$(window).unload(function() {
+	//	if (isAppRuning) {
+	//		shutdownServer();
+	//		window.location = '/';
+	//	}
+	//});
 
 });

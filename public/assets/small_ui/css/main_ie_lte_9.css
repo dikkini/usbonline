@@ -1,6 +1,7 @@
 #refreshFlashDrives {
-    padding-left: 0; width: 35px; height: 34px;
+    width: 96% !important;
 }
+
 #addCross {
     width:100px; /*width of your image*/
     height:100px; /*height of your image*/
