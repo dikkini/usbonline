@@ -67,11 +67,20 @@ $(document).ready(function() {
 
 		$.blockUI();
 
+		var wHeight = $(window).height() - 100;
+		$("#loader-list").css({"height":wHeight});
+
 		saveUserInfo();
 
 		disableInterface();
 		renderFlashDrives();
 	}
+
+	$(window).resize(function(){
+		var width = $(window).width();
+		var height = $(window).height();
+		$("#loader-list").css({"height":height-100});
+	});
 
 	$body.on("click", "#refreshFlashDrives", function() {
 		selectedFlashDrive = -1;
@@ -545,7 +554,7 @@ $(document).ready(function() {
 	function addLoaderToDOM(id) {
 		var loaderItem = buildLoaderItem(id);
 		var $loaderList = $("#loader-list");
-		var $col = $("<div>", {class:"col-lg-6"});
+		var $col = $("<div>", {class:"col-lg-6","style":"padding-bottom:10px;"});
 
 		var $container;
 		// because build loader item function plus one inside but there are no loader actually till now
@@ -562,12 +571,15 @@ $(document).ready(function() {
 			$loaderColLg6.empty();
 			$loaderColLg6.append(loaderItem).hide().fadeIn('slow');
 
-			var $row = $("<div>", {class:"row loader-row"});
+			var $row = $("<div>", {class:"row loader-row", "style":"padding-bottom:10px;"});
 			$col.append($addLoaderBtn);
 			$row.append($col);
 
 			$loaderList.append($row);
 		}
+
+		var height = $loaderList[0].scrollHeight ? $loaderList[0].scrollHeight : 0;
+		scroll.call($loaderList, height, this);
 		ALL_LOADERS_COUNT += 1;
 	}
 

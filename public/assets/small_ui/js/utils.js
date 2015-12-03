@@ -15,3 +15,14 @@ function generateUUID(){
 		return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
 	});
 }
+
+function scroll(height, ele) {
+	this.stop().animate({
+		scrollTop: height
+	}, 1000, function() {
+		var dir = height ? "top" : "bottom";
+		$(ele).html("scroll to " + dir).attr({
+			id: dir
+		});
+	});
+};
