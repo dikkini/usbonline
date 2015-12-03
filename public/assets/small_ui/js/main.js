@@ -153,12 +153,13 @@ $(document).ready(function() {
 		if (loaderList == "") {
 			return;
 		}
-		//var mode = $burnTypeSelect.text().trim();
-		//if (mode == MODE_NONE) {
-		//	$burnTypeSelect.css({'border-color': 'red'});
-		//	$.growlUI('Error', 'Choose type flash drive burn!');
-		//	return;
-		//}
+		var mode = $("#formatFlashDriveCb").prop('checked');
+
+		if (mode) {
+			mode = "New";
+		} else {
+			mode = "Add";
+		}
 
 		for (var i = 0; i<loaderList.length; i++) {
 			var loader = loaderList[i];
@@ -456,14 +457,20 @@ $(document).ready(function() {
 	}
 	function disableInterface() {
 		$refreshDrivesBtn.attr("disabled", "disabled");
-		$flashDriveList.attr("disabled", "disabled");
+		$flashDriveList.children().each(function() {
+			$(this).addClass("disabled");
+			$(this).attr("disabled", "disabled");
+		});
 		$addLoaderBtn.attr("disabled", "disabled");
 		$burnBtn.attr("disabled", "disabled");
 	}
 
 	function enableInterface() {
 		$refreshDrivesBtn.removeAttr("disabled");
-		$flashDriveList.removeAttr("disabled");
+		$flashDriveList.children().each(function() {
+			$(this).removeClass("disabled");
+			$(this).removeAttr("disabled");
+		});
 		$addLoaderBtn.removeAttr("disabled");
 		$burnBtn.removeAttr("disabled");
 	}
