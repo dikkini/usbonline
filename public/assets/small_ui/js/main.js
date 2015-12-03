@@ -545,7 +545,7 @@ $(document).ready(function() {
 	function addLoaderToDOM(id) {
 		var loaderItem = buildLoaderItem(id);
 		var $loaderList = $("#loader-list");
-		var $col = $("<div>", {class:"col-xs-6"});
+		var $col = $("<div>", {class:"col-lg-6"});
 
 		var $container;
 		// because build loader item function plus one inside but there are no loader actually till now
@@ -592,14 +592,8 @@ $(document).ready(function() {
 					'<span data-loader-id="<%= loaderId %>" class="loader-action-remcancel glyphicon glyphicon-remove" aria-hidden="true">' +
 					'</span>' +
 					'<h4 data-loader-id="<%= loaderId %>" class="loader-status-value" data-code="0"> Waiting... </h4>' +
-					'<div data-loader-id="<%= loaderId %>" class="loader-information input-group btn-group-sm" role="group">' +
-						'<button data-loader-id="<%= loaderId %>" type="button" class="loader-action-chooseiso btn btn-default">' +
-							'<span class="glyphicon glyphicon-search" aria-hidden="true"></span>' +
-						'</button>' +
-						'<button data-loader-id="<%= loaderId %>" type="button" class="loader-action-linktoiso btn btn-default">' +
-							'<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>' +
-						'</button>' +
-						'<select data-loader-id="<%= loaderId %>" class="loader-type-select form-control input-sm" style="width: auto; height: 30px; display: inline;">' +
+					//'<div data-loader-id="<%= loaderId %>" class="loader-information input-group btn-group-sm" role="group">' +
+						'<select data-loader-id="<%= loaderId %>" class="loader-type-select form-control input-sm" style="width: 75%; height: 35px; display: inline;">' +
 							'<option value="windows7" data-code="0" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 7</option>' +
 							'<option value="windows8" data-code="1" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 8</option>' +
 							'<option value="windows10" data-code="2" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 10</option>' +
@@ -611,7 +605,13 @@ $(document).ready(function() {
 							'<option value="drweb" data-code="8" data-url="http://www.freedrweb.com/livedisk/">Dr. Web Live Disk</option>' +
 							'<option value="clonezilla" data-code="9" data-url="http://clonezilla.org/downloads.php">CloneZilla Live</option>' +
 						'</select>' +
-					'</div>' +
+						'<button data-loader-id="<%= loaderId %>" type="button" class="loader-action-chooseiso btn btn-default">' +
+							'<span class="glyphicon glyphicon-search" aria-hidden="true"></span>' +
+						'</button>' +
+						'<button data-loader-id="<%= loaderId %>" type="button" class="loader-action-linktoiso btn btn-default">' +
+							'<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>' +
+						'</button>' +
+					//'</div>' +
 					'<div data-loader-id="<%= loaderId %>" class="progress" style="margin-top: 10px;">' +
 						'<div data-loader-id="<%= loaderId %>" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">' +
 							'0%' +
