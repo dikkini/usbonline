@@ -379,6 +379,7 @@ $(document).ready(function() {
 			var drives = response.Drives;
 			if (!drives) {
 				$refreshDrivesBtn.removeAttr("disabled");
+				$addLoaderBtn.removeAttr("disabled");
 				$.unblockUI();
 				return;
 			}
