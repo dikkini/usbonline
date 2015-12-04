@@ -5,6 +5,18 @@ button,input {
     outline: none !important;
 }
 
+#refreshFlashDrives {
+    width: 100%;
+}
+
+#showFlashDrives {
+    cursor: pointer;
+}
+
+#flashDriveCapacity {
+    padding-left: 10px;
+}
+
 .btn-circle {
     width: 30px;
     height: 30px;
@@ -26,12 +38,19 @@ button,input {
 
 .trian {
     width:      		auto;
-    height:     		150px;
+    height:     		170px;
     padding: 			10px;
     border:     		1px solid white;
     box-shadow: 		5px 5px 15px #193C54;
     -webkit-box-shadow: 5px 5px 15px #193C54;
     -moz-box-shadow: 	5px 5px 15px #193C54;
+}
+
+.loader-iso {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display:block;
 }
 
 .loader-item {
@@ -42,7 +61,7 @@ button,input {
     overflow-y: scroll;
     overflow-x: hidden;
     width: 100%;
-    /*height: 600px;*/
+    padding-right: 15px;
 }
 
 .color-black {
@@ -169,7 +188,8 @@ button,input {
     top: 0;
     width: 230px;
     margin: 0;
-    padding: 0;
+    padding-left: 15px;
+    padding-right: 15px;
     list-style: none;
 }
 
@@ -238,14 +258,34 @@ button,input {
     }
 }
 
+#burnContainer {
+    padding-left: 70px;
+}
+
 /* FIX BOOTSTRAP */
+
 .sidebar-column {
     width: 240px !important;
 }
 
 /* PROGRESS BAR */
-.progress-flash-bar {
-    margin-right: 8px !important;
+
+#flashDriveProgressBar {
+    margin-right: 10px;
+}
+
+.progress {
+    margin-top: 10px;
+}
+
+.loader-type-select {
+    width: 75%;
+    height: 35px;
+    display: inline;
+}
+
+#flashDriveSizeBarGreen {
+    width: 0;
 }
 
 #menu-toggle {

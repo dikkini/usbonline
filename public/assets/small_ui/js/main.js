@@ -1,3 +1,4 @@
+$( document ).tooltip();
 $(document).ready(function() {
 	'use strict';
 
@@ -115,26 +116,6 @@ $(document).ready(function() {
 		calcFlashDriveSize(value);
 	});
 
-	//$body.on('click', '#burnTypeSelectUL li a', function() {
-	//	var chosenType = $(this).text();
-	//	$burnTypeSelect.html(chosenType + " <span class='caret'></span>");
-	//
-	//	var allLoaderSize = 0;
-	//	$(".loader-item").each(function() {
-	//		var loaderId = $(this).data("loader-id");
-	//		var loaderISO = $('.loader-iso[data-loader-id="' + loaderId + '"]');
-	//		allLoaderSize += loaderISO.data("loader-iso-size");
-	//	});
-	//
-	//	var value = allLoaderSize;
-	//	var filledSpace = getFlashDriveFilledSpace(selectedFlashDrive);
-	//	if (chosenType == MODE_ADD) {
-	//		value += filledSpace;
-	//	}
-	//	value = isoSizeToPerc(selectedFlashDrive, value);
-	//	calcFlashDriveSize(value);
-	//});
-
 	$body.on("click", "button,input", function(){
 		var border = $(this).css('border-color');
 		// fucking IE
@@ -233,13 +214,8 @@ $(document).ready(function() {
 				calcFlashDriveSize(currentWidth);
 			}
 
-			$loader.fadeOut(200, function() {
+			$loader.fadeOut(100, function() {
 				$(this).remove();
-			});
-
-			ALL_LOADERS_COUNT -= 1;
-
-			setTimeout(function() {
 				if (ALL_LOADERS_COUNT == 0) {
 					$loaderList.empty();
 				}
@@ -271,16 +247,39 @@ $(document).ready(function() {
 					$col.append($addLoaderBtn);
 					$row.append($col);
 					$loaderList.append($row);
+					$row.hide();
+					$row.fadeIn(200);
 				} else {
 					var $container = $loaderList.children().last();
 					$col.append($addLoaderBtn);
 					$container.append($col);
+					$addLoaderBtn.hide();
+					$addLoaderBtn.fadeIn(200);
 				}
-			}, 300);
+			});
+
+			ALL_LOADERS_COUNT -= 1;
 		}
 	});
 
+
+	$body.on("change", "select.loader-type-select", function() {
+		var loaderId = $(this).data("loader-id");
+		var iso = $('.loader-iso[data-loader-id="' + loaderId + '"]');
+		var isoSizePercent = iso.data("loader-iso-size-percent");
+		var currentWidth = getCurrentWidthInPercent();
+		if (isoSizePercent) {
+			iso.remove();
+			currentWidth -= isoSizePercent;
+		}
+		calcFlashDriveSize(currentWidth, true);
+	});
+
 	$body.on('click', '.loader-action-chooseiso', function() {
+		if (selectedFlashDrive == -1) {
+			$.growlUI('Error', 'Choose flash drive firstly!');
+			return;
+		}
 		var loaderId = $(this).data('loader-id');
 		var loaderSelect = $('select[data-loader-id="' + loaderId + '"]');
 		var loaderSelectSelected = loaderSelect.find(':selected');
@@ -315,6 +314,7 @@ $(document).ready(function() {
 					"data-loader-iso-path": path,
 					"data-loader-iso-size-percent": sizePerc,
 					"data-loader-iso-size": size,
+					"title": path + " " + sizeMb + " MiB",
 					text: path + " " + sizeMb + " MiB"
 				});
 
@@ -464,6 +464,7 @@ $(document).ready(function() {
 		loaders.find("input, button").not(".loader-action-minimize, .loader-action-linktoiso").attr("disabled", "disabled");
 		loaders.find("select").prop('disabled', 'disabled');
 	}
+
 	function disableInterface() {
 		$refreshDrivesBtn.attr("disabled", "disabled");
 		$flashDriveList.children().each(function() {
@@ -601,30 +602,29 @@ $(document).ready(function() {
 		var template =
 			_.template(
 				'<div data-loader-id="<%= loaderId %>" class="loader-item trian box-shadow">' +
-					'<span data-loader-id="<%= loaderId %>" class="loader-action-remcancel glyphicon glyphicon-remove" aria-hidden="true">' +
+					'<span data-loader-id="<%= loaderId %>" title="Delete or cancel burning" class="loader-action-remcancel glyphicon glyphicon-remove" aria-hidden="true">' +
 					'</span>' +
 					'<h4 data-loader-id="<%= loaderId %>" class="loader-status-value" data-code="0"> Waiting... </h4>' +
-					//'<div data-loader-id="<%= loaderId %>" class="loader-information input-group btn-group-sm" role="group">' +
-						'<select data-loader-id="<%= loaderId %>" class="loader-type-select form-control input-sm" style="width: 75%; height: 35px; display: inline;">' +
-							'<option value="windows7" data-code="0" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 7</option>' +
-							'<option value="windows8" data-code="1" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 8</option>' +
-							'<option value="windows10" data-code="2" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 10</option>' +
-							'<option value="kav" data-code="3" data-url="http://support.kaspersky.ru/4162">Kasperksy Rescue Disk</option>' +
-							'<option value="avg" data-code="4" data-url="http://www.avg.com/dk-en/download.prd-arl">AVG Rescue Disk</option>' +
-							'<option value="ubuntu" data-code="5" data-url="http://www.ubuntu.com/download/desktop">Ubuntu Linux</option>' +
-							'<option value="hiren" data-code="6" data-url="http://www.hiren.info/pages/bootcd">Hiren\'s Boot CD</option>' +
-							'<option value="parted" data-code="7" data-url="http://partedmagic.com/downloads/">Parted Magic</option>' +
-							'<option value="drweb" data-code="8" data-url="http://www.freedrweb.com/livedisk/">Dr. Web Live Disk</option>' +
-							'<option value="clonezilla" data-code="9" data-url="http://clonezilla.org/downloads.php">CloneZilla Live</option>' +
-						'</select>' +
-						'<button data-loader-id="<%= loaderId %>" type="button" class="loader-action-chooseiso btn btn-default">' +
-							'<span class="glyphicon glyphicon-search" aria-hidden="true"></span>' +
-						'</button>' +
-						'<button data-loader-id="<%= loaderId %>" type="button" class="loader-action-linktoiso btn btn-default">' +
-							'<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>' +
-						'</button>' +
-					//'</div>' +
-					'<div data-loader-id="<%= loaderId %>" class="progress" style="margin-top: 10px;">' +
+					'<select data-loader-id="<%= loaderId %>" class="loader-type-select form-control input-sm">' +
+						'<option value="windows7" data-code="0" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 7</option>' +
+						'<option value="windows8" data-code="1" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 8</option>' +
+						'<option value="windows10" data-code="2" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 10</option>' +
+						'<option value="kav" data-code="3" data-url="http://support.kaspersky.ru/4162">Kasperksy Rescue Disk</option>' +
+						'<option value="avg" data-code="4" data-url="http://www.avg.com/dk-en/download.prd-arl">AVG Rescue Disk</option>' +
+						'<option value="ubuntu" data-code="5" data-url="http://www.ubuntu.com/download/desktop">Ubuntu Linux</option>' +
+						'<option value="hiren" data-code="6" data-url="http://www.hiren.info/pages/bootcd">Hiren\'s Boot CD</option>' +
+						'<option value="parted" data-code="7" data-url="http://partedmagic.com/downloads/">Parted Magic</option>' +
+						'<option value="drweb" data-code="8" data-url="http://www.freedrweb.com/livedisk/">Dr. Web Live Disk</option>' +
+						'<option value="clonezilla" data-code="9" data-url="http://clonezilla.org/downloads.php">CloneZilla Live</option>' +
+					'</select>' +
+					'<button data-loader-id="<%= loaderId %>" title="Choose ISO file from filesystem" type="button" class="loader-action-chooseiso btn btn-default">' +
+						'<span class="glyphicon glyphicon-search" aria-hidden="true"></span>' +
+					'</button>' +
+					'<button data-loader-id="<%= loaderId %>" title="Open site of chosen loader in a new tab" type="button" class="loader-action-linktoiso btn btn-default">' +
+						'<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>' +
+					'</button>' +
+					'<div data-loader-id="<%= loaderId %>" class="loader-information"></div>' +
+					'<div data-loader-id="<%= loaderId %>" class="progress">' +
 						'<div data-loader-id="<%= loaderId %>" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">' +
 							'0%' +
 						'</div>' +
