@@ -72,18 +72,21 @@ $(document).ready(function() {
 		return loaderCodes;
 	}
 
+	var buffer = 20; //scroll bar buffer
+
+	function pageY(elem) {
+		return elem.offsetParent ? (elem.offsetTop + pageY(elem.offsetParent)) : elem.offsetTop;
+	}
+
+	function resizeIframe() {
+		var height = document.documentElement.clientHeight;
+		height -= pageY(document.getElementById('smallAppIFrame'))+ buffer ;
+		height = (height < 0) ? 0 : height;
+		document.getElementById('smallAppIFrame').style.height = height + 'px';
+	}
+
 	$('body').on('click', "#debug", function() {
-		alert("startApp");
-		$.blockUI();
-		var content = $("#page-content");
-		content.empty();
-		content.removeClass("container");
-
-		var iframe = '<iframe id="smallAppIFrame" width="100%" height="90%" scrolling="no" frameborder="no" ' +
-				'src="http://localhost:1792"></iframe>';
-		content.append(iframe);
-
-		$.unblockUI();
+		startApp('1792');
 	});
 
 	function startApp(port) {
@@ -96,6 +99,15 @@ $(document).ready(function() {
 				'src="http://localhost:' + port + '"></iframe>';
 
 		content.append(iframe);
+
+		// .onload doesn't work with IE8 and older.
+		if (iframe.attachEvent) {
+			iframe.attachEvent("onload", resizeIframe);
+		} else {
+			iframe.onload=resizeIframe;
+		}
+
+		window.onresize = resizeIframe;
 
 		$.unblockUI();
 	}

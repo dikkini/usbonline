@@ -1,4 +1,3 @@
-$( document ).tooltip();
 $(document).ready(function() {
 	'use strict';
 
@@ -30,6 +29,7 @@ $(document).ready(function() {
 
 	var isAppRuning = $("#isAppRunning").val();
 	if (isAppRuning) {
+		$( document ).tooltip();
 		var successCb = function(response) {
 			SESSIONID = response.SessionUID;
 			var successCb = function (response) {
@@ -366,9 +366,7 @@ $(document).ready(function() {
 			},
 			async: true,
 			success: function (response) {
-				if (response.success) {
-					$.growlUI('Success', 'Thank you!');
-				}
+				alert("Thank you! You opinion very important to us!");
 			},
 			error: function (response) {
 			}

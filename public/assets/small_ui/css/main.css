@@ -9,6 +9,10 @@ button,input {
     width: 100%;
 }
 
+#feedback-email,#feedback-text {
+    padding-left: 20px;
+}
+
 #showFlashDrives {
     cursor: pointer;
 }

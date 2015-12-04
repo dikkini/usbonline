@@ -1,5 +1,9 @@
-#refreshFlashDrives {
-    width: 96% !important;
+#refreshFlashDrives,#feedbackModal {
+    width: 100% !important;
+}
+
+#feedbackModal {
+    margin-left: -5px;
 }
 
 #addCross {

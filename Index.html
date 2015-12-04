@@ -65,7 +65,10 @@
 		<ul class="sidebar-nav">
 			<li>
 				<h4 class="color-white">Flash Drive Menu</h4>
-				<button id="refreshFlashDrives" title="Refresh flash drives" class="btn btn-default" data-toggle="tooltip" data-placement="right" data-original-title="Refresh flash drives" type="button">
+				<button id="feedbackModal" title="Show feedback window" class="btn btn-default" data-toggle="modal" data-target="#feedback-modal">
+					Feedback
+				</button>
+				<button id="refreshFlashDrives" title="Refresh flash drives" class="btn btn-default" type="button">
 					<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 				</button>
 				<div class="panel panel-default">
@@ -92,6 +95,7 @@
 					<div class="col-lg-12 sidebar-column">
 						<button id="burnBtn" title="Burn all loaders to chosen flash drive" type="button" class="btn btn-danger btn-circle btn-lg">Burn</button>
 					</div>
+				</div>
 			</li>
 		</ul>
 	</div>
