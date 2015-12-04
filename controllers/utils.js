@@ -53,6 +53,7 @@ router.post('/feedback', function(req, res, next) {
 			response.success = false;
 			response.errorMessage = err;
 		}
+		log.debug("User feedback successfully added!");
 		return res.end(JSON.stringify(response));
 	});
 });
@@ -69,15 +70,16 @@ router.post('/feedback_win', function(req, res, next) {
 		"success": true
 	};
 
-	log.debug("Add user feedback to database");
+	log.debug("Add user feedback from portable application to database");
 	db.query(config.get("sql:add_user_feedback"), [feedback_email, feedback, true, sessionid], function (err, result) {
 		log.debug(result);
 		log.error(err);
-		log.error("Add user error: ", err);
+		log.error("Add user feedback error: ", err);
 		if (err) {
 			response.success = false;
 			response.errorMessage = err;
 		}
+		log.debug("User feedback from portable application successfully added!");
 		return res.end(JSON.stringify(response));
 	});
 });
