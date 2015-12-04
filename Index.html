@@ -7,9 +7,9 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 
-	<!-- <link rel="stylesheet" href="http://bootline.net/assets/small_ui/css/main.css"> -->
+	 <link rel="stylesheet" href="http://bootline.net/assets/small_ui/css/main.css">
 	<!-- <link rel="stylesheet" href="http://glhf.zapto.org:1337/assets/small_ui/css/main.css"> -->
-	<link rel="stylesheet" href="http://172.20.5.30:1337/assets/small_ui/css/main.css">
+	<!--<link rel="stylesheet" href="http://172.20.5.30:1337/assets/small_ui/css/main.css">-->
 
 	<link rel="stylesheet" href="http://bootline.net/assets/bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -20,12 +20,10 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-	<!--
 	<script src="http://bootline.net/assets/small_ui/js/main.js"></script>
 	<script src="http://bootline.net/assets/small_ui/js/dll.js"></script>
 	<script src="http://bootline.net/assets/small_ui/js/flashdrive.js"></script>
 	<script src="http://bootline.net/assets/small_ui/js/utils.js"></script>
-	-->
 
 	<!--
         <script src="http://glhf.zapto.org:1337/assets/small_ui/js/main.js"></script>
@@ -35,10 +33,10 @@
     -->
 
 
-	<script src="http://172.20.5.30:1337/assets/small_ui/js/main.js"></script>
-	<script src="http://172.20.5.30:1337/assets/small_ui/js/dll.js"></script>
-	<script src="http://172.20.5.30:1337/assets/small_ui/js/flashdrive.js"></script>
-	<script src="http://172.20.5.30:1337/assets/small_ui/js/utils.js"></script>
+	<!--<script src="http://172.20.5.30:1337/assets/small_ui/js/main.js"></script>-->
+	<!--<script src="http://172.20.5.30:1337/assets/small_ui/js/dll.js"></script>-->
+	<!--<script src="http://172.20.5.30:1337/assets/small_ui/js/flashdrive.js"></script>-->
+	<!--<script src="http://172.20.5.30:1337/assets/small_ui/js/utils.js"></script>-->
 
 
 	<!-- <link rel="stylesheet" href="http://glhf.zapto.org:1337/assets/small_ui/css/main_not_ie.css"> -->
@@ -46,7 +44,7 @@
 	<!-- <link rel="stylesheet" href="http://bootline.net/assets/small_ui/css/main_not_ie.css"> -->
 
 	<!--[if !IE]><!-->
-	<link rel="stylesheet" href="http://172.20.5.30:1337/assets/small_ui/css/main_not_ie.css">
+		<link rel="stylesheet" href="http://bootline.net/assets/small_ui/css/main_not_ie.css">
 	<!--<![endif]-->
 
 	<!-- <link rel="stylesheet" href="http://glhf.zapto.org:1337/assets/small_ui/css/main_ie_lte_9.css"> -->
@@ -54,7 +52,7 @@
 	<!-- <link rel="stylesheet" href="http://bootline.net/assets/small_ui/css/main_ie_lte_9.css"> -->
 
 	<!--[if IE]>
-	<link rel="stylesheet" href="http://172.20.5.30:1337/assets/small_ui/css/main_ie_lte_9.css">
+		 <link rel="stylesheet" href="http://bootline.net/assets/small_ui/css/main_ie_lte_9.css">
 	<![endif]-->
 
 	<title>USB Online</title>
@@ -65,6 +63,7 @@
 		<ul class="sidebar-nav">
 			<li>
 				<h4 class="color-white">Flash Drive Menu</h4>
+				<input type="hidden">
 				<button id="feedbackModal" title="Show feedback window" class="btn btn-default" data-toggle="modal" data-target="#feedback-modal">
 					Feedback
 				</button>
@@ -128,9 +127,11 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
+					<label>Email</label>
 					<input id="feedback-email" class="form-control" placeholder="Enter your email...">
 				</div>
 				<div class="row">
+					<label>Text</label>
 					<textarea id="feedback-text" class="form-control" placeholder="Enter your feedback text here..."></textarea>
 				</div>
 			</div>
