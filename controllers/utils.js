@@ -105,7 +105,7 @@ router.post('/userinfo', function(req, res, next) {
 
 	log.debug("Save userinfo to database");
 	db.query(config.get("sql:save_user_info"), [sessionid, startdate, appcodename, appname, appversion, language,
-		platform, useragent, javaenabled, cookiesenabled, browserversion, false], function (err, result) {
+		platform, useragent, javaenabled, cookiesenabled, browserversion], function (err, result) {
 
 		log.debug(result);
 		log.error(err);
