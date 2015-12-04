@@ -8,6 +8,6 @@
   },
   "sql": {
     "save_user_info": "INSERT INTO userinfo (sessionid, startdate, appcodename, appname, appversion, language, platform, useragent, javaenabled, cookiesenabled, browserversion) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11);",
-    "add_user_feedback": "UPDATE userinfo SET feedback_email = $1, feedback = $2 WHERE sessionid = $3"
+    "add_user_feedback": "UPDATE userinfo SET feedback_email = $1, feedback = $2, winapp = $3 WHERE sessionid = $4"
   }
 }
