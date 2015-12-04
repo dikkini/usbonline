@@ -282,8 +282,13 @@ button,input {
     margin-top: 10px;
 }
 
-.loader-type-select {
-    width: 75%;
+.loader-interface {
+    width: 100%;
+    display: inline;
+}
+
+select.loader-type-select {
+    width: 89%;
     height: 35px;
     display: inline;
 }

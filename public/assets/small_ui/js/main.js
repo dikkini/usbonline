@@ -11,10 +11,6 @@ $(document).ready(function() {
 	var $refreshDrivesBtn = $("#refreshFlashDrives");
 	var $addLoaderBtn = $("#addLoaderBtn");
 
-	var MODE_NONE = "Type";
-	var MODE_CURRENT = MODE_NONE;
-	var MODE_NEW = "New";
-	var MODE_ADD = "Add";
 	var ISWORKING = false;
 	var dontBlock = false;
 
@@ -608,6 +604,7 @@ $(document).ready(function() {
 					'<span data-loader-id="<%= loaderId %>" title="Delete or cancel burning" class="loader-action-remcancel glyphicon glyphicon-remove" aria-hidden="true">' +
 					'</span>' +
 					'<h4 data-loader-id="<%= loaderId %>" class="loader-status-value" data-code="0"> Waiting... </h4>' +
+					'<div class="loader-interface">' +
 					'<select data-loader-id="<%= loaderId %>" class="loader-type-select form-control input-sm">' +
 						'<option value="windows7" data-code="0" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 7</option>' +
 						'<option value="windows8" data-code="1" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 8</option>' +
@@ -626,9 +623,10 @@ $(document).ready(function() {
 					'<button data-loader-id="<%= loaderId %>" title="Open site of chosen loader in a new tab" type="button" class="loader-action-linktoiso btn btn-default">' +
 						'<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>' +
 					'</button>' +
+					'</div>' +
 					'<div data-loader-id="<%= loaderId %>" class="loader-information"></div>' +
 					'<div data-loader-id="<%= loaderId %>" class="progress">' +
-						'<div data-loader-id="<%= loaderId %>" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">' +
+						'<div data-loader-id="<%= loaderId %>" class="progress-bar burning-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">' +
 							'0%' +
 						'</div>' +
 					'</div>' +
