@@ -288,7 +288,7 @@ button,input {
 }
 
 select.loader-type-select {
-    width: 89%;
+    width: 75%;
     height: 35px;
     display: inline;
 }
