@@ -2,10 +2,6 @@
     width: 100% !important;
 }
 
-#feedbackModal {
-    margin-left: -5px;
-}
-
 #addCross {
     width:100px; /*width of your image*/
     height:100px; /*height of your image*/
