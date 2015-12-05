@@ -601,11 +601,11 @@ $(document).ready(function() {
 		var template =
 			_.template(
 				'<div data-loader-id="<%= loaderId %>" class="loader-item trian box-shadow">' +
-					'<span data-loader-id="<%= loaderId %>" title="Delete or cancel burning" class="loader-action-remcancel glyphicon glyphicon-remove" aria-hidden="true">' +
+					'<span ' + ((ALL_LOADERS_COUNT == 0) ? 'id="lar"' : '') + ' data-loader-id="<%= loaderId %>" title="Delete or cancel burning" class="loader-action-remcancel glyphicon glyphicon-remove" aria-hidden="true">' +
 					'</span>' +
-					'<h4 data-loader-id="<%= loaderId %>" class="loader-status-value" data-code="0"> Waiting... </h4>' +
+					'<h4 ' + ((ALL_LOADERS_COUNT == 0) ? 'id="lsv"' : '') + ' data-loader-id="<%= loaderId %>" class="loader-status-value" data-code="0"> Waiting... </h4>' +
 					'<div class="loader-interface">' +
-					'<select data-loader-id="<%= loaderId %>" class="loader-type-select form-control input-sm">' +
+					'<select ' + ((ALL_LOADERS_COUNT == 0) ? 'id="lts"' : '') + ' data-loader-id="<%= loaderId %>" class="loader-type-select form-control input-sm">' +
 						'<option value="windows7" data-code="0" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 7</option>' +
 						'<option value="windows8" data-code="1" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 8</option>' +
 						'<option value="windows10" data-code="2" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 10</option>' +
@@ -617,16 +617,16 @@ $(document).ready(function() {
 						'<option value="drweb" data-code="8" data-url="http://www.freedrweb.com/livedisk/">Dr. Web Live Disk</option>' +
 						'<option value="clonezilla" data-code="9" data-url="http://clonezilla.org/downloads.php">CloneZilla Live</option>' +
 					'</select>' +
-					'<button data-loader-id="<%= loaderId %>" title="Choose ISO file from filesystem" type="button" class="loader-action-chooseiso btn btn-default">' +
+					'<button ' + ((ALL_LOADERS_COUNT == 0) ? 'id="lac"' : '') + ' data-loader-id="<%= loaderId %>" title="Choose ISO file from filesystem" type="button" class="loader-action-chooseiso btn btn-default">' +
 						'<span class="glyphicon glyphicon-search" aria-hidden="true"></span>' +
 					'</button>' +
-					'<button data-loader-id="<%= loaderId %>" title="Open site of chosen loader in a new tab" type="button" class="loader-action-linktoiso btn btn-default">' +
+					'<button ' + ((ALL_LOADERS_COUNT == 0) ? 'id="lal"' : '') + ' data-loader-id="<%= loaderId %>" title="Open site of chosen loader in a new tab" type="button" class="loader-action-linktoiso btn btn-default">' +
 						'<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>' +
 					'</button>' +
 					'</div>' +
-					'<div data-loader-id="<%= loaderId %>" class="loader-information"></div>' +
+					'<div ' + ((ALL_LOADERS_COUNT == 0) ? 'id="linf"' : '') + ' data-loader-id="<%= loaderId %>" class="loader-information"></div>' +
 					'<div data-loader-id="<%= loaderId %>" class="progress">' +
-						'<div data-loader-id="<%= loaderId %>" class="progress-bar burning-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">' +
+						'<div ' + ((ALL_LOADERS_COUNT == 0) ? 'id="burnprogr"' : '') + ' data-loader-id="<%= loaderId %>" class="progress-bar burning-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">' +
 							'0%' +
 						'</div>' +
 					'</div>' +

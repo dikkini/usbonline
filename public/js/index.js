@@ -209,31 +209,30 @@ $(document).ready(function() {
 		ALL_LOADERS_COUNT += 1;
 		var template =
 				_.template(
-						'<div data-loader-id="<%= loaderId %>" class="loader-item trian box-shadow">' +
-						'<span data-loader-id="<%= loaderId %>" title="Delete or cancel burning" class="loader-action-remcancel glyphicon glyphicon-remove" aria-hidden="true">' +
-						'</span>' +
+					'<div data-loader-id="<%= loaderId %>" class="loader-item trian box-shadow">' +
+						'<span data-loader-id="<%= loaderId %>" title="Delete or cancel burning" class="loader-action-remcancel glyphicon glyphicon-remove" aria-hidden="true"></span>' +
 						'<h4 data-loader-id="<%= loaderId %>" class="loader-status-value" data-code="0"> Waiting... </h4>' +
 						'<div class="loader-interface">' +
-						'<select data-loader-id="<%= loaderId %>" class="loader-type-select form-control input-sm">' +
-						'<option value="windows7" data-code="0" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 7</option>' +
-						'<option value="windows8" data-code="1" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 8</option>' +
-						'<option value="windows10" data-code="2" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 10</option>' +
-						'<option value="kav" data-code="3" data-url="http://support.kaspersky.ru/4162">Kasperksy Rescue Disk</option>' +
-						'<option value="avg" data-code="4" data-url="http://www.avg.com/dk-en/download.prd-arl">AVG Rescue Disk</option>' +
-						'<option value="ubuntu" data-code="5" data-url="http://www.ubuntu.com/download/desktop">Ubuntu Linux</option>' +
-						'<option value="hiren" data-code="6" data-url="http://www.hiren.info/pages/bootcd">Hiren\'s Boot CD</option>' +
-						'<option value="parted" data-code="7" data-url="http://partedmagic.com/downloads/">Parted Magic</option>' +
-						'<option value="drweb" data-code="8" data-url="http://www.freedrweb.com/livedisk/">Dr. Web Live Disk</option>' +
-						'<option value="clonezilla" data-code="9" data-url="http://clonezilla.org/downloads.php">CloneZilla Live</option>' +
-						'</select>' +
+							'<select data-loader-id="<%= loaderId %>" class="loader-type-select form-control input-sm">' +
+								'<option value="windows7" data-code="0" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 7</option>' +
+								'<option value="windows8" data-code="1" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 8</option>' +
+								'<option value="windows10" data-code="2" data-url="https://msdn.microsoft.com/ru-ru/subscriptions/downloads/hh442898.aspx">Windows 10</option>' +
+								'<option value="kav" data-code="3" data-url="http://support.kaspersky.ru/4162">Kasperksy Rescue Disk</option>' +
+								'<option value="avg" data-code="4" data-url="http://www.avg.com/dk-en/download.prd-arl">AVG Rescue Disk</option>' +
+								'<option value="ubuntu" data-code="5" data-url="http://www.ubuntu.com/download/desktop">Ubuntu Linux</option>' +
+								'<option value="hiren" data-code="6" data-url="http://www.hiren.info/pages/bootcd">Hiren\'s Boot CD</option>' +
+								'<option value="parted" data-code="7" data-url="http://partedmagic.com/downloads/">Parted Magic</option>' +
+								'<option value="drweb" data-code="8" data-url="http://www.freedrweb.com/livedisk/">Dr. Web Live Disk</option>' +
+								'<option value="clonezilla" data-code="9" data-url="http://clonezilla.org/downloads.php">CloneZilla Live</option>' +
+							'</select>' +
 						'</div>' +
 						'<div data-loader-id="<%= loaderId %>" class="loader-information"></div>' +
 						'<div data-loader-id="<%= loaderId %>" class="progress">' +
-						'<div data-loader-id="<%= loaderId %>" class="progress-bar burning-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">' +
-						'0%' +
+							'<div data-loader-id="<%= loaderId %>" class="progress-bar burning-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">' +
+								'0%' +
+							'</div>' +
 						'</div>' +
-						'</div>' +
-						'</div>');
+					'</div>');
 
 		return template({loaderId:loaderId});
 	}

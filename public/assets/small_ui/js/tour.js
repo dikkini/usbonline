@@ -25,19 +25,27 @@ function runTour() {
 		placement: 'right center'
 	}, {
 		content: '<p>Step 6. Choose loader type which you want to burn onto your chosen flash drive</p>',
-		element: '.loader-type-select',
+		element: '#lts',
 		placement: 'right center'
 	}, {
 		content: '<p>Step 7. You have to choose ISO file, if you don\'t have it, you can go to loader type website by pressing this button and download it  </p>',
-		element: '.glyphicon-new-window',
+		element: '#lal',
 		placement: 'right center'
 	}, {
 		content: '<p>Step 8. Choose ISO file from your filesystem </p>',
-		element: '.loader-action-chooseiso',
+		element: '#lac',
 		placement: 'right center'
 	}, {
 		content: '<p>Here will be progress of burning loaders to flash drive</p>',
-		element: '.burning-progress',
+		element: '#burnprogr',
+		placement: 'right center'
+	}, {
+		content: '<p>This is showing status of burning</p>',
+		element: '#burnprogr',
+		placement: 'right center'
+	}, {
+		content: '<p>If you want to delete loader or cancel burning press this button</p>',
+		element: '#lar',
 		placement: 'right center'
 	}, {
 		content: '<p>Step 9. Now, you can burn this loader to flash drive by pressing this button or add more loaders. Good luck!</p>',
