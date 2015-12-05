@@ -88,10 +88,12 @@ $(document).ready(function() {
 		content.empty();
 		content.removeClass("container");
 
-		var iframe = '<iframe id="smallAppIFrame" width="100%" height="90%" scrolling="no" frameborder="no" ' +
+		var iframe = '<iframe id="smallAppIFrame" width="100%" height="600px" scrolling="no" frameborder="no" ' +
 				'src="http://localhost:' + port + '"></iframe>';
 
 		content.append(iframe);
+
+		resizeIframe();
 
 		// .onload doesn't work with IE8 and older.
 		if (iframe.attachEvent) {
