@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	var serverBaseUrl = document.URL
 		, sessionId = ''
-		, canReload = false
+		, canReload = true
 		, launchApp = false
 		, isClickOnce = false;
 
@@ -29,7 +29,6 @@ $(document).ready(function() {
 	});
 
 	socket.on('launchapp', function (data) {
-		alert("launchapp");
 		startApp(data.port);
 	});
 
@@ -44,7 +43,6 @@ $(document).ready(function() {
 			window.location.href = href;
 
 			setTimeout(function() {
-				alert("timeout canReload = false");
 				canReload = false;
 			}, 3000)
 		}
@@ -68,7 +66,6 @@ $(document).ready(function() {
 			loaderCodes = loaderCodes.substring(0, loaderCodes.length - 1);
 		}
 
-		alert(loaderCodes);
 		return loaderCodes;
 	}
 
@@ -84,10 +81,6 @@ $(document).ready(function() {
 		height = (height < 0) ? 0 : height;
 		document.getElementById('smallAppIFrame').style.height = height + 'px';
 	}
-
-	$('body').on('click', "#debug", function() {
-		startApp('1792');
-	});
 
 	function startApp(port) {
 		$.blockUI();
@@ -110,12 +103,6 @@ $(document).ready(function() {
 		window.onresize = resizeIframe;
 
 		$.unblockUI();
-	}
-
-	function reloadIFrame() {
-		$('#smallAppIFrame').attr('src', function ( i, val ) {
-			return val;
-		});
 	}
 
 	function isClientBrowserIE() {
