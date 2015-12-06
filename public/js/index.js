@@ -13,6 +13,7 @@ $(document).ready(function() {
 	var isIE = isClientBrowserIE();
 	if (isIE) {
 		isClickOnce = true;
+		$appUrl.hide();
 	} else {
 		$appUrl.attr("href", "/download/application");
 	}
