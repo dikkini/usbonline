@@ -376,10 +376,11 @@ $(document).ready(function() {
 			if (!drives) {
 				$refreshDrivesBtn.removeAttr("disabled");
 				$addLoaderBtn.removeAttr("disabled");
-				var html = "<a href='#' class='list-group-item flash-drive-item' disabled='disabled'>" +
+				var html = "<a href='#' class='list-group-item flash-drive-item disabled' disabled='disabled'>" +
 								"<h4 class='list-group-item-heading'>Insert flash drive to your computer</h4>" +
 							"</a>";
 				fdList.append(html);
+				enableInterface();
 				$.unblockUI();
 				return;
 			}
