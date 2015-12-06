@@ -5,7 +5,9 @@ button,input {
     outline: none !important;
 }
 
-#refreshFlashDrives,#feedbackModal {
+#refreshFlashDrives,
+#feedbackModal,
+#tourBtn {
     width: 100%;
 }
 
