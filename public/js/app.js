@@ -84,11 +84,16 @@ $(document).ready(function() {
 		document.getElementById('smallAppIFrame').style.height = height + 'px';
 	}
 
+	$body.on("click", "#debug", function() {
+		startApp("1792");
+	});
+
 	function startApp(port) {
 		$.blockUI();
 		var content = $("#page-content");
 		content.empty();
-
+		content.removeClass("row");
+		
 		var iframe = '<iframe id="smallAppIFrame" width="100%" height="600px" scrolling="no" frameborder="no" ' +
 				'src="http://localhost:' + port + '"></iframe>';
 
