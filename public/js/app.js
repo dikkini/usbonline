@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	var serverBaseUrl = document.URL
+	var serverBaseUrl = window.location.protocol + "//" + window.location.host
 		, sessionId = ''
 		, canReload = true
 		, launchApp = false
