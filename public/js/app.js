@@ -86,9 +86,8 @@ $(document).ready(function() {
 
 	function startApp(port) {
 		$.blockUI();
-		var content = $("#page-content");
+		var content = $("section#app");
 		content.empty();
-		content.removeClass("container");
 
 		var iframe = '<iframe id="smallAppIFrame" width="100%" height="600px" scrolling="no" frameborder="no" ' +
 				'src="http://localhost:' + port + '"></iframe>';
