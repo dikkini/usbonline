@@ -1,0 +1,76 @@
+a {
+  color: #00B7FF;
+}
+
+.white {
+  color: #f8ffff;
+}
+
+.navbar-brand {
+  padding-left: 47px !important;
+}
+
+.loader-row {
+  padding-top: 25px;
+}
+
+.loader-action-remcancel {
+  width: 15px;
+  height: 15px;
+  margin-top: -23px;
+  margin-right: -12px;
+  display: block;
+  float: right;
+  background-color: rgba(0, 0, 0, 0.0001);
+  color: red;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.trian {
+  width:      		auto;
+  height:     		170px;
+  padding: 			10px;
+  border:     		1px solid white;
+  box-shadow: 		5px 5px 15px #193C54;
+  -webkit-box-shadow: 5px 5px 15px #193C54;
+  -moz-box-shadow: 	5px 5px 15px #193C54;
+}
+
+.loader-iso {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display:block;
+}
+
+.loader-item {
+  padding-top: 20px !important;
+}
+
+#loader-list {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  padding-right: 15px;
+}
+
+#flashDriveProgressBar {
+  margin-right: 10px;
+}
+
+.progress {
+  margin-top: 10px;
+}
+
+.loader-interface {
+  width: 100%;
+  display: inline;
+}
+
+select.loader-type-select {
+  width: 75%;
+  height: 35px;
+  display: inline;
+}

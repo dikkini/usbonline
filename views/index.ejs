@@ -12,47 +12,44 @@
 <html class="no-js" lang="en">
 <!--<![endif]-->
 <head>
-  <title>BootLine</title>
-  <meta charset="UTF-8">
-  <% include partials/head.ejs %>
-  <script src="/js/index.js"></script>
-  <script src="/assets/small_ui/js/main.js"></script>
-  <link rel="stylesheet" href="/assets/small_ui/css/normalize.css">
-  <link rel="stylesheet" href="/assets/small_ui/css/main.css">
+	<title>BootLine</title>
+	<meta charset="UTF-8">
+
+	<% include partials/head.ejs %>
+
+	<script src="/js/index.js"></script>
 </head>
 
 <body>
-<% include partials/nav.ejs %>
+<nav id="nav-wrap">
+	<ul id="nav" class="nav">
+		<li><a href="/" class="active">Home</a></li>
+		<li><a href="/app">Application</a></li>
+		<li><a href="/about">Contact</a></li>
+	</ul>
+</nav>
 
-<div id="page-content" class="container">
-  <div class="row">
-    <div id="left-content" class="col-lg-3">
-      <p>Два простых шага чтобы начать пользоваться приложением:</p>
-      <p>
-        1. Запустить приложение <a id="application-url" href="/clickonce/ClickLine.application">кликнув по ссылке</a>
-      </p>
-      <p>
-        2. Обновить страницу если она сама не обновилась чтобы появился интерфейс приложения
-      </p>
-      <hr>
-      <p>Если вы видите ошибку, </p><img src="/img/iframe_error.png" height="50px"/>
+<header id="header">
+	<div class="banner">
+		<div class="banner-text">
+			<h1 class="responsive-headline">Welcome to BootLine.net</h1>
 
-      <p>а не интерфейс программы, то вам необходимо запустить сервер после чего обновить страницу</p>
-    </div>
-    <div id="right-content" class="col-lg-9">
-      <div class="row" style="padding-bottom: 30px;">
-        <button id="launchApp" class="btn btn-primary col-lg-12">Continue</button>
-      </div>
-      <div id="loader-list" class="list-group" style="padding: 0 !important;">
-        <div id="addLoaderBtn" class="list-group-item">
-          <center>
-            <img width="50px" src="/assets/small_ui/img/btn_plus.png"/>
-          </center>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+			<ul class="social">
+				<li><a target="_blank" href="https://www.facebook.com/?q=#/dikkini"><i class="fa fa-facebook"></i></a></li>
+				<li><a target="_blank" href="https://twitter.com/dikkini"><i class="fa fa-twitter"></i></a></li>
+				<li><a target="_blank" href="http://vk.com/dikkini"><i class="fa fa-vk"></i></a></li>
+			</ul>
 
+			<p class="scrolldown">
+				<a href="#howto" class="smoothscroll">
+					<i class="icon-down-circle color-black"></i>
+				</a>
+			</p>
+		</div>
+	</div>
+</header>
+<section id="howto">
+
+</section>
 </body>
 </html>

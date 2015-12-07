@@ -1,80 +1,159 @@
+@import url("../assets/fonts/fonts.css");
+@import url("../assets/fonts/fontello/css/fontello.css");
+@import url("../assets/fonts/font-awesome/css/font-awesome.min.css");
+
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 50px;
+    background: transparent;
 }
 
-a {
-  color: #00B7FF;
+html, body {
+    height: 100%;
 }
 
-.white {
-  color: #f8ffff;
+/**
+		TYPOGRAPHY
+**/
+
+h1, h2, h3, h4, h5, h6 {
+    color: #313131;
+    font-family: 'opensans-bold', sans-serif;
+    font-weight: normal;
+}
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { font-weight: inherit; }
+h1 { font-size: 38px; line-height: 42px; margin-bottom: 12px; letter-spacing: -1px; }
+
+p { margin: 0 0 30px 0; }
+
+h1, h2, h3, h4, h5, h6 {
+    color: #313131;
+    font-family: 'opensans-bold', sans-serif;
+    font-weight: normal;
+}
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { font-weight: inherit; }
+h1 { font-size: 38px; line-height: 42px; margin-bottom: 12px; letter-spacing: -1px; }
+h2 { font-size: 28px; line-height: 36px; margin-bottom: 6px; }
+h3 { font-size: 22px; line-height: 30px; margin-bottom: 12px; }
+h4 { font-size: 20px; line-height: 30px; margin-bottom: 6px; }
+h5 { font-size: 18px; line-height: 30px; }
+h6 { font-size: 14px; line-height: 30px; }
+
+/*
+		HEADER
+*/
+header {
+    position: relative;
+    height: 800px;
+    min-height: 500px;
+    width: 100%;
+    /*background: #161415 url(../img/header-background.png) no-repeat top center;*/
+    background-color: white;
+    background-size: cover !important;
+    -webkit-background-size: cover !important;
+    text-align: center;
+    overflow: auto;
 }
 
-.navbar-brand {
-  padding-left: 47px !important;
+/* vertically center banner section */
+header:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 90%;
 }
 
-.loader-row {
-  padding-top: 25px;
+header .banner {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 auto;
+    width: 85%;
+    padding-bottom: 30px;
+    text-align: center;
 }
 
-.loader-action-remcancel {
-  width: 15px;
-  height: 15px;
-  margin-top: -23px;
-  margin-right: -12px;
-  display: block;
-  float: right;
-  background-color: rgba(0, 0, 0, 0.0001);
-  color: red;
-  text-align: center;
-  border-radius: 50%;
-  cursor: pointer;
+header .banner-text {
+    width: 100%;
 }
 
-.trian {
-  width:      		auto;
-  height:     		170px;
-  padding: 			10px;
-  border:     		1px solid white;
-  box-shadow: 		5px 5px 15px #193C54;
-  -webkit-box-shadow: 5px 5px 15px #193C54;
-  -moz-box-shadow: 	5px 5px 15px #193C54;
+header .banner-text h1 {
+    font: 90px/1.1em 'opensans-bold', sans-serif;
+    color: #193C54;
+    letter-spacing: -2px;
+    margin: 0 auto 18px auto;
+    text-shadow: 0px 1px 3px rgba(0, 0, 0, .8);
 }
 
-.loader-iso {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display:block;
+header .banner-text h3 {
+    font: 18px/1.9em 'librebaskerville-regular', serif;
+    color: #A8A8A8;
+    margin: 0 auto;
+    width: 70%;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, .5);
 }
 
-.loader-item {
-  padding-top: 20px !important;
+header .banner-text h3 span,
+header .banner-text h3 a {
+    color: #fff;
 }
 
-#loader-list {
-  overflow-y: scroll;
-  overflow-x: hidden;
-  width: 100%;
-  padding-right: 15px;
+header .banner-text hr {
+    width: 60%;
+    margin: 18px auto 24px auto;
+    border-color: #2F2D2E;
+    border-color: rgba(150, 150, 150, .1);
 }
 
-#flashDriveProgressBar {
-  margin-right: 10px;
+section {
+    padding-top: 48px;
+    margin-bottom: 48px;
+    font-size: 14px;
+    position: relative;
 }
 
-.progress {
-  margin-top: 10px;
+
+/*
+	SOCIAL LINKS
+*/
+.social {
+    margin: 24px 0;
+    padding: 0;
+    font-size: 30px;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, .8);
 }
 
-.loader-interface {
-  width: 100%;
-  display: inline;
+.social li {
+    display: inline-block;
+    margin: 0 15px;
+    padding: 0;
 }
 
-select.loader-type-select {
-  width: 75%;
-  height: 35px;
-  display: inline;
+.social li a {
+    color: white;
+}
+
+.social li a:hover {
+    color: #193C54;
+}
+
+.scrolldown {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    margin-left: -29px;
+    color: #193C54;
+    display: block;
+    height: 42px;
+    width: 42px;
+    font-size: 42px;
+    line-height: 42px;
+    border-radius: 100%;
+
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.scrolldown a:hover {
+    color: black;
 }

@@ -64,7 +64,7 @@ button,input {
 }
 
 #loader-list {
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     width: 100%;
     padding-right: 15px;
