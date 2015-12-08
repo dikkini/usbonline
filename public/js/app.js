@@ -93,7 +93,7 @@ $(document).ready(function() {
 		var content = $("#page-content");
 		content.empty();
 		content.removeClass("row");
-		
+
 		var iframe = '<iframe id="smallAppIFrame" width="100%" height="600px" scrolling="no" frameborder="no" ' +
 				'src="http://localhost:' + port + '"></iframe>';
 
