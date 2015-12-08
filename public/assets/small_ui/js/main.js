@@ -64,8 +64,8 @@ $(document).ready(function() {
 
 		$.blockUI();
 
-		//var wHeight = $(window).height() - 100;
-		//$("#loader-list").css({"height":wHeight});
+		var wHeight = $(window).height() - 100;
+		$("#loader-list").css({"height":wHeight});
 
 		saveUserInfo();
 
@@ -73,11 +73,11 @@ $(document).ready(function() {
 		renderFlashDrives();
 	}
 
-	//$(window).resize(function(){
-	//	var width = $(window).width();
-	//	var height = $(window).height();
-	//	$("#loader-list").css({"height":height-100});
-	//});
+	$(window).resize(function(){
+		var width = $(window).width();
+		var height = $(window).height();
+		$("#loader-list").css({"height":height-100});
+	});
 
 	$body.on("click", "#refreshFlashDrives", function() {
 		selectedFlashDrive = -1;

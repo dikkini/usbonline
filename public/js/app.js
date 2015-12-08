@@ -77,10 +77,15 @@ $(document).ready(function() {
 		return elem.offsetParent ? (elem.offsetTop + pageY(elem.offsetParent)) : elem.offsetTop;
 	}
 
+	//function resizeIframe() {
+	//	var height = document.documentElement.clientHeight;
+	//	height -= pageY(document.getElementById('smallAppIFrame'))+ buffer ;
+	//	height = (height < 0) ? 0 : height;
+	//	document.getElementById('smallAppIFrame').style.height = height + 'px';
+	//}
+
 	function resizeIframe() {
-		var height = document.documentElement.clientHeight;
-		height -= pageY(document.getElementById('smallAppIFrame'))+ buffer ;
-		height = (height < 0) ? 0 : height;
+		var height = $("section#app").height();
 		document.getElementById('smallAppIFrame').style.height = height + 'px';
 	}
 
@@ -93,6 +98,7 @@ $(document).ready(function() {
 		var content = $("#page-content");
 		content.empty();
 		content.removeClass("row");
+		$body.css({"padding-left": "0", "padding-right": "0"});
 
 		var iframe = '<iframe id="smallAppIFrame" width="100%" height="600px" scrolling="no" frameborder="no" ' +
 				'src="http://localhost:' + port + '"></iframe>';
