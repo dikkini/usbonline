@@ -64,7 +64,7 @@ $(document).ready(function() {
 
 		$.blockUI();
 
-		var wHeight = $(window).height() - 100;
+		var wHeight = $(window).height() - 148;
 		$("#loader-list").css({"height":wHeight});
 
 		saveUserInfo();
@@ -76,7 +76,7 @@ $(document).ready(function() {
 	$(window).resize(function(){
 		var width = $(window).width();
 		var height = $(window).height();
-		$("#loader-list").css({"height":height-100});
+		$("#loader-list").css({"height":height-148});
 	});
 
 	$body.on("click", "#refreshFlashDrives", function() {
