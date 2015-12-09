@@ -118,6 +118,8 @@ $(document).ready(function() {
 
 		window.onresize = resizeIframe;
 
+		scroll.call($body, 0, this);
+
 		$.unblockUI();
 	}
 

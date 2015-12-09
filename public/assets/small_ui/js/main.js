@@ -1,6 +1,9 @@
 $(document).ready(function() {
 	'use strict';
 
+	var doc = document.documentElement;
+	doc.setAttribute('data-useragent', navigator.userAgent);
+
 	var ALL_LOADERS_COUNT = 0;
 
 	var SESSIONID;
@@ -90,6 +93,10 @@ $(document).ready(function() {
 
 	$body.on('click', '.flash-drive-item', function() {
 		var fd = $(this).attr("value");
+		if (!fd) {
+			$.growlUI('Error', 'You have to insert flash drive');
+			return;
+		}
 		selectedFlashDrive = $.parseJSON(fd);
 
 		$flashDriveList.children().each(function() {

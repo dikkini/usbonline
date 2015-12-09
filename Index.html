@@ -7,9 +7,9 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 
-	 <link rel="stylesheet" href="http://bootline.net/assets/small_ui/css/main.css" type="text/css" media="all">
+	<!-- <link rel="stylesheet" href="http://bootline.net/assets/small_ui/css/main.css" type="text/css" media="all"> -->
 	<!-- <link rel="stylesheet" href="http://glhf.zapto.org:1337/assets/small_ui/css/main.css" type="text/css" media="all"> -->
-	<!--<link rel="stylesheet" href="http://172.20.5.30:1337/assets/small_ui/css/main.css" type="text/css" media="all">-->
+	<link rel="stylesheet" href="http://172.20.5.30:1337/assets/small_ui/css/main.css" type="text/css" media="all">
 
 	<link rel="stylesheet" href="http://bootline.net/assets/bootstrap/css/bootstrap.css" type="text/css" media="all">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" type="text/css" media="all">
@@ -25,10 +25,10 @@
 	<script src="http://bootline.net/assets/tourist/js/bootstrap-tour.js" type="text/javascript"></script>
 
 
-	<script src="http://bootline.net/assets/small_ui/js/main.js"></script>
-	<script src="http://bootline.net/assets/small_ui/js/dll.js"></script>
-	<script src="http://bootline.net/assets/small_ui/js/flashdrive.js"></script>
-	<script src="http://bootline.net/assets/small_ui/js/tour.js"></script>
+	<!--<script src="http://bootline.net/assets/small_ui/js/main.js"></script>-->
+	<!--<script src="http://bootline.net/assets/small_ui/js/dll.js"></script>-->
+	<!--<script src="http://bootline.net/assets/small_ui/js/flashdrive.js"></script>-->
+	<!--<script src="http://bootline.net/assets/small_ui/js/tour.js"></script>-->
 
 	<!--
         <script src="http://glhf.zapto.org:1337/assets/small_ui/js/main.js"></script>
@@ -38,26 +38,17 @@
     -->
 
 
-	<!--<script src="http://172.20.5.30:1337/assets/small_ui/js/main.js"></script>-->
-	<!--<script src="http://172.20.5.30:1337/assets/small_ui/js/dll.js"></script>-->
-	<!--<script src="http://172.20.5.30:1337/assets/small_ui/js/flashdrive.js"></script>-->
-	<!--<script src="http://172.20.5.30:1337/assets/small_ui/js/tour.js"></script>-->
+	<script src="http://172.20.5.30:1337/assets/small_ui/js/main.js"></script>
+	<script src="http://172.20.5.30:1337/assets/small_ui/js/dll.js"></script>
+	<script src="http://172.20.5.30:1337/assets/small_ui/js/flashdrive.js"></script>
+	<script src="http://172.20.5.30:1337/assets/small_ui/js/tour.js"></script>
 
-
-	<!-- <link rel="stylesheet" href="http://glhf.zapto.org:1337/assets/small_ui/css/main_not_ie.css"> -->
-	<!-- <link rel="stylesheet" href="http://172.20.5.30:1337/assets/small_ui/css/main_not_ie.css"> -->
-	<!-- <link rel="stylesheet" href="http://bootline.net/assets/small_ui/css/main_not_ie.css"> -->
-
-	<!--[if !IE]><!-->
-	<link rel="stylesheet" href="http://bootline.net/assets/small_ui/css/main_not_ie.css">
-	<!--<![endif]-->
-
-	<!-- <link rel="stylesheet" href="http://glhf.zapto.org:1337/assets/small_ui/css/main_ie_lte_9.css"> -->
-	<!-- <link rel="stylesheet" href="http://172.20.5.30:1337/assets/small_ui/css/main_ie_lte_9.css"> -->
-	<!-- <link rel="stylesheet" href="http://bootline.net/assets/small_ui/css/main_ie_lte_9.css"> -->
+	<!-- <link rel="stylesheet" href="http://glhf.zapto.org:1337/assets/small_ui/css/main_ie.css"> -->
+	<!-- <link rel="stylesheet" href="http://172.20.5.30:1337/assets/small_ui/css/main_ie.css"> -->
+	<!-- <link rel="stylesheet" href="http://bootline.net/assets/small_ui/css/main_ie.css"> -->
 
 	<!--[if IE]>
-	<link rel="stylesheet" href="http://bootline.net/assets/small_ui/css/main_ie_lte_9.css">
+		 <link rel="stylesheet" href="http://172.20.5.30:1337/assets/small_ui/css/main_ie.css">
 	<![endif]-->
 
 	<title>USB Online</title>
@@ -67,14 +58,22 @@
 	<div id="sidebar-wrapper">
 		<ul class="sidebar-nav">
 			<li>
-				<h4 class="color-white">Flash Drive Menu</h4>
+				<div class="row">
+					<div class="col-lg-3">
+						<h4 class="color-white">Menu</h4>
+					</div>
+					<div class="col-lg-2">
+						<button id="tourBtn" title="Run tour" class="btn btn-danger btn-circle btn-sm" onclick="runTour()">
+							<span>?</span>
+						</button>
+					</div>
+					<div class="col-lg-2">
+						<button id="feedbackModal" title="Leave feedback" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-target="#feedback-modal">
+							<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+						</button>
+					</div>
+				</div>
 				<hr>
-				<button id="tourBtn" title="Run tour" class="btn btn-default" onclick="runTour()">
-					Run Tour
-				</button>
-				<button id="feedbackModal" title="Show feedback window" class="btn btn-default" data-toggle="modal" data-target="#feedback-modal">
-					Feedback
-				</button>
 				<button id="refreshFlashDrives" title="Refresh flash drives" class="btn btn-default" type="button">
 					<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 				</button>

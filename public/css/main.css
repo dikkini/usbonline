@@ -67,7 +67,7 @@ header .banner {
     vertical-align: middle;
     margin: 0 auto;
     width: 85%;
-    padding-bottom: 30px;
+    padding-bottom: 150px;
     text-align: center;
 }
 
@@ -83,8 +83,24 @@ header .banner-text h1 {
     text-shadow: 0px 1px 3px rgba(0, 0, 0, .8);
 }
 
+header .banner-text h2 {
+    font: 36px/1.1em 'opensans-bold', sans-serif;
+    color: #193C54;
+    letter-spacing: -2px;
+    margin: 0 auto 18px auto;
+    text-shadow: 0px 1px 3px rgba(0, 0, 0, .8);
+}
+
 header .banner-text h3 {
-    font: 18px/1.9em 'librebaskerville-regular', serif;
+    font: 18px/1.1em 'librebaskerville-regular', serif;
+    color: #A8A8A8;
+    margin: 0 auto;
+    width: 70%;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, .5);
+}
+
+header .banner-text h4 {
+    font: 14px/3.3em 'librebaskerville-regular', serif;
     color: #A8A8A8;
     margin: 0 auto;
     width: 70%;
@@ -103,9 +119,14 @@ header .banner-text hr {
     border-color: rgba(150, 150, 150, .1);
 }
 
+
+/*
+    SECTION
+*/
+
 section {
     padding-top: 48px;
-    margin-bottom: 48px;
+    padding-bottom: 48px;
     font-size: 14px;
     position: relative;
 }
@@ -115,9 +136,21 @@ section {
 	SOCIAL LINKS
 */
 .social {
-    margin: 24px 0;
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    margin-left: -79px;
+    color: #193C54;
+    display: block;
+    height: 42px;
     padding: 0;
     font-size: 30px;
+
+
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
     text-shadow: 0px 1px 2px rgba(0, 0, 0, .8);
 }
 
@@ -156,4 +189,9 @@ section {
 
 .scrolldown a:hover {
     color: black;
+}
+
+a.smoothscroll {
+    color: #193C54 !important;
+    text-decoration: none !important;
 }

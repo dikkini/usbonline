@@ -5,9 +5,34 @@ button,input {
     outline: none !important;
 }
 
-#refreshFlashDrives,
-#feedbackModal,
-#tourBtn {
+
+#addCross {
+    width: 65px;
+    height: 65px;
+    margin: 35px auto auto;
+    background: linear-gradient(to bottom, transparent 35%, #193C54 35%, #193C54 65%,  transparent 65%),
+    linear-gradient(to right, transparent 35%, #193C54 35%, #193C54 65%, transparent 65%);
+}
+
+.btn-circle.btn-sm {
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+    line-height: 1.33;
+    border-radius: 25px;
+}
+
+.btn-circle.btn-sm span {
+    margin-left: -2px;
+    margin-top: -3px;
+}
+
+.btn-circle.btn-sm span.glyphicon {
+    margin-left: -5px;
+    margin-top: -3px;
+}
+
+#refreshFlashDrives {
     width: 100%;
 }
 
@@ -301,4 +326,30 @@ select.loader-type-select {
 
 #menu-toggle {
     cursor: pointer;
+}
+
+/*
+    IE 11
+*/
+
+html[data-useragent*='rv:11.0'] .btn-circle.btn-sm {
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+    line-height: 1.33;
+    border-radius: 25px;
+}
+
+html[data-useragent*='rv:11.0'] .btn-circle.btn-sm span {
+    margin-left: -7px;
+    margin-top: -8px;
+}
+
+html[data-useragent*='rv:11.0'] .btn-circle.btn-sm span.glyphicon {
+    margin-left: -14px;
+    margin-top: -7px;
+}
+
+html[data-useragent*='rv:11.0'] #refreshFlashDrives {
+    margin-left: -5px;
 }

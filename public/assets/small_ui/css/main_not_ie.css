@@ -1,7 +1,0 @@
-#addCross {
-    width: 65px;
-    height: 65px;
-    margin: 35px auto auto;
-    background: linear-gradient(to bottom, transparent 35%, #193C54 35%, #193C54 65%,  transparent 65%),
-    linear-gradient(to right, transparent 35%, #193C54 35%, #193C54 65%, transparent 65%);
-}

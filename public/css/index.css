@@ -1,0 +1,97 @@
+.go_to_app_btn {
+    border-radius: 75px;
+}
+
+.vertical_dotted_line
+{
+    border-left: 1px solid black;
+    height: 70%;
+    margin-top: 100px;
+    padding-bottom: 100px;
+}
+
+#youtube_video {
+    margin-top: 50px;
+}
+
+#description {
+    margin-top: 50px;
+}
+
+#description .row {
+    padding-top: 10px;
+    margin-right: -110px !important;
+}
+
+.split-line {
+    width: 1% !important;
+}
+
+.numberCircle {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    padding: 15px;
+    background: #fff;
+    border: 2px solid #193C54;
+    color: #193C54;
+    text-align: center;
+    font: 32px Arial, sans-serif;
+}
+
+.higher {
+    margin-top: 20px;
+}
+
+/*
+    FOOTER
+*/
+#footer {
+    bottom: 0;
+    width: 100%;
+    color: white;
+    background: #193C54 no-repeat top center;
+    font-size: 14px;
+    text-align: center;
+    position: relative;
+}
+
+#footer a, #footer a:visited {
+    color: white
+}
+
+#footer a:hover, footer a:focus {
+    color: #fff;
+}
+
+#footer .copyright {
+    margin: 0;
+    padding: 0;
+}
+
+#footer .copyright li {
+    color: white;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    line-height: 24px;
+}
+
+.ie #footer .copyright li {
+    display: inline;
+}
+
+#footer .copyright li:before {
+    content: "\2022";
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+}
+
+#footer .copyright li:first-child:before {
+    display: none;
+}
+
+ul.copyright {
+    list-style-type: none;
+}
