@@ -14,16 +14,6 @@
 <head>
 	<title>BootLine</title>
 	<meta charset="UTF-8">
-
-	<link rel="stylesheet" href="/css/app.css">
-
-	<!--[if IE]>
-		<link rel="stylesheet" href="/assets/small_ui/css/main_ie.css">
-	<![endif]-->
-
-	<% include partials/head.ejs %>
-
-	<script src="/js/app.js"></script>
 </head>
 
 <body>
@@ -37,27 +27,26 @@
 		<input id="isAppRunning" type="hidden">
 	</ul>
 </nav>
-<header id="header">
-	<div class="banner">
-		<div class="banner-text">
-			<h3 class="responsive-headline">Three easy steps to start..</h3>
-		</div>
-	</div>
-	<p class="scrolldown">
-		<a href="#app" class="smoothscroll">
-			<i class="icon-down-circle color-black"></i>
-		</a>
-	</p>
-</header>
-
 <section id="app">
 	<div id="page-content" class="row">
-		<a id="application-url" href="/clickonce/ClickLine.application">Download portable version</a>
-		<div class="row">
+		<ul id="light-slider">
+			<li>
+				<a href="http://investmir.biz/wp-content/uploads/2015/06/google-logo-black-1920-800x450.jpg" data-simplbox>
+					<img class="helper-image" width="200px" height="100px" src="http://investmir.biz/wp-content/uploads/2015/06/google-logo-black-1920-800x450.jpg" alt="My image description that will be used">
+				</a>
+			</li>
+			<li>
+				<a href="http://investmir.biz/wp-content/uploads/2015/06/google-logo-black-1920-800x450.jpg" data-simplbox>
+					<img class="helper-image" width="200px" height="100px" src="http://investmir.biz/wp-content/uploads/2015/06/google-logo-black-1920-800x450.jpg" alt="My image description that will be used">
+				</a>
+			</li>
+		</ul>
+		<input type="hidden" id="application-url" href="/clickonce/ClickLine.application"></input>
+		<div class="row" style="">
 			<div id="right-content" class="col-xs-12">
 				<div class="row" style="padding-bottom: 30px;">
 					<button id="launchApp" class="btn btn-primary col-lg-12">Continue</button>
-					<button id="debug" class="btn btn-default col-lg-12">Debug</button>
+					<!--<button id="debug" class="btn btn-default col-lg-12">Debug</button>-->
 				</div>
 				<div id="loader-list">
 					<div class="row loader-row">
@@ -70,6 +59,19 @@
 		</div>
 	</div>
 </section>
-
 </body>
 </html>
+
+
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/assets/lightslider/lightslider.css">
+
+<!--[if IE]>
+	<link rel="stylesheet" href="/assets/small_ui/css/main_ie.css">
+<![endif]-->
+
+<% include partials/head.ejs %>
+
+<script src="/js/app.js"></script>
+<script src="/assets/lightslider/lightslider.js"></script>
+<script src="/assets/simplbox/simplbox.js"></script>

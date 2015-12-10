@@ -16,7 +16,11 @@ $(document).ready(function() {
 		isClickOnce = true;
 		$appUrl.hide();
 	} else {
-		$appUrl.attr("href", "/download/application");
+		var content = $("#page-content");
+		//content.empty();
+		//content.html("<h1> Current beta version of online application available " +
+		//		"only for Internet Explorer 9 and later. You can download " +
+		//		"<a href='/download/application'>portable application</a></h1>")
 	}
 
 	$("#isClickOnce").val(isClickOnce);
@@ -33,6 +37,64 @@ $(document).ready(function() {
 	socket.on('launchapp', function (data) {
 		startApp(data.port);
 	});
+
+
+	$("#light-slider").lightSlider({
+		item: 6,
+		autoWidth: false,
+		slideMove: 1, // slidemove will be 1 if loop is true
+		slideMargin: 10,
+
+		addClass: '',
+		mode: "slide",
+		useCSS: true,
+		cssEasing: 'ease', //'cubic-bezier(0.25, 0, 0.25, 1)',//
+		easing: 'linear', //'for jquery animation',////
+
+		speed: 400, //ms'
+		auto: false,
+		pauseOnHover: false,
+		loop: false,
+		slideEndAnimation: true,
+		pause: 2000,
+
+		keyPress: false,
+		controls: true,
+		prevHtml: '',
+		nextHtml: '',
+
+		rtl:false,
+		adaptiveHeight:false,
+
+		vertical:false,
+		verticalHeight:300,
+		vThumbWidth:100,
+
+		thumbItem:7,
+		pager: true,
+		gallery: false,
+		galleryMargin: 15,
+		thumbMargin: 15,
+		currentPagerPosition: 'middle',
+
+		enableTouch:true,
+		enableDrag:true,
+		freeMove:true,
+		swipeThreshold: 40,
+		onBeforeStart: function (el) {},
+		onSliderLoad: function (el) {},
+		onBeforeSlide: function (el) {},
+		onAfterSlide: function (el) {},
+		onBeforeNextSlide: function (el) {},
+		onBeforePrevSlide: function (el) {}
+	});
+
+	// Get elements.
+	var myelement = document.querySelectorAll("[data-simplbox]");
+	// Get constructor.
+	var simplbox = new SimplBox(myelement);
+	// Initialize.
+	simplbox.init();
 
 	$body.on('click', "#launchApp", function() {
 		if (isClickOnce) {
@@ -185,8 +247,12 @@ $(document).ready(function() {
 
 	var $addLoaderBtn = $("#addLoaderBtn");
 
-	var wHeight = $(window).height() - 100;
+	var wHeight = $("section#app").height();
 	$("#loader-list").css({"height":wHeight});
+	$(window).on('resize', function() {
+		var wHeight = $("section#app").height();
+		$("#loader-list").css({"height":wHeight});
+	});
 
 
 	function addLoaderToDOM(id) {

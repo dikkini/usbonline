@@ -20,11 +20,14 @@
 
 #description .row {
     padding-top: 10px;
-    margin-right: -110px !important;
 }
 
 .split-line {
     width: 1% !important;
+}
+
+section {
+    padding-top: 48px;
 }
 
 .numberCircle {
@@ -37,10 +40,6 @@
     color: #193C54;
     text-align: center;
     font: 32px Arial, sans-serif;
-}
-
-.higher {
-    margin-top: 20px;
 }
 
 /*

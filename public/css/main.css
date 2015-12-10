@@ -38,6 +38,15 @@ h4 { font-size: 20px; line-height: 30px; margin-bottom: 6px; }
 h5 { font-size: 18px; line-height: 30px; }
 h6 { font-size: 14px; line-height: 30px; }
 
+h3.higher {
+    margin-top: 20px;
+    font-family: 'librebaskerville-regular', sans-serif;
+}
+
+span.font {
+    font-family: 'librebaskerville-regular', sans-serif;
+}
+
 /*
 		HEADER
 */
@@ -76,7 +85,7 @@ header .banner-text {
 }
 
 header .banner-text h1 {
-    font: 90px/1.1em 'opensans-bold', sans-serif;
+    font: 90px/1.1em 'librebaskerville-regular', sans-serif;
     color: #193C54;
     letter-spacing: -2px;
     margin: 0 auto 18px auto;
@@ -84,7 +93,7 @@ header .banner-text h1 {
 }
 
 header .banner-text h2 {
-    font: 36px/1.1em 'opensans-bold', sans-serif;
+    font: 36px/1.1em 'librebaskerville-regular', sans-serif;
     color: #193C54;
     letter-spacing: -2px;
     margin: 0 auto 18px auto;
@@ -125,7 +134,7 @@ header .banner-text hr {
 */
 
 section {
-    padding-top: 48px;
+    /*padding-top: 48px;*/
     padding-bottom: 48px;
     font-size: 14px;
     position: relative;
@@ -194,4 +203,13 @@ section {
 a.smoothscroll {
     color: #193C54 !important;
     text-decoration: none !important;
+}
+
+.circular {
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 }
