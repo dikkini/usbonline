@@ -41,9 +41,9 @@ $(document).ready(function() {
 
 	$("#light-slider").lightSlider({
 		item: 6,
-		autoWidth: false,
+		autoWidth: true,
 		slideMove: 1, // slidemove will be 1 if loop is true
-		slideMargin: 10,
+		slideMargin: 0,
 
 		addClass: '',
 		mode: "slide",
@@ -67,11 +67,11 @@ $(document).ready(function() {
 		adaptiveHeight:false,
 
 		vertical:false,
-		verticalHeight:300,
-		vThumbWidth:100,
+		verticalHeight:500,
+		vThumbWidth:200,
 
 		thumbItem:7,
-		pager: true,
+		pager: false,
 		gallery: false,
 		galleryMargin: 15,
 		thumbMargin: 15,
