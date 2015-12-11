@@ -265,6 +265,25 @@ $(document).ready(function() {
 		}
 	});
 
+	$body.on("change", "#formatFlashDriveCb", function() {
+
+		var checked = $(this).is(":checked");
+
+		var allLoaderSize = 0;
+		$(".loader-item").each(function() {
+			var loaderId = $(this).data("loader-id");
+			var loaderISO = $('.loader-iso[data-loader-id="' + loaderId + '"]');
+			allLoaderSize += loaderISO.data("loader-iso-size");
+		});
+
+		var value = allLoaderSize;
+		var filledSpace = getFlashDriveFilledSpace(selectedFlashDrive);
+		if (!checked) {
+			value += filledSpace;
+		}
+		value = isoSizeToPerc(selectedFlashDrive, value);
+		calcFlashDriveSize(value);
+	});
 
 	$body.on("change", "select.loader-type-select", function() {
 		var loaderId = $(this).data("loader-id");
@@ -301,7 +320,7 @@ $(document).ready(function() {
 			var prevIsoSizePercent = prevIso.data("loader-iso-size-percent");
 			if (prevIsoSizePercent) {
 				prevIso.remove();
-				currentWidth -= prevIsoSizePercent;
+				currentWidth -= prevIsoSizePercent;s
 			}
 			var path = response.Path;
 			var size = parseInt(response.Size);
@@ -687,11 +706,11 @@ $(document).ready(function() {
 		});
 	}
 
-	//$(window).unload(function() {
-	//	if (isAppRuning) {
-	//		shutdownServer();
-	//		window.location = '/';
-	//	}
-	//});
+	$(window).unload(function() {
+		if (isAppRuning) {
+			shutdownServer();
+			window.location = '/';
+		}
+	});
 
 });

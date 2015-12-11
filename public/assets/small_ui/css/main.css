@@ -14,6 +14,10 @@ button,input {
     linear-gradient(to right, transparent 35%, #193C54 35%, #193C54 65%, transparent 65%);
 }
 
+#addLoaderBtnContainer, #addLoaderBtn {
+    cursor: pointer;
+}
+
 .btn-circle.btn-sm {
     width: 25px;
     height: 25px;

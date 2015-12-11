@@ -11,6 +11,11 @@ html, body {
     height: 100%;
 }
 
+button,input,a,h1,h2,h3,h4,h5 {
+    outline: none !important;
+}
+
+
 /**
 		TYPOGRAPHY
 **/
@@ -84,7 +89,7 @@ header .banner-text {
     width: 100%;
 }
 
-header .banner-text h1 {
+.banner-text h1 {
     font: 90px/1.1em 'librebaskerville-regular', sans-serif;
     color: #193C54;
     letter-spacing: -2px;
@@ -92,7 +97,7 @@ header .banner-text h1 {
     text-shadow: 0px 1px 3px rgba(0, 0, 0, .8);
 }
 
-header .banner-text h2 {
+.banner-text h2 {
     font: 36px/1.1em 'librebaskerville-regular', sans-serif;
     color: #193C54;
     letter-spacing: -2px;
@@ -100,7 +105,7 @@ header .banner-text h2 {
     text-shadow: 0px 1px 3px rgba(0, 0, 0, .8);
 }
 
-header .banner-text h3 {
+.banner-text h3 {
     font: 18px/1.1em 'librebaskerville-regular', serif;
     color: #A8A8A8;
     margin: 0 auto;
@@ -108,7 +113,7 @@ header .banner-text h3 {
     text-shadow: 0px 1px 2px rgba(0, 0, 0, .5);
 }
 
-header .banner-text h4 {
+.banner-text h4 {
     font: 14px/3.3em 'librebaskerville-regular', serif;
     color: #A8A8A8;
     margin: 0 auto;
@@ -116,12 +121,12 @@ header .banner-text h4 {
     text-shadow: 0px 1px 2px rgba(0, 0, 0, .5);
 }
 
-header .banner-text h3 span,
-header .banner-text h3 a {
+.banner-text h3 span,
+.banner-text h3 a {
     color: #fff;
 }
 
-header .banner-text hr {
+.banner-text hr {
     width: 60%;
     margin: 18px auto 24px auto;
     border-color: #2F2D2E;
@@ -206,10 +211,17 @@ a.smoothscroll {
 }
 
 .circular {
+    width: 300px;
+    height: 300px;
+    background: no-repeat 50%;
     border-radius: 150px;
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px;
     box-shadow: 0 0 8px rgba(0, 0, 0, .8);
     -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
     -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+.round_btn {
+    border-radius: 75px;
 }

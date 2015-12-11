@@ -17,10 +17,10 @@ $(document).ready(function() {
 		$appUrl.hide();
 	} else {
 		var content = $("#page-content");
-		//content.empty();
-		//content.html("<h1> Current beta version of online application available " +
-		//		"only for Internet Explorer 9 and later. You can download " +
-		//		"<a href='/download/application'>portable application</a></h1>")
+		content.empty();
+		content.html("<h1> Current beta version of online application available " +
+				"only for Internet Explorer 9 and later. You can download " +
+				"<a href='/download/application'>portable application</a></h1>")
 	}
 
 	$("#isClickOnce").val(isClickOnce);
@@ -38,63 +38,10 @@ $(document).ready(function() {
 		startApp(data.port);
 	});
 
-
-	$("#light-slider").lightSlider({
-		item: 6,
-		autoWidth: true,
-		slideMove: 1, // slidemove will be 1 if loop is true
-		slideMargin: 0,
-
-		addClass: '',
-		mode: "slide",
-		useCSS: true,
-		cssEasing: 'ease', //'cubic-bezier(0.25, 0, 0.25, 1)',//
-		easing: 'linear', //'for jquery animation',////
-
-		speed: 400, //ms'
-		auto: false,
-		pauseOnHover: false,
-		loop: false,
-		slideEndAnimation: true,
-		pause: 2000,
-
-		keyPress: false,
-		controls: true,
-		prevHtml: '',
-		nextHtml: '',
-
-		rtl:false,
-		adaptiveHeight:false,
-
-		vertical:false,
-		verticalHeight:500,
-		vThumbWidth:200,
-
-		thumbItem:7,
-		pager: false,
-		gallery: false,
-		galleryMargin: 15,
-		thumbMargin: 15,
-		currentPagerPosition: 'middle',
-
-		enableTouch:true,
-		enableDrag:true,
-		freeMove:true,
-		swipeThreshold: 40,
-		onBeforeStart: function (el) {},
-		onSliderLoad: function (el) {},
-		onBeforeSlide: function (el) {},
-		onAfterSlide: function (el) {},
-		onBeforeNextSlide: function (el) {},
-		onBeforePrevSlide: function (el) {}
+	$(".circular").colorbox({
+		rel: "circular",
+		scrolling: false
 	});
-
-	// Get elements.
-	var myelement = document.querySelectorAll("[data-simplbox]");
-	// Get constructor.
-	var simplbox = new SimplBox(myelement);
-	// Initialize.
-	simplbox.init();
 
 	$body.on('click', "#launchApp", function() {
 		if (isClickOnce) {

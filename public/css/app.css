@@ -109,3 +109,7 @@ section#app {
   line-height: 1.33;
   border-radius: 75px;
 }
+
+ul li {
+  display: inline;
+}
