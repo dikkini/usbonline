@@ -1,4 +1,7 @@
 $(document).ready(function() {
+
+	$("#app-navigation").addClass("active");
+
 	var serverBaseUrl = window.location.protocol + "//" + window.location.host
 		, sessionId = ''
 		, canReload = true
@@ -8,7 +11,7 @@ $(document).ready(function() {
 
 	var socket = io.connect(serverBaseUrl, {'sync disconnect on unload' : true});
 
-	$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Please wait...</h3>'
+	$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Please wait...</h3>';
 
 	var $appUrl = $("#application-url");
 	var isIE = isClientBrowserIE();

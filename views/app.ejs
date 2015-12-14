@@ -29,17 +29,14 @@
 </head>
 
 <body>
-<nav id="nav-wrap">
-	<ul id="nav" class="nav">
-		<li><a href="/">Home</a></li>
-		<li><a href="/app" class="active">Application</a></li>
-		<li><a href="/about">Contact</a></li>
-		<input id="sessionId" type="hidden">
-		<input id="isClickOnce" type="hidden">
-		<input id="isAppRunning" type="hidden">
-		<input id="application-url" type="hidden" href="/clickonce/ClickLine.application">
-	</ul>
-</nav>
+
+<% include partials/navigation.ejs %>
+
+<input id="sessionId" type="hidden">
+<input id="isClickOnce" type="hidden">
+<input id="isAppRunning" type="hidden">
+<input id="application-url" type="hidden" href="/clickonce/ClickLine.application">
+
 <section id="app">
 	<div id="page-content" class="row">
 		<div class="row">

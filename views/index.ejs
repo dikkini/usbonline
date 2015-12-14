@@ -23,13 +23,8 @@
 </head>
 
 <body>
-<nav id="nav-wrap">
-	<ul id="nav" class="nav">
-		<li><a href="/" class="active">Home</a></li>
-		<li><a href="/app">Application</a></li>
-		<li><a href="/about">Contact</a></li>
-	</ul>
-</nav>
+
+<% include partials/navigation.ejs %>
 
 <header id="header">
 	<div class="banner">
@@ -43,42 +38,38 @@
 					</button>
 				</div>
 				<div class="col-xs-3">
-					<h4><a href="#watchdemo" class="smoothscroll">WATCH DEMO <i class="fa fa-youtube-play"></i></a></h4>
+					<h4><a href="#learnmore" class="smoothscroll">LEARN MORE <i class="fa fa-arrow-down"></i></a></h4>
 				</div>
 			</div>
 
 			<ul class="social">
-				<li><a target="_blank" href="https://www.facebook.com/?q=#/dikkini"><i class="fa fa-facebook"></i></a></li>
-				<li><a target="_blank" href="https://twitter.com/dikkini"><i class="fa fa-twitter"></i></a></li>
-				<li><a target="_blank" href="http://vk.com/dikkini"><i class="fa fa-vk"></i></a></li>
+				<li><a target="_blank" href="https://www.facebook.com/?q=#/"><i class="fa fa-facebook"></i></a></li>
+				<li><a target="_blank" href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+				<li><a target="_blank" href="http://vk.com/"><i class="fa fa-vk"></i></a></li>
 			</ul>
 		</div>
 	</div>
 </header>
-<section id="watchdemo">
+<section id="learnmore">
 	<div class="row">
-		<div class="col-lg-6" style="border-right: 1px solid black;height:800px">
-			<iframe id="youtube_video" width="100%" height="450px" src="https://www.youtube.com/embed/8XFBUM8dMqw?autoplay=0"></iframe>
-		</div>
 		<div class="col-lg-6">
-			<div id="description">
-				<div class="row">
-					<div class="col-lg-2">
-						<div class="numberCircle">1</div>
-					</div>
-					<div class="col-lg-9">
-						<h3 class="higher">Do your flash drive bootable online*</h3>
-					</div>
+			<div class="row">
+				<div class="col-lg-2">
+					<div class="numberCircle">1</div>
 				</div>
-				<div class="row">
-					<div class="col-lg-2">
-						<div class="numberCircle">2</div>
-					</div>
-					<div class="col-lg-9">
-						<h3 class="higher">Multiple loaders on 1 flash drive</h3>
-					</div>
+				<div class="col-lg-9">
+					<h3 class="higher">Do your flash drive bootable online*</h3>
 				</div>
-				<div class="row">
+			</div>
+			<div class="row">
+				<div class="col-lg-2">
+					<div class="numberCircle">2</div>
+				</div>
+				<div class="col-lg-9">
+					<h3 class="higher">Multiple loaders on 1 flash drive</h3>
+				</div>
+			</div>
+			<div class="row">
 					<div class="col-lg-2">
 						<div class="numberCircle">3</div>
 					</div>
@@ -86,33 +77,43 @@
 						<h3 class="higher">Supports more than 10 loaders</h3>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-lg-2">
-						<div class="numberCircle">4</div>
-					</div>
-					<div class="col-lg-9">
-						<h3 class="higher">No loss of data</h3>
-					</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="row">
+				<div class="col-lg-2">
+					<div class="numberCircle">4</div>
 				</div>
-				<div class="row">
-					<div class="col-lg-2">
-						<div class="numberCircle">5</div>
-					</div>
-					<div class="col-lg-9">
-						<h3 class="higher">Portable application for Windows</h3>
-					</div>
+				<div class="col-lg-9">
+					<h3 class="higher">No loss of data</h3>
 				</div>
-				<hr>
-				<div class="row">
-					<div class="col-lg-offset-3">
-						<button class="btn btn-lg btn-warning go_to_app_btn" onclick="window.location = '/app';">
-							<span class="font">Try it your self!</span>
-						</button>
-					</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-2">
+					<div class="numberCircle">5</div>
+				</div>
+				<div class="col-lg-9">
+					<h3 class="higher">Portable application for Windows</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-2">
+					<div class="numberCircle">6</div>
+				</div>
+				<div class="col-lg-9">
+					<h3 class="higher">Intuitive interface in your browser</h3>
 				</div>
 			</div>
 		</div>
 	</div>
+	<hr>
+	<div class="row">
+		<div class="col-xs-4 col-lg-offset-5">
+			<button class="btn btn-lg btn-warning go_to_app_btn" onclick="window.location = '/app';">
+				<span class="font">Try it your self!</span>
+			</button>
+		</div>
+	</div>
 </section>
+
 </body>
 </html>

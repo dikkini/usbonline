@@ -40,4 +40,8 @@ $(document).ready(function () {
 			$(selected).removeClass('slide-active');
 		}
 	});
+
+	$("a.navigation").click(function() {
+		$(this).addClass("active");
+	});
 });
