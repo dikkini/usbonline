@@ -1,19 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<html>
+<!DOCTYPE>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
 <head>
+	<title>BootLine</title>
+	<meta charset="UTF-8">
+
 	<% include ../partials/head.ejs %>
+
+	<link rel="stylesheet" href="/css/forum/index.css">
+
+	<script src="/js/forum/index.js"></script>
 </head>
 
 <body>
-<% include ../partials/nav.ejs %>
 
-<div id="page-content">
-	<div class="container">
-		<h2><%= error %></h2>
+<% include ../partials/navigation.ejs %>
+
+<header id="header">
+	<div class="banner">
+		<div class="banner-text">
+			<h2 class="responsive-headline"><p><%= error %></h2>
+
+			<ul class="social">
+				<li><a target="_blank" href="https://www.facebook.com/?q=#/"><i class="fa fa-facebook"></i></a></li>
+				<li><a target="_blank" href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+				<li><a target="_blank" href="http://vk.com/"><i class="fa fa-vk"></i></a></li>
+			</ul>
+		</div>
 	</div>
-</div>
-
+</header>
 </body>
 </html>
-

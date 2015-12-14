@@ -33,19 +33,22 @@ router.post('/setPort', function(req, res, next) {
 });
 
 router.post('/feedback', function(req, res, next) {
-	var feedback_email = req.body.email;
-	log.debug("Feedback email: " + feedback_email);
+	var email = req.body.email;
+	log.debug("Email: " + email);
 	var feedback = req.body.feedback;
-	log.debug("Feedback text: " + feedback);
+	log.debug("Feedback: " + feedback);
 	var sessionid = req.body.sessionId;
 	log.debug("Session Id: " + sessionid);
+	var categoryid = req.body.categoryId;
+	log.debug("Category Id: " + categoryid);
+
 
 	var response = {
 		"success": true
 	};
 
 	log.debug("Add user feedback to database");
-	db.query(config.get("sql:add_user_feedback"), [feedback_email, feedback, false, sessionid], function (err, result) {
+	db.query(config.get("sql:add_user_feedback"), [sessionid, feedback, email, categoryid, false], function (err, result) {
 		log.debug(result);
 		if (err) {
 			response.success = false;
@@ -53,32 +56,6 @@ router.post('/feedback', function(req, res, next) {
 			log.error("Add user feedback error: ", err);
 		} else {
 			log.debug("User feedback successfully added!");
-		}
-		return res.end(JSON.stringify(response));
-	});
-});
-
-router.post('/feedback_win', function(req, res, next) {
-	var feedback_email = req.body.email;
-	log.debug("Feedback email: " + feedback_email);
-	var feedback = req.body.feedback;
-	log.debug("Feedback text: " + feedback);
-	var sessionid = req.body.id;
-	log.debug("Session Id: " + sessionid);
-
-	var response = {
-		"success": true
-	};
-
-	log.debug("Add user feedback from portable application to database");
-	db.query(config.get("sql:add_user_feedback_win"), [sessionid, feedback_email, feedback, true], function (err, result) {
-		log.debug(result);
-		if (err) {
-			response.success = false;
-			response.errorMessage = err;
-			log.error("Add user feedback error: ", err);
-		} else {
-			log.debug("User feedback from portable application successfully added!");
 		}
 		return res.end(JSON.stringify(response));
 	});
@@ -104,11 +81,10 @@ router.post('/userinfo', function(req, res, next) {
 	};
 
 	log.debug("Save userinfo to database");
-	db.query(config.get("sql:save_user_info"), [sessionid, startdate, appcodename, appname, appversion, language,
+	db.query(config.get("sql:add_user_browser_info"), [sessionid, startdate, appcodename, appname, appversion, language,
 		platform, useragent, javaenabled, cookiesenabled, browserversion], function (err, result) {
 
 		log.debug(result);
-		log.error(err);
 		if (err) {
 			log.error("Save error user info", err);
 			response.success = false;

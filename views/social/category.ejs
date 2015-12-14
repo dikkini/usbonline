@@ -1,0 +1,43 @@
+<!DOCTYPE>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+	<title>BootLine</title>
+	<meta charset="UTF-8">
+
+	<% include ../partials/head.ejs %>
+
+	<link rel="stylesheet" href="/css/social/index.css">
+
+	<script src="/js/social/index.js"></script>
+</head>
+
+<body>
+
+<% include ../partials/navigation.ejs %>
+
+<section id="app">
+	<div id="page-content" class="row">
+		<div class="list-group col-xs-4 col-xs-offset-4">
+			<% var topics; %>
+			<% for(var i=0; i < topics.length; i++) { %>
+			<a href="/social/category/" class="list-group-item">
+				<h4 class="list-group-item-heading"><%= topics[i].email %></h4>
+				<p class="list-group-item-text"><%= topics[i].feedback %></p>
+			</a>
+			<% } %>
+		</div>
+	</div>
+</section>
+</body>
+</html>

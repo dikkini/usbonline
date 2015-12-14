@@ -5,8 +5,22 @@ function expressLog() {
 	return expressWinston.logger({
 		transports: [
 			new winston.transports.Console({
+				level: 'debug',
+				timestamp: true,
 				json: true,
-				colorize: true
+				colorize: true,
+				prettyPrint: true,
+				humanReadableUnhandledException: true
+			}),
+			new winston.transports.File({
+				level: 'debug',
+				filename: 'usbonline-log.log',
+				timestamp: true,
+				json: true,
+				colorize: true,
+				prettyPrint: true,
+				humanReadableUnhandledException: true,
+				maxsize: 1000000
 			})
 		],
 		meta: true, // optional: control whether you want to log the meta data about the request (default to true)

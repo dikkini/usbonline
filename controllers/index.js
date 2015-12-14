@@ -15,4 +15,8 @@ router.get('/about', function (req, res, next) {
 	res.render('about');
 });
 
+router.get('/eula', function (req, res, next) {
+	res.render('eula');
+});
+
 module.exports = router;
