@@ -19,6 +19,7 @@
 
 	<link rel="stylesheet" href="/css/social/index.css">
 
+	<script src="/js/social/main.js"></script>
 	<script src="/js/social/index.js"></script>
 </head>
 
@@ -27,14 +28,22 @@
 <% include ../partials/navigation.ejs %>
 
 <section id="app">
-	<div id="page-content" class="row">
-		<% var categories; %>
-		<div class="list-group col-xs-3 col-xs-offset-4">
+	<div id="page-content">
+		<div class="row">
+			<% var categories; %>
 			<% for(var i=0; i < categories.length; i++) { %>
-				<a href="/social/category/<%= categories[i].id %>" class="list-group-item">
-					<h4 class="list-group-item-heading"><%= categories[i].name %></h4>
-					<p class="list-group-item-text"><%= categories[i].description %></p>
-				</a>
+				<div class="col-xs-<%=Math.round(12/categories.length)%>">
+					<a href="/social/category/<%= categories[i].id %>" style="text-align: center;">
+						<h4 class="category-header" data-categoryid="<%= categories[i].id %>"><%= categories[i].name %></h4>
+					</a>
+				</div>
+			<% } %>
+		</div>
+		<div class="row">
+			<% for(var i=0; i < categories.length; i++) { %>
+				<div id="topic_list" data-categoryid="<%= categories[i].id %>" class="list-group col-xs-4">
+
+				</div>
 			<% } %>
 		</div>
 	</div>

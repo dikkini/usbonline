@@ -19,7 +19,8 @@
 
 	<link rel="stylesheet" href="/css/social/index.css">
 
-	<script src="/js/social/index.js"></script>
+	<script src="/js/social/main.js"></script>
+	<script src="/js/social/category.js"></script>
 </head>
 
 <body>
@@ -28,14 +29,9 @@
 
 <section id="app">
 	<div id="page-content" class="row">
-		<div class="list-group col-xs-4 col-xs-offset-4">
-			<% var topics; %>
-			<% for(var i=0; i < topics.length; i++) { %>
-			<a href="/social/category/" class="list-group-item">
-				<h4 class="list-group-item-heading"><%= topics[i].email %></h4>
-				<p class="list-group-item-text"><%= topics[i].feedback %></p>
-			</a>
-			<% } %>
+		<div id="topic-list" class="list-group col-xs-4 col-xs-offset-4">
+			<% var category; %>
+			<h4 id="category-header" style="text-align: center;" data-categoryid="<%= category.id %>"><%= category.name %></h4>
 		</div>
 	</div>
 </section>

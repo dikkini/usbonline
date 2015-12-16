@@ -7,11 +7,17 @@
     "port": 1792
   },
   "sql": {
-    "add_user_browser_info": "INSERT INTO BOOTLINE.USERBROWSERINFO (sessionid, startdate, appcodename, appname, appversion, language, platform, useragent, javaenabled, cookiesenabled, browserversion) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11);",
-    "add_user_feedback": "INSERT INTO BOOTLINE.SOCIALTOPIC (sessionid, feedback, email, categoryid, portable) VALUES ($1,$2,$3,$4,$5)",
+    "create_user_session": "INSERT INTO BOOTLINE.f_usersession (sessionId, createddate) VALUES ($1,$2)",
+    "add_user_browser_info": "INSERT INTO BOOTLINE.f_userbrowserinfo (sessionid, appcodename, appname, appversion, language, platform, useragent, javaenabled, cookiesenabled, browserversion, createddate) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11);",
+    "add_user_topic": "INSERT INTO BOOTLINE.f_socialtopic (sessionid, subject, text, email, categoryid, portable) VALUES ($1,$2,$3,$4,$5,$6)",
     "social": {
-      "get_all_categories": "SELECT * FROM BOOTLINE.SOCIALCATEGORY",
-      "get_all_topics_by_category_id": "SELECT * FROM BOOTLINE.SOCIALTOPIC WHERE categoryid = $1"
+      "get_category_by_id":               "SELECT * FROM BOOTLINE.d_socialcategory WHERE active = TRUE AND id = $1;",
+      "get_topic_by_id":                  "SELECT * FROM BOOTLINE.d_socialcategory sc JOIN BOOTLINE.f_socialtopic st ON sc.id = st.categoryid WHERE st.id = $1;",
+      "get_all_active_categories":        "SELECT * FROM BOOTLINE.d_socialcategory WHERE active = TRUE;",
+      "get_all_topics_by_category_id":    "SELECT * FROM BOOTLINE.f_socialtopic WHERE categoryid = $1",
+      "get_top_topics_by_category_id":    "SELECT * FROM BOOTLINE.d_socialcategory sc JOIN BOOTLINE.f_socialtopic st ON sc.id = st.categoryid WHERE sc.id = $1 AND sc.active = TRUE AND st.reviewed = TRUE LIMIT 5;",
+      "get_recent_topics_by_category_id": "SELECT * FROM BOOTLINE.d_socialcategory sc JOIN BOOTLINE.f_socialtopic st ON sc.id = st.categoryid WHERE sc.id = $1 AND sc.active = TRUE AND st.createddate > current_date - interval '5' day LIMIT 5;",
+      "get_all_topics_by_session_id":     "SELECT * FROM BOOTLINE.f_socialtopic WHERE sessionid = $1"
     }
   }
 }

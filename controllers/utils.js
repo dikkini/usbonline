@@ -48,12 +48,12 @@ router.post('/feedback', function(req, res, next) {
 	};
 
 	log.debug("Add user feedback to database");
-	db.query(config.get("sql:add_user_feedback"), [sessionid, feedback, email, categoryid, false], function (err, result) {
+	db.query(config.get("sql:add_user_topic"), [sessionid, feedback, email, categoryid, false], function (err, result) {
 		log.debug(result);
 		if (err) {
 			response.success = false;
 			response.errorMessage = err;
-			log.error("Add user feedback error: ", err);
+			log.error(err);
 		} else {
 			log.debug("User feedback successfully added!");
 		}
@@ -74,23 +74,33 @@ router.post('/userinfo', function(req, res, next) {
 	var cookiesenabled = req.body.cookiesEnabled;
 	var browserversion = req.body.version;
 
-	var startdate = new Date();
+	var createdDate = new Date();
 
 	var response = {
 		"success": true
 	};
 
-	log.debug("Save userinfo to database");
-	db.query(config.get("sql:add_user_browser_info"), [sessionid, startdate, appcodename, appname, appversion, language,
-		platform, useragent, javaenabled, cookiesenabled, browserversion], function (err, result) {
+	log.debug("Create user session");
+	db.query(config.get("sql:create_user_session"), [sessionid, appcodename, appname, appversion, language, platform, useragent, javaenabled, cookiesenabled, browserversion, createdDate], function (err, result) {
 
 		log.debug(result);
 		if (err) {
-			log.error("Save error user info", err);
+			log.error(err);
 			response.success = false;
 			response.errorMessage = err;
+			return res.end(JSON.stringify(response));
 		}
-		return res.end(JSON.stringify(response));
+		log.debug("Save userinfo");
+		db.query(config.get("sql:add_user_browser_info"), [sessionid, appcodename, appname, appversion, language, platform, useragent, javaenabled, cookiesenabled, browserversion, createdDate], function (err, result) {
+
+			log.debug(result);
+			if (err) {
+				log.error(err);
+				response.success = false;
+				response.errorMessage = err;
+			}
+			return res.end(JSON.stringify(response));
+		});
 	});
 });
 

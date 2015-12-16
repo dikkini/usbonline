@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+	'use strict';
+
 	$("#app-navigation").addClass("active");
 
 	var serverBaseUrl = window.location.protocol + "//" + window.location.host
