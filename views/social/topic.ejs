@@ -28,21 +28,19 @@
 <% include ../partials/navigation.ejs %>
 
 <section id="app">
-	<div id="page-content" class="row">
-		<div class="list-group col-xs-4 col-xs-offset-4">
-			<% var topic; %>
-			<a data-topicid="10" href="#" class="topic list-group-item">
-				<div class="row">
-					<div class="col-xs-8">
-						<h4 class="list-group-item-heading topic-subject"><%= topic.subject %></h4>
-					</div>
-					<div class="col-xs-4">
-						<small><%= topic.since %></small>
-					</div>
+	<div class="list-group col-xs-6 col-xs-offset-3">
+		<% var topic; %>
+		<a data-topicid="10" href="#" class="topic list-group-item">
+			<div class="row">
+				<div class="col-xs-8">
+					<h4 class="list-group-item-heading topic-subject"><%= topic.subject %></h4>
 				</div>
-				<p class="list-group-item-text"><%= topic.text %></p>
-			</a>
-		</div>
+				<div class="col-xs-4">
+					<small><%= topic.since %></small>
+				</div>
+			</div>
+			<p class="list-group-item-text"><%= topic.text %></p>
+		</a>
 	</div>
 </section>
 </body>

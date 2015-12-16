@@ -28,11 +28,9 @@
 <% include ../partials/navigation.ejs %>
 
 <section id="app">
-	<div id="page-content" class="row">
-		<div id="topic-list" class="list-group col-xs-4 col-xs-offset-4">
-			<% var category; %>
-			<h4 id="category-header" style="text-align: center;" data-categoryid="<%= category.id %>"><%= category.name %></h4>
-		</div>
+	<div id="topic-list" class="list-group col-xs-4 col-xs-offset-4">
+		<% var category; %>
+		<h4 id="category-header" data-categoryid="<%= category.id %>"><%= category.name %></h4>
 	</div>
 </section>
 </body>
