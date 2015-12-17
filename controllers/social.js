@@ -219,6 +219,10 @@ router.post('/topic/addComment', function (req, res, next) {
 	var commentName = req.body.commentName;
 	var topicId = req.body.topicId;
 
+	var response = {
+		success: true
+	};
+
 	log.debug("Add comment. Name: " + commentName + " Text: " + commentText + " TopicID: " + topicId);
 	db.query(config.get("sql:social:add_new_comment_to_topic"), [topicId, commentName, commentText, new Date()], function (err, result) {
 
@@ -226,8 +230,9 @@ router.post('/topic/addComment', function (req, res, next) {
 		if (err) {
 			log.error(err);
 			res.status(err.status || 500);
-			res.error = "Can't add comment. Internal database error";
 			log.error('Internal error(%d): %s',res.statusCode,err.message);
+			response.success = false;
+			response.error = "Can't add comment. Internal database error";
 			return res.end(JSON.stringify(response));
 		}
 		return res.end(JSON.stringify(response));
