@@ -225,3 +225,7 @@ a.smoothscroll {
 .round_btn {
     border-radius: 75px;
 }
+
+.color-white {
+    color: white;
+}

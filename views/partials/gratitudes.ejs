@@ -6,19 +6,19 @@
 		<% var gratitudes = pageData.gratitudes; %>
 		<% for(var i=0; i < gratitudes.length; i++) { %>
 		<% var gratitude = gratitudes[i]; %>
-		<div class="panel panel-success">
+		<div id="<%= gratitude.id %>" class="gratitude-topic panel panel-success">
 			<div class="panel-heading">
 				<div class="row">
-					<div class="col-xs-9">
-						<h3 class="panel-title topic-subject"><%= gratitude.subject %></h3>
+					<div class="col-xs-8">
+						<h3 class="panel-title topic-subject-small"><%= gratitude.subject %></h3>
 					</div>
-					<div class="col-xs-3">
+					<div class="col-xs-4">
 						<small class="smaller"><%= timeSince(gratitude.createddate) %></small>
 					</div>
 				</div>
 			</div>
 			<div class="panel-body">
-				<p class="topic-text"><%= gratitude.text %></p>
+				<p class="topic-text-small"><%= gratitude.text %></p>
 			</div>
 		</div>
 		<% } %>

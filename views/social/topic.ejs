@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="/css/social/main.css">
 
 	<script src="/js/social/main.js"></script>
+	<script src="/js/social/topic.js"></script>
 </head>
 
 <body>
@@ -34,22 +35,21 @@
 			<% include ../partials/gratitudes.ejs %>
 		</div>
 		<div class="col-xs-9">
-			<table class="table forum">
-				<% var topic = pageData.topic; %>
+			<% var topic = pageData.topic; %>
+			<table id="topicTable" class="table forum" data-topicid="<%= topic.id %>">
 				<thead>
 				<tr>
-					<th class="cell-stat"><i class="fa fa-comments fa-2x text-primary"></i></th>
-					<th class="cell-stat hidden-xs hidden-sm"><%= topic.subject %></th>
-					<th><span style="float: right;">by <%= topic.email %> @ <%= timeSince(topic.createddate) %></span></th>
+					<th class="cell-stat text-center"><i class="fa fa-comments fa-2x text-primary"></i></th>
+					<th colspan="2" class="cell-stat hidden-xs hidden-sm"><%= topic.subject %></th>
+					<th class="cell-stat hidden-xs hidden-sm"><span><small>by <%= topic.email %> @ <%= timeSince(topic.createddate) %></small></span></th>
 				</tr>
 				</thead>
 				<tbody>
 				<tr>
 					<td class="hidden-xs hidden-sm"></td>
-					<td class="hidden-xs hidden-sm">
+					<td colspan="3" class="hidden-xs hidden-sm">
 						<%= topic.text %>
 					</td>
-					<td></td>
 				</tr>
 				</tbody>
 			</table>
@@ -59,23 +59,23 @@
 				<h4>Comments: <%= comments.length %></h4>
 				<div id="comments-controls" class="row">
 					<div class="col-xs-4 col-lg-offset-8">
-						<button class="btn btn-link">Refresh</button>
-						<button class="btn btn-link">Hide comments</button>
+						<button class="btn btn-link" data-toggle="modal" data-target="#add-comment-modal">Add comment</button>
+						<button id="hide-comments-btn" class="btn btn-link" data-default-text="Hide comments" data-new-text="Show comments">Hide comments</button>
 					</div>
 				</div>
-				<div class="comment-list">
+				<div id="comment-list">
 					<% for(var i=0; i < comments.length; i++) { %>
 					<% var comment = comments[i]; %>
 					<div id="1" class="comment">
 						<div class="row comment-header">
 							<div class="col-xs-3">
-								<label><%= comment.name %></label>
+								<label class="color-white"><%= comment.name %></label>
 							</div>
 							<div class="col-xs-2">
-								<%= timeSince(comment.createddate); %>
+								<span class="color-white"><%= timeSince(comment.createddate); %></span>
 							</div>
 							<div class="col-xs-1">
-								<a href="#">#</a>
+								<a href="#" class="color-white">#</a>
 							</div>
 						</div>
 						<div class="comment-body">
@@ -88,5 +88,31 @@
 		</div>
 	</div>
 </section>
+
+<div id="add-comment-modal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Add new comment</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<label>Name</label>
+					<input id="comment-name" class="form-control" placeholder="Enter your name...">
+				</div>
+				<div class="row">
+					<label>Text</label>
+					<textarea id="comment-text" class="form-control" placeholder="Enter your text here..."></textarea>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button id="add-comment-btn" type="button" class="btn btn-primary">Add comment</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 </body>
 </html>
