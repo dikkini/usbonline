@@ -1,5 +1,5 @@
 .topic-text {
-    width: 100%;
+    width: 500px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -7,17 +7,38 @@
 }
 
 .topic-subject {
-    width: 100%;
+    width: 500px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     -ms-text-overflow: ellipsis;
 }
 
-/* fix bootstrap */
+.comment-list .comment {
+    padding-top: 30px;
+}
+.comment-list .comment:first-child {
+    padding-top: 0px !important;
+}
+
+.comment-header {
+    background-color:#e6e7e4;
+}
+
+.smaller {
+    font-size: 65%;
+}
+
+/* start fix bootstrap */
 .row {
     margin-left: 0px !important;
 }
+
+.panel-heading {
+    padding: 0px !important;
+}
+
+/* end fix bootstrap */
 
 #category-header {
     text-align: center;

@@ -17,30 +17,75 @@
 
 	<% include ../partials/head.ejs %>
 
-	<link rel="stylesheet" href="/css/social/index.css">
+	<link rel="stylesheet" href="/css/social/main.css">
 
 	<script src="/js/social/main.js"></script>
-	<script src="/js/social/category.js"></script>
 </head>
 
 <body>
 
+<% include ../partials/functions.ejs %>
+
 <% include ../partials/navigation.ejs %>
 
-<section id="app">
-	<div class="list-group col-xs-6 col-xs-offset-3">
-		<% var topic; %>
-		<a data-topicid="10" href="#" class="topic list-group-item">
-			<div class="row">
-				<div class="col-xs-8">
-					<h4 class="list-group-item-heading topic-subject"><%= topic.subject %></h4>
+<section>
+	<div class="row">
+		<div id="recent-gratitudes" class="col-xs-3" style="margin-top: 10px;">
+			<% include ../partials/gratitudes.ejs %>
+		</div>
+		<div class="col-xs-9">
+			<table class="table forum">
+				<% var topic = pageData.topic; %>
+				<thead>
+				<tr>
+					<th class="cell-stat"><i class="fa fa-comments fa-2x text-primary"></i></th>
+					<th class="cell-stat hidden-xs hidden-sm"><%= topic.subject %></th>
+					<th><span style="float: right;">by <%= topic.email %> @ <%= timeSince(topic.createddate) %></span></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td class="hidden-xs hidden-sm"></td>
+					<td class="hidden-xs hidden-sm">
+						<%= topic.text %>
+					</td>
+					<td></td>
+				</tr>
+				</tbody>
+			</table>
+			<hr>
+			<% var comments = pageData.comments; %>
+			<div id="comments">
+				<h4>Comments: <%= comments.length %></h4>
+				<div id="comments-controls" class="row">
+					<div class="col-xs-4 col-lg-offset-8">
+						<button class="btn btn-link">Refresh</button>
+						<button class="btn btn-link">Hide comments</button>
+					</div>
 				</div>
-				<div class="col-xs-4">
-					<small><%= topic.since %></small>
+				<div class="comment-list">
+					<% for(var i=0; i < comments.length; i++) { %>
+					<% var comment = comments[i]; %>
+					<div id="1" class="comment">
+						<div class="row comment-header">
+							<div class="col-xs-3">
+								<label><%= comment.name %></label>
+							</div>
+							<div class="col-xs-2">
+								<%= timeSince(comment.createddate); %>
+							</div>
+							<div class="col-xs-1">
+								<a href="#">#</a>
+							</div>
+						</div>
+						<div class="comment-body">
+							<%= comment.comment %>
+						</div>
+					</div>
+					<% } %>
 				</div>
 			</div>
-			<p class="list-group-item-text"><%= topic.text %></p>
-		</a>
+		</div>
 	</div>
 </section>
 </body>

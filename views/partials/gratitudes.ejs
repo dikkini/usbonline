@@ -1,0 +1,26 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title" style="padding-left: 10px;">Recent Gratitude's</h3>
+	</div>
+	<div class="panel-body">
+		<% var gratitudes = pageData.gratitudes; %>
+		<% for(var i=0; i < gratitudes.length; i++) { %>
+		<% var gratitude = gratitudes[i]; %>
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-9">
+						<h3 class="panel-title topic-subject"><%= gratitude.subject %></h3>
+					</div>
+					<div class="col-xs-3">
+						<small class="smaller"><%= timeSince(gratitude.createddate) %></small>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<p class="topic-text"><%= gratitude.text %></p>
+			</div>
+		</div>
+		<% } %>
+	</div>
+</div>
