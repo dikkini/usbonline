@@ -85,3 +85,7 @@
 .forum.table th.cell-stat-2x {
     width: 14em;
 }
+
+.cell-stat {
+    width: 100% !important;
+}
