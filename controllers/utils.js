@@ -37,24 +37,28 @@ router.post('/feedback_win', function(req, res, next) {
 });
 
 router.post('/feedback', function(req, res, next) {
-	var name = req.body.name;
+	var name = req.body.nick;
 	log.debug("Name: " + name);
 	var email = req.body.email;
 	log.debug("Email: " + email);
+	var subject = req.body.subject;
+	log.debug("Subject: " + subject);
 	var feedback = req.body.feedback;
 	log.debug("Feedback: " + feedback);
-	var sessionid = req.body.sessionId;
+	var sessionid = req.body.id;
 	log.debug("Session Id: " + sessionid);
-	var categoryid = req.body.categoryId;
+	var categoryid = req.body.type;
 	log.debug("Category Id: " + categoryid);
-
+	var rsa = req.body.RSA;
+	log.debug("RSA: " + rsa);
+	// TODO check RSA
 
 	var response = {
 		"success": true
 	};
 
 	log.debug("Add user feedback to database");
-	db.query(config.get("sql:add_user_topic"), [sessionid, feedback, email, categoryid, false], function (err, result) {
+	db.query(config.get("sql:add_user_topic"), [sessionid, subject, feedback, name, email, categoryid, false, new Date()], function (err, result) {
 		log.debug(result);
 		if (err) {
 			response.success = false;
@@ -66,6 +70,15 @@ router.post('/feedback', function(req, res, next) {
 		return res.end(JSON.stringify(response));
 	});
 });
+
+function genHash(data) {
+	data = data.split("").reverse().join("").substring(0, data.length - 1);
+	// TODO get key
+	var key = "KeyY";
+	var shaObj = new jsSHA(data, "TEXT");
+	var hash = shaObj.getHash("SHA-1", "HEX");
+	return shaObj.getHMAC(key, "TEXT", "SHA-1", "HEX");
+}
 
 router.post('/userinfo', function(req, res, next) {
 	log.debug("Collect user info");

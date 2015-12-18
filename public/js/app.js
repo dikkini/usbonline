@@ -21,10 +21,10 @@ $(document).ready(function() {
 		isClickOnce = true;
 		$appUrl.hide();
 	} else {
-		$("section#app").remove();
-		$body.append("<header><div class='banner'><div class='banner-text'><h2> Current version of online application available " +
-				"only for Internet Explorer 9 and later. You can download our " +
-				"<a href='/download/application'>portable application for Windows</a></h2></div></div></header>");
+		//$("section#app").remove();
+		//$body.append("<header><div class='banner'><div class='banner-text'><h2> Current version of online application available " +
+		//		"only for Internet Explorer 9 and later. You can download our " +
+		//		"<a href='/download/application'>portable application for Windows</a></h2></div></div></header>");
 	}
 
 	$("#isClickOnce").val(isClickOnce);
@@ -126,7 +126,7 @@ $(document).ready(function() {
 		if (iframe.attachEvent) {
 			iframe.attachEvent("onload", resizeIframe);
 		} else {
-			iframe.onload=resizeIframe;
+			//iframe.onload=resizeIframe;
 		}
 
 		window.onresize = resizeIframe;

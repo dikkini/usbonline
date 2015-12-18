@@ -38,10 +38,10 @@ CREATE TABLE BOOTLINE.D_SOCIALCATEGORY
   active BOOLEAN DEFAULT FALSE NOT NULL
 );
 
-INSERT INTO "BOOTLINE".D_SOCIALCATEGORY (id, name, description, active) VALUES (0, 'Bugs', 'Bugs Descr', true);
-INSERT INTO "BOOTLINE".D_SOCIALCATEGORY (id, name, description, active) VALUES (1, 'Advice', 'Advice Descr', true);
-INSERT INTO "BOOTLINE".D_SOCIALCATEGORY (id, name, description, active) VALUES (2, 'Gratitude', 'Gratitude Descr', true);
-INSERT INTO "BOOTLINE".D_SOCIALCATEGORY (id, name, description, active) VALUES (3, 'Other', 'Other Descr', false);
+INSERT INTO BOOTLINE.D_SOCIALCATEGORY (id, name, description, active) VALUES (0, 'Bugs', 'Bugs Descr', true);
+INSERT INTO BOOTLINE.D_SOCIALCATEGORY (id, name, description, active) VALUES (1, 'Advice', 'Advice Descr', true);
+INSERT INTO BOOTLINE.D_SOCIALCATEGORY (id, name, description, active) VALUES (2, 'Gratitude', 'Gratitude Descr', true);
+INSERT INTO BOOTLINE.D_SOCIALCATEGORY (id, name, description, active) VALUES (3, 'Other', 'Other Descr', false);
 
 CREATE TABLE BOOTLINE.F_SOCIALTOPIC
 (
@@ -49,6 +49,7 @@ CREATE TABLE BOOTLINE.F_SOCIALTOPIC
   sessionId  VARCHAR(255) REFERENCES F_USERSESSION(sessionId),
   subject    VARCHAR(255) NOT NULL,
   text       VARCHAR(255) NOT NULL,
+  name       VARCHAR(255) NOT NULL,
   email      VARCHAR(255) NOT NULL,
   categoryid INT REFERENCES D_SOCIALCATEGORY(id),
   portable   BOOLEAN DEFAULT FALSE NOT NULL,

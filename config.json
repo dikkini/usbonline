@@ -9,7 +9,7 @@
   "sql": {
     "create_user_session": "INSERT INTO BOOTLINE.f_usersession (sessionId, createddate) VALUES ($1,$2)",
     "add_user_browser_info": "INSERT INTO BOOTLINE.f_userbrowserinfo (sessionid, appcodename, appname, appversion, language, platform, useragent, javaenabled, cookiesenabled, browserversion, createddate) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11);",
-    "add_user_topic": "INSERT INTO BOOTLINE.f_socialtopic (sessionid, subject, text, email, categoryid, portable) VALUES ($1,$2,$3,$4,$5,$6)",
+    "add_user_topic": "INSERT INTO BOOTLINE.f_socialtopic (sessionid, subject, text, name, email, categoryid, portable, createddate) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)",
     "social": {
       "count_category_topics":            "SELECT count(*) FROM BOOTLINE.f_socialtopic WHERE categoryid = $1",
       "count_category_comments":          "SELECT count(*) FROM BOOTLINE.d_socialcategory sc JOIN BOOTLINE.f_socialtopic st ON sc.id = st.categoryid JOIN BOOTLINE.f_socialtopiccomment stc ON st.id = stc.topicid WHERE sc.id = $1;",

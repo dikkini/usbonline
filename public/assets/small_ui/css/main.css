@@ -1,3 +1,7 @@
+@import url("http://bootline.net/assets/fonts/fonts.css");
+@import url("http://bootline.net/assets/fonts/fontello/css/fontello.css");
+@import url("http://bootline.net//assets/fonts/font-awesome/css/font-awesome.min.css");
+
 /*
     common
 */
@@ -40,11 +44,7 @@ button,input {
     width: 100%;
 }
 #feedback-text {
-    height: 300px;
-}
-
-#feedback-email,#feedback-text {
-    padding-left: 20px;
+    height: 150px;
 }
 
 #showFlashDrives {

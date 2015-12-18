@@ -127,38 +127,62 @@
 </div>
 
 <div id="feedback-modal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Some trouble or opinion? Tell it to us!</h4>
-			</div>
-			<div class="modal-body">
-				<div class="row">
-					<label>Type</label>
-					<select id="feedback-type">
-						<option id="0" selected>Bugs</option>
-						<option id="1">Advice</option>
-						<option id="2">Gratitude</option>
-						<option id="3">Other</option>
-					</select>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="well well-sm">
+					<form class="form-horizontal" method="post">
+						<fieldset>
+							<legend class="text-center header">Contact us</legend>
+
+							<div class="form-group">
+								<span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-list-alt fa-2x"></i></span>
+								<div class="col-md-8">
+									<select id="feedback-type" class="form-control">
+										<option id="0" selected>Bugs</option>
+										<option id="1">Advice</option>
+										<option id="2">Gratitude</option>
+										<option id="3">Other</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user fa-2x"></i></span>
+								<div class="col-md-8">
+									<input id="feedback-name" name="name" type="text" placeholder="Nickname" class="form-control">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o fa-2x"></i></span>
+								<div class="col-md-8">
+									<input id="feedback-email" name="email" type="text" placeholder="Email Address" class="form-control">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-text-width fa-2x"></i></span>
+								<div class="col-md-8">
+									<input id="feedback-subject" name="phone" type="text" placeholder="Subject. Write a few words about you feedback" class="form-control">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-pencil-square-o fa-2x"></i></span>
+								<div class="col-md-8">
+									<textarea id="feedback-text" class="form-control" name="message" placeholder="Enter your massage for us here. In case all categories exept Other, this feedback will appear on forum." rows="7"></textarea>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-12 text-center">
+									<button id="send-feedback" type="submit" class="btn btn-primary btn-lg">Submit</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
 				</div>
-				<div class="row">
-					<label>Name</label>
-					<input id="feedback-name" class="form-control" placeholder="Enter your name...">
-				</div>
-				<div class="row">
-					<label>Email</label>
-					<input id="feedback-email" class="form-control" placeholder="Enter your email...">
-				</div>
-				<div class="row">
-					<label>Text</label>
-					<textarea id="feedback-text" class="form-control" placeholder="Enter your feedback text here..."></textarea>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button id="send-feedback" type="button" class="btn btn-primary">Send</button>
 			</div>
 		</div>
 	</div>

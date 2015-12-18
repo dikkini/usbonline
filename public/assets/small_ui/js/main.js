@@ -404,6 +404,7 @@ $(document).ready(function() {
 		var name = $("#feedback-name").val();
 		var email = $("#feedback-email").val();
 		var feedback = $("#feedback-text").val();
+		var feedbackSubject = $("#feedback-subject").val();
 		var feedbackType = $("#feedback-type option:selected").attr("id");
 
 		if ($.trim(name) == "") {
@@ -421,21 +422,31 @@ $(document).ready(function() {
 				text: 'Enter feedback text please!'
 			});
 			return;
+		}else if ($.trim(feedbackSubject) == "") {
+			noty({
+				text: 'Enter feedback subject please!'
+			});
+			return;
 		}
+
+		//var rsa = genHash();
+		var rsa = "hash";
 
 		$("#feedback-modal").modal("hide");
 		dontBlock = true;
 
 		$.ajax({
-			url: "http://bootline.net/utils/feedback",
+			url: "http://172.20.5.30:1337/utils/feedback",
 			type: "POST",
 			dataType: "JSON",
 			data: {
-				"name": name,
+				"nick": name,
 				"email": email,
 				"feedback": feedback,
+				"subject": feedbackSubject,
 				"type": feedbackType,
-				"sessionId": SESSIONID
+				"id": SESSIONID,
+				"RSA": rsa
 			},
 			async: true,
 			success: function (response) {
@@ -757,11 +768,11 @@ $(document).ready(function() {
 		});
 	}
 
-	$(window).unload(function() {
-		if (isAppRuning) {
-			shutdownServer();
-			window.location = '/';
-		}
-	});
+	//$(window).unload(function() {
+	//	if (isAppRuning) {
+	//		shutdownServer();
+	//		window.location = '/';
+	//	}
+	//});
 
 });
