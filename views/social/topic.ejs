@@ -38,12 +38,12 @@
 			<% var topic = pageData.topic; %>
 			<div id="topicTable" class="row" data-topicid="<%= topic.id %>">
 				<div class="col-xs-1">
-					<i class="fa fa-comments fa-4x text-primary"></i>
+					<i class="fa fa-comments fa-3x text-primary"></i>
 				</div>
-				<div class="col-xs-5">
+				<div class="col-xs-8">
 					<h3><%= topic.subject %></h3>
 				</div>
-				<div class="col-xs-3 col-lg-offset-3">
+				<div class="col-xs-3">
 					<small>by <%= topic.email %> @ <%= timeSince(topic.createddate) %></small>
 				</div>
 			</div>
@@ -57,7 +57,7 @@
 			<div id="comments">
 				<h4>Comments: <%= comments.length %></h4>
 				<div id="comments-controls" class="row">
-					<div class="col-xs-4 col-lg-offset-8">
+					<div class="col-xs-4 col-lg-offset-7">
 						<button class="btn btn-link" data-toggle="modal" data-target="#add-comment-modal">Add comment</button>
 						<button id="hide-comments-btn" class="btn btn-link" data-default-text="Hide comments" data-new-text="Show comments">Hide comments</button>
 					</div>
@@ -65,7 +65,7 @@
 				<div id="comment-list">
 					<% for(var i=0; i < comments.length; i++) { %>
 					<% var comment = comments[i]; %>
-					<div id="1" class="comment">
+					<div id="<%= comment.id %>" class="comment">
 						<div class="row comment-header">
 							<div class="col-xs-3">
 								<label class="color-white"><%= comment.name %></label>
