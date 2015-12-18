@@ -33,7 +33,7 @@ router.post('/setPort', function(req, res, next) {
 });
 
 router.post('/feedback_win', function(req, res, next) {
-	log.debug("BODY: " + req.body);
+	log.debug("BODY: " + JSON.stringify(req.body));
 });
 
 router.post('/feedback', function(req, res, next) {
