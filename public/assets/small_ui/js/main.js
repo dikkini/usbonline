@@ -422,15 +422,17 @@ $(document).ready(function() {
 				text: 'Enter feedback text please!'
 			});
 			return;
-		}else if ($.trim(feedbackSubject) == "") {
+		} else if ($.trim(feedbackSubject) == "") {
 			noty({
 				text: 'Enter feedback subject please!'
 			});
 			return;
 		}
 
-		//var rsa = genHash();
-		var rsa = "hash";
+		var data = "Bugemailnicknametext{872F4BFA-EEF8-493A-BB4F-8147D26663A5}";
+		var t = "B7F08C14C8C7B6DBED16A938FCB2B008BD52D144";
+		var rsa = genHash(data);
+		alert(t + "\n" + rsa);
 
 		$("#feedback-modal").modal("hide");
 		dontBlock = true;
@@ -446,6 +448,7 @@ $(document).ready(function() {
 				"subject": feedbackSubject,
 				"type": feedbackType,
 				"id": SESSIONID,
+				"online": true,
 				"RSA": rsa
 			},
 			async: true,

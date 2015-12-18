@@ -37,6 +37,11 @@ router.post('/feedback_win', function(req, res, next) {
 });
 
 router.post('/feedback', function(req, res, next) {
+
+	// TODO check RSA
+	var rsa = req.body.RSA;
+	log.debug("RSA: " + rsa);
+
 	var name = req.body.nick;
 	log.debug("Name: " + name);
 	var email = req.body.email;
@@ -49,26 +54,51 @@ router.post('/feedback', function(req, res, next) {
 	log.debug("Session Id: " + sessionid);
 	var categoryid = req.body.type;
 	log.debug("Category Id: " + categoryid);
-	var rsa = req.body.RSA;
-	log.debug("RSA: " + rsa);
-	// TODO check RSA
+
+	var isOnline = req.body.online;
 
 	var response = {
 		"success": true
 	};
 
-	log.debug("Add user feedback to database");
-	db.query(config.get("sql:add_user_topic"), [sessionid, subject, feedback, name, email, categoryid, false, new Date()], function (err, result) {
-		log.debug(result);
-		if (err) {
-			response.success = false;
-			response.errorMessage = err;
-			log.error(err);
-		} else {
-			log.debug("User feedback successfully added!");
-		}
-		return res.end(JSON.stringify(response));
-	});
+	if (!isOnline) {
+		log.debug("Create user session");
+		db.query(config.get("sql:create_user_session"), [sessionid, new Date()], function (err, result) {
+
+			log.debug(result);
+			if (err) {
+				log.error(err);
+				response.success = false;
+				response.errorMessage = err;
+				return res.end(JSON.stringify(response));
+			}
+			log.debug("Add user feedback to database");
+			db.query(config.get("sql:add_user_topic"), [sessionid, subject, feedback, name, email, categoryid, false, new Date()], function (err, result) {
+				log.debug(result);
+				if (err) {
+					response.success = false;
+					response.errorMessage = err;
+					log.error(err);
+				} else {
+					log.debug("User feedback successfully added!");
+				}
+				return res.end(JSON.stringify(response));
+			});
+		});
+	} else {
+		log.debug("Add user feedback to database");
+		db.query(config.get("sql:add_user_topic"), [sessionid, subject, feedback, name, email, categoryid, true, new Date()], function (err, result) {
+			log.debug(result);
+			if (err) {
+				response.success = false;
+				response.errorMessage = err;
+				log.error(err);
+			} else {
+				log.debug("User feedback successfully added!");
+			}
+			return res.end(JSON.stringify(response));
+		});
+	}
 });
 
 function genHash(data) {
@@ -100,7 +130,7 @@ router.post('/userinfo', function(req, res, next) {
 	};
 
 	log.debug("Create user session");
-	db.query(config.get("sql:create_user_session"), [sessionid, appcodename, appname, appversion, language, platform, useragent, javaenabled, cookiesenabled, browserversion, createdDate], function (err, result) {
+	db.query(config.get("sql:create_user_session"), [sessionid, createdDate], function (err, result) {
 
 		log.debug(result);
 		if (err) {
