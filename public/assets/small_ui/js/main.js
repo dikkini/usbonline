@@ -123,7 +123,9 @@ $(document).ready(function() {
 	$body.on('click', '.flash-drive-item', function() {
 		var fd = $(this).attr("value");
 		if (!fd) {
-			$.growlUI('Error', 'You have to insert flash drive');
+			noty({
+				text: 'You have to insert flash drive!'
+			});
 			return;
 		}
 		selectedFlashDrive = $.parseJSON(fd);
@@ -161,13 +163,17 @@ $(document).ready(function() {
 
 	$burnBtn.click(function() {
 		if (selectedFlashDrive == -1) {
-			$.growlUI('Error', 'Choose flash drive from the list firstly!');
+			noty({
+				text: 'Choose flash drive from the list firstly!'
+			});
 			return;
 		}
 
 		if (ERROR_ALL_LOADERS_SIZE) {
-			$.growlUI('Error', 'We can\'t burn all loaders because their size more than capacity of your flash drive. ' +
-					'Choose other flash drive or remove some loaders');
+			noty({
+				text: 'We can\'t burn all loaders because their size more than capacity of your flash drive. ' +
+				'Choose other flash drive or remove some loaders'
+			});
 			return;
 		}
 		var loaderList = collectLoaders();
@@ -328,7 +334,9 @@ $(document).ready(function() {
 
 	$body.on('click', '.loader-action-chooseiso', function() {
 		if (selectedFlashDrive == -1) {
-			$.growlUI('Error', 'Choose flash drive firstly!');
+			noty({
+				text: 'Choose flash drive firstly!'
+			});
 			return;
 		}
 		var loaderId = $(this).data('loader-id');
@@ -529,7 +537,9 @@ $(document).ready(function() {
 				}
 
 				if (progressValue == "Format") {
-					$.growlUI('Info', 'Formatting flash Drive');
+					noty({
+						text: 'Formatting flash Drive...'
+					});
 					continue;
 				}
 
@@ -580,10 +590,14 @@ $(document).ready(function() {
 		var $progressBar = $("#flashDriveSizeBarGreen");
 
 		if (widthInPerc > 80 && widthInPerc < 98) {
-			$.growlUI('Error', 'Your flash drive has more than 80% capacity filled. Be carefully.');
+			noty({
+				text: 'Your flash drive has more than 80% capacity filled. Be carefully.'
+			});
 			ERROR_ALL_LOADERS_SIZE = false;
 		} else if (widthInPerc > 98) {
-			$.growlUI('Error', 'Your flash drive has more than 98% capacity filled. We can\'t burn this loader.');
+			noty({
+				text: 'Your flash drive has more than 98% capacity filled. We can\'t burn this loader.'
+			});
 			ERROR_ALL_LOADERS_SIZE = true;
 		} else {
 			ERROR_ALL_LOADERS_SIZE = false;
@@ -603,7 +617,9 @@ $(document).ready(function() {
 			var loaderISOSize = loaderISO.data("loader-iso-size");
 			if (!loaderISOPath || !loaderISOSize) {
 				$('.loader-action-chooseiso[data-loader-id="' + loaderId + '"]').css({'border-color': 'red'});
-				$.growlUI('Error', 'Choose ISO Path for loader!');
+				noty({
+					text: 'Choose ISO Path for loader!'
+				});
 				error = true;
 				return;
 			}
@@ -613,7 +629,9 @@ $(document).ready(function() {
 			loaderCode = loaderSelectSelected.data('code');
 			if (loaderCode == -1) {
 				$('.loader-type-select[data-loader-id="' + loaderId + '"]').css({'border-color': 'red'});
-				$.growlUI('Error', 'Choose loader type!');
+				noty({
+					text: 'Choose loader type!'
+				});
 				error = true;
 				return;
 			}
@@ -632,7 +650,9 @@ $(document).ready(function() {
 		if (error) {
 			return "";
 		} else if (loaderList.length == 0) {
-			$.growlUI('Error', 'Add at least one loader!');
+			noty({
+				text: 'Add at least one loader!'
+			});
 			return "";
 		}
 		return loaderList;
