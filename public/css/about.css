@@ -1,3 +1,7 @@
 .banner-text h2 {
     width: 70%;
 }
+
+.banner-text h4 {
+    text-shadow: none !important;
+}
