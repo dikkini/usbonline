@@ -6,14 +6,28 @@ var express = require('express')
 	, config = require('../libs/config');
 
 router.post('/setPort', function(req, res, next) {
+
+	var response = {
+		"success": true
+	};
+
 	var sessionId = req.body.id;
 	log.debug("SessionId: " + sessionId);
 	var port = req.body.port;
 	log.debug("port: " + port);
 
-	var response = {
-		"success": true
-	};
+	var rsa = req.body.RSA;
+	log.debug("RSA: " + rsa);
+	log.debug("Generate data for RSA check");
+	var rsaData = sessionId + port;
+
+	var isValid = isRSAValid(rsa, rsaData);
+
+	if (!isValid) {
+		response.success = false;
+		res.status = 500;
+		return res.end(JSON.stringify(response));
+	}
 
 	log.debug("Build data for socket transport");
 	var data = {
@@ -38,9 +52,9 @@ router.post('/feedback_win', function(req, res, next) {
 
 router.post('/feedback', function(req, res, next) {
 
-	// TODO check RSA
-	var rsa = req.body.RSA;
-	log.debug("RSA: " + rsa);
+	var response = {
+		"success": true
+	};
 
 	var name = req.body.nick;
 	log.debug("Name: " + name);
@@ -55,11 +69,20 @@ router.post('/feedback', function(req, res, next) {
 	var categoryid = req.body.type;
 	log.debug("Category Id: " + categoryid);
 
-	var isOnline = req.body.online;
+	var rsa = req.body.RSA;
+	log.debug("RSA: " + rsa);
+	log.debug("Generate data for RSA check");
+	var data = name + email + subject + feedback + sessionid + categoryid;
 
-	var response = {
-		"success": true
-	};
+	var isValid = isRSAValid(rsa, data);
+
+	if (!isValid) {
+		response.success = false;
+		res.status = 500;
+		return res.end(JSON.stringify(response));
+	}
+
+	var isOnline = req.body.online;
 
 	if (!isOnline) {
 		log.debug("Create user session");
@@ -100,6 +123,14 @@ router.post('/feedback', function(req, res, next) {
 		});
 	}
 });
+
+function isRSAValid(rsa, data) {
+	log.debug("Data: " + data);
+	var cRsa = genHash(data);
+	log.debug("New RSA: " + cRsa);
+
+	return cRsa == rsa;
+}
 
 function genHash(data) {
 	data = data.split("").reverse().join("").substring(0, data.length - 1);
