@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	'use strict'
+	'use strict';
 
 	$(function() {
 		// Make sure that #header-background-image height is equal to the browser height.

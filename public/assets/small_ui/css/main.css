@@ -335,6 +335,29 @@ select.loader-type-select {
     cursor: pointer;
 }
 
+#eula {
+    padding-bottom: 30px;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
+
+#eula a:link {
+    color: darkgray;
+}
+
+/* visited link */
+#eula a:visited {
+    color: darkgray;
+}
+
+/* mouse over link */
+#eula a:hover {
+    text-decoration: underline;
+}
+
 /*
     IE 11
 */
