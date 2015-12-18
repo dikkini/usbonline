@@ -429,10 +429,9 @@ $(document).ready(function() {
 			return;
 		}
 
-		var data = "Bugemailnicknametext{872F4BFA-EEF8-493A-BB4F-8147D26663A5}";
-		var t = "B7F08C14C8C7B6DBED16A938FCB2B008BD52D144";
+		var data = name+email+feedback+feedbackSubject+feedbackType;
 		var rsa = genHash(data);
-		alert(t + "\n" + rsa);
+		alert(rsa);
 
 		$("#feedback-modal").modal("hide");
 		dontBlock = true;
@@ -454,6 +453,7 @@ $(document).ready(function() {
 			async: true,
 			success: function (response) {
 				alert("Thank you! You opinion very important to us!");
+				return;
 			},
 			error: function (response) {
 			}
