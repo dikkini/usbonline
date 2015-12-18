@@ -39,6 +39,9 @@ button,input {
 #refreshFlashDrives {
     width: 100%;
 }
+#feedback-text {
+    height: 300px;
+}
 
 #feedback-email,#feedback-text {
     padding-left: 20px;

@@ -404,6 +404,7 @@ $(document).ready(function() {
 		var name = $("#feedback-name").val();
 		var email = $("#feedback-email").val();
 		var feedback = $("#feedback-text").val();
+		var feedbackType = $("#feedback-type option:selected").attr("id");
 
 		if ($.trim(name) == "") {
 			noty({
@@ -433,6 +434,7 @@ $(document).ready(function() {
 				"name": name,
 				"email": email,
 				"feedback": feedback,
+				"type": feedbackType,
 				"sessionId": SESSIONID
 			},
 			async: true,

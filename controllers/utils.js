@@ -32,7 +32,13 @@ router.post('/setPort', function(req, res, next) {
 
 });
 
+router.post('/feedback_win', function(req, res, next) {
+	log.debug("BODY: " + req.body);
+});
+
 router.post('/feedback', function(req, res, next) {
+	var name = req.body.name;
+	log.debug("Name: " + name);
 	var email = req.body.email;
 	log.debug("Email: " + email);
 	var feedback = req.body.feedback;
