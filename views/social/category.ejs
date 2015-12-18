@@ -34,32 +34,37 @@
 			<% include ../partials/gratitudes.ejs %>
 		</div>
 		<div class="col-xs-9">
-			<table class="table forum">
-				<thead>
-				<tr>
-					<th class="cell-stat"></th>
-					<th class="cell-stat hidden-xs hidden-sm">Topics</th>
-					<th class="cell-stat text-center hidden-xs hidden-sm">Comments</th>
-				</tr>
-				</thead>
-				<tbody>
-					<% var topics = pageData.topics; %>
-					<% for(var i=0; i < topics.length; i++) { %>
-					<% var topic = topics[i]; %>
-					<tr>
-						<td class="text-center"><i class="fa fa-comments fa-2x text-primary"></i></td>
-						<td>
-							<h4>
-								<a href="/social/topic/<%= topic.id %>">
-									<p class="topic-subject"><%= topic.subject %></p>
-								</a>
-							</h4>
-						</td>
-						<td class="text-center hidden-xs hidden-sm"><span class="badge"><%= topic.commentsCount %></span></td>
-					</tr>
-					<% } %>
-				</tbody>
-			</table>
+			<div class="row">
+				<div class="col-xs-1">
+					<i class="fa fa-comments fa-2x text-primary"></i>
+				</div>
+				<div class="col-xs-8">
+					<div><strong>Topics</strong></div>
+				</div>
+				<div class="col-xs-2">
+					<div class="text-center"><strong>Comments</strong></div>
+				</div>
+			</div>
+			<% var topics = pageData.topics; %>
+			<% for(var i=0; i < topics.length; i++) { %>
+			<% var topic = topics[i]; %>
+			<hr>
+			<div class="row">
+				<div class="col-xs-1"></div>
+				<div class="col-xs-8">
+					<h4>
+						<a href="/social/topic/<%= topic.id %>">
+							<div class="topic-subject-small"><%= topic.subject %>asdasdasadsadsadsasddasadsadsasdasdasadsadsadsasddasadsadsasdasdasadsadsadsasddasadsads</div>
+						</a>
+						<br>
+						<div class="topic-subject-small"><small><%= topic.text %>asdasdasadsadsadsasddasadsadsasdasdasadsadsadsasddasadsadsasdasdasadsadsadsasddasadsads</small></div>
+					</h4>
+				</div>
+				<div class="col-xs-2 container">
+					<div class="text-center"><span class="badge"><%= topic.commentsCount %></span></div>
+				</div>
+			</div>
+			<% } %>
 		</div>
 	</div>
 </section>
