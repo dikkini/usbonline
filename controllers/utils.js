@@ -136,17 +136,22 @@ function isRSAValid(rsa, data) {
 	return cRsa == rsa;
 }
 
-function genHash(data) {
-	data = data.split("").reverse().join("").substring(0, data.length - 1);
-	// TODO get key
+function genHash(reverse, data) {
+	var d;
+	if (reverse) {
+		d = data.split("").reverse().join("").substring(0, data.length - 1);
+	} else {
+		d = data.substring(0, data.length - 1);
+	}
+	log.debug("Wrecked data: " + d);
 	var key = "KeyY";
 	var shaObj = new jsSHA("SHA-1", "TEXT");
 	shaObj.setHMACKey(key, "TEXT");
-	shaObj.update(data);
+	shaObj.update(d);
 	var hmac = shaObj.getHMAC("HEX");
 
 	shaObj = new jsSHA("SHA-1", "TEXT");
-	shaObj.update(data);
+	shaObj.update(d);
 	var hash = shaObj.getHash("HEX");
 
 	return hmac;
