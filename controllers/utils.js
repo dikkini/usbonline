@@ -54,7 +54,7 @@ router.post('/feedback_win', function(req, res, next) {
 
 router.post('/feedback', function(req, res, next) {
 	log.debug("BODY: " + JSON.stringify(req.body));
-	
+
 	var response = {
 		"success": true
 	};
@@ -75,7 +75,8 @@ router.post('/feedback', function(req, res, next) {
 	var rsa = req.body.RSA;
 	log.debug("RSA: " + rsa);
 	log.debug("Generate data for RSA check");
-	var data = name+email+feedback+subject+categoryid+sessionid;
+	// {"type":"1","email":"C","nick":"D","feedback":"B","subject":"A","id":"C8B44286668444EBB3B015F7A49A63E8","RSA":"83FA34FB956B509DDF98796010E494EAD969781B"}
+	var data = categoryid+email+name+feedback+subject+sessionid;
 
 	var isValid = isRSAValid(rsa, data);
 
