@@ -8,6 +8,8 @@ var express = require('express')
 	, config = require('../libs/config');
 
 router.post('/setPort', function(req, res, next) {
+	
+	log.debug("BODY: " + JSON.stringify(req.body));
 
 	var response = {
 		"success": true
