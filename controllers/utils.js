@@ -130,8 +130,13 @@ router.post('/feedback', function(req, res, next) {
 
 function isRSAValid(rsa, data) {
 	log.debug("Data: " + data);
-	var cRsa = genHash(data);
-	log.debug("New RSA: " + cRsa);
+	var cRsa = genHash(true, data);
+	log.debug("New RSA when data was reversed: " + cRsa);
+
+	if (cRsa != rsa) {
+		cRsa = genHash(false, data);
+		log.debug("New RSA when data was NOT reversed: " + cRsa);
+	}
 
 	return cRsa == rsa;
 }
