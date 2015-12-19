@@ -24,6 +24,8 @@
     "nconf": "~0.8.2",
     "method-override": "~2.3.5",
     "crypto": "~0.0.3",
-    "finalhandler": "~0.4.1"
+    "finalhandler": "~0.4.1",
+    "sha1": "~1.1.1",
+    "jssha": "~2.0.2"
   }
 }

@@ -1,5 +1,7 @@
 var express = require('express')
 	, router = express.Router()
+	, sha1 = require('sha1')
+	, jsSHA = require("jssha")
 	, log = require('../libs/log')(module)
 	, db = require('../service/db')
 	, sockets = require('../service/sockets')
@@ -51,7 +53,8 @@ router.post('/feedback_win', function(req, res, next) {
 });
 
 router.post('/feedback', function(req, res, next) {
-
+	log.debug("BODY: " + JSON.stringify(req.body));
+	
 	var response = {
 		"success": true
 	};
@@ -72,7 +75,7 @@ router.post('/feedback', function(req, res, next) {
 	var rsa = req.body.RSA;
 	log.debug("RSA: " + rsa);
 	log.debug("Generate data for RSA check");
-	var data = name + email + subject + feedback + sessionid + categoryid;
+	var data = name+email+feedback+subject+categoryid+sessionid;
 
 	var isValid = isRSAValid(rsa, data);
 
@@ -136,9 +139,16 @@ function genHash(data) {
 	data = data.split("").reverse().join("").substring(0, data.length - 1);
 	// TODO get key
 	var key = "KeyY";
-	var shaObj = new jsSHA(data, "TEXT");
-	var hash = shaObj.getHash("SHA-1", "HEX");
-	return shaObj.getHMAC(key, "TEXT", "SHA-1", "HEX");
+	var shaObj = new jsSHA("SHA-1", "TEXT");
+	shaObj.setHMACKey(key, "TEXT");
+	shaObj.update(data);
+	var hmac = shaObj.getHMAC("HEX");
+
+	shaObj = new jsSHA("SHA-1", "TEXT");
+	shaObj.update(data);
+	var hash = shaObj.getHash("HEX");
+
+	return hmac;
 }
 
 router.post('/userinfo', function(req, res, next) {
