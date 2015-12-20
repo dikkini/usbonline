@@ -160,6 +160,7 @@ function genHash(reverse, data) {
 	shaObj = new jsSHA("SHA-1", "TEXT");
 	shaObj.update(d);
 	var hash = shaObj.getHash("HEX");
+	log.debug("HASH: " + hash);
 
 	return hmac;
 }
