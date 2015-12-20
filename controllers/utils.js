@@ -8,7 +8,7 @@ var express = require('express')
 	, config = require('../libs/config');
 
 router.post('/setPort', function(req, res, next) {
-	
+
 	log.debug("BODY: " + JSON.stringify(req.body));
 
 	var response = {
@@ -23,7 +23,7 @@ router.post('/setPort', function(req, res, next) {
 	var rsa = req.body.RSA;
 	log.debug("RSA: " + rsa);
 	log.debug("Generate data for RSA check");
-	var rsaData = sessionId + port;
+	var rsaData = port+sessionId;
 
 	var isValid = isRSAValid(rsa, rsaData);
 
