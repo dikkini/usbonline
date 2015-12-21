@@ -23,7 +23,7 @@ router.post('/setPort', function(req, res, next) {
 	var rsa = req.body.RSA;
 	log.debug("RSA: " + rsa);
 	log.debug("Generate data for RSA check");
-	var rsaData = port+sessionId;
+	var rsaData = "\"" + port + "\"" + "\"" + sessionId + "\"";
 
 	var isValid = isRSAValid(rsa, rsaData);
 
@@ -77,8 +77,7 @@ router.post('/feedback', function(req, res, next) {
 	var rsa = req.body.RSA;
 	log.debug("RSA: " + rsa);
 	log.debug("Generate data for RSA check");
-	// {"type":"1","email":"C","nick":"D","feedback":"B","subject":"A","id":"C8B44286668444EBB3B015F7A49A63E8","RSA":"83FA34FB956B509DDF98796010E494EAD969781B"}
-	var data = categoryid+email+name+feedback+subject+sessionid;
+	var data = "\"" + categoryid + "\"" + "\"" + email + "\"" + "\"" + name + "\"" + "\"" + feedback + "\"" + "\"" + subject + "\"" + "\"" + sessionid + "\"";
 
 	var isValid = isRSAValid(rsa, data);
 
@@ -132,24 +131,14 @@ router.post('/feedback', function(req, res, next) {
 
 function isRSAValid(rsa, data) {
 	log.debug("Data: " + data);
-	var cRsa = genHash(true, data);
-	log.debug("New RSA when data was reversed: " + cRsa);
-
-	if (cRsa != rsa) {
-		cRsa = genHash(false, data);
-		log.debug("New RSA when data was NOT reversed: " + cRsa);
-	}
+	var cRsa = genHash(data);
+	log.debug("New RSA: " + cRsa);
 
 	return cRsa == rsa;
 }
 
-function genHash(reverse, data) {
-	var d;
-	if (reverse) {
-		d = data.split("").reverse().join("").substring(0, data.length - 1);
-	} else {
-		d = data.substring(0, data.length - 1);
-	}
+function genHash(data) {
+	var d = data.split("").reverse().join("").substring(0, data.length - 1);
 	log.debug("Wrecked data: " + d);
 	var key = "KeyY";
 	var shaObj = new jsSHA("SHA-1", "TEXT");
