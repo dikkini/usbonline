@@ -146,12 +146,6 @@ function genHash(data) {
 	shaObj.setHMACKey(key, "TEXT");
 	shaObj.update(d);
 	var hmac = shaObj.getHMAC("HEX");
-
-	shaObj = new jsSHA("SHA-1", "TEXT");
-	shaObj.update(d);
-	var hash = shaObj.getHash("HEX");
-	log.debug("HASH: " + hash);
-
 	return hmac;
 }
 

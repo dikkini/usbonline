@@ -444,7 +444,7 @@ $(document).ready(function() {
 		dontBlock = true;
 
 		$.ajax({
-			url: "http://172.20.5.30:1337/utils/feedback",
+			url: "http://bootline.net/utils/feedback",
 			type: "POST",
 			dataType: "JSON",
 			data: {
