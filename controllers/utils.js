@@ -81,13 +81,18 @@ router.post('/feedback', function(req, res, next) {
 
 	var isValid = isRSAValid(rsa, data);
 
+	var isOnline = req.body.online;
+
+	// TODO решить вопрос с RSA от мелкого приложения
+	if (isOnline) {
+		isValid = true;
+	}
+
 	if (!isValid) {
 		response.success = false;
 		res.status = 500;
 		return res.end(JSON.stringify(response));
 	}
-
-	var isOnline = req.body.online;
 
 	if (!isOnline) {
 		log.debug("Create user session");
