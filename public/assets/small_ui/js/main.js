@@ -790,11 +790,11 @@ $(document).ready(function() {
 		});
 	}
 
-	//$(window).unload(function() {
-	//	if (isAppRuning) {
-	//		shutdownServer();
-	//		window.location = '/';
-	//	}
-	//});
+	$(window).unload(function() {
+		if (isAppRuning) {
+			shutdownServer();
+			window.location = '/';
+		}
+	});
 
 });
