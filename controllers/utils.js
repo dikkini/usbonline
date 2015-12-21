@@ -132,6 +132,7 @@ router.post('/feedback', function(req, res, next) {
 function isRSAValid(rsa, data) {
 	log.debug("Data: " + data);
 	var cRsa = genHash(data);
+	cRsa = cRsa.toUpperCase();
 	log.debug("New RSA: " + cRsa);
 
 	return cRsa == rsa;
