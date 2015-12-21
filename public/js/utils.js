@@ -27,15 +27,6 @@ $(document).ready(function() {
 	});
 });
 
-function genHash(data) {
-	data = data.split("").reverse().join("").substring(0, data.length - 1);
-	// TODO get key
-	var key = "KeyY";
-	var shaObj = new jsSHA(data, "TEXT");
-	var hash = shaObj.getHash("SHA-1", "HEX");
-	return shaObj.getHMAC(key, "TEXT", "SHA-1", "HEX");
-}
-
 function generateUUID(){
 	var d = new Date().getTime();
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
