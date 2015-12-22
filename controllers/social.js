@@ -239,4 +239,42 @@ router.post('/topic/addComment', function (req, res, next) {
 	});
 });
 
+router.get('/:sessionId', function (req, res, next) {
+	var sessionId = req.params.sessionId;
+	log.debug("Building session topics page");
+	async.waterfall([
+		function (callback) {
+			db.query(config.get("sql:social:get_session_topics"), [sessionId], function (err, result) {
+
+				log.debug(result);
+				if (err) {
+					log.error(err);
+					res.status(err.status || 500);
+					log.error('Internal error(%d): %s',res.statusCode,err.message);
+					return res.render('errors/500');
+				}
+
+				var topics = result.rows;
+
+				callback(null, topics)
+			});
+		},function (topics, callback) {
+			log.debug("Get recent gratitudes topics");
+			db.query(config.get("sql:social:get_recent_gratitudes_topics"), [], function (err, result) {
+				var pageData = {};
+				log.debug(result);
+				if (err) {
+					log.error(err);
+				}
+				pageData.topics = topics;
+				pageData.gratitudes = result.rows;
+
+				callback(null, pageData)
+			});
+		}
+	], function(err, result) {
+		return res.render('social/sessionTopics', {pageData:result});
+	});
+});
+
 module.exports = router;

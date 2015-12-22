@@ -444,18 +444,17 @@ $(document).ready(function() {
 		dontBlock = true;
 
 		$.ajax({
-			url: "http://bootline.net/utils/feedback",
+			url: "/",
 			type: "POST",
 			dataType: "JSON",
 			data: {
+				"Operation": "feedback",
 				"nick": name,
 				"email": email,
 				"feedback": feedback,
 				"subject": feedbackSubject,
 				"type": feedbackType,
-				"id": SESSIONID,
-				"online": true,
-				"RSA": rsa
+				"online": true
 			},
 			async: true,
 			success: function (response) {
@@ -469,12 +468,13 @@ $(document).ready(function() {
 
 	function renderFlashDrives() {
 		var successCb = function(response) {
+			var html;
 			var fdList = $("#flash-drives-list");
 			var drives = response.Drives;
 			if (!drives) {
 				$refreshDrivesBtn.removeAttr("disabled");
 				$addLoaderBtn.removeAttr("disabled");
-				var html = "<a href='#' class='list-group-item flash-drive-item disabled' disabled='disabled'>" +
+				html = "<a href='#' class='list-group-item flash-drive-item disabled' disabled='disabled'>" +
 								"<h4 class='list-group-item-heading'>Insert flash drive to your computer</h4>" +
 							"</a>";
 				fdList.append(html);
@@ -484,12 +484,11 @@ $(document).ready(function() {
 			}
 			for (var i = 0; i < drives.length; i++) {
 				var drive = drives[i];
-				var html = "<a href='#' value='" + JSON.stringify(drive) + "' class='list-group-item flash-drive-item'>" +
+				html = "<a href='#' value='" + JSON.stringify(drive) + "' class='list-group-item flash-drive-item'>" +
 								"<h4 class='list-group-item-heading'>" + drive.Name + '</h4>' +
 								"<p class='list-group-item-text'>(" + drive.Letter.toUpperCase() + ":\\" + ") " + drive.FS + "</p>" +
 						    	"<p class='list-group-item-text'>FreeSpace:" + Math.round(parseInt(drive.FreeSpace) / (1024*1024)) + "Mb</p>" +
 								"<p class='list-group-item-text'>FullSize: " + Math.round(parseInt(drive.FullSize) / (1024*1024)) + "Mb</p>" +
-
 							'</a>';
 				fdList.append(html);
 			}
@@ -767,11 +766,11 @@ $(document).ready(function() {
 		var version = parseInt(navigator.appVersion,10);
 
 		$.ajax({
-			url: "http://bootline.net/utils/userinfo",
+			url: "/",
 			type: "POST",
 			dataType: "JSON",
 			data: {
-				"sessionId": SESSIONID,
+				"Operation": "userinfo",
 				"codeName": codeName,
 				"appName": appName,
 				"appVersion": appVersion,

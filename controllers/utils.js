@@ -50,10 +50,6 @@ router.post('/setPort', function(req, res, next) {
 
 });
 
-router.post('/feedback_win', function(req, res, next) {
-	log.debug("BODY: " + JSON.stringify(req.body));
-});
-
 router.post('/feedback', function(req, res, next) {
 	log.debug("BODY: " + JSON.stringify(req.body));
 
@@ -82,11 +78,6 @@ router.post('/feedback', function(req, res, next) {
 	var isValid = isRSAValid(rsa, data);
 
 	var isOnline = req.body.online;
-
-	// TODO решить вопрос с RSA от мелкого приложения
-	if (isOnline) {
-		isValid = true;
-	}
 
 	if (!isValid) {
 		response.success = false;
@@ -156,7 +147,7 @@ function genHash(data) {
 
 router.post('/userinfo', function(req, res, next) {
 	log.debug("Collect user info");
-	var sessionid = req.body.sessionId;
+	var sessionid = req.body.id;
 	var appcodename = req.body.codeName;
 	var appname = req.body.appName;
 	var appversion = req.body.appVersion;
