@@ -77,7 +77,13 @@ router.post('/feedback', function(req, res, next) {
 	var rsa = req.body.RSA;
 	log.debug("RSA: " + rsa);
 	log.debug("Generate data for RSA check");
-	var data = "\"" + operation + "\"" + "\"" + name +  "\"" + "\"" + email + "\"" + "\"" + feedback + "\"" + "\"" + subject + "\"" + "\"" + categoryid + "\"" + "\"" + isOnline + "\"" + "\"" + sessionid + "\"";
+	var data;
+
+	if (isOnline) {
+		data = "\"" + operation + "\"" + "\"" + name + "\"" + "\"" + email + "\"" + "\"" + feedback + "\"" + "\"" + subject + "\"" + "\"" + categoryid + "\"" + "\"" + isOnline + "\"" + "\"" + sessionid + "\"";
+	} else {
+		data = "\"" + categoryid + "\"" + "\"" + email + "\"" + "\"" + name + "\"" + "\"" + feedback + "\"" + "\"" + subject + "\"" + "\"" + sessionid + "\"";
+	}
 
 	var isValid = isRSAValid(rsa, data);
 
