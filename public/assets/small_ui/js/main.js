@@ -437,9 +437,6 @@ $(document).ready(function() {
 			return;
 		}
 
-		var data = name+email+feedback+feedbackSubject+feedbackType+SESSIONID;
-		var rsa = genHash(data);
-
 		$("#feedback-modal").modal("hide");
 		dontBlock = true;
 
