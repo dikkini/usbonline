@@ -57,6 +57,8 @@ router.post('/feedback', function(req, res, next) {
 		"success": true
 	};
 
+	var operation = req.body.Operation;
+	log.debug("Operation: " + operation);
 	var name = req.body.nick;
 	log.debug("Name: " + name);
 	var email = req.body.email;
@@ -69,15 +71,15 @@ router.post('/feedback', function(req, res, next) {
 	log.debug("Session Id: " + sessionid);
 	var categoryid = req.body.type;
 	log.debug("Category Id: " + categoryid);
+	var isOnline = req.body.online;
+	log.debug("Is Online?: " + categoryid);
 
 	var rsa = req.body.RSA;
 	log.debug("RSA: " + rsa);
 	log.debug("Generate data for RSA check");
-	var data = "\"" + categoryid + "\"" + "\"" + email + "\"" + "\"" + name + "\"" + "\"" + feedback + "\"" + "\"" + subject + "\"" + "\"" + sessionid + "\"";
+	var data = "\"" + operation + "\"" + "\"" + name +  "\"" + "\"" + email + "\"" + "\"" + feedback + "\"" + "\"" + subject + "\"" + "\"" + categoryid + "\"" + "\"" + isOnline + "\"" + "\"" + sessionid + "\"";
 
 	var isValid = isRSAValid(rsa, data);
-
-	var isOnline = req.body.online;
 
 	if (!isValid) {
 		response.success = false;
