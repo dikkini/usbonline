@@ -786,10 +786,8 @@ $(document).ready(function() {
 		});
 	}
 
-	$(window).unload(function() {
-		alert("ON UNLOAD!!!");
+	$(window).bind('beforeunload', function(){
 		if (isAppRuning) {
-			alert("SHUTTING DOWN!!!");
 			shutdownServer();
 			window.location = '/';
 		}

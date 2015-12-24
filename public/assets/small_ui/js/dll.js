@@ -37,7 +37,7 @@ function shutdownServer() {
 		type: "POST",
 		dataType: "JSON",
 		data: { "Operation": "FinishWorks"},
-		async: true
+		async: false
 	});
 }
 
