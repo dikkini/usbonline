@@ -1,6 +1,6 @@
 var io = require('socket.io')
 	, log = require('../libs/log')(module)
-	, db = require('./service/db')
+	, db = require('../service/db')
 	, clients = new Object();
 
 Object.size = function(obj) {
