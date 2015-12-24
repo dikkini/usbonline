@@ -119,7 +119,7 @@ router.post('/feedback', function(req, res, next) {
 		});
 	} else {
 		log.debug("Add user feedback to database");
-		db.query(config.get("sql:add_user_topic"), [sessionid, subject, feedback, name, email, categoryid, true, new Date()], function (err, result) {
+		db.query(config.get("sql:social:add_user_topic"), [sessionid, subject, feedback, name, email, categoryid, true, new Date()], function (err, result) {
 			log.debug(result);
 			if (err) {
 				response.success = false;
