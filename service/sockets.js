@@ -1,5 +1,6 @@
 var io = require('socket.io')
 	, log = require('../libs/log')(module)
+	, config = require('../libs/config')
 	, db = require('../service/db')
 	, clients = new Object();
 
