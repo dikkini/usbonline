@@ -113,3 +113,7 @@ section#app {
 ul li {
   display: inline;
 }
+
+.banner-text h2 {
+  text-shadow: none;
+}

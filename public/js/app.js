@@ -23,8 +23,8 @@ $(document).ready(function() {
 	} else {
 		$("section#app").remove();
 		$body.append("<header><div class='banner'><div class='banner-text'><h2> Current version of online application available " +
-				"only for Internet Explorer 9 and later. You can download our " +
-				"<a href='/download/application'>portable application for Windows</a></h2></div></div></header>");
+				"only for Internet Explorer 9 and later. <p>You can download our " +
+				"<a href='/download/application'>portable application for Windows</a></p></h2></div></div></header>");
 	}
 
 	$("#isClickOnce").val(isClickOnce);

@@ -36,6 +36,13 @@
 		</div>
 		<div class="col-xs-9">
 			<% var topic = pageData.topic; %>
+			<ol class="breadcrumb">
+				<li><a href="/social">Categories</a></li>
+				<% if (topic.categoryid != 2) {%>
+				<li><a href="/social/category/<%= topic.categoryid %>">Topics</a></li>
+				<%  } %>
+				<li class="active">Topic</li>
+			</ol>
 			<div id="topicTable" class="row" data-topicid="<%= topic.id %>">
 				<div class="col-xs-1">
 					<i class="fa fa-comments fa-3x text-primary"></i>
@@ -57,7 +64,7 @@
 			<div id="comments">
 				<h4>Comments: <%= comments.length %></h4>
 				<div id="comments-controls" class="row">
-					<div class="col-xs-4 col-lg-offset-7">
+					<div class="col-xs-4">
 						<button class="btn btn-link" data-toggle="modal" data-target="#add-comment-modal">Add comment</button>
 						<button id="hide-comments-btn" class="btn btn-link" data-default-text="Hide comments" data-new-text="Show comments">Hide comments</button>
 					</div>
