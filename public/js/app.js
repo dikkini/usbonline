@@ -126,7 +126,7 @@ $(document).ready(function() {
 		if (iframe.attachEvent) {
 			iframe.attachEvent("onload", resizeIframe);
 		} else {
-			//iframe.onload=resizeIframe;
+			iframe.onload=resizeIframe;
 		}
 
 		window.onresize = resizeIframe;

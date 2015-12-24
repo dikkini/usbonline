@@ -7,7 +7,7 @@
     "stop": "node ./bin/stop"
   },
   "dependencies": {
-    "body-parser": "~1.14.1",
+    "body-parser": "~1.14.2",
     "async": "~1.5.0",
     "ejs": "~2.3.4",
     "compression": "~1.6.0",
@@ -19,13 +19,14 @@
     "serve-favicon": "~2.3.0",
     "pg": "~4.4.3",
     "winston": "~2.1.1",
-    "express-winston": "~0.4.1",
+    "express-winston": "~1.2.0",
     "winston-filerotatedate": "~0.1.7",
     "nconf": "~0.8.2",
     "method-override": "~2.3.5",
     "crypto": "~0.0.3",
     "finalhandler": "~0.4.1",
     "sha1": "~1.1.1",
-    "jssha": "~2.0.2"
+    "jssha": "~2.0.2",
+    "node-uuid": "~1.4.7"
   }
 }

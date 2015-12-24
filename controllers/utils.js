@@ -95,7 +95,7 @@ router.post('/feedback', function(req, res, next) {
 
 	if (!isOnline) {
 		log.debug("Create user session");
-		db.query(config.get("sql:create_user_session"), [sessionid, new Date()], function (err, result) {
+		db.query(config.get("sql:users:create_user_session"), [sessionid, new Date()], function (err, result) {
 
 			log.debug(result);
 			if (err) {
@@ -105,7 +105,7 @@ router.post('/feedback', function(req, res, next) {
 				return res.end(JSON.stringify(response));
 			}
 			log.debug("Add user feedback to database");
-			db.query(config.get("sql:add_user_topic"), [sessionid, subject, feedback, name, email, categoryid, false, new Date()], function (err, result) {
+			db.query(config.get("sql:social:add_user_topic"), [sessionid, subject, feedback, name, email, categoryid, false, new Date()], function (err, result) {
 				log.debug(result);
 				if (err) {
 					response.success = false;
@@ -173,7 +173,7 @@ router.post('/userinfo', function(req, res, next) {
 	};
 
 	log.debug("Create user session");
-	db.query(config.get("sql:create_user_session"), [sessionid, createdDate], function (err, result) {
+	db.query(config.get("sql:users:create_user_session"), [sessionid, createdDate], function (err, result) {
 
 		log.debug(result);
 		if (err) {
@@ -183,7 +183,7 @@ router.post('/userinfo', function(req, res, next) {
 			return res.end(JSON.stringify(response));
 		}
 		log.debug("Save userinfo");
-		db.query(config.get("sql:add_user_browser_info"), [sessionid, appcodename, appname, appversion, language, platform, useragent, javaenabled, cookiesenabled, browserversion, createdDate], function (err, result) {
+		db.query(config.get("sql:users:add_user_browser_info"), [sessionid, appcodename, appname, appversion, language, platform, useragent, javaenabled, cookiesenabled, browserversion, createdDate], function (err, result) {
 
 			log.debug(result);
 			if (err) {
