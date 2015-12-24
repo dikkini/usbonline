@@ -1,5 +1,6 @@
 var io = require('socket.io')
 	, log = require('../libs/log')(module)
+	, db = require('./service/db')
 	, clients = new Object();
 
 Object.size = function(obj) {
@@ -21,6 +22,14 @@ function handler(socket) {
 
 	socket.emit("connect");
 
+	log.debug("Update statistic in database");
+	db.query(config.get("sql:stats:update_plus_count_active_users"), [], function (err, result) {
+		log.debug(result);
+		if (err) {
+			log.error(err);
+		}
+	});
+
 	socket.on("launchapp", function (data) {
 		socket.emit("launchapp", {
 			port: data.port
@@ -36,6 +45,14 @@ function handler(socket) {
 		log.debug("Delete client from array");
 		socket.disconnect();
 		log.debug("Disconnected");
+
+		log.debug("Update statistic in database");
+		db.query(config.get("sql:stats:update_minus_count_active_users"), [], function (err, result) {
+			log.debug(result);
+			if (err) {
+				log.error(err);
+			}
+		});
 	});
 
 	socket.on('end', function() {
@@ -47,6 +64,13 @@ function handler(socket) {
 		log.debug("Delete client from array");
 		socket.disconnect();
 		log.debug("Disconnected");
+		log.debug("Update statistic in database");
+		db.query(config.get("sql:stats:update_minus_count_active_users"), [], function (err, result) {
+			log.debug(result);
+			if (err) {
+				log.error(err);
+			}
+		});
 	});
 }
 
