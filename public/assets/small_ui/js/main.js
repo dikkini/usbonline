@@ -787,7 +787,9 @@ $(document).ready(function() {
 	}
 
 	$(window).unload(function() {
+		alert("ON UNLOAD!!!");
 		if (isAppRuning) {
+			alert("SHUTTING DOWN!!!");
 			shutdownServer();
 			window.location = '/';
 		}
