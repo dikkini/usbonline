@@ -198,7 +198,7 @@ $(document).ready(function() {
 
 	var $addLoaderBtn = $("#addLoaderBtn");
 
-	var wHeight = $("section#app").height();
+	var wHeight = document.documentElement.clientHeight - $("section#app").height();
 	$("#loader-list").css({"height":wHeight});
 	$(window).on('resize', function() {
 		var wHeight = $("section#app").height();
