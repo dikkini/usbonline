@@ -64,9 +64,15 @@
 			<div id="comments">
 				<h4>Comments: <%= comments.length %></h4>
 				<div id="comments-controls" class="row">
-					<div class="col-xs-4">
-						<button class="btn btn-link" data-toggle="modal" data-target="#add-comment-modal">Add comment</button>
-						<button id="hide-comments-btn" class="btn btn-link" data-default-text="Hide comments" data-new-text="Show comments">Hide comments</button>
+					<div class="col-xs-4 col-lg-offset-7">
+						<div class="row">
+							<div class="col-xs-6">
+								<button class="btn btn-link" data-toggle="modal" data-target="#add-comment-modal">Add comment</button>
+							</div>
+							<div class="col-xs-6">
+								<button id="hide-comments-btn" class="btn btn-link" data-default-text="Hide comments" data-new-text="Show comments">Hide comments</button>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div id="comment-list">
