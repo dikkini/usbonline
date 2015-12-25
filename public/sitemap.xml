@@ -4,22 +4,22 @@
         <loc>http://bootline.net/index</loc>
         <lastmod>2015-12-25</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.4</priority>
     </url>
     <url>
         <loc>http://bootline.net/app</loc>
         <lastmod>2015-12-25</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.3</priority>
     </url>
     <url>
         <loc>http://bootline.net/about</loc>
         <lastmod>2015-12-25</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.2</priority>
     </url>
     <url>
-        <loc>http://bootline.net/about</loc>
+        <loc>http://bootline.net/social</loc>
         <lastmod>2015-12-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
