@@ -211,4 +211,17 @@ router.post('/userinfo', function(req, res, next) {
 	});
 });
 
+router.post('/startappbtn', function (req, res, next) {
+	db.query(config.get("sql:stats:update_pressedstartapp"), [], function (err, result) {
+		log.debug(result);
+		if (err) {
+			log.error(err);
+		}
+	});
+	var response = {
+		"success": true
+	};
+	return res.end(JSON.stringify(response));
+});
+
 module.exports = router;

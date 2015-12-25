@@ -49,6 +49,15 @@ $(document).ready(function() {
 
 	$body.on('click', "#launchApp", function() {
 		if (isClickOnce) {
+			$.ajax({
+				url: "/utils/startappbtn",
+				type: "POST",
+				dataType: "JSON",
+				data: {},
+				async: false,
+				success: function (response) {},
+				error: function (response) {}
+			});
 			var loadersJson = loaderCodes();
 			var $appUrl = $("#application-url");
 			var href = $appUrl.attr("href");
