@@ -25,7 +25,7 @@ $(document).ready(function() {
 			afterShow: function() {},
 			onClose: function() {},
 			afterClose: function() {},
-			onCloseClick: function() {},
+			onCloseClick: function() {}
 		},
 		buttons: false // an array of buttons
 	};
@@ -34,7 +34,7 @@ $(document).ready(function() {
 		// Make sure that #header-background-image height is equal to the browser height.
 
 		$('header').css({ 'height': $(window).height() });
-		$('section').css({ 'height': $(window).height() });
+		$('section').css({ 'height': $(window).height() - 50 });
 		$(window).on('resize', function() {
 			$('header').css({ 'height': $(window).height() });
 			$('section').css({ 'height': $(window).height() - 50 });

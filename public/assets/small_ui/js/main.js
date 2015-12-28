@@ -786,6 +786,12 @@ $(document).ready(function() {
 		});
 	}
 
+	$("span").find('a[href="/eula"]').click(function(e) {
+		var win = window.open("http://bootline.net/eula", '_blank');
+		win.focus();
+		e.preventDefault();
+	});
+
 	$(window).bind('beforeunload', function(){
 		if (isAppRuning) {
 			shutdownServer();

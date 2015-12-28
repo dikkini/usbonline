@@ -93,18 +93,9 @@ $(document).ready(function() {
 		return loaderCodes;
 	}
 
-	var buffer = 20; //scroll bar buffer
-
 	function pageY(elem) {
 		return elem.offsetParent ? (elem.offsetTop + pageY(elem.offsetParent)) : elem.offsetTop;
 	}
-
-	//function resizeIframe() {
-	//	var height = document.documentElement.clientHeight;
-	//	height -= pageY(document.getElementById('smallAppIFrame'))+ buffer ;
-	//	height = (height < 0) ? 0 : height;
-	//	document.getElementById('smallAppIFrame').style.height = height + 'px';
-	//}
 
 	function resizeIframe() {
 		var height = $("section#app").height();
@@ -122,7 +113,7 @@ $(document).ready(function() {
 		content.removeClass("row");
 		$body.css({"padding-left": "0", "padding-right": "0"});
 		$("#header").remove();
-		$("section#app").css({"margin-top": "-2px", "margin-bottom": "0", "padding-top": "0"});
+		$("section#app").css({"margin-top": "-2px", "margin-bottom": "0", "padding-top": "0", "padding-bottom": "0"});
 
 		var iframe = '<iframe id="smallAppIFrame" width="100%" height="600px" scrolling="no" frameborder="no" ' +
 				'src="http://localhost:' + port + '"></iframe>';
@@ -134,8 +125,6 @@ $(document).ready(function() {
 		// .onload doesn't work with IE8 and older.
 		if (iframe.attachEvent) {
 			iframe.attachEvent("onload", resizeIframe);
-		} else {
-			iframe.onload=resizeIframe;
 		}
 
 		window.onresize = resizeIframe;

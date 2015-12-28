@@ -38,7 +38,7 @@ $.noty.themes.defaultTheme = {
             position       : 'fixed',
             width          : '100%',
             height         : '100%',
-            backgroundColor: '#000',
+            backgroundColor: 'red',
             zIndex         : 10000,
             opacity        : 0.6,
             display        : 'none',
@@ -149,7 +149,7 @@ $.noty.themes.defaultTheme = {
         switch(this.options.type) {
             case 'alert':
             case 'notification':
-                this.$bar.css({backgroundColor: '#FFF', borderColor: '#CCC', color: '#444'});
+                this.$bar.css({backgroundColor: 'red', borderColor: '#CCC', color: '#444'});
                 break;
             case 'warning':
                 this.$bar.css({backgroundColor: '#FFEAA8', borderColor: '#FFC237', color: '#826200'});

@@ -336,6 +336,7 @@ select.loader-type-select {
 }
 
 #eula {
+    padding-top: 50px;
     padding-bottom: 30px;
     color: white;
     position: absolute;
@@ -356,6 +357,32 @@ select.loader-type-select {
 /* mouse over link */
 #eula a:hover {
     text-decoration: underline;
+}
+
+/*
+    IE 10
+*/
+
+html[data-useragent*='MSIE 10.0'] .btn-circle.btn-sm {
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+    line-height: 1.33;
+    border-radius: 25px;
+}
+
+html[data-useragent*='MSIE 10.0'] .btn-circle.btn-sm span {
+    margin-left: -7px;
+    margin-top: -8px;
+}
+
+html[data-useragent*='MSIE 10.0'] .btn-circle.btn-sm span.glyphicon {
+    margin-left: -14px;
+    margin-top: -7px;
+}
+
+html[data-useragent*='MSIE 10.0'] #refreshFlashDrives {
+    margin-left: -5px;
 }
 
 /*
