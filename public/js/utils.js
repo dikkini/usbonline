@@ -33,7 +33,7 @@ $(document).ready(function() {
 	$(function() {
 		// Make sure that #header-background-image height is equal to the browser height.
 
-		$('header').css({ 'height': $(window).height() });
+		$('header').css({ 'height': $(window).height() - 50 });
 		$('section').css({ 'height': $(window).height() - 50 });
 		$(window).on('resize', function() {
 			$('header').css({ 'height': $(window).height() });
