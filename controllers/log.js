@@ -5,7 +5,7 @@ var express = require('express')
 
 router.post('/', function (req, res, next) {
 	var id = req.body.id;
-	var logMsg = req.body.msg.toString();
+	var logMsg = JSON.stringify(req.body.msg);
 
 	var response = {
 		"success": true
