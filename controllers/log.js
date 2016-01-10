@@ -15,9 +15,9 @@ router.post('/', function (req, res, next) {
 	log.debug("Income logMsg: " + logMsg);
 
 
-	fs.exists('/tmp/usbonline/logs/' + id, function (exists) {
+	fs.exists('/home/winusb/portable_logs/' + id, function (exists) {
 		if (exists) {
-			fs.appendFile("/tmp/usbonline/logs/" + id, logMsg + "\n", function (err) {
+			fs.appendFile("/home/winusb/portable_logs/" + id, logMsg + "\n", function (err) {
 				if (err) {
 					log.error(err);
 					response.success = false;
@@ -27,7 +27,7 @@ router.post('/', function (req, res, next) {
 				return res.end(JSON.stringify(response));
 			});
 		} else {
-			fs.writeFile("/tmp/usbonline/logs/" + id, logMsg + "\n", function (err) {
+			fs.writeFile("/home/winusb/portable_logs/" + id, logMsg + "\n", function (err) {
 				if (err) {
 					log.error(err);
 					response.success = false;
@@ -46,9 +46,9 @@ router.get('/:id', function (req, res, next) {
 		"success": false,
 		"logFile": "file not found"
 	};
-	fs.exists('/tmp/usbonline/logs/' + id, function (exists) {
+	fs.exists('/home/winusb/portable_logs/' + id, function (exists) {
 		if (exists) {
-			fs.readFile('/tmp/usbonline/logs/' + id, function (err, data) {
+			fs.readFile('/home/winusb/portable_logs/' + id, function (err, data) {
 				if (err) {
 					return log.error(err);
 				}
