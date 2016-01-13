@@ -27,13 +27,8 @@ section {
 }
 
 #features {
-    padding-left: 290px;
+    padding-left: 190px;
 }
-
-#go-to-app-btn-container {
-    padding-left: 50px;
-}
-
 
 .numberCircle {
     border-radius: 50%;
