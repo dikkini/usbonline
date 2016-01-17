@@ -1,18 +1,14 @@
-function log(message, async, successCb, errorCb) {
+function log(message) {
 	window.dontBlock = true;
-
+	message = JSON.stringify(message);
 	$.ajax({
 		url: "/",
 		type: "POST",
 		dataType: "JSON",
 		data: { "Operation": "WriteLogMessage", "Message": message},
-		async: async,
-		success: function (response) {
-			successCb(response);
-		},
-		error: function (response) {
-			errorCb(response);
-		}
+		async: true,
+		success: function (response) {},
+		error: function (response) {}
 	});
 }
 

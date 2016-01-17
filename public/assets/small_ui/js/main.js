@@ -204,6 +204,11 @@ $(document).ready(function() {
 			alert(response);
 		};
 
+		var msg = {
+			"date": new Date(),
+			"msg":"Burn Button Click"
+		};
+		log(msg);
 		burnFlashDrive(loaderList, mode, selectedFlashDrive.Letter, true, successCb, errorCb);
 	});
 
@@ -491,6 +496,11 @@ $(document).ready(function() {
 			}
 			enableInterface();
 			$.unblockUI();
+			var msg = {
+				"date": new Date(),
+				"msg":"Online Application Init Completed"
+			};
+			log(msg);
 		};
 		var errorCb = function(response) {
 			alert(response);
@@ -502,6 +512,11 @@ $(document).ready(function() {
 	var burningProgressMessages;
 	function launchBurningProgressProcess() {
 		var successCb = function(response) {
+			var msg = {
+				"date": new Date(),
+				"msg":"Launch Burning Progress"
+			};
+			log(msg);
 			ISWORKING = true;
 			var messages = response.NewMessages;
 			if (!messages) {
@@ -787,6 +802,11 @@ $(document).ready(function() {
 	}
 
 	$("span").find('a[href="/eula"]').click(function(e) {
+		var msg = {
+			"date": new Date(),
+			"msg":"EULA click"
+		};
+		log(msg);
 		var win = window.open("http://bootline.net/eula", '_blank');
 		win.focus();
 		e.preventDefault();
