@@ -19,23 +19,20 @@ $(document).ready(function() {
 	var isIE = isClientBrowserIE();
 	if (isIE) {
 		isClickOnce = true;
-		$appUrl.hide();
 	} else {
-		$("section#app").remove();
-		$body.append("<header><div class='banner'><div class='banner-text'><h2> Current version of online application available " +
-				"only for Internet Explorer 9 and later. <p>You can download our " +
-				"<a href='/download/application'>portable application for Windows</a></p></h2></div></div></header>");
+		$("#loader-list").remove();
+		$appUrl.attr("href", "/download/online");
+		$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Do not close this page! Launch BootLine.exe and back to this page.</h3>';
 	}
+	$appUrl.hide();
 
 	$("#isClickOnce").val(isClickOnce);
 
 	socket.on('connect', function () {
 		sessionId = (socket.io.engine.id).toString().substr(0, 10);
-		if (isClickOnce) {
-			var href = $appUrl.attr("href");
-			href = href + "?sessionId=" + sessionId;
-			$appUrl.attr("href", href);
-		}
+		var href = $appUrl.attr("href");
+		href = href + "?sessionId=" + sessionId;
+		$appUrl.attr("href", href);
 	});
 
 	socket.on('launchapp', function (data) {
@@ -48,28 +45,31 @@ $(document).ready(function() {
 	});
 
 	$body.on('click', "#launchApp", function() {
+		$.blockUI();
+		$.ajax({
+			url: "/utils/startappbtn",
+			type: "POST",
+			dataType: "JSON",
+			data: {
+				IE:isIE
+			},
+			async: false,
+			success: function (response) {},
+			error: function (response) {}
+		});
+		var $appUrl = $("#application-url");
+		var href = $appUrl.attr("href");
 		if (isClickOnce) {
-			$.ajax({
-				url: "/utils/startappbtn",
-				type: "POST",
-				dataType: "JSON",
-				data: {},
-				async: false,
-				success: function (response) {},
-				error: function (response) {}
-			});
 			var loadersJson = loaderCodes();
-			var $appUrl = $("#application-url");
-			var href = $appUrl.attr("href");
 			href = href + "&loadersJson=" + loadersJson;
-			canReload = true;
-			launchApp = true;
-			window.location.href = href;
-
-			setTimeout(function() {
-				canReload = false;
-			}, 3000)
 		}
+		canReload = true;
+		launchApp = true;
+		window.location.href = href;
+
+		setTimeout(function() {
+			canReload = false;
+		}, 3000)
 	});
 
 	function loaderCodes() {
@@ -107,7 +107,6 @@ $(document).ready(function() {
 	});
 
 	function startApp(port) {
-		$.blockUI();
 		var content = $("#page-content");
 		content.empty();
 		content.removeClass("row");

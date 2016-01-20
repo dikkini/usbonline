@@ -212,12 +212,24 @@ router.post('/userinfo', function(req, res, next) {
 });
 
 router.post('/startappbtn', function (req, res, next) {
-	db.query(config.get("sql:stats:update_pressedstartapp"), [], function (err, result) {
-		log.debug(result);
-		if (err) {
-			log.error(err);
-		}
-	});
+	log.debug("startappbtn");
+	var isIE = req.body.IE;
+	log.debug("IsIE: " + isIE);
+	if (isIE) {
+		db.query(config.get("sql:stats:update_pressedstartapp"), [], function (err, result) {
+			log.debug(result);
+			if (err) {
+				log.error(err);
+			}
+		});
+	} else {
+		//db.query(config.get("sql:stats:update_pressedstartapp_chrome"), [], function (err, result) {
+		//	log.debug(result);
+		//	if (err) {
+		//		log.error(err);
+		//	}
+		//});
+	}
 	var response = {
 		"success": true
 	};
