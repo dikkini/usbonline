@@ -34,6 +34,7 @@
       "update_plus_count_active_users": "UPDATE bootline.f_statistic SET activeusers = activeusers + 1;",
       "update_minus_count_active_users": "UPDATE bootline.f_statistic SET activeusers = activeusers - 1;",
       "update_pressedstartapp": "UPDATE bootline.f_statistic SET pressedstartapp = pressedstartapp + 1;",
+      "update_pressedstartapp_chrome": "UPDATE bootline.f_statistic SET pressedstartapp_chrome = pressedstartapp_chrome + 1;",
       "update_downloadportable": "UPDATE bootline.f_statistic SET downloadportable = downloadportable + 1;"
     }
   }

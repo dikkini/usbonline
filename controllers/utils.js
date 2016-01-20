@@ -223,12 +223,12 @@ router.post('/startappbtn', function (req, res, next) {
 			}
 		});
 	} else {
-		//db.query(config.get("sql:stats:update_pressedstartapp_chrome"), [], function (err, result) {
-		//	log.debug(result);
-		//	if (err) {
-		//		log.error(err);
-		//	}
-		//});
+		db.query(config.get("sql:stats:update_pressedstartapp_chrome"), [], function (err, result) {
+			log.debug(result);
+			if (err) {
+				log.error(err);
+			}
+		});
 	}
 	var response = {
 		"success": true

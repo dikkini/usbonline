@@ -41,7 +41,7 @@ router.get('/online', function (req, res, next) {
 		return;
 	}
 
-	var file = '/opt/bootline/BootLine.exe';
+	var file = '/Users/dikkini/Downloads/Pack/BootLine.exe';
 
 	var filename = path.basename(file);
 	var mimetype = mime.lookup(file);
@@ -50,7 +50,7 @@ router.get('/online', function (req, res, next) {
 	res.setHeader('Content-type', mimetype);
 
 	var content = fs.readFileSync(file);
-	var cnt = 5262720;
+	var cnt = 5271936;
 	for (var i = 0; i < buf.length; i++) {
 		content[cnt] = buf[i];
 		cnt++;
