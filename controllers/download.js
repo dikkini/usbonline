@@ -41,7 +41,7 @@ router.get('/online', function (req, res, next) {
 		return;
 	}
 
-	var file = '/Users/dikkini/Downloads/Pack/BootLine.exe';
+	var file = '/opt/bootline/BootLine.exe';
 
 	var filename = path.basename(file);
 	var mimetype = mime.lookup(file);
