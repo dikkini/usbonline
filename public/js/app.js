@@ -24,6 +24,9 @@ $(document).ready(function() {
 		$("#loader-list").remove();
 		$appUrl.attr("href", "/download/online");
 		$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Do not close this page! Launch BootLine.exe and back to this page.</h3>';
+		$body.append("<header><div class='banner'><div class='banner-text'><h2> Current version of online application available " +
+				"only for Internet Explorer 9 and later. <p>You can download our " +
+				"<a href='/download/application'>portable application for Windows</a></p></h2></div></div></header>");
 	}
 	$appUrl.hide();
 
