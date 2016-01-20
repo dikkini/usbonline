@@ -20,6 +20,7 @@ $(document).ready(function() {
 	if (isIE) {
 		isClickOnce = true;
 	} else {
+		$("section#app").remove();
 		$("#loader-list").remove();
 		$appUrl.attr("href", "/download/online");
 		$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Do not close this page! Launch BootLine.exe and back to this page.</h3>';
