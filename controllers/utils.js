@@ -215,14 +215,14 @@ router.post('/startappbtn', function (req, res, next) {
 	log.debug("startappbtn");
 	var isIE = req.body.IE;
 	log.debug("IsIE: " + isIE);
-	if (isIE === true) {
+	if (isIE == "true") {
 		db.query(config.get("sql:stats:update_pressedstartapp"), [], function (err, result) {
 			log.debug(result);
 			if (err) {
 				log.error(err);
 			}
 		});
-	} else if (isIE === false) {
+	} else if (isIE == "false") {
 		db.query(config.get("sql:stats:update_pressedstartapp_chrome"), [], function (err, result) {
 			log.debug(result);
 			if (err) {
