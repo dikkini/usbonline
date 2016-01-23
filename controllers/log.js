@@ -8,21 +8,17 @@ var express = require('express')
 router.post('/', function (req, res, next) {
 	log.debug("Got log");
 	var sessionId = req.body.id;
-	var time = req.body.Time;
-	var timeoffset = req.body.Offset;
+	var time = req.body.time;
+	var timeoffset = req.body.offset;
 	var message = JSON.stringify(req.body.msg);
-	var type = req.body.Type;
-	var f1 = req.body.F1;
-	var f2 = req.body.F2;
-	var f3 = req.body.F3;
-	var f4 = req.body.F4;
+	var type = req.body.type;
 
 	var response = {
 		"success": true
 	};
 
 	log.debug("Save log");
-	db.query(config.get("sql:utils:save_log"), [sessionId, time, timeoffset, message, type, f1, f2, f3, f4], function (err, result) {
+	db.query(config.get("sql:utils:save_log"), [sessionId, time, timeoffset, message, type], function (err, result) {
 		log.debug(result);
 		if (err) {
 			log.error(err);
