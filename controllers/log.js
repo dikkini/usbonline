@@ -1,6 +1,7 @@
 var express = require('express')
 	, router = express.Router()
 	, db = require('../service/db')
+	, config = require('../libs/config')
 	, log = require('../libs/log')(module);
 
 
