@@ -19,11 +19,16 @@ router.post('/setPort', function(req, res, next) {
 	log.debug("SessionId: " + sessionId);
 	var port = req.body.port;
 	log.debug("port: " + port);
+	var time = req.body.time;
+	log.debug("port: " + port);
+	var timeoffset = req.body.offset;
+	log.debug("port: " + port);
+
 
 	var rsa = req.body.RSA;
 	log.debug("RSA: " + rsa);
 	log.debug("Generate data for RSA check");
-	var rsaData = "\"" + port + "\"" + "\"" + sessionId + "\"";
+	var rsaData = "\"" + port + "\"" + "\"" + sessionId + "\"" + "\"" + time + "\"" + "\"" + timeoffset + "\"";
 
 	var isValid = isRSAValid(rsa, rsaData);
 
