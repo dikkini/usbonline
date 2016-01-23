@@ -1,62 +1,36 @@
 var express = require('express')
 	, router = express.Router()
-	, log = require('../libs/log')(module)
-	, fs = require('fs');
+	, db = require('../service/db')
+	, log = require('../libs/log')(module);
+
 
 router.post('/', function (req, res, next) {
-	var id = req.body.id;
-	var logMsg = JSON.stringify(req.body.msg);
+	log.debug("Got log");
+	var sessionId = req.body.id;
+	var time = req.body.Time;
+	var timeoffset = req.body.Offset;
+	var message = JSON.stringify(req.body.msg);
+	var type = req.body.Type;
+	var f1 = req.body.F1;
+	var f2 = req.body.F2;
+	var f3 = req.body.F3;
+	var f4 = req.body.F4;
 
 	var response = {
 		"success": true
 	};
 
-	log.debug("Income id:" + id);
-	log.debug("Income logMsg: " + logMsg);
-
-
-	fs.exists('/home/winusb/portable_logs/' + id, function (exists) {
-		if (exists) {
-			fs.appendFile("/home/winusb/portable_logs/" + id, logMsg + "\n", function (err) {
-				if (err) {
-					log.error(err);
-					response.success = false;
-					return res.end(JSON.stringify(response));
-				}
-				log.info("Log done");
-				return res.end(JSON.stringify(response));
-			});
-		} else {
-			fs.writeFile("/home/winusb/portable_logs/" + id, logMsg + "\n", function (err) {
-				if (err) {
-					log.error(err);
-					response.success = false;
-					return res.end(JSON.stringify(response));
-				}
-				log.info("Log done");
-				return res.end(JSON.stringify(response));
-			});
-		}
-	});
-});
-
-router.get('/:id', function (req, res, next) {
-	var id = req.params.id;
-	var response = {
-		"success": false,
-		"logFile": "file not found"
-	};
-	fs.exists('/home/winusb/portable_logs/' + id, function (exists) {
-		if (exists) {
-			fs.readFile('/home/winusb/portable_logs/' + id, function (err, data) {
-				if (err) {
-					return log.error(err);
-				}
-				return res.end(data);
-			});
-		} else {
+	log.debug("Save log");
+	db.query(config.get("sql:utils:save_log"), [sessionId, time, timeoffset, message, type, f1, f2, f3, f4], function (err, result) {
+		log.debug(result);
+		if (err) {
+			log.error(err);
+			response.success = false;
+			response.errorMessage = err;
 			return res.end(JSON.stringify(response));
 		}
+		log.debug("Saved!");
+		return res.end(JSON.stringify(response));
 	});
 });
 

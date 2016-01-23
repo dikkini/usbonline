@@ -8,8 +8,6 @@
   },
   "sql": {
     "users": {
-      "get_user_by_sessionid": "SELECT * FROM BOOTLINE.f_usersession WHERE sessionId = $1",
-      "create_user_session": "INSERT INTO BOOTLINE.f_usersession (sessionId, createddate) VALUES ($1,$2)",
       "add_user_browser_info": "INSERT INTO BOOTLINE.f_userbrowserinfo (sessionid, appcodename, appname, appversion, language, platform, useragent, javaenabled, cookiesenabled, browserversion, createddate) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11);"
     },
     "social": {
@@ -36,6 +34,9 @@
       "update_pressedstartapp": "UPDATE bootline.f_statistic SET pressedstartapp = pressedstartapp + 1;",
       "update_pressedstartapp_chrome": "UPDATE bootline.f_statistic SET pressedstartapp_chrome = pressedstartapp_chrome + 1;",
       "update_downloadportable": "UPDATE bootline.f_statistic SET downloadportable = downloadportable + 1;"
+    },
+    "utils": {
+      "save_log": "INSERT INTO bootline.log(sessionId, time, timeoffset, message, type, f1, f2, f3, f4) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)"
     }
   }
 }

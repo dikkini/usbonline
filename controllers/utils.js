@@ -93,8 +93,7 @@ router.post('/feedback', function(req, res, next) {
 		return res.end(JSON.stringify(response));
 	}
 
-	log.debug("Get user by sessionId.");
-	db.query(config.get("sql:users:get_user_by_sessionid"), [sessionid], function (err, result) {
+	db.query(config.get("sql:social:add_user_topic"), [sessionid, subject, feedback, name, email, categoryid, false, new Date()], function (err, result) {
 		log.debug(result);
 		if (err) {
 			response.success = false;
@@ -103,48 +102,7 @@ router.post('/feedback', function(req, res, next) {
 		} else {
 			log.debug("User feedback successfully added!");
 		}
-
-		log.debug("Checking row count.");
-		if (result.rowCount > 0) {
-			log.debug("User exist. rowCount > 0: " + result.rowCount);
-			log.debug("Add user feedback to database");
-			db.query(config.get("sql:social:add_user_topic"), [sessionid, subject, feedback, name, email, categoryid, false, new Date()], function (err, result) {
-				log.debug(result);
-				if (err) {
-					response.success = false;
-					response.errorMessage = err;
-					log.error(err);
-				} else {
-					log.debug("User feedback successfully added!");
-				}
-				return res.end(JSON.stringify(response));
-			});
-		} else {
-			log.debug("User does not exist. rowCount == 0: " +  result.rowCount);
-			log.debug("Create user session");
-			db.query(config.get("sql:users:create_user_session"), [sessionid, new Date()], function (err, result) {
-
-				log.debug(result);
-				if (err) {
-					log.error(err);
-					response.success = false;
-					response.errorMessage = err;
-					return res.end(JSON.stringify(response));
-				}
-				log.debug("Add user feedback to database");
-				db.query(config.get("sql:social:add_user_topic"), [sessionid, subject, feedback, name, email, categoryid, false, new Date()], function (err, result) {
-					log.debug(result);
-					if (err) {
-						response.success = false;
-						response.errorMessage = err;
-						log.error(err);
-					} else {
-						log.debug("User feedback successfully added!");
-					}
-					return res.end(JSON.stringify(response));
-				});
-			});
-		}
+		return res.end(JSON.stringify(response));
 	});
 });
 
@@ -187,27 +145,15 @@ router.post('/userinfo', function(req, res, next) {
 		"success": true
 	};
 
-	log.debug("Create user session");
-	db.query(config.get("sql:users:create_user_session"), [sessionid, createdDate], function (err, result) {
+	db.query(config.get("sql:users:add_user_browser_info"), [sessionid, appcodename, appname, appversion, language, platform, useragent, javaenabled, cookiesenabled, browserversion, createdDate], function (err, result) {
 
 		log.debug(result);
 		if (err) {
 			log.error(err);
 			response.success = false;
 			response.errorMessage = err;
-			return res.end(JSON.stringify(response));
 		}
-		log.debug("Save userinfo");
-		db.query(config.get("sql:users:add_user_browser_info"), [sessionid, appcodename, appname, appversion, language, platform, useragent, javaenabled, cookiesenabled, browserversion, createdDate], function (err, result) {
-
-			log.debug(result);
-			if (err) {
-				log.error(err);
-				response.success = false;
-				response.errorMessage = err;
-			}
-			return res.end(JSON.stringify(response));
-		});
+		return res.end(JSON.stringify(response));
 	});
 });
 
