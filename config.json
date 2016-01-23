@@ -36,7 +36,7 @@
       "update_downloadportable": "UPDATE bootline.f_statistic SET downloadportable = downloadportable + 1;"
     },
     "utils": {
-      "save_log": "INSERT INTO bootline.log(sessionId, time, timeoffset, message, type, f1, f2, f3, f4) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)"
+      "save_log": "INSERT INTO bootline.f_log(sessionId, time, timeoffset, message, type, f1, f2, f3, f4) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)"
     }
   }
 }
