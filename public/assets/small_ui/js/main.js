@@ -72,11 +72,6 @@ $(document).ready(function() {
 				loadersJson = loadersJson.split(",");
 				renderLoadersJson(loadersJson);
 				init();
-				var msg = {
-					"date": new Date(),
-					"msg":"Online Application Init Completed"
-				};
-				log(msg);
 			};
 			var errorCb = function (response) {
 				alert(response);
@@ -108,6 +103,11 @@ $(document).ready(function() {
 
 		disableInterface();
 		renderFlashDrives();
+
+		var msg = {
+			"msg":"Online Application Init Completed"
+		};
+		log(msg);
 	}
 
 	$(window).resize(function(){
@@ -134,12 +134,6 @@ $(document).ready(function() {
 			return;
 		}
 		selectedFlashDrive = $.parseJSON(fd);
-
-		var msg = {
-			"date": new Date(),
-			"msg":"New flash drive inserted: " + fd
-		};
-		log(msg);
 
 		$flashDriveList.children().each(function() {
 			$(this).removeClass("active");
@@ -216,7 +210,6 @@ $(document).ready(function() {
 		};
 
 		var msg = {
-			"date": new Date(),
 			"msg":"Burn Button Click. Loaders: " + JSON.stringify(loaderList)
 		};
 		log(msg);
@@ -507,10 +500,6 @@ $(document).ready(function() {
 			}
 			enableInterface();
 			$.unblockUI();
-			var msg = {
-				"date": new Date(),
-				"msg":"Online Application Init Completed"
-			};
 			log(msg);
 		};
 		var errorCb = function(response) {
@@ -814,10 +803,6 @@ $(document).ready(function() {
 	}
 
 	$("span").find('a[href="/eula"]').click(function(e) {
-		var msg = {
-			"msg":"EULA click"
-		};
-		log(msg);
 		var win = window.open("http://bootline.net/eula", '_blank');
 		win.focus();
 		e.preventDefault();
@@ -826,10 +811,6 @@ $(document).ready(function() {
 	$(window).bind('beforeunload', function(){
 		if (isAppRuning) {
 			shutdownServer();
-			var msg = {
-				"msg":"close page"
-			};
-			log(msg);
 			window.location = '/';
 		}
 	});
