@@ -7,6 +7,7 @@ var express = require('express')
 
 router.post('/', function (req, res, next) {
 	log.debug("Got log");
+	log.debug(JSON.stringify(req.body));
 	var sessionId = req.body.id;
 	var time = req.body.time;
 	var timeoffset = req.body.offset;
@@ -18,7 +19,7 @@ router.post('/', function (req, res, next) {
 	};
 
 	log.debug("Save log");
-	db.query(config.get("sql:utils:save_log"), [sessionId, time, timeoffset, message, type], function (err, result) {
+	db.query(config.get("sql:utils:save_log"), [sessionId, time, "DDMMYYYYHH24MISS", timeoffset, message, type], function (err, result) {
 		log.debug(result);
 		if (err) {
 			log.error(err);
