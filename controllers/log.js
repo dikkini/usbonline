@@ -14,6 +14,10 @@ router.post('/', function (req, res, next) {
 	var message = JSON.stringify(req.body.msg);
 	var type = req.body.type;
 
+	if (!time) {
+		time = "01012016183658"
+	}
+
 	var response = {
 		"success": true
 	};

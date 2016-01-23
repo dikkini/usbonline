@@ -72,6 +72,11 @@ $(document).ready(function() {
 				loadersJson = loadersJson.split(",");
 				renderLoadersJson(loadersJson);
 				init();
+				var msg = {
+					"date": new Date(),
+					"msg":"Online Application Init Completed"
+				};
+				log(msg);
 			};
 			var errorCb = function (response) {
 				alert(response);
@@ -129,6 +134,12 @@ $(document).ready(function() {
 			return;
 		}
 		selectedFlashDrive = $.parseJSON(fd);
+
+		var msg = {
+			"date": new Date(),
+			"msg":"New flash drive inserted: " + fd
+		};
+		log(msg);
 
 		$flashDriveList.children().each(function() {
 			$(this).removeClass("active");
@@ -206,7 +217,7 @@ $(document).ready(function() {
 
 		var msg = {
 			"date": new Date(),
-			"msg":"Burn Button Click"
+			"msg":"Burn Button Click. Loaders: " + JSON.stringify(loaderList)
 		};
 		log(msg);
 		burnFlashDrive(loaderList, mode, selectedFlashDrive.Letter, true, successCb, errorCb);
@@ -512,11 +523,6 @@ $(document).ready(function() {
 	var burningProgressMessages;
 	function launchBurningProgressProcess() {
 		var successCb = function(response) {
-			var msg = {
-				"date": new Date(),
-				"msg":"Launch Burning Progress"
-			};
-			log(msg);
 			ISWORKING = true;
 			var messages = response.NewMessages;
 			if (!messages) {
@@ -538,6 +544,12 @@ $(document).ready(function() {
 					ISWORKING = false;
 					enableInterface();
 					clearInterval(burningProgressMessages);
+
+					var msg = {
+						"date": new Date(),
+						"msg":"Burn finished"
+					};
+					log(msg);
 					return;
 				}
 
@@ -803,7 +815,6 @@ $(document).ready(function() {
 
 	$("span").find('a[href="/eula"]').click(function(e) {
 		var msg = {
-			"date": new Date(),
 			"msg":"EULA click"
 		};
 		log(msg);
@@ -815,6 +826,10 @@ $(document).ready(function() {
 	$(window).bind('beforeunload', function(){
 		if (isAppRuning) {
 			shutdownServer();
+			var msg = {
+				"msg":"close page"
+			};
+			log(msg);
 			window.location = '/';
 		}
 	});
