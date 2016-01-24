@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 	'use strict';
 
-	$("#app-navigation").addClass("active");
+	$("#online-navigation").addClass("active");
 
 	var serverBaseUrl = window.location.protocol + "//" + window.location.host
 		, sessionId = ''
@@ -21,7 +21,7 @@ $(document).ready(function() {
 		isClickOnce = true;
 	} else {
 		$("#loader-list").remove();
-		$("#howtolink").remove();
+		$("#howto-block").remove();
 		$appUrl.attr("href", "/download/online");
 		$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Do not close this page! Launch BootLine.exe and back to this page.</h3>';
 	}

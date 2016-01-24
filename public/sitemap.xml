@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>http://bootline.net/index</loc>
+        <loc>http://bootline.net/</loc>
         <lastmod>2015-12-25</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>http://bootline.net/app</loc>
-        <lastmod>2015-12-25</lastmod>
+        <loc>http://bootline.net/online</loc>
+        <lastmod>2016-01-24</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.3</priority>
+        <priority>0.5</priority>
     </url>
     <url>
-        <loc>http://bootline.net/about</loc>
-        <lastmod>2015-12-25</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.2</priority>
+        <loc>http://bootline.net/download</loc>
+        <lastmod>2016-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
     </url>
     <url>
         <loc>http://bootline.net/social</loc>
         <lastmod>2015-12-25</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>http://bootline.net/about</loc>
+        <lastmod>2016-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.2</priority>
     </url>
 </urlset>

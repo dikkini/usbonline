@@ -110,10 +110,6 @@ section#app {
   border-radius: 75px;
 }
 
-ul li {
-  display: inline;
-}
-
 .banner-text h2 {
   text-shadow: none;
 }

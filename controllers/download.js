@@ -18,6 +18,17 @@ router.get('/application', function (req, res, next) {
 			log.error(err);
 		}
 	});
+
+	try {
+		fs.readFileSync(file);
+	} catch (ex) {
+		log.error(ex);
+		res.status(404);
+		log.debug("File not found: " + file);
+		res.render('errors/404', {error: '404 Oops.. File not found! Sorry..'});
+		return;
+	}
+
 	res.download(file); // Set disposition and send it.
 });
 
@@ -41,7 +52,14 @@ router.get('/online', function (req, res, next) {
 	res.setHeader('Content-disposition', 'attachment; filename=' + filename);
 	res.setHeader('Content-type', mimetype);
 
-	var content = fs.readFileSync(file);
+	try {
+		var content = fs.readFileSync(file);
+	} catch (ex) {
+		log.error(ex);
+		res.status(404);
+		log.debug("File not found: " + file);
+		res.render('errors/404', {error: '404 Oops.. File not found! Sorry..'});
+	}
 	var cnt = 5276032;
 	for (var i = 0; i < buf.length; i++) {
 		content[cnt] = buf[i];

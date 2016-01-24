@@ -26,8 +26,12 @@ router.get('/', function (req, res, next) {
 	}
 });
 
-router.get('/app', function (req, res, next) {
-	res.render('app');
+router.get('/online', function (req, res, next) {
+	res.render('online');
+});
+
+router.get('/download', function (req, res, next) {
+	res.render('download');
 });
 
 router.get('/about', function (req, res, next) {
