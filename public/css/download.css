@@ -1,3 +1,23 @@
 ul li {
 
 }
+
+.jumbotron {
+    padding: 50px 50px
+}
+
+.jumbotron h1 {
+    margin-bottom: 20px;
+}
+
+.jumbotron.description {
+    margin-bottom: 15px
+}
+
+.whatnew {
+    margin-bottom: 0 !important;
+}
+
+.jbtn {
+    padding-top: 10px;
+}
