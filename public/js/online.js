@@ -15,12 +15,12 @@ $(document).ready(function() {
 
 	$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Please wait...</h3>';
 
+	$("#loader-list").remove();
 	var $appUrl = $("#application-url");
 	var isIE = isClientBrowserIE();
 	if (isIE) {
 		isClickOnce = true;
 	} else {
-		$("#loader-list").remove();
 		$("#howto-block").remove();
 		$appUrl.attr("href", "/download/online");
 		$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Do not close this page! Launch BootLine.exe and back to this page.</h3>';
