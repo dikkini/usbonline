@@ -37,36 +37,40 @@
 <input id="isAppRunning" type="hidden">
 <input id="application-url" type="hidden" href="/clickonce/ClickLine.application">
 
-<div class="jumbotron" style="padding: 50px 50px">
-	<h1>Bootline Online Version - v 1.0</h1>
-	<div class="row">
-		<div class="col-lg-6">
-			<p>What's new?</p>
-			<ul>
-				<li>Online application is now available in most popular Windows browsers.</li>
-				<li>New Tutorial</li>
-				<li>Improvements of feedback form</li>
-			</ul>
+<section id="app">
+	<div id="page-content" class="row">
+		<div class="jumbotron" style="padding: 50px 50px">
+			<h1>Bootline Online Version - v 1.0</h1>
+			<div class="row">
+				<div class="col-lg-6">
+					<p>What's new?</p>
+					<ul>
+						<li>Online application is now available in most popular Windows browsers.</li>
+						<li>New Tutorial</li>
+						<li>Improvements of feedback form</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-3">
+					<p><button id="launchApp" class="btn btn-primary btn-lg" type="button">Launch Online Application</button></p>
+				</div>
+				<div id="howto-block" class="col-xs-6 banner-text">
+					<h3><a href="#" class="smoothscroll" data-toggle="modal" data-target="#howto-modal">HOW TO</a></h3>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-3">
-			<p><button id="launchApp" class="btn btn-primary btn-lg" type="button">Launch Online Application</button></p>
-		</div>
-		<div id="howto-block" class="col-xs-6 banner-text">
-			<h3><a href="#" class="smoothscroll" data-toggle="modal" data-target="#howto-modal">HOW TO</a></h3>
-		</div>
-	</div>
-</div>
-<div id="loader-list">
-	<div class="row loader-row">
-		<div id="addLoaderBtnContainer" class="col-lg-6">
-			<div id="addLoaderBtn" class="trian box-shadow">
-				<div id="addCross"></div>
+		<div id="loader-list">
+			<div class="row loader-row">
+				<div id="addLoaderBtnContainer" class="col-lg-6">
+					<div id="addLoaderBtn" class="trian box-shadow">
+						<div id="addCross"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+</section>
 
 
 <!--<section id="app">-->

@@ -112,7 +112,6 @@ $(document).ready(function() {
 		content.empty();
 		content.removeClass("row");
 		$body.css({"padding-left": "0", "padding-right": "0"});
-		$("#header").remove();
 		$("section#app").css({"margin-top": "-2px", "margin-bottom": "0", "padding-top": "0", "padding-bottom": "0"});
 
 		var iframe = '<iframe id="smallAppIFrame" width="100%" height="600px" scrolling="no" frameborder="no" ' +
