@@ -83,10 +83,6 @@ select.loader-type-select {
   display: inline;
 }
 
-section#app {
-  padding-top: 30px;
-}
-
 .btn-primary {
   background-color: #193C54 !important;
 }
