@@ -78,6 +78,10 @@ router.post('/feedback', function(req, res, next) {
 	log.debug("Category Id: " + categoryid);
 	var isOnline = req.body.online;
 	log.debug("Is Online?: " + categoryid);
+	var time = req.body.time;
+	log.debug("Time: " + time);
+	var timeoffset = req.body.offset;
+	log.debug("Time Offset: " + timeoffset);
 
 	var rsa = req.body.RSA;
 	log.debug("RSA: " + rsa);
@@ -87,7 +91,7 @@ router.post('/feedback', function(req, res, next) {
 	if (isOnline) {
 		data = "\"" + operation + "\"" + "\"" + name + "\"" + "\"" + email + "\"" + "\"" + feedback + "\"" + "\"" + subject + "\"" + "\"" + categoryid + "\"" + "\"" + isOnline + "\"" + "\"" + sessionid + "\"";
 	} else {
-		data = "\"" + categoryid + "\"" + "\"" + email + "\"" + "\"" + name + "\"" + "\"" + feedback + "\"" + "\"" + subject + "\"" + "\"" + sessionid + "\"";
+		data = "\"" + categoryid + "\"" + "\"" + email + "\"" + "\"" + name + "\"" + "\"" + feedback + "\"" + "\"" + subject + "\"" + "\"" + sessionid + "\"" + "\"" + time + "\"" + "\"" + timeoffset + "\"";
 	}
 
 	var isValid = isRSAValid(rsa, data);
