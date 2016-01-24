@@ -3,7 +3,7 @@
 	<MASTER_PAD_VERSION_INFO>
 		<MASTER_PAD_VERSION>3.10</MASTER_PAD_VERSION>
 		<MASTER_PAD_EDITOR>Online PAD Generator 1.33 - http://www.padbuilder.com</MASTER_PAD_EDITOR>
-		<MASTER_PAD_INFO>Portable Application Description or PAD, for short it is a data set that is used by shareware authors to disseminate information to anyone interested in their software products. To find out more go to http://www.asp-shareware.org/pad</MASTER_PAD_INFO>
+		<MASTER_PAD_INFO>Portable Application Description, or PAD for short, is a data set that is used by shareware authors to disseminate information to anyone interested in their software products. To find out more go to http://www.asp-shareware.org/pad</MASTER_PAD_INFO>
 	</MASTER_PAD_VERSION_INFO>
 	<Company_Info>
 		<Company_Name>BootLine</Company_Name>
@@ -68,12 +68,12 @@
 	</Program_Info>
 	<Program_Descriptions>
 		<English>
-			<Keywords>windows usb, bootable usb, multiboot, bootable flash, boot usb</Keywords>
+			<Keywords>windows usb, bootable usb, multiboot, bootable flash, boot usb, boot</Keywords>
 			<Char_Desc_45>Makes miltiboot USB drive without formatting</Char_Desc_45>
 			<Char_Desc_80>Simple portable tool for creating multiboot usb flash drives without formatting</Char_Desc_80>
-			<Char_Desc_250>Simple, portable and lightweight tool, lets you burn flash drive with multiple ISO. With Bootline you can install Windows 7,8,10 or run live images like Kaspersky Rescue Disk or CloneZilla from USB stick without formatting it. Bootline is portable ve</Char_Desc_250>
-			<Char_Desc_450>Simple, portable and lightweight tool, lets you burn flash drive with multiple ISO. With Bootline you can install Windows 7,8,10 or run live images like Kaspersky Rescue Disk or CloneZilla from USB stick without formatting it. Bootline is portable version of web service bootline.net - you can burn your multiple ISO to flash drive online in your browser. Advantages:   1. Creating Multiboot USB flash drive   2. Formatting is not required in most ca</Char_Desc_450>
-			<Char_Desc_2000>Your current notebook with Windows or Linux onboard died? You have to rescue data than check for viruses, reinstall Windows notebook to bring it to your young sister? All of this actions could be done without pain with just one bootable usb with 3-4 bootloaders on board! But creating bootable USB with several loaders may not by easy thing... And now you have to start searching for some information how to do it. You are wasting time, you became tired and stressed. BootLine helps you to install Windows 7,8,10 or run live images like Kaspersky or AVG Rescue Disk, CloneZilla and other from USB stick without formatting it in a few click! Bootline is portable version of web service bootline.net - you can burn your multiple ISO to flash drive online in your browser. Advantages:   1. Creating Multiboot USB flash drive   2. Formatting is not required in most cases   3. Helps to find disk images   4. No Ads   5. Portable app - installation not required   6. It's possible to post message to the forum directly from app   7. Burn images to USB drive in continuous process after choosing all</Char_Desc_2000>
+			<Char_Desc_250>Simple, portable and lightweight tool, lets you burn flash drive with multiple ISO. BootLine helps you to install Windows 7,8,10 or run live images like Kaspersky Rescue Disk or CloneZilla from USB stick without formatting it.</Char_Desc_250>
+			<Char_Desc_450>Simple, portable and lightweight tool, lets you burn flash drive with multiple ISO. BootLine helps you to install Windows 7,8,10 or run live images like Kaspersky Rescue Disk or CloneZilla from USB stick without formatting it. Bootline is portable version of web service bootline.net - you can burn your multiple ISO to flash drive online in your browser.</Char_Desc_450>
+			<Char_Desc_2000>Your notebook with Windows or Linux onboard died? You need to rescue data, check for viruses, reinstall Windows on notebook to give it to your little sister? All of this actions could be done without any problems with just one bootable usb with 3-4 bootloaders on board! But creating bootable USB with several loaders may become not an easy task... And now you have to start searching for some information how to do it. You waste time, you become tired and stressed. BootLine helps you to install Windows 7,8,10 or run live images like Kaspersky or AVG Rescue Disk, CloneZilla and other from USB stick without formatting it in a few clicks! Bootline is portable version of web service bootline.net - you can burn your multiple ISO to flash drive online in your browser. Our advantages:   1. Creating Multiboot USB flash drive   2. Formatting is not required in most cases   3. Helps to find disk images   4. No Ads   5. Portable app - installation not required   6. It's possible to post message to the forum directly from app   7. Burn images to USB drive in continuous process after choosing all</Char_Desc_2000>
 		</English>
 	</Program_Descriptions>
 	<Web_Info>
@@ -86,7 +86,7 @@
 		</Application_URLs>
 		<Download_URLs>
 			<Primary_Download_URL>http://bootline.net/assets/BootLine.exe</Primary_Download_URL>
-			<Secondary_Download_URL />
+			<Secondary_Download_URL>http://bootline.net/BootLine.exe</Secondary_Download_URL>
 			<Additional_Download_URL_1 />
 			<Additional_Download_URL_2 />
 		</Download_URLs>
