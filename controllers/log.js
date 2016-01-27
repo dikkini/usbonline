@@ -7,7 +7,20 @@ var express = require('express')
 
 router.post('/', function (req, res, next) {
 	log.debug("Got log");
-	log.debug(JSON.stringify(req.body));
+	log.debug("BODY: " + JSON.stringify(req.body));
+
+	var response = {
+		"success": true
+	};
+
+	var isValid = isRSAValid(req.body);
+
+	if (!isValid) {
+		response.success = false;
+		res.status = 500;
+		return res.end(JSON.stringify(response));
+	}
+
 	var sessionId = req.body.id;
 	var time = req.body.time;
 	var timeoffset = req.body.offset;
@@ -17,10 +30,6 @@ router.post('/', function (req, res, next) {
 	if (!time) {
 		time = "01012016183658"
 	}
-
-	var response = {
-		"success": true
-	};
 
 	log.debug("Save log");
 	db.query(config.get("sql:utils:save_log"), [sessionId, time, "DDMMYYYYHH24MISS", timeoffset, message, type], function (err, result) {

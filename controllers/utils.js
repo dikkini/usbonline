@@ -15,28 +15,19 @@ router.post('/setPort', function(req, res, next) {
 		"success": true
 	};
 
-	var sessionId = req.body.id;
-	log.debug("SessionId: " + sessionId);
-	var port = req.body.port;
-	log.debug("port: " + port);
-	var time = req.body.time;
-	log.debug("port: " + port);
-	var timeoffset = req.body.offset;
-	log.debug("port: " + port);
-
-
-	var rsa = req.body.RSA;
-	log.debug("RSA: " + rsa);
-	log.debug("Generate data for RSA check");
-	var rsaData = "\"" + port + "\"" + "\"" + sessionId + "\"" + "\"" + time + "\"" + "\"" + timeoffset + "\"";
-
-	var isValid = isRSAValid(rsa, rsaData);
+	var isValid = isRSAValid(req.body);
 
 	if (!isValid) {
 		response.success = false;
 		res.status = 500;
 		return res.end(JSON.stringify(response));
 	}
+
+	var sessionId = req.body.id;
+	log.debug("SessionId: " + sessionId);
+	var port = req.body.port;
+	log.debug("Port: " + port);
+
 
 	log.debug("Build data for socket transport");
 	var data = {
@@ -62,7 +53,7 @@ router.post('/feedback', function(req, res, next) {
 		"success": true
 	};
 
-	var isValid = isRSAValidNew(req.body);
+	var isValid = isRSAValid(req.body);
 
 	if (!isValid) {
 		response.success = false;
@@ -108,17 +99,16 @@ router.post('/feedback', function(req, res, next) {
 	});
 });
 
-function isRSAValidNew(body) {
+function isRSAValid(body) {
 	var rsa = body.RSA;
 	log.debug("RSA: " + rsa);
 	log.debug("Generate data for RSA check");
 	var data = "";
 	for (var el in body) {
 		if (el == "RSA") {
-			log.debug("Bad el: " + el);
+			log.debug("Miss RSA: " + el);
 			continue;
 		}
-		log.debug("Good el: " + el);
 		if (body.hasOwnProperty(el)) {
 			data += "\"";
 			data += body[el];
@@ -127,15 +117,6 @@ function isRSAValidNew(body) {
 	}
 	log.debug("Got data: " + data);
 
-	var cRsa = genHash(data);
-	cRsa = cRsa.toUpperCase();
-	log.debug("New RSA: " + cRsa);
-
-	return cRsa == rsa;
-}
-
-function isRSAValid(rsa, data) {
-	log.debug("Data: " + data);
 	var cRsa = genHash(data);
 	cRsa = cRsa.toUpperCase();
 	log.debug("New RSA: " + cRsa);
