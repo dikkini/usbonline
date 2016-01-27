@@ -62,6 +62,14 @@ router.post('/feedback', function(req, res, next) {
 		"success": true
 	};
 
+	var isValid = isRSAValidNew(req.body);
+
+	if (!isValid) {
+		response.success = false;
+		res.status = 500;
+		return res.end(JSON.stringify(response));
+	}
+
 	var operation = req.body.Operation;
 	log.debug("Operation: " + operation);
 	var name = req.body.nick;
@@ -82,14 +90,6 @@ router.post('/feedback', function(req, res, next) {
 	log.debug("Time: " + time);
 	var timeoffset = req.body.offset;
 	log.debug("Time Offset: " + timeoffset);
-
-	var isValid = isRSAValidNew(req.body);
-
-	if (!isValid) {
-		response.success = false;
-		res.status = 500;
-		return res.end(JSON.stringify(response));
-	}
 
 	db.query(config.get("sql:social:add_user_topic"), [sessionid, subject, feedback, name, email, categoryid, isOnline, new Date()], function (err, result) {
 		log.debug(result);
