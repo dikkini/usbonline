@@ -108,7 +108,7 @@ function isRSAValidNew(body) {
 	var rsa = body.RSA;
 	log.debug("RSA: " + rsa);
 	log.debug("Generate data for RSA check");
-	var data;
+	var data = "";
 	for (var el in body) {
 		if (el == "RSA") {
 			log.debug("Bad el: " + el);
