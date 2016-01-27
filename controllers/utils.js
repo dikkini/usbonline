@@ -105,11 +105,11 @@ router.post('/feedback', function(req, res, next) {
 });
 
 function isRSAValidNew(body) {
-	var rsa = req.body.RSA;
+	var rsa = body.RSA;
 	log.debug("RSA: " + rsa);
 	log.debug("Generate data for RSA check");
 	var data;
-	for (var el in req.body) {
+	for (var el in body) {
 		data += "\"";
 		data += el;
 		data += "\"";
