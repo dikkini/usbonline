@@ -91,6 +91,10 @@ router.post('/feedback', function(req, res, next) {
 	var timeoffset = req.body.offset;
 	log.debug("Time Offset: " + timeoffset);
 
+	if (!isOnline) {
+		isOnline = false;
+	}
+
 	db.query(config.get("sql:social:add_user_topic"), [sessionid, subject, feedback, name, email, categoryid, isOnline, new Date()], function (err, result) {
 		log.debug(result);
 		if (err) {
