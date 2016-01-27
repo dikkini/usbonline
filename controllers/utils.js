@@ -83,18 +83,7 @@ router.post('/feedback', function(req, res, next) {
 	var timeoffset = req.body.offset;
 	log.debug("Time Offset: " + timeoffset);
 
-	var rsa = req.body.RSA;
-	log.debug("RSA: " + rsa);
-	log.debug("Generate data for RSA check");
-	var data;
-
-	if (isOnline) {
-		data = "\"" + operation + "\"" + "\"" + name + "\"" + "\"" + email + "\"" + "\"" + feedback + "\"" + "\"" + subject + "\"" + "\"" + categoryid + "\"" + "\"" + isOnline + "\"" + "\"" + sessionid + "\"" + "\"" + time + "\"" + "\"" + timeoffset + "\"";
-	} else {
-		data = "\"" + categoryid + "\"" + "\"" + email + "\"" + "\"" + name + "\"" + "\"" + feedback + "\"" + "\"" + subject + "\"" + "\"" + sessionid + "\"" + "\"" + time + "\"" + "\"" + timeoffset + "\"";
-	}
-
-	var isValid = isRSAValid(rsa, data);
+	var isValid = isRSAValidNew(req.body);
 
 	if (!isValid) {
 		response.success = false;
@@ -114,6 +103,25 @@ router.post('/feedback', function(req, res, next) {
 		return res.end(JSON.stringify(response));
 	});
 });
+
+function isRSAValidNew(body) {
+	var rsa = req.body.RSA;
+	log.debug("RSA: " + rsa);
+	log.debug("Generate data for RSA check");
+	var data;
+	for (var el in req.body) {
+		data += "\"";
+		data += el;
+		data += "\"";
+	}
+	log.debug("Got data: " + data);
+
+	var cRsa = genHash(data);
+	cRsa = cRsa.toUpperCase();
+	log.debug("New RSA: " + cRsa);
+
+	return cRsa == rsa;
+}
 
 function isRSAValid(rsa, data) {
 	log.debug("Data: " + data);
