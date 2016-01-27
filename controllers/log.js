@@ -1,6 +1,7 @@
 var express = require('express')
 	, router = express.Router()
 	, db = require('../service/db')
+	, tools = require("../libs/tools")
 	, config = require('../libs/config')
 	, log = require('../libs/log')(module);
 
@@ -13,7 +14,7 @@ router.post('/', function (req, res, next) {
 		"success": true
 	};
 
-	var isValid = isRSAValid(req.body);
+	var isValid = tools.isRSAValid(req.body);
 
 	if (!isValid) {
 		response.success = false;
