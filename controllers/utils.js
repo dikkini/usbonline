@@ -110,7 +110,7 @@ function isRSAValidNew(body) {
 	log.debug("Generate data for RSA check");
 	var data;
 	for (var el in body) {
-		if (!el || el == "RSA") {
+		if (!el || el === undefined|| el == "RSA") {
 			continue;
 		}
 		data += "\"";
