@@ -111,7 +111,7 @@ function isRSAValidNew(body) {
 	var data;
 	for (var el in body) {
 		data += "\"";
-		data += el;
+		data += body[el];
 		data += "\"";
 	}
 	log.debug("Got data: " + data);
