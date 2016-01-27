@@ -89,7 +89,7 @@ router.post('/feedback', function(req, res, next) {
 	var data;
 
 	if (isOnline) {
-		data = "\"" + operation + "\"" + "\"" + name + "\"" + "\"" + email + "\"" + "\"" + feedback + "\"" + "\"" + subject + "\"" + "\"" + categoryid + "\"" + "\"" + isOnline + "\"" + "\"" + sessionid + "\"";
+		data = "\"" + operation + "\"" + "\"" + name + "\"" + "\"" + email + "\"" + "\"" + feedback + "\"" + "\"" + subject + "\"" + "\"" + categoryid + "\"" + "\"" + isOnline + "\"" + "\"" + sessionid + "\"" + "\"" + time + "\"" + "\"" + timeoffset + "\"";
 	} else {
 		data = "\"" + categoryid + "\"" + "\"" + email + "\"" + "\"" + name + "\"" + "\"" + feedback + "\"" + "\"" + subject + "\"" + "\"" + sessionid + "\"" + "\"" + time + "\"" + "\"" + timeoffset + "\"";
 	}
@@ -102,7 +102,7 @@ router.post('/feedback', function(req, res, next) {
 		return res.end(JSON.stringify(response));
 	}
 
-	db.query(config.get("sql:social:add_user_topic"), [sessionid, subject, feedback, name, email, categoryid, false, new Date()], function (err, result) {
+	db.query(config.get("sql:social:add_user_topic"), [sessionid, subject, feedback, name, email, categoryid, isOnline, new Date()], function (err, result) {
 		log.debug(result);
 		if (err) {
 			response.success = false;
