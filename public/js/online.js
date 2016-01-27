@@ -20,8 +20,11 @@ $(document).ready(function() {
 	var isIE = isClientBrowserIE();
 	if (isIE) {
 		isClickOnce = true;
+		$("#howto_other").remove();
+		$("#howto_ie").show();
 	} else {
-		$("#howto-block").remove();
+		$("#howto_ie").remove();
+		$("#howto_other").show();
 		$appUrl.attr("href", "/download/online");
 		$.blockUI.defaults.message = '<h3><img height=50 src="/assets/small_ui/img/loading.gif" /> Do not close this page! Launch BootLine.exe and back to this page.</h3>';
 	}
