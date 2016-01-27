@@ -1,9 +1,9 @@
 var express = require('express')
 	, router = express.Router()
-	, sha1 = require('sha1')
 	, jsSHA = require("jssha")
 	, log = require('../libs/log')(module)
 	, db = require('../service/db')
+	, tools = require("../libs/tools")
 	, sockets = require('../service/sockets')
 	, config = require('../libs/config');
 
@@ -15,7 +15,7 @@ router.post('/setPort', function(req, res, next) {
 		"success": true
 	};
 
-	var isValid = isRSAValid(req.body);
+	var isValid = tools.isRSAValid(req.body);
 
 	if (!isValid) {
 		response.success = false;
@@ -53,7 +53,7 @@ router.post('/feedback', function(req, res, next) {
 		"success": true
 	};
 
-	var isValid = isRSAValid(req.body);
+	var isValid = tools.isRSAValid(req.body);
 
 	if (!isValid) {
 		response.success = false;
@@ -98,42 +98,6 @@ router.post('/feedback', function(req, res, next) {
 		return res.end(JSON.stringify(response));
 	});
 });
-
-function isRSAValid(body) {
-	var rsa = body.RSA;
-	log.debug("RSA: " + rsa);
-	log.debug("Generate data for RSA check");
-	var data = "";
-	for (var el in body) {
-		if (el == "RSA") {
-			log.debug("Miss RSA: " + el);
-			continue;
-		}
-		if (body.hasOwnProperty(el)) {
-			data += "\"";
-			data += body[el];
-			data += "\"";
-		}
-	}
-	log.debug("Got data: " + data);
-
-	var cRsa = genHash(data);
-	cRsa = cRsa.toUpperCase();
-	log.debug("New RSA: " + cRsa);
-
-	return cRsa == rsa;
-}
-
-function genHash(data) {
-	var d = data.split("").reverse().join("").substring(0, data.length - 1);
-	log.debug("Wrecked data: " + d);
-	var key = "KeyY";
-	var shaObj = new jsSHA("SHA-1", "TEXT");
-	shaObj.setHMACKey(key, "TEXT");
-	shaObj.update(d);
-	var hmac = shaObj.getHMAC("HEX");
-	return hmac;
-}
 
 router.post('/userinfo', function(req, res, next) {
 	log.debug("Collect user info");
