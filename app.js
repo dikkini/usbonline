@@ -49,6 +49,21 @@ app.use(function(req, res, next) {
         // update count
         db.query(config.get("sql:stats:update_count_users"), [], function (err, result) {
             log.debug(result);
+            if (result.rowCount == 0) {
+                db.query(config.get("sql:stats:insert_stat_row"), [], function (err, result) {
+                    log.debug(result);
+                    if (err) {
+                        log.error(err);
+                    }
+
+                    db.query(config.get("sql:stats:update_count_users"), [], function (err, result) {
+                        log.debug(result);
+                        if (err) {
+                            log.error(err);
+                        }
+                    });
+                });
+            }
             if (err) {
                 log.error(err);
             }
