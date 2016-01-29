@@ -27,7 +27,7 @@ module.exports = {
 			}
 			if (body.hasOwnProperty(el)) {
 				data += "\"";
-				data += body[el];
+				data += JSON.stringify(body[el]);
 				data += "\"";
 			}
 		}
