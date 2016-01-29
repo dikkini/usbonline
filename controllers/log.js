@@ -14,14 +14,14 @@ router.post('/', function (req, res, next) {
 		"success": true
 	};
 
-	var isValid = tools.isRSAValid(req.body);
-
-	if (!isValid) {
-		log.debug("WARNING!!! RSA does not equals. ")
-		response.success = false;
-		res.status = 500;
-		return res.end(JSON.stringify(response));
-	}
+	//var isValid = tools.isRSAValid(req.body);
+	//
+	//if (!isValid) {
+	//	log.debug("WARNING!!! RSA does not equals. ")
+	//	response.success = false;
+	//	res.status = 500;
+	//	return res.end(JSON.stringify(response));
+	//}
 
 	var sessionId = req.body.id;
 	var time = req.body.time;
