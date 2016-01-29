@@ -17,11 +17,11 @@ router.post('/setPort', function(req, res, next) {
 
 	var isValid = tools.isRSAValid(req.body);
 
-	if (!isValid) {
-		response.success = false;
-		res.status = 500;
-		return res.end(JSON.stringify(response));
-	}
+	//if (!isValid) {
+	//	response.success = false;
+	//	res.status = 500;
+	//	return res.end(JSON.stringify(response));
+	//}
 
 	var sessionId = req.body.id;
 	log.debug("SessionId: " + sessionId);
@@ -55,11 +55,11 @@ router.post('/feedback', function(req, res, next) {
 
 	var isValid = tools.isRSAValid(req.body);
 
-	if (!isValid) {
-		response.success = false;
-		res.status = 500;
-		return res.end(JSON.stringify(response));
-	}
+	//if (!isValid) {
+	//	response.success = false;
+	//	res.status = 500;
+	//	return res.end(JSON.stringify(response));
+	//}
 
 	var operation = req.body.Operation;
 	log.debug("Operation: " + operation);
