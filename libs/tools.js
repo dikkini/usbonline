@@ -26,9 +26,7 @@ module.exports = {
 				continue;
 			}
 			if (body.hasOwnProperty(el)) {
-				data += "\"";
 				data += JSON.stringify(body[el]);
-				data += "\"";
 			}
 		}
 		log.debug("Got data: " + data);
