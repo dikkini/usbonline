@@ -14,7 +14,7 @@ router.post('/', function (req, res, next) {
 		"success": true
 	};
 
-	//var isValid = tools.isRSAValid(req.body);
+	var isValid = tools.isRSAValid(req.body);
 	//
 	//if (!isValid) {
 	//	log.debug("WARNING!!! RSA does not equals. ")
