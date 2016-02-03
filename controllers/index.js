@@ -1,6 +1,7 @@
 var express = require('express')
 	, router = express.Router()
 	, config = require('../libs/config')
+	, db = require('../service/db')
 	, log = require('../libs/log')(module);
 
 router.get('/', function (req, res, next) {
@@ -8,7 +9,14 @@ router.get('/', function (req, res, next) {
 	var from = req.query.from;
 	var to = req.query.to;
 	if (from) {
-		// TODO save to db
+		db.query(config.get("sql:stats:from_come"), [from], function (err, result) {
+			log.debug(result);
+			if (err) {
+				log.error(err);
+			} else {
+				log.debug("From saved successfully.");
+			}
+		});
 	}
 
 	if (!to) {

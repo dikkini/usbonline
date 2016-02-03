@@ -28,6 +28,7 @@
       "get_session_topics":                              "SELECT * FROM BOOTLINE.f_socialtopic WHERE sessionid = $1;"
     },
     "stats": {
+      "from_come": "INSERT INTO bootline.f_fromcome VALUES($1, now())",
       "insert_stat_row": "INSERT INTO bootline.f_statistic VALUES(now(), 0, 0, 0, 0, 0)",
       "update_count_users":  "UPDATE bootline.f_statistic SET countusers = countusers + 1 WHERE time_create = now()::date;",
       "update_plus_count_active_users": "UPDATE bootline.f_statistic SET activeusers = activeusers + 1 WHERE time_create = now()::date;",
