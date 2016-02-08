@@ -22,10 +22,11 @@
       "get_top_topics_by_category_id":                   "SELECT * FROM BOOTLINE.d_socialcategory sc JOIN BOOTLINE.f_socialtopic st ON sc.id = st.categoryid WHERE sc.id = $1 AND sc.active = TRUE AND st.reviewed = TRUE LIMIT 5;",
       "get_recent_topics_by_category_id":                "SELECT * FROM BOOTLINE.d_socialcategory sc JOIN BOOTLINE.f_socialtopic st ON sc.id = st.categoryid WHERE sc.id = $1 AND sc.active = TRUE AND st.createddate > current_date - interval '5' day LIMIT 5;",
       "get_all_topics_by_session_id":                    "SELECT * FROM BOOTLINE.f_socialtopic WHERE sessionid = $1",
-      "get_recent_gratitudes_topics":                    "SELECT * FROM BOOTLINE.d_socialcategory sc JOIN BOOTLINE.f_socialtopic st ON sc.id = st.categoryid WHERE sc.id = 2 AND st.createddate > current_date - interval '5' day LIMIT 5;",
+      "get_recent_gratitudes_topics":                    "SELECT * FROM BOOTLINE.d_socialcategory sc JOIN BOOTLINE.f_socialtopic st ON sc.id = st.categoryid WHERE sc.id = 2 LIMIT 5;",
       "get_all_comments_for_topic_order_by_createddate": "SELECT * FROM BOOTLINE.f_socialtopiccomment WHERE topicid = $1 ORDER BY createddate DESC;",
       "add_new_comment_to_topic":                        "INSERT INTO BOOTLINE.f_socialtopiccomment (topicid, name, comment, createddate) VALUES ($1,$2,$3,$4);",
-      "get_session_topics":                              "SELECT * FROM BOOTLINE.f_socialtopic WHERE sessionid = $1;"
+      "get_session_topics":                              "SELECT * FROM BOOTLINE.f_socialtopic WHERE sessionid = $1;",
+      "create_new_user_topic":                           "INSERT INTO BOOTLINE.f_socialtopic (sessionid, subject, text, name, email, categoryid, portable, createddate) VALUES ('site',$1,$2,$3,$4,$5,false,now())"
     },
     "stats": {
       "from_come": "INSERT INTO bootline.f_fromcome VALUES($1, now())",

@@ -148,13 +148,25 @@ router.get('/category/:id', function (req, res, next) {
 		}, function (topics, callback) {
 			log.debug("Get recent gratitudes topics");
 			db.query(config.get("sql:social:get_recent_gratitudes_topics"), [], function (err, result) {
+				log.debug(result);
+				if (err) {
+					log.error(err);
+				}
+				var recentGratitudes = result.rows;
+
+				callback(null, topics, recentGratitudes)
+			});
+		}, function (topics, recentGratitudes, callback) {
+			log.debug("Get recent gratitudes topics");
+			db.query(config.get("sql:social:get_category_by_id"), [categoryId], function (err, result) {
 				var pageData = {};
 				log.debug(result);
 				if (err) {
 					log.error(err);
 				}
-				pageData.gratitudes = result.rows;
+				pageData.gratitudes = recentGratitudes;
 				pageData.topics = topics;
+				pageData.category = result.rows[0];
 
 				callback(null, pageData)
 			});
@@ -180,6 +192,10 @@ router.get('/topic/:topicId', function (req, res, next) {
 				}
 
 				var topic = result.rows[0];
+
+				if (!topic) {
+					return res.render('errors/404', {error: '404 Oops.. Page not found! Sorry..'});
+				}
 
 				callback(null, topic)
 			});
@@ -212,6 +228,39 @@ router.get('/topic/:topicId', function (req, res, next) {
 	], function(err, result) {
 		return res.render('social/topic', {pageData:result});
 	});
+});
+
+router.post('/createTopic', function (req, res, next) {
+	var name =  req.body.name;
+	var email =  req.body.email;
+	var topicText =  req.body.topicText;
+	var topicSubject =  req.body.topicSubject;
+	var topicCategory =  req.body.topicCategory;
+
+	log.debug("Create user topic... ");
+	log.debug("name: " + name);
+	log.debug("email: " + email);
+	log.debug("topicSubject: " + topicSubject);
+	log.debug("topicText: " + topicText);
+	log.debug("topicCategory: " + topicCategory);
+
+	var response = {
+		success: true
+	};
+	db.query(config.get("sql:social:create_new_user_topic"), [topicSubject, topicText, name, email, topicCategory], function (err, result) {
+
+		log.debug(result);
+		if (err) {
+			log.error(err);
+			res.status(err.status || 500);
+			log.error('Internal error(%d): %s',res.statusCode,err.message);
+			response.success = false;
+			response.error = "Can't create new topic. Internal database error";
+			return res.end(JSON.stringify(response));
+		}
+		return res.end(JSON.stringify(response));
+	});
+
 });
 
 router.post('/topic/addComment', function (req, res, next) {
