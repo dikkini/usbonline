@@ -50,4 +50,8 @@ router.get('/eula', function (req, res, next) {
 	res.render('eula');
 });
 
+router.get('/test', function (req, res, next) {
+	res.render('test');
+});
+
 module.exports = router;
