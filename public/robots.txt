@@ -2,3 +2,4 @@ User-agent: Googlebot
 Host:
 Host: bootline.net
 Sitemap: http://bootline.net/sitemap.xml
+Disallow: /winline/app

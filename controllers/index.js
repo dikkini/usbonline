@@ -38,6 +38,14 @@ router.get('/online', function (req, res, next) {
 	res.render('online');
 });
 
+router.get('/winline', function (req, res, next) {
+	res.render('winline');
+});
+
+router.get('/winline/app', function (req, res, next) {
+	res.render('test');
+});
+
 router.get('/download', function (req, res, next) {
 	res.render('download');
 });

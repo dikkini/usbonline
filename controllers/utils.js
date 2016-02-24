@@ -7,16 +7,6 @@ var express = require('express')
 	, sockets = require('../service/sockets')
 	, config = require('../libs/config');
 
-
-router.get('/Application%20Files/:version/:file', function (req, res, next) {
-	var version = req.params.version;
-	log.debug(version);
-	var fileName = req.params.file;
-	log.debug(fileName);
-	var file = '/opt/test/Application Files/' + version + '/' + fileName;
-	res.download(file); // Set disposition and send it.
-});
-
 router.post('/setPort', function(req, res, next) {
 
 	log.debug("BODY: " + JSON.stringify(req.body));

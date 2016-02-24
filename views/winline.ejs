@@ -1,0 +1,65 @@
+<!DOCTYPE>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+	<title>BootLine - Online Windows USB Creator Tool</title>
+	<meta charset="UTF-8">
+
+	<% include partials/head.ejs %>
+
+	<link rel="stylesheet" href="/css/online.css">
+	<link rel="stylesheet" href="/assets/lightbox/colorbox.css">
+
+	<!--[if IE]>
+	<link rel="stylesheet" href="/assets/small_ui/css/main_ie.css">
+	<![endif]-->
+
+	<script src="/assets/lightbox/jquery.colorbox-min.js"></script>
+	<script src="/js/winline.js"></script>
+</head>
+
+<body>
+
+<% include partials/navigation.ejs %>
+
+<input id="sessionId" type="hidden">
+<input id="isClickOnce" type="hidden">
+<input id="isAppRunning" type="hidden">
+<input id="application-url" type="hidden" href="/clickonce/WindowInject.application">
+
+<section id="app">
+	<div id="page-content" class="row">
+		<div class="jumbotron" style="padding: 50px 50px">
+			<h1>WinLine Application <small>Version - 1.0.3</small></h1>
+			<div class="row">
+				<div class="col-lg-6">
+					<p style="margin: 0;">What's new?</p>
+					<ul>
+						<li>No Administration rights required</li>
+						<li>No delay before launch</li>
+						<li>No ads</li>
+						<li>No UAC warning</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<p class="jbtn"><a id="launchApp" class="btn btn-primary btn-lg" href="/clickonce/WindowInject.application" role="button">Launch WinLine Application</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+</body>
+</html>
