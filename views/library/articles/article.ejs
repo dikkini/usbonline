@@ -1,0 +1,564 @@
+<!DOCTYPE>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+	<title>BootLine - Library</title>
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" href="/css/library/articles/main.css">
+
+	<% include ../../partials/head.ejs %>
+
+	<script src="/js/library/articles/main.js"></script>
+</head>
+
+<body>
+
+<% include ../../partials/navigation.ejs %>
+
+<section id="about" class="banner-text">
+	<div class="container">
+		<div class="row">
+			<% if (article == "kaspersky") { %>
+			<div id="kasperky" class="col-xs-12">
+				<h2>How to make Kasperky Live CD?</h2>
+				<p>
+						Kaspersky Rescue Disk let you to check and cure infected computers,
+					which you can’t cure with usual antivirus programs under OS.
+					You need to make bootable usb with Kasperky live cd using our Portable Application in
+					your Windows OS or Online Application. Both applications let you to do this in intuitive interface.
+					In case Online Application you can interract with ISO images and your flash drive direct
+					from you browser, we have versions for the Google Chrome and Internet Explorer.
+				</p>
+				<p>
+					To make Kasperksy Live CD bootable using your USB stick you need to complete some steps.
+					Let’s review what you have to do:
+				</p>
+
+
+				<div class="tabbable">
+					<ul class="nav nav-pills nav-stacked col-md-2">
+						<li class="active"><a href="#a" data-toggle="tab">Portable Application</a></li>
+						<li><a href="#b" data-toggle="tab">Online Application</a></li>
+					</ul>
+					<div class="tab-content col-md-9">
+						<div class="tab-pane active" id="a">
+							<p>
+								Step 1
+								Download and launch Portable application
+								<img alt="Download portable application to make Clonezilla bootable USB" src="/img/library/articles/portable/download.png">
+							</p>
+							<p>
+								Step 2
+								Insert flash drive into your computer and press refresh button
+								<img alt="Insert flash drive to refresh flash drive in portable application" src="/img/library/articles/portable/1.png">
+							</p>
+							<p>
+								Step 3
+								Choose as Loader Type in drop down list Kaspersky Live CD
+								<img alt="Choose loader type - Kaspersky Live CD" src="/img/library/articles/portable/2.png">
+							</p>
+							<p>
+								Step 4 (optional, if you have already ISO image - skip this step)
+								Go to Vendor site and download last image of ISO
+								<img alt="Choose ISO of Kasperky Live CD to make it bootable" src="/img/library/articles/portable/kav_gotovendor.png">
+							</p>
+							<p>
+								Step 5
+								Press “Browse” in application, than choose ISO image on your filesystem
+								<img alt="Choose ISO of Kasperky Live CD to make it bootable" src="/img/library/articles/portable/kav_browse.png">
+							</p>
+							<p>
+								Step 6
+								Press “START” button and look how progress bar going to finish :P
+								<img alt="Press START button to start burning Kaspersky Live CD ISO image to flash drive" src="/img/library/articles/portable/3.png">
+								<img alt="Progress bar moving while Kaspersky Live CD burning to your flash drive using Bootline application" src="/img/library/articles/portable/4.png">
+							</p>
+							<p>
+								Step 7
+								Wait for FINISH status and now you have bootable USB stick with Kaspersky Live CD
+								<img alt="Now you have finished burn Kaspersky Live CD to you flash drive using Bootline portable application" src="/img/library/articles/portable/5.png">
+							</p>
+						</div>
+						<div class="tab-pane" id="b">
+							<p>
+								Step 1
+								Launch Online Application
+								<img alt="Make Bootable USB using Online Application" src="/img/library/articles/online/launch_1.png">
+							</p>
+							<p>
+								Step 2
+								Agree to download and access for application through internet
+								<img alt="Allow access for Online Application to make bootable USB online" src="/img/library/articles/online/launch_2.png">
+							</p>
+							<p>
+								Step 3
+								Insert flash drive into your computer and press refresh button
+								<img alt="Insert flash drive to make bootable USB Online" src="/img/library/articles/online/start_3.png">
+							</p>
+							<p>
+								Step 3
+								Choose as Loader Type in drop down list Kaspersky Live CD
+								<img alt="Loader Type Kaspersky Live CD to make it bootable online" src="/img/library/articles/online/start_5.png">
+							</p>
+							<p>
+								Step 4 (optional, if you have already ISO image - skip this step)
+								Go to Vendor site and download last image of ISO
+								<img alt="Online advice link to download ISO" src="/img/library/articles/online/start_5.png">
+							</p>
+							<p>
+								Step 5
+								Press “Browse” in application, than choose ISO image on your filesystem
+								<img alt="Choose ISO of Kasperky Live CD to make it bootable" src="/img/library/articles/online/browse.png">
+							</p>
+							<p>
+								Step 6
+								Press "GO" button and look how progress bar going to finish :P
+								<img alt="Kasperksy Live CD burning to flash drive online" src="/img/library/articles/online/kav_run.png">
+							</p>
+							<p>
+								Step 7
+								Wait for "Finished" status and now you have bootable USB stick with Kaspersky Live CD
+								<img alt="Kasperksy Live CD finished" src="/img/library/articles/online/kav_fin.png">
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% } %>
+
+			<% if (article == "clonezilla") { %>
+			<div id="clonezilla" class="col-xs-12">
+				<h2>How to make Clonezilla Live CD to USB?</h2>
+				<p>
+					Clonezilla it is a tool to do partition and disk imagin/cloning jobs.
+					It helps you to do system deployment, backup and recover your important data.
+					This application is suitable for one machine to backup and restore.
+				</p>
+				<p>
+					To make Clonezilla bootable using your USB stick you need to complete some steps.
+					Let’s review what you have to do:
+				</p>
+
+
+				<div class="tabbable">
+					<ul class="nav nav-pills nav-stacked col-md-2">
+						<li class="active"><a href="#a" data-toggle="tab">Portable Application</a></li>
+						<li><a href="#b" data-toggle="tab">Online Application</a></li>
+					</ul>
+					<div class="tab-content col-md-9">
+						<div class="tab-pane active" id="a">
+							<p>
+								Step 1
+								Download and launch Portable application
+								<img alt="Download portable application to make Clonezilla bootable USB" src="/img/library/articles/portable/download.png">
+							</p>
+							<p>
+								Step 2
+								Insert flash drive into your computer and press refresh button
+								<img alt="Insert flash drive to refresh flash drive in portable application" src="/img/library/articles/portable/1.png">
+							</p>
+							<p>
+								Step 3
+								Choose as Loader Type in drop down list Clonezilla
+								<img alt="Choose loader type - Clonezilla" src="/img/library/articles/portable/9.png">
+							</p>
+							<p>
+								Step 4 (optional, if you have already ISO image - skip this step)
+								Go to Vendor site and download last image of ISO
+								<img alt="Choose ISO of Clonezilla to make it bootable" src="/img/library/articles/portable/clonezilla_gtv.png">
+							</p>
+							<p>
+								Step 5
+								Press “Browse” in application, than choose ISO image on your filesystem
+								<img alt="Choose ISO of Clonezilla to make it bootable" src="/img/library/articles/portable/clonezilla_browse.png">
+							</p>
+							<p>
+								Step 6
+								Press “START” button and look how progress bar going to finish :P
+								<img alt="Press START button to start burning Clonezilla ISO image to flash drive" src="/img/library/articles/portable/10.png">
+								<img alt="Progress bar moving while Clonezilla burning to your flash drive using Bootline application" src="/img/library/articles/portable/11.png">
+							</p>
+							<p>
+								Step 7
+								Wait for FINISH status and now you have bootable USB stick with Clonezilla
+								<img alt="Now you have finished burn Clonezilla to you flash drive using Bootline portable application" src="/img/library/articles/portable/13.png">
+							</p>
+						</div>
+						<div class="tab-pane" id="b">
+							<p>
+								Step 1
+								Launch Online Application
+								<img alt="Make Bootable USB using Online Application" src="/img/library/articles/online/launch_1.png">
+							</p>
+							<p>
+								Step 2
+								Agree to download and access for application through internet
+								<img alt="Allow access for Online Application to make bootable USB online" src="/img/library/articles/online/launch_2.png">
+							</p>
+							<p>
+								Step 3
+								Insert flash drive into your computer and press refresh button
+								<img alt="Insert flash drive to make bootable USB Online" src="/img/library/articles/online/start_3.png">
+							</p>
+							<p>
+								Step 3
+								Choose as Loader Type in drop down list Kaspersky Live CD
+								<img alt="Loader Type Clonezilla to make it bootable online" src="/img/library/articles/online/start_5.png">
+							</p>
+							<p>
+								Step 4 (optional, if you have already ISO image - skip this step)
+								Go to Vendor site and download last image of ISO
+								<img alt="Online advice link to download ISO" src="/img/library/articles/online/start_5.png">
+							</p>
+							<p>
+								Step 5
+								Press “Browse” in application, than choose ISO image on your filesystem
+								<img alt="Choose ISO of Clonezilla to make it bootable" src="/img/library/articles/online/browse.png">
+							</p>
+							<p>
+								Step 6
+								Press "GO" button and look how progress bar going to finish :P
+								<img alt="Clonezilla burning to flash drive online" src="/img/library/articles/online/clonezilla_wait.png">
+							</p>
+							<p>
+								Step 7
+								Wait for "Finished" status and now you have bootable USB stick with Clonezilla
+								<img alt="Clonezilla finished" src="/img/library/articles/online/clonezilla_fin.png">
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% } %>
+
+			<% if (article == "avg") { %>
+			<div id="avg" class="col-xs-12">
+				<h2>How to make AVG Rescue Disk to USB?</h2>
+				<p>
+					The AVG Rescue CD is a standalone set of tools that can be launched from USB stick.
+					It’s using to recover data and computers that are not able to boot or are infected with a
+					various viruses or win lock and etc.
+				</p>
+				<p>
+					To make AVG Rescue CD bootable using your USB stick you need to complete some steps.
+					Let’s review what you have to do:
+				</p>
+
+
+				<div class="tabbable">
+					<ul class="nav nav-pills nav-stacked col-md-2">
+						<li class="active"><a href="#a" data-toggle="tab">Portable Application</a></li>
+						<li><a href="#b" data-toggle="tab">Online Application</a></li>
+					</ul>
+					<div class="tab-content col-md-9">
+						<div class="tab-pane active" id="a">
+							<p>
+								Step 1
+								Download and launch Portable application
+								<img alt="Download portable application to make Clonezilla bootable USB" src="/img/library/articles/portable/download.png">
+							</p>
+							<p>
+								Step 2
+								Insert flash drive into your computer and press refresh button
+								<img alt="Insert flash drive to refresh flash drive in portable application" src="/img/library/articles/portable/1.png">
+							</p>
+							<p>
+								Step 3
+								Choose as Loader Type in drop down list AVG Rescue CD
+								<img alt="Choose loader type - AVG Rescue CD" src="/img/library/articles/portable/2.png">
+							</p>
+							<p>
+								Step 4 (optional, if you have already ISO image - skip this step)
+								Go to Vendor site and download last image of ISO
+								<img alt="Choose ISO of AVG Rescue CD to make it bootable" src="/img/library/articles/portable/avg_gtv.png">
+							</p>
+							<p>
+								Step 5
+								Press “Browse” in application, than choose ISO image on your filesystem
+								<img alt="Choose ISO of AVG Rescue CD to make it bootable" src="/img/library/articles/portable/avg_browse.png">
+							</p>
+							<p>
+								Step 6
+								Press “START” button and look how progress bar going to finish :P
+								<img alt="Progress bar moving while AVG Rescue CD burning to your flash drive using Bootline application" src="/img/library/articles/portable/5.png">
+							</p>
+							<p>
+								Step 7
+								Wait for FINISH status and now you have bootable USB stick with AVG Rescue CD
+								<img alt="Now you have finished burn AVG Rescue CD to you flash drive using Bootline portable application" src="/img/library/articles/portable/6.png">
+							</p>
+						</div>
+						<div class="tab-pane" id="b">
+							<p>
+								Step 1
+								Launch Online Application
+								<img alt="Make Bootable USB using Online Application" src="/img/library/articles/online/launch_1.png">
+							</p>
+							<p>
+								Step 2
+								Agree to download and access for application through internet
+								<img alt="Allow access for Online Application to make bootable USB online" src="/img/library/articles/online/launch_2.png">
+							</p>
+							<p>
+								Step 3
+								Insert flash drive into your computer and press refresh button
+								<img alt="Insert flash drive to make bootable USB Online" src="/img/library/articles/online/start_3.png">
+							</p>
+							<p>
+								Step 3
+								Choose as Loader Type in drop down list AVG Rescue CD
+								<img alt="Loader Type AVG Rescue CD to make it bootable online" src="/img/library/articles/online/start_5.png">
+							</p>
+							<p>
+								Step 4 (optional, if you have already ISO image - skip this step)
+								Go to Vendor site and download last image of ISO
+								<img alt="Online advice link to download ISO" src="/img/library/articles/online/start_5.png">
+							</p>
+							<p>
+								Step 5
+								Press “Browse” in application, than choose ISO image on your filesystem
+								<img alt="Choose ISO of AVG Rescue CD to make it bootable" src="/img/library/articles/online/browse.png">
+							</p>
+							<p>
+								Step 6
+								Press "GO" button and look how progress bar going to finish :P
+								<img alt="AVG Rescue CD burning to flash drive online" src="/img/library/articles/online/avg_run.png">
+							</p>
+							<p>
+								Step 7
+								Wait for "Finished" status and now you have bootable USB stick with AVG Rescue CD
+								<img alt="AVG Rescue CD finished" src="/img/library/articles/online/avg_fin.png">
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% } %>
+
+			<% if (article == "drweb") { %>
+			<div id="drweb" class="col-xs-12">
+				<h2>How to make Dr. Web Live Disk to USB?</h2>
+				<p>
+					Emergency system repair from a bootable USB drive If some of malicious programs such as
+					WinLockers made it impossible to boot a computer running Windows,
+					this tool helps you recover the system. With Dr.Web LiveDisk you can clean your system,
+					copy important data (save it!). Dr.Web LiveDisk also will try to cure infected files and save them too.
+				</p>
+				<p>
+					To make Dr. Web Live Disk bootable using your USB stick you need to complete some steps.
+					Let’s review what you have to do:
+				</p>
+
+
+				<div class="tabbable">
+					<ul class="nav nav-pills nav-stacked col-md-2">
+						<li class="active"><a href="#a" data-toggle="tab">Portable Application</a></li>
+						<li><a href="#b" data-toggle="tab">Online Application</a></li>
+					</ul>
+					<div class="tab-content col-md-9">
+						<div class="tab-pane active" id="a">
+							<p>
+								Step 1
+								Download and launch Portable application
+								<img alt="Download portable application to make Dr. Web Live Disk bootable USB" src="/img/library/articles/portable/download.png">
+							</p>
+							<p>
+								Step 2
+								Insert flash drive into your computer and press refresh button
+								<img alt="Insert flash drive to refresh flash drive in portable application" src="/img/library/articles/portable/1.png">
+							</p>
+							<p>
+								Step 3
+								Choose as Loader Type in drop down list Dr. Web Live Disk
+								<img alt="Choose loader type - Dr. Web Live Disk" src="/img/library/articles/portable/9.png">
+							</p>
+							<p>
+								Step 4 (optional, if you have already ISO image - skip this step)
+								Go to Vendor site and download last image of ISO
+								<img alt="Choose ISO of Dr. Web Live Disk to make it bootable" src="/img/library/articles/portable/drweb_gtv.png">
+							</p>
+							<p>
+								Step 5
+								Press “Browse” in application, than choose ISO image on your filesystem
+								<img alt="Choose ISO of Dr. Web Live Disk to make it bootable" src="/img/library/articles/portable/drweb_browse.png">
+							</p>
+							<p>
+								Step 6
+								Press “START” button and look how progress bar going to finish :P
+								<img alt="Press START button to start burning Dr. Web Live Disk ISO image to flash drive" src="/img/library/articles/portable/10.png">
+								<img alt="Progress bar moving while Dr. Web Live Disk burning to your flash drive using Bootline application" src="/img/library/articles/portable/11.png">
+							</p>
+							<p>
+								Step 7
+								Wait for FINISH status and now you have bootable USB stick with Dr. Web Live Disk
+								<img alt="Now you have finished burn Dr. Web Live Disk to you flash drive using Bootline portable application" src="/img/library/articles/portable/13.png">
+							</p>
+						</div>
+						<div class="tab-pane" id="b">
+							<p>
+								Step 1
+								Launch Online Application
+								<img alt="Make Bootable USB using Online Application" src="/img/library/articles/online/launch_1.png">
+							</p>
+							<p>
+								Step 2
+								Agree to download and access for application through internet
+								<img alt="Allow access for Online Application to make bootable USB online" src="/img/library/articles/online/launch_2.png">
+							</p>
+							<p>
+								Step 3
+								Insert flash drive into your computer and press refresh button
+								<img alt="Insert flash drive to make bootable USB Online" src="/img/library/articles/online/start_3.png">
+							</p>
+							<p>
+								Step 3
+								Choose as Loader Type in drop down list Dr. Web Live Disk
+								<img alt="Loader Type Dr. Web Live Disk to make it bootable online" src="/img/library/articles/online/start_5.png">
+							</p>
+							<p>
+								Step 4 (optional, if you have already ISO image - skip this step)
+								Go to Vendor site and download last image of ISO
+								<img alt="Online advice link to download ISO" src="/img/library/articles/online/start_5.png">
+							</p>
+							<p>
+								Step 5
+								Press “Browse” in application, than choose ISO image on your filesystem
+								<img alt="Choose ISO of Dr. Web Live Disk to make it bootable" src="/img/library/articles/online/browse.png">
+							</p>
+							<p>
+								Step 6
+								Press "GO" button and look how progress bar going to finish :P
+								<img alt="Dr. Web Live Disk burning to flash drive online" src="/img/library/articles/online/drweb_wait.png">
+								<img alt="Dr. Web Live Disk burning to flash drive online" src="/img/library/articles/online/drweb_run.png">
+							</p>
+							<p>
+								Step 7
+								Wait for "Finished" status and now you have bootable USB stick with Dr. Web Live Disk
+								<img alt="Dr. Web Live Disk finished" src="/img/library/articles/online/drweb_fin.png">
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% } %>
+
+			<% if (article == "ubuntu") { %>
+			<div id="ubuntu" class="col-xs-12">
+				<h2>How to make Ubuntu Linux to USB?</h2>
+				<p>
+					Ubuntu Linux it is a tool to do partition and disk imagin/cloning jobs.
+					It helps you to do system deployment, backup and recover your important data.
+					This application is suitable for one machine to backup and restore.
+				</p>
+				<p>
+					To make Ubuntu Linux bootable using your USB stick you need to complete some steps.
+					Let’s review what you have to do:
+				</p>
+
+
+				<div class="tabbable">
+					<ul class="nav nav-pills nav-stacked col-md-2">
+						<li class="active"><a href="#a" data-toggle="tab">Portable Application</a></li>
+						<li><a href="#b" data-toggle="tab">Online Application</a></li>
+					</ul>
+					<div class="tab-content col-md-9">
+						<div class="tab-pane active" id="a">
+							<p>
+								Step 1
+								Download and launch Portable application
+								<img alt="Download portable application to make Ubuntu Linux bootable USB" src="/img/library/articles/portable/download.png">
+							</p>
+							<p>
+								Step 2
+								Insert flash drive into your computer and press refresh button
+								<img alt="Insert flash drive to refresh flash drive in portable application" src="/img/library/articles/portable/1.png">
+							</p>
+							<p>
+								Step 3
+								Choose as Loader Type in drop down list Ubuntu Linux
+								<img alt="Choose loader type - Ubuntu Linux" src="/img/library/articles/portable/2.png">
+							</p>
+							<p>
+								Step 4 (optional, if you have already ISO image - skip this step)
+								Go to Vendor site and download last image of ISO
+								<img alt="Choose ISO of Ubuntu Linux to make it bootable" src="/img/library/articles/portable/ubuntu_gtv.png">
+							</p>
+							<p>
+								Step 5
+								Press “Browse” in application, than choose ISO image on your filesystem
+								<img alt="Choose ISO of Ubuntu Linux to make it bootable" src="/img/library/articles/portable/ubuntu_browse.png">
+							</p>
+							<p>
+								Step 6
+								Press “START” button and look how progress bar going to finish :P
+								<img alt="Progress bar moving while Ubuntu Linux burning to your flash drive using Bootline application" src="/img/library/articles/portable/7.png">
+							</p>
+							<p>
+								Step 7
+								Wait for FINISH status and now you have bootable USB stick with Ubuntu Linux
+								<img alt="Now you have finished burn Ubuntu Linux to you flash drive using Bootline portable application" src="/img/library/articles/portable/8.png">
+							</p>
+						</div>
+						<div class="tab-pane" id="b">
+							<p>
+								Step 1
+								Launch Online Application
+								<img alt="Make Bootable USB using Online Application" src="/img/library/articles/online/launch_1.png">
+							</p>
+							<p>
+								Step 2
+								Agree to download and access for application through internet
+								<img alt="Allow access for Online Application to make bootable USB online" src="/img/library/articles/online/launch_2.png">
+							</p>
+							<p>
+								Step 3
+								Insert flash drive into your computer and press refresh button
+								<img alt="Insert flash drive to make bootable USB Online" src="/img/library/articles/online/start_3.png">
+							</p>
+							<p>
+								Step 3
+								Choose as Loader Type in drop down list Ubuntu Linux
+								<img alt="Loader Type Ubuntu Linux to make it bootable online" src="/img/library/articles/online/start_5.png">
+							</p>
+							<p>
+								Step 4 (optional, if you have already ISO image - skip this step)
+								Go to Vendor site and download last image of ISO
+								<img alt="Online advice link to download ISO" src="/img/library/articles/online/start_5.png">
+							</p>
+							<p>
+								Step 5
+								Press “Browse” in application, than choose ISO image on your filesystem
+								<img alt="Choose ISO of Ubuntu Linux to make it bootable" src="/img/library/articles/portable/browse.png">
+							</p>
+							<p>
+								Step 6
+								Press "GO" button and look how progress bar going to finish :P
+								<img alt="Ubuntu Linux burning to flash drive online" src="/img/library/articles/online/ubuntu_run.png">
+							</p>
+							<p>
+								Step 7
+								Wait for "Finished" status and now you have bootable USB stick with Ubuntu Linux
+								<img alt="Ubuntu Linux finished" src="/img/library/articles/online/ubuntu_run.png">
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% } %>
+		</div>
+	</div>
+	<hr>
+</section>
+</body>
+</html>

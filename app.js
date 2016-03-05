@@ -17,8 +17,9 @@ var express = require("express")
     , download = require('./controllers/download')
     , clickonce = require('./controllers/clickonce')
     , social = require('./controllers/social')
-    , uuid = require('node-uuid')
+    , library = require('./controllers/library')
     , errors = require('./controllers/errors')
+    , uuid = require('node-uuid')
     , log = require('./libs/log')(module);
 
 // view engine setup
@@ -78,6 +79,7 @@ app.use('/utils', utils);
 app.use('/download', download);
 app.use('/clickonce', clickonce);
 app.use('/social', social);
+app.use('/library', library);
 app.use(errors);
 
 module.exports = app;
