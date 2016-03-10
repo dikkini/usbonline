@@ -18,7 +18,7 @@
       "get_category_by_id":                              "SELECT * FROM BOOTLINE.d_socialcategory WHERE active = TRUE AND id = $1;",
       "get_topic_by_id":                                 "SELECT * FROM BOOTLINE.d_socialcategory sc JOIN BOOTLINE.f_socialtopic st ON sc.id = st.categoryid WHERE st.id = $1;",
       "get_all_active_categories":                       "SELECT * FROM BOOTLINE.d_socialcategory WHERE active = TRUE;",
-      "get_all_topics_by_category_id":                   "SELECT * FROM BOOTLINE.f_socialtopic st JOIN BOOTLINE.d_socialcategory sc ON st.categoryid = sc.id WHERE st.categoryid = $1 AND sc.active = TRUE ",
+      "get_all_topics_by_category_id":                   "SELECT st.id, st.sessionid, st.subject, st.name, st.email, st.reviewed, st.createddate FROM BOOTLINE.f_socialtopic st JOIN BOOTLINE.d_socialcategory sc ON st.categoryid = sc.id WHERE st.categoryid = $1 AND sc.active = TRUE ",
       "get_top_topics_by_category_id":                   "SELECT * FROM BOOTLINE.d_socialcategory sc JOIN BOOTLINE.f_socialtopic st ON sc.id = st.categoryid WHERE sc.id = $1 AND sc.active = TRUE AND st.reviewed = TRUE LIMIT 5;",
       "get_recent_topics_by_category_id":                "SELECT * FROM BOOTLINE.d_socialcategory sc JOIN BOOTLINE.f_socialtopic st ON sc.id = st.categoryid WHERE sc.id = $1 AND sc.active = TRUE AND st.createddate > current_date - interval '5' day LIMIT 5;",
       "get_all_topics_by_session_id":                    "SELECT * FROM BOOTLINE.f_socialtopic WHERE sessionid = $1",
