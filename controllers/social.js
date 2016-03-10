@@ -168,6 +168,10 @@ router.get('/category/:id', function (req, res, next) {
 				pageData.topics = topics;
 				pageData.category = result.rows[0];
 
+				if (!pageData.category) {
+					return res.render('errors/404', {error: '404 Oops.. Page not found! Sorry..'});
+				}
+
 				callback(null, pageData)
 			});
 		}

@@ -30,7 +30,7 @@
 <% include ../partials/navigation.ejs %>
 
 <section>
-	<% var category = pageData.category %>
+	<% var category = pageData.category; %>
 	<input type="hidden" id="categoryId" data-category-id="<%= category.id %>">
 	<div class="row">
 		<div id="recent-gratitudes" class="col-xs-3" style="margin-top: 10px;">
@@ -55,6 +55,7 @@
 			<% var topics = pageData.topics; %>
 			<% for(var i=0; i < topics.length; i++) { %>
 			<% var topic = topics[i]; %>
+			<%= JSON.stringify(topic) %>
 			<hr>
 			<div class="row">
 				<div class="col-xs-1"></div>
