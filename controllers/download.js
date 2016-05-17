@@ -32,6 +32,24 @@ router.get('/application', function (req, res, next) {
 	res.download(file); // Set disposition and send it.
 });
 
+router.get('/winline', function (req, res, next) {
+	log.debug("Download winline application");
+
+	var file = '/opt/bootline/WinLine.exe';
+
+	try {
+		fs.readFileSync(file);
+	} catch (ex) {
+		log.error(ex);
+		res.status(404);
+		log.debug("File not found: " + file);
+		res.render('errors/404', {error: '404 Oops.. File not found! Sorry..'});
+		return;
+	}
+
+	res.download(file); // Set disposition and send it.
+});
+
 router.get('/online', function (req, res, next) {
 	log.debug("Download ONLINE exe");
 
