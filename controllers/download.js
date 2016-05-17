@@ -35,7 +35,7 @@ router.get('/application', function (req, res, next) {
 router.get('/winline', function (req, res, next) {
 	log.debug("Download winline application");
 
-	var file = '/opt/bootline/WinLine.exe';
+	var file = '/opt/winline/WinLine.exe';
 
 	try {
 		fs.readFileSync(file);
