@@ -12,7 +12,7 @@ $(document).ready(function() {
 	var isIE = isClientBrowserIE();
 	if (!isIE) {
 		$("#launchApp").remove();
-		$(".jbtn").html("Online version of application available only in Internet Explorer.");
+		$(".jbtn").html("This version available only in Internet Explorer.");
 	}
 
 
