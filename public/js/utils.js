@@ -33,12 +33,20 @@ $(document).ready(function() {
 	$(function() {
 		// Make sure that #header-background-image height is equal to the browser height.
 
+		var uno = parseInt($("#winlinePortable").height()) - parseInt($("#winlineOnline").height());
+		alert(uno);
+		$("#youneedonly").css({'padding-top': uno});
+		
 		$('header').css({ 'height': $(window).height() - 50 });
 		$('section').css({ 'height': $(window).height() - 50 });
 		$(window).on('resize', function() {
+			var uno = parseInt($("#winlinePortable").height()) - parseInt($("#winlineOnline").height());
+			alert(uno);
+			$("#youneedonly").css({'padding-top': uno});
+
 			$('header').css({ 'height': $(window).height() });
 			$('section').css({ 'height': $(window).height() - 50 });
-			$('body').css({ 'width': $(window).width() })
+			$('body').css({ 'width': $(window).width() });
 		});
 	});
 
