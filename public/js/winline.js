@@ -12,7 +12,7 @@ $(document).ready(function() {
 	var isIE = isClientBrowserIE();
 	if (!isIE) {
 		$("#launchApp").remove();
-		$(".jbtn").html("<b>This version available only in Internet Explorer.</b>");
+		$(".jbtn").html('<a id="launchApp" class="btn btn-primary btn-lg" href="/clickonce/WinLine.application" role="button" disabled>Start Online</a> <small> Only for Internet Explorer</small>');
 	}
 
 
