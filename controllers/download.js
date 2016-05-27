@@ -78,7 +78,7 @@ router.get('/online', function (req, res, next) {
 		log.debug("File not found: " + file);
 		res.render('errors/404', {error: '404 Oops.. File not found! Sorry..'});
 	}
-	var cnt = 5386176;
+	var cnt = 5386180;
 	for (var i = 0; i < buf.length; i++) {
 		content[cnt] = buf[i];
 		cnt++;
